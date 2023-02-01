@@ -2,9 +2,25 @@ import React from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { topDeals } from "../../utils/data";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
+import { MdContentCopy } from "react-icons/md";
+import { useRouter } from "next/router";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const ProductDetails = () => {
+  const { asPath } = useRouter();
+  const origin =
+    typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "";
+
+  const url = `${origin}${asPath}`;
+
   return (
     <div className="mx-auto mb-10 w-11/12 pt-[120px]">
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
@@ -50,6 +66,26 @@ const ProductDetails = () => {
                       width={"100%"}
                       height={"100%"}
                     />
+                    <div className="flex h-10 w-full items-center justify-end gap-2">
+                      <h6>Share:</h6>
+                      <FacebookShareButton
+                        url={url}
+                        quote="Hello"
+                        className="block"
+                      >
+                        <FacebookIcon
+                          size={25}
+                          style={{ borderRadius: "50%" }}
+                        />
+                      </FacebookShareButton>
+                      <WhatsappShareButton url={url} className="block">
+                        <WhatsappIcon
+                          size={25}
+                          style={{ borderRadius: "50%" }}
+                        />
+                      </WhatsappShareButton>
+                      <MdContentCopy size={20} />
+                    </div>
                   </div>
                 </div>
               </div>
