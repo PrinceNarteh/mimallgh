@@ -1,46 +1,14 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import { ReactNode } from "react";
 import { BsShop } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
 
-export const shopMenus = [
-  {
-    name: "Dashboard",
-    link: "/shop",
-    icon: MdOutlineDashboard,
-  },
-  {
-    name: "Products",
-    icon: FiShoppingBag,
-    subLinks: [
-      {
-        name: "Product List",
-        link: "/shop/products",
-      },
-      {
-        name: "Add Product",
-        link: "/shop/products/add-product",
-      },
-    ],
-  },
-  {
-    name: "Orders",
-    icon: TiShoppingCart,
-    subLinks: [
-      {
-        name: "Order List",
-        link: "/shop/orders",
-      },
-      {
-        name: "Order Details",
-        link: "/shop/orders/1",
-      },
-    ],
-  },
-];
-
-export const adminMenus = [
+const menus = [
   {
     name: "Dashboard",
     link: "/admin",
@@ -52,11 +20,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Product List",
-        link: "/admin/products",
+        link: "admin/products",
       },
       {
         name: "Add Product",
-        link: "/admin/products/add",
+        link: "admin/products/add",
       },
     ],
   },
@@ -66,11 +34,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Shop List",
-        link: "/admin/shops",
+        link: "admin/shops",
       },
       {
         name: "Add Shop",
-        link: "/admin/shops/add",
+        link: "admin/shops/add",
       },
     ],
   },
@@ -80,11 +48,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Shop Owners List",
-        link: "/admin/shop-owners",
+        link: "admin/shop-owners",
       },
       {
         name: "Add Shop Owner",
-        link: "/admin/shop-owners/add",
+        link: "admin/shop-owners/add",
       },
     ],
   },
@@ -94,12 +62,18 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Order List",
-        link: "/admin/orders",
+        link: "admin/orders",
       },
       {
         name: "Order Details",
-        link: "/admin/orders/1",
+        link: "admin/orders/1",
       },
     ],
   },
 ];
+
+const BaseLayout = dynamic(() => import("../BaseLayout"), { ssr: false });
+
+export default function AdminLayout({ children }: { children: ReactNode }) {
+  return <BaseLayout menus={menus}>{children}</BaseLayout>;
+}

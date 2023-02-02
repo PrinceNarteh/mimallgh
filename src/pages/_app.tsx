@@ -8,7 +8,11 @@ import "../styles/globals.css";
 import MainNavbar from "../components/layout/MainNavbar";
 import SubNavbar from "../components/layout/SubNavbar";
 import { useRouter } from "next/router";
-import AdminLayout from "../components/admin/AdminLayout";
+import dynamic from "next/dynamic";
+
+const AdminLayout = dynamic(() => import("../components/admin/AdminLayout"), {
+  ssr: false,
+});
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,

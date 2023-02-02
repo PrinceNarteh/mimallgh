@@ -1,9 +1,10 @@
-import { AiOutlineFall, AiOutlineRise } from "react-icons/ai";
+import React from "react";
 import Card from "../../components/admin/Card";
+import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
 
-const Admin = () => {
+const Home = () => {
   return (
-    <>
+    <div>
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         <Card heading="Total Sells">
           <div className="flex items-center justify-between">
@@ -145,8 +146,8 @@ const Admin = () => {
           </div>
         </Card>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Admin;
+export default Home;
