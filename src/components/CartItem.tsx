@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import productOne from "../assets/images/product-1.jpg";
+import productOne from "../../assets/images/product-1.jpg";
 
 const CartItem = () => {
   return (

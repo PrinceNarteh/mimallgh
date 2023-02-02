@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "../../components/Header";
-import SectionHeader from "../../components/layout/SectionHeader";
-import ProductCard from "../../components/ProductCard";
-import Section from "../../components/Section";
+import Header from "../components/Header";
+import SectionHeader from "../components/layout/SectionHeader";
+import ProductCard from "../components/ProductCard";
+import Section from "../components/Section";
 
 const Home = () => {
   return (
