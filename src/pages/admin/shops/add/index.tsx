@@ -77,7 +77,6 @@ const AddShop = () => {
               label="Shop Name"
               register={register}
               errors={errors}
-              required
               validationSchema={{ required: "Shop name is required" }}
             />
             <InputField
@@ -85,7 +84,6 @@ const AddShop = () => {
               label="Location"
               register={register}
               errors={errors}
-              required
               validationSchema={{ required: "Location is required" }}
             />
           </div>

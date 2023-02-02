@@ -28,9 +28,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
         </AdminLayout>
       ) : (
         <>
-          <MainNavbar />
-          <SubNavbar />
-          <Component {...pageProps} />
+          {pathname.startsWith("/auth") ? (
+            <Component {...pageProps} />
+          ) : (
+            <>
+              <MainNavbar />
+              <SubNavbar />
+              <Component {...pageProps} />
+            </>
+          )}
         </>
       )}
     </SessionProvider>
