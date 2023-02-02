@@ -1,8 +1,10 @@
 import { Poppins } from "@next/font/google";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { IMenus } from "../../../types";
 import Header from "./Header";
+import { shopMenus, adminMenus } from "./menus";
 
 const SideBar = dynamic(() => import("./SideBar"), { ssr: false });
 
@@ -12,12 +14,14 @@ const poppins = Poppins({
 });
 
 interface IAdminLayout {
-  menus: IMenus;
   children: React.ReactNode;
 }
 
-export default function AdminLayout({ menus, children }: IAdminLayout) {
+export default function AdminLayout({ children }: IAdminLayout) {
   const [open, setOpen] = useState(true);
+  const { pathname } = useRouter();
+
+  const menus = pathname.startsWith("/shop") ? shopMenus : adminMenus;
 
   return (
     <html className={poppins.className}>

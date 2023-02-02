@@ -1,49 +1,9 @@
 import { AiOutlineFall, AiOutlineRise } from "react-icons/ai";
-import { FiShoppingBag } from "react-icons/fi";
-import { MdOutlineDashboard } from "react-icons/md";
-import { TiShoppingCart } from "react-icons/ti";
-import AdminLayout from "../../components/admin/AdminLayout";
 import Card from "../../components/admin/Card";
-
-const menus = [
-  {
-    name: "Dashboard",
-    link: "/shop",
-    icon: MdOutlineDashboard,
-  },
-  {
-    name: "Products",
-    icon: FiShoppingBag,
-    subLinks: [
-      {
-        name: "Product List",
-        link: "/shop/products",
-      },
-      {
-        name: "Add Product",
-        link: "/shop/products/add-product",
-      },
-    ],
-  },
-  {
-    name: "Orders",
-    icon: TiShoppingCart,
-    subLinks: [
-      {
-        name: "Order List",
-        link: "/shop/orders",
-      },
-      {
-        name: "Order Details",
-        link: "/shop/orders/1",
-      },
-    ],
-  },
-];
 
 const ShopAdmin = () => {
   return (
-    <AdminLayout menus={menus}>
+    <>
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         <Card heading="Total Sells">
           <div className="flex items-center justify-between">
@@ -185,7 +145,7 @@ const ShopAdmin = () => {
           </div>
         </Card>
       </div>
-    </AdminLayout>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import "../styles/globals.css";
 import MainNavbar from "../components/layout/MainNavbar";
 import SubNavbar from "../components/layout/SubNavbar";
 import { useRouter } from "next/router";
+import AdminLayout from "../components/admin/AdminLayout";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -15,14 +16,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   const { pathname } = useRouter();
 
-  console.log(pathname);
-
   return (
     <SessionProvider session={session}>
       {pathname.startsWith("/shop") || pathname.startsWith("/admin") ? (
-        <>
+        <AdminLayout>
           <Component {...pageProps} />
-        </>
+        </AdminLayout>
       ) : (
         <>
           <MainNavbar />
