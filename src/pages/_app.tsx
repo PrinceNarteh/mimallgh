@@ -1,14 +1,14 @@
-import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { type AppType } from "next/app";
 
 import { api } from "../utils/api";
 
-import "../styles/globals.css";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import MainNavbar from "../components/layout/MainNavbar";
 import SubNavbar from "../components/layout/SubNavbar";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
+import "../styles/globals.css";
 
 const AdminLayout = dynamic(() => import("../components/admin/AdminLayout"), {
   ssr: false,
