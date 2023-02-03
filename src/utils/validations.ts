@@ -24,7 +24,6 @@ export const createProductDto = z.object({
     .max(5, "Maximum rating should be 5")
     .optional(),
   images: z.string().url(),
-  role: z.enum(["user", "admin", "shop_owner"]),
 });
 
 export const updateProductDto = createProductDto.partial();

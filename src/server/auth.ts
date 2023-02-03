@@ -20,6 +20,15 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
+      firstName: String;
+      lastName: String;
+      middleName: String;
+      address: String;
+      phoneNumber: String;
+      email: String;
+      password: String;
+      image: String;
+      active: Boolean;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];

@@ -5,6 +5,16 @@ import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";
 
+//  title              String
+//     description        String
+//     price              Float
+//     discountPercentage Float    @default(0)
+//     stock              Int      @default(0)
+//     brand              String
+//     category           String
+//     images             String
+//     shopId             String
+
 const AddProductForm = () => {
   const {
     register,
@@ -36,7 +46,10 @@ const AddProductForm = () => {
   }, [images]);
 
   return (
-    <div className="mx-auto max-w-4xl">
+    <div
+      className="mx-auto max-w-4xl pb-5
+    "
+    >
       <Card heading={"Add Product"}>
         <div className="space-y-4">
           <InputField
@@ -45,17 +58,8 @@ const AddProductForm = () => {
             register={register}
             errors={errors}
           />
-          <div>
-            <label htmlFor="" className="mb-2 inline-block text-xl capitalize">
-              Description
-            </label>
-            <textarea
-              className="w-full rounded border border-gray-600 bg-transparent p-2 outline-none"
-              rows={5}
-              onChange={(e) => {}}
-            />
-          </div>
-          <div className="flex gap-5">
+
+          <div className="flex flex-col gap-5 md:flex-row">
             <InputField
               label="Price"
               name="price"
@@ -67,6 +71,30 @@ const AddProductForm = () => {
               name="quantity"
               register={register}
               errors={errors}
+            />
+          </div>
+          <div className="flex flex-col gap-5 md:flex-row">
+            <InputField
+              label="Brand"
+              name="brand"
+              register={register}
+              errors={errors}
+            />
+            <InputField
+              label="Category"
+              name="category"
+              register={register}
+              errors={errors}
+            />
+          </div>
+          <div>
+            <label htmlFor="" className="mb-2 inline-block text-xl capitalize">
+              Description
+            </label>
+            <textarea
+              className="w-full rounded border border-gray-600 bg-transparent p-2 outline-none"
+              rows={5}
+              onChange={(e) => {}}
             />
           </div>
           <input type="file" name="" id="" onChange={selectedImages} multiple />

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputField from "../../components/InputField";
+import { useSession } from "next-auth/react";
 
 const loginValidation = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
@@ -22,12 +23,14 @@ const Login = () => {
     resolver: zodResolver(loginValidation),
   });
   const router = useRouter();
+  const { data: session } = useSession();
 
   const submitHandler = async (data: any) => {
     const res = await signIn("credentials", {
       ...data,
       redirect: false,
     });
+    console.log(session);
     if (res?.error === null) {
       router.push("/shop");
     }
