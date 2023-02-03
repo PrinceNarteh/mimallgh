@@ -40,7 +40,6 @@ const InputField = ({
       type={type}
       {...register(name, validationSchema)}
       className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
-      required
     />
     {errors && errors[name] && (
       <span className="pl-1 text-sm text-red-500">

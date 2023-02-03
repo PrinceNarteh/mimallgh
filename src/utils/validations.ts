@@ -24,21 +24,30 @@ export const createProductDto = z.object({
     .max(5, "Maximum rating should be 5")
     .optional(),
   images: z.string().url(),
+  role: z.enum(["user", "admin", "shop_owner"]),
 });
 
 export const updateProductDto = createProductDto.partial();
 
-export const createAccountDto = z.object({
+export const createUserDto = z.object({
   firstName: z
     .string({ required_error: "First name is required." })
     .min(1, "First name cannot be empty"),
   lastName: z
     .string({ required_error: "Last name is required." })
     .min(1, "Last name cannot be empty"),
+  middleName: z.string().optional(),
   email: z.string({ required_error: "Email name is required." }).email(),
+  address: z
+    .string({ required_error: "Address is required." })
+    .min(1, "Address cannot be empty"),
+  phoneNumber: z
+    .string({ required_error: "Phone number is required." })
+    .length(10, "Phone number must be ten numbers"),
   password: z
     .string({ required_error: "Password name is required." })
     .min(6, "Password should be six character or more"),
+  image: z.string({ required_error: "Password name is required." }).optional(),
   role: z.enum(["admin", "shop_owner", "user"], {
     required_error: "Role is required",
     invalid_type_error:
@@ -46,11 +55,11 @@ export const createAccountDto = z.object({
   }),
 });
 
-export const createShopOwnerDto = createAccountDto
+export const createShopOwnerDto = createUserDto
   .extend({
     confirmPassword: z
       .string({ required_error: "Confirm password name is required." })
-      .min(6, "Password should be six character or more"),
+      .min(6, "Password must be at least 6 characters"),
     role: z
       .enum(["admin", "shop_owner", "user"], {
         required_error: "Role is required",

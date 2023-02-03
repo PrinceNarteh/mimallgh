@@ -1,38 +1,44 @@
-import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import Card from "../../../../components/admin/Card";
 import InputField from "../../../../components/InputField";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "../../../../utils/api";
 import { createShopOwnerDto } from "../../../../utils/validations";
-import { httpClient } from "../../../../utils/httpClient";
-import { toast } from "react-hot-toast";
 
 const AddShopOwner = () => {
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm({
     resolver: zodResolver(createShopOwnerDto),
   });
 
+  const createUser = api.auth.register.useMutation({
+    onSuccess: () => {
+      toast.success("Shop owner created successfully.");
+    },
+    onError: (error) => {
+      setError("email", { message: error.message });
+    },
+  });
+
   const submitHandler = async (data: any) => {
-    try {
-      const res = await httpClient.post("/auth/register", data);
-      console.log(res.data.user);
-      toast.success("Account created successfully");
-    } catch (error: any) {
-      setError(error.response.data.error);
-    }
+    createUser.mutate({
+      ...data,
+      role: "shop_owner",
+    });
   };
 
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <div className="mx-auto max-w-4xl">
       <Card heading="Add Shop Owner">
-        {error && <li className="py-2">Email already in use.</li>}
         <form className="w-full" onSubmit={handleSubmit(submitHandler)}>
           <div className="flex flex-col gap-5 lg:flex-row">
             <InputField
@@ -40,7 +46,6 @@ const AddShopOwner = () => {
               label="First name"
               register={register}
               errors={errors}
-              required
               validationSchema={{ required: "First Name is required" }}
             />
             <InputField
@@ -48,13 +53,13 @@ const AddShopOwner = () => {
               label="Other name(s)"
               register={register}
               errors={errors}
+              validationSchema={{ required: false }}
             />
             <InputField
               name="lastName"
               label="Last name"
               register={register}
               errors={errors}
-              required
               validationSchema={{ required: "Last Name is required" }}
             />
           </div>
@@ -65,8 +70,23 @@ const AddShopOwner = () => {
             register={register}
             errors={errors}
             validationSchema={{ required: "Email is required" }}
-            required
           />
+          <InputField
+            name="address"
+            label="Address"
+            register={register}
+            errors={errors}
+            validationSchema={{ required: "Address is required" }}
+          />
+
+          <InputField
+            name="phoneNumber"
+            label="Phone Number"
+            register={register}
+            errors={errors}
+            validationSchema={{ required: "Phone number is required" }}
+          />
+
           <div className="flex flex-col gap-5 md:flex-row">
             <InputField
               name="password"
@@ -75,7 +95,6 @@ const AddShopOwner = () => {
               register={register}
               errors={errors}
               validationSchema={{ required: "Password is required" }}
-              required
             />
             <InputField
               name="confirmPassword"
@@ -84,7 +103,6 @@ const AddShopOwner = () => {
               register={register}
               errors={errors}
               validationSchema={{ required: "Confirm password is required" }}
-              required
             />
           </div>
           <button

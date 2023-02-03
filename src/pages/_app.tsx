@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import MainNavbar from "../components/layout/MainNavbar";
 import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 const AdminLayout = dynamic(() => import("../components/admin/AdminLayout"), {
   ssr: false,
@@ -39,6 +40,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           )}
         </>
       )}
+      <Toaster />
     </SessionProvider>
   );
 };
