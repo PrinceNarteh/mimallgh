@@ -1,9 +1,10 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import InputField from "../../components/InputField";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import InputField from "../../components/InputField";
 
 const loginValidation = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
@@ -20,12 +21,17 @@ const Login = () => {
   } = useForm({
     resolver: zodResolver(loginValidation),
   });
+  const router = useRouter();
 
-  const submitHandler = (data: any) => {
-    console.log(data);
+  const submitHandler = async (data: any) => {
+    const res = await signIn("credentials", {
+      ...data,
+      redirect: false,
+    });
+    if (res?.error === null) {
+      router.push("/shop");
+    }
   };
-
-  console.log(errors);
 
   return (
     <div className="min-h-screen bg-authImage bg-cover bg-no-repeat">

@@ -34,8 +34,6 @@ const AddShopOwner = () => {
     });
   };
 
-  // console.log(errors);
-
   return (
     <div className="mx-auto max-w-4xl">
       <Card heading="Add Shop Owner">

@@ -37,7 +37,6 @@ const AddShop = () => {
   });
 
   const submitHandler = async (data: any) => {
-    console.log(data);
     if (data.shop_owner === "") {
       setError("shop_owner", {
         message: "Shop owner is required.",
@@ -46,13 +45,10 @@ const AddShop = () => {
     }
     try {
       // const res = await httpClient.post("/auth/register", data);
-      // console.log(res.data.user);
     } catch (error: any) {
       // setError(error.response.data.error);
     }
   };
-
-  console.log(errors);
 
   return (
     <div className="mx-auto max-w-4xl">

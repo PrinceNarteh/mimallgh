@@ -1,18 +1,22 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-
-import { api } from "../utils/api";
-
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+
+import { Poppins } from "@next/font/google";
+import { api } from "../utils/api";
 import MainNavbar from "../components/layout/MainNavbar";
 import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
-import { Toaster } from "react-hot-toast";
 
 const AdminLayout = dynamic(() => import("../components/admin/AdminLayout"), {
   ssr: false,
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -22,26 +26,27 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const { pathname } = useRouter();
 
   return (
-    <SessionProvider session={session}>
-      {pathname.startsWith("/shop") || pathname.startsWith("/admin") ? (
-        <AdminLayout>
-          <Component {...pageProps} />
-        </AdminLayout>
-      ) : (
-        <>
-          {pathname.startsWith("/auth") ? (
+    <div className={poppins.className}>
+      <SessionProvider session={session}>
+        {pathname.startsWith("/shop") || pathname.startsWith("/admin") ? (
+          <AdminLayout>
             <Component {...pageProps} />
-          ) : (
-            <>
-              <MainNavbar />
-              <SubNavbar />
+          </AdminLayout>
+        ) : (
+          <>
+            {pathname.startsWith("/auth") ? (
               <Component {...pageProps} />
-            </>
-          )}
-        </>
-      )}
-      <Toaster />
-    </SessionProvider>
+            ) : (
+              <>
+                <MainNavbar />
+                <SubNavbar />
+                <Component {...pageProps} />
+              </>
+            )}
+          </>
+        )}
+      </SessionProvider>
+    </div>
   );
 };
 

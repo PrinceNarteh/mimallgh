@@ -25,8 +25,6 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
   const [selected, setSelected] = useState("");
   const [open, setOpen] = useState(false);
 
-  console.log(selected);
-
   return (
     <div className="relative w-full font-medium">
       <div

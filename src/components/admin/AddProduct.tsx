@@ -23,7 +23,6 @@ const AddProductForm = () => {
   };
 
   function deleteHandler(index: number) {
-    console.log(index);
     const imageCopy = [...images];
     imageCopy.splice(index, 1);
     setImages([...imageCopy]);
@@ -35,8 +34,6 @@ const AddProductForm = () => {
     });
     setPreviewImages(imagesArray);
   }, [images]);
-
-  console.log(images);
 
   return (
     <div className="mx-auto max-w-4xl">

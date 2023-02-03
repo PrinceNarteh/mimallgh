@@ -1,7 +1,8 @@
 import { Role } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import { createUserDto } from "../../../utils/validations";
+import bcrypt from "bcryptjs";
 
+import { createUserDto } from "../../../utils/validations";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const authRouter = createTRPCRouter({
@@ -9,9 +10,11 @@ export const authRouter = createTRPCRouter({
     .input(createUserDto)
     .mutation(async ({ input, ctx }) => {
       try {
+        const hashedPassword = await bcrypt.hash(input.password, 12);
         const user = await ctx.prisma.user.create({
           data: {
             ...input,
+            password: hashedPassword,
             role: Role.SHOP_OWNER,
           },
         });

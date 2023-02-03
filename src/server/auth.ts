@@ -4,10 +4,11 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import CredentialProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "../env/server.mjs";
 import { prisma } from "./db";
+import bcrypt from "bcryptjs";
 
 /**
  * Module augmentation for `next-auth` types
@@ -45,11 +46,35 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  pages: {
+    signIn: "/auth/login",
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    CredentialProvider({
+      name: "credentials",
+      credentials: {
+        email: {
+          type: "email",
+        },
+        password: {
+          type: "password",
+        },
+      },
+      async authorize(credentials, req) {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
+
+        const user = await prisma.user.findUnique({ where: { email } });
+
+        // if (user && (await bcrypt.compare(password, user.password))) {
+        //   return user;
+        // }
+
+        return user;
+      },
     }),
     /**
      * ...add more providers here

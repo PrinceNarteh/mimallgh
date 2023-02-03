@@ -27,11 +27,8 @@ const Register = () => {
   const submitHandler = async (data: { email: string; password: string }) => {
     try {
       const res = await signIn("credentials", data);
-      console.log(res);
     } catch (error) {}
   };
-
-  console.log(errors);
 
   return (
     <div className="min-h-screen bg-authImage bg-cover bg-no-repeat">
