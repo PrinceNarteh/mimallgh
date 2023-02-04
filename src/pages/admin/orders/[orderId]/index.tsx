@@ -1,7 +1,12 @@
 import React from "react";
+import OrderDetails from "../../../../components/admin/OrderDetails";
 
-const OrderDetails = () => {
-  return <div>OrderDetails</div>;
+const OrderDetail = () => {
+  return (
+    <div>
+      <OrderDetails />
+    </div>
+  );
 };
 
-export default OrderDetails;
+export default OrderDetail;

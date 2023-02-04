@@ -50,6 +50,13 @@ const AddShop = () => {
     }
   };
 
+  //    name        String
+  //   description String
+  //   location    String
+  //   address     String
+  //   phoneNumber String
+  //   ownerId     String    @unique
+
   return (
     <div className="mx-auto max-w-4xl">
       <Card heading="Add Shop Owner">
@@ -83,9 +90,35 @@ const AddShop = () => {
               validationSchema={{ required: "Location is required" }}
             />
           </div>
+          <div className="flex flex-col gap-5 lg:flex-row">
+            <InputField
+              name="address"
+              label="Address"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Shop name is required" }}
+            />
+            <InputField
+              name="Phone Number"
+              label="phoneNumber"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Location is required" }}
+            />
+          </div>
+          <div>
+            <label htmlFor="" className="mb-2 inline-block capitalize">
+              Description
+            </label>
+            <textarea
+              className="w-full rounded border border-gray-600 bg-transparent p-2 outline-none"
+              rows={5}
+              onChange={(e) => {}}
+            />
+          </div>
           <button
             type="submit"
-            className="rounded bg-blue-600 py-2 px-4 text-white"
+            className="mt-3 rounded bg-blue-600 py-2 px-4 text-white"
           >
             Create Account
           </button>

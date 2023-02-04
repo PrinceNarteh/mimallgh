@@ -6,7 +6,7 @@ import Status from "../../../components/admin/Status";
 
 const ProductList = () => {
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-6xl">
       <Card heading="Product List">
         <div className="flex items-center rounded border border-gray-600 bg-light-gray px-2">
           <BiSearch className="text-3xl text-gray-500" />

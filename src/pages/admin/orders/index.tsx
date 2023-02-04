@@ -1,7 +1,12 @@
 import React from "react";
+import OrderListTable from "../../../components/admin/OrderListTable";
 
 const OrdersList = () => {
-  return <div>OrdersList</div>;
+  return (
+    <div>
+      <OrderListTable />
+    </div>
+  );
 };
 
 export default OrdersList;
