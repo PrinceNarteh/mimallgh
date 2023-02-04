@@ -5,6 +5,7 @@ import SearchFilter from "../../../../components/admin/SearchFilter";
 import InputField from "../../../../components/InputField";
 // import { httpClient } from "@/utils/httpClient";
 import { useForm } from "react-hook-form";
+import { api } from "../../../../utils/api";
 
 const shopOwners = [
   {
@@ -35,6 +36,7 @@ const AddShop = () => {
   } = useForm({
     // resolver: zodResolver(createShopOwnerDto),
   });
+  const shopOwners = api.shop.getAllShopOwners.useQuery();
 
   const submitHandler = async (data: any) => {
     if (data.shop_owner === "") {
@@ -50,13 +52,6 @@ const AddShop = () => {
     }
   };
 
-  //    name        String
-  //   description String
-  //   location    String
-  //   address     String
-  //   phoneNumber String
-  //   ownerId     String    @unique
-
   return (
     <div className="mx-auto max-w-4xl">
       <Card heading="Add Shop Owner">
@@ -69,7 +64,7 @@ const AddShop = () => {
               Shop Owner
             </label>
             <SearchFilter
-              shopOwners={shopOwners}
+              shopOwners={shopOwners.data || []}
               errors={errors}
               setValue={setValue}
             />

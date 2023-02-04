@@ -9,6 +9,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "../env/server.mjs";
 import { prisma } from "./db";
 import bcrypt from "bcryptjs";
+import { Role } from "@prisma/client";
 
 /**
  * Module augmentation for `next-auth` types
@@ -29,6 +30,7 @@ declare module "next-auth" {
       password: String;
       image: String;
       active: Boolean;
+      role: Role;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];

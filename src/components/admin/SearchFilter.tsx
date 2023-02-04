@@ -1,15 +1,13 @@
 "use client";
 
+import { User } from "@prisma/client";
 import { useState } from "react";
 import { FieldErrorsImpl } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 
 interface ISearchFilter {
-  shopOwners: {
-    id: string;
-    fullName: string;
-  }[];
+  shopOwners: User[];
   setValue: any;
   errors: Partial<
     FieldErrorsImpl<{
@@ -18,12 +16,16 @@ interface ISearchFilter {
   >;
 }
 
-// outline-none bg-transparent border border-gray-500 rounded w-full p-2
-
 const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
   const [inputValue, setInputValue] = useState("");
   const [selected, setSelected] = useState("");
   const [open, setOpen] = useState(false);
+
+  const owners = shopOwners.map((shopOwner) => ({
+    id: shopOwner.id,
+    fullName:
+      `${shopOwner.firstName} ${shopOwner.lastName}` + shopOwner.middleName,
+  }));
 
   return (
     <div className="relative w-full font-medium">
@@ -55,7 +57,7 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
             className="w-full bg-transparent p-2 outline-none placeholder:text-gray-700"
           />
         </div>
-        {shopOwners?.map((shopOwner) => (
+        {owners?.map((shopOwner) => (
           <li
             key={shopOwner?.id}
             className={`p-2 text-sm hover:bg-sky-600 hover:text-white
