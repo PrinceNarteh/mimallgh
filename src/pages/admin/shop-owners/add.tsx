@@ -2,10 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import Card from "../../../../components/admin/Card";
-import InputField from "../../../../components/InputField";
-import { api } from "../../../../utils/api";
-import { createShopOwnerDto } from "../../../../utils/validations";
+import Card from "../../../components/admin/Card";
+import InputField from "../../../components/InputField";
+import { api } from "../../../utils/api";
+import { createShopOwnerDto } from "../../../utils/validations";
 
 const AddShopOwner = () => {
   // const [error, setError] = useState("");
