@@ -1,7 +1,13 @@
 import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 const ShopOwnersList = () => {
+  const router = useRouter();
+
+  const navigate = (shopOwnerId: string) =>
+    router.push(`/admin/shop-owners/${shopOwnerId}`);
+
   return (
     <div className="mx-auto max-w-5xl">
       <div className="w-full py-4 px-2">
@@ -20,7 +26,10 @@ const ShopOwnersList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="rounded bg-light-gray">
+            <tr
+              className="cursor-pointer rounded bg-light-gray"
+              onClick={() => navigate("1234")}
+            >
               <td className="text-center">
                 <input type="checkbox" />
               </td>

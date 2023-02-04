@@ -3,8 +3,14 @@ import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import Card from "../../../components/admin/Card";
 import Status from "../../../components/admin/Status";
+import { useRouter } from "next/router";
 
 const ProductList = () => {
+  const router = useRouter();
+
+  const navigate = (productId: string) =>
+    router.push(`/admin/products/${productId}`);
+
   return (
     <div className="mx-auto max-w-6xl">
       <Card heading="Product List">
@@ -33,8 +39,11 @@ const ProductList = () => {
           <tbody className="border-separate border-spacing-10 space-y-20">
             {products.map((product, idx) => (
               <tr
-                className={`${idx % 2 === 0 && "bg-gray-500 bg-opacity-20"}`}
+                className={`${
+                  idx % 2 === 0 && "bg-gray-500 bg-opacity-20"
+                } cursor-pointer`}
                 key={idx}
+                onClick={() => navigate(product.id)}
               >
                 <td className="py-7 text-center">
                   <input type="checkbox" name="" id="" />

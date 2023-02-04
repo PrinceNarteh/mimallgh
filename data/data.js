@@ -7,7 +7,7 @@ import orange from "../assets/images/orange.png";
 
 export const products = [
   {
-    id: 1022,
+    id: "1022",
     name: "Red Apple",
     SKU: "AC6660KW",
     image: apple,
@@ -15,7 +15,7 @@ export const products = [
     stock: 5,
   },
   {
-    id: 4402,
+    id: "4402",
     name: "Banana",
     SKU: "DELTA500",
     image: banana,
@@ -23,7 +23,7 @@ export const products = [
     stock: 15,
   },
   {
-    id: 1023,
+    id: "1023",
     name: "Carrot",
     SKU: "KZX389PQ",
     image: carrot,
@@ -31,7 +31,7 @@ export const products = [
     stock: 0,
   },
   {
-    id: 1522,
+    id: "1522",
     name: "Grape",
     SKU: "DM2019KW",
     image: grape,
@@ -39,7 +39,7 @@ export const products = [
     stock: 12,
   },
   {
-    id: 1222,
+    id: "1222",
     name: "Guava",
     SKU: "BDX100PL",
     image: guava,
@@ -47,7 +47,7 @@ export const products = [
     stock: 0,
   },
   {
-    id: 1072,
+    id: "1072",
     name: "Orange",
     SKU: "2017ERX9",
     image: orange,
@@ -55,7 +55,7 @@ export const products = [
     stock: 14,
   },
   {
-    id: 4402,
+    id: "4402",
     name: "Banana",
     SKU: "DELTA500",
     image: banana,
@@ -63,7 +63,7 @@ export const products = [
     stock: 15,
   },
   {
-    id: 1023,
+    id: "1023",
     name: "Carrot",
     SKU: "KZX389PQ",
     image: carrot,
@@ -71,7 +71,7 @@ export const products = [
     stock: 0,
   },
   {
-    id: 1522,
+    id: "1522",
     name: "Grape",
     SKU: "DM2019KW",
     image: grape,
@@ -79,7 +79,7 @@ export const products = [
     stock: 12,
   },
   {
-    id: 1222,
+    id: "1222",
     name: "Guava",
     SKU: "BDX100PL",
     image: guava,
@@ -87,7 +87,7 @@ export const products = [
     stock: 0,
   },
   {
-    id: 1072,
+    id: "1072",
     name: "Orange",
     SKU: "2017ERX9",
     image: orange,
