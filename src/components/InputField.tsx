@@ -10,7 +10,7 @@ interface IInputField {
   name: string;
   label: string;
   type?: string;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<any>;
   errors: Partial<
     FieldErrorsImpl<{
       [x: string]: any;

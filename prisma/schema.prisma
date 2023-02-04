@@ -79,7 +79,7 @@ model Shop {
     name        String
     description String
     location    String
-    address     String
+    address     String?
     phoneNumber String
     ownerId     String    @unique
     owner       User      @relation(fields: [ownerId], references: [id])

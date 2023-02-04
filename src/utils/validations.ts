@@ -54,6 +54,12 @@ export const createUserDto = z.object({
   }),
 });
 
+export const updateUserDto = createUserDto
+  .extend({
+    id: z.string({ required_error: "ID is required." }).cuid(),
+  })
+  .optional();
+
 export const createShopOwnerDto = createUserDto
   .extend({
     confirmPassword: z
@@ -78,3 +84,26 @@ export const loginDto = z.object({
     .string({ required_error: "Password is required" })
     .max(6, "Password should be six character or more"),
 });
+
+export const addShopDto = z.object({
+  ownerId: z
+    .string({ required_error: "Shop Owner Id is required" })
+    .cuid("Enter valid ID"),
+  name: z
+    .string({ required_error: "Shop name is required" })
+    .min(1, "Shop name cannot be empty"),
+  location: z
+    .string({ required_error: "Location is required" })
+    .min(1, "Location cannot be empty"),
+  address: z.string(),
+  phoneNumber: z
+    .string({ required_error: "Phone number is required" })
+    .length(10, "Phone number must be 10 characters"),
+  description: z.string(),
+});
+
+export const updateShopDto = addShopDto.extend({
+  id: z.string({ required_error: "" }).cuid(),
+});
+
+export type IUpdateShop = z.infer<typeof updateShopDto>;
