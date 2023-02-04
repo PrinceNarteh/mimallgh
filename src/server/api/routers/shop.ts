@@ -9,7 +9,7 @@ import {
 } from "../trpc";
 
 export const shopRouter = createTRPCRouter({
-  getAllShop: adminProtectedProcedure.query(async ({ ctx }) => {
+  getAllShops: publicProcedure.query(async ({ ctx }) => {
     const shops = await ctx.prisma.shop.findMany();
     return shops;
   }),
