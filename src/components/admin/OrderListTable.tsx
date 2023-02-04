@@ -1,15 +1,10 @@
 import React from "react";
 import { BiSearch } from "react-icons/bi";
-
-const orders = [
-  {
-    no: 29,
-    ref: "CH1ZXA",
-    date: "21 Jun 23",
-  },
-];
+import { useRouter } from "next/router";
 
 const OrderListTable = () => {
+  const router = useRouter();
+
   return (
     <div className="mx-auto max-w-5xl">
       <div className=" flex justify-center">
@@ -41,7 +36,10 @@ const OrderListTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="rounded bg-light-gray">
+            <tr
+              className="cursor-pointer rounded bg-light-gray"
+              onClick={() => router.push(`/admin/orders/${123}`)}
+            >
               <td className="text-center">
                 <input type="checkbox" />
               </td>

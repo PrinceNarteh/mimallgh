@@ -1,7 +1,7 @@
 import { Role } from "@prisma/client";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { addShopDto, updateShopDto } from "../../../utils/validations";
+import { createShopDto, updateShopDto } from "../../../utils/validations";
 import {
   adminProtectedProcedure,
   createTRPCRouter,
@@ -21,8 +21,14 @@ export const shopRouter = createTRPCRouter({
     });
     return shopOwners;
   }),
+  getShopById: publicProcedure
+    .input(z.string().cuid())
+    .query(async ({ input, ctx }) => {
+      const shop = await ctx.prisma.shop.findUnique({ where: { id: input } });
+      return shop;
+    }),
   createShop: publicProcedure
-    .input(addShopDto)
+    .input(createShopDto)
     .mutation(async ({ input, ctx }) => {
       try {
         const res = await ctx.prisma.shop.create({

@@ -1,9 +1,9 @@
-import AddShopForm from "../../../components/admin/AddShopForm";
+import ShopForm from "../../../components/admin/ShopForm";
 
 const AddShop = () => {
   return (
     <div className="mx-auto max-w-4xl">
-      <AddShopForm />
+      <ShopForm />
     </div>
   );
 };

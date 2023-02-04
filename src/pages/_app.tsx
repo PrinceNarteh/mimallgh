@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Poppins } from "@next/font/google";
 import { api } from "../utils/api";
@@ -46,6 +47,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           </>
         )}
       </SessionProvider>
+      <ReactQueryDevtools />
     </div>
   );
 };

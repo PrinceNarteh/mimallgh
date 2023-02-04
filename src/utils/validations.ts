@@ -85,7 +85,7 @@ export const loginDto = z.object({
     .max(6, "Password should be six character or more"),
 });
 
-export const addShopDto = z.object({
+export const createShopDto = z.object({
   ownerId: z
     .string({ required_error: "Shop Owner Id is required" })
     .cuid("Enter valid ID"),
@@ -102,7 +102,7 @@ export const addShopDto = z.object({
   description: z.string(),
 });
 
-export const updateShopDto = addShopDto.extend({
+export const updateShopDto = createShopDto.extend({
   id: z.string({ required_error: "" }).cuid(),
 });
 

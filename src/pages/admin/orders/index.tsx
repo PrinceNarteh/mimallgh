@@ -6,12 +6,6 @@ import OrderListTable from "../../../components/admin/OrderListTable";
 const OrdersList = () => {
   return (
     <div>
-      <Link
-        href={`/admin/products`}
-        className="flex cursor-pointer items-center"
-      >
-        <MdArrowBackIosNew className="mr-2" /> Back
-      </Link>
       <OrderListTable />
     </div>
   );

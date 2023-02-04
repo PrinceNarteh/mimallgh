@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { api } from "../../utils/api";
-import { createShopOwnerDto, IUpdateShop } from "../../utils/validations";
-import Card from "../admin/Card";
-import SearchFilter from "../admin/SearchFilter";
+import { createShopDto, updateShopDto } from "../../utils/validations";
+import Card from "./Card";
+import SearchFilter from "./SearchFilter";
 import InputField from "../InputField";
+import { Shop } from "@prisma/client";
 
-const AddShopForm = ({ shop }: { shop?: IUpdateShop }) => {
+const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
   const {
     register,
     formState: { errors },
@@ -15,30 +16,46 @@ const AddShopForm = ({ shop }: { shop?: IUpdateShop }) => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      shop_owner: shop?.ownerId || null,
+      id: shop?.id || null,
+      ownerId: shop?.ownerId || "",
       name: shop?.name || "",
       location: shop?.location || "",
       address: shop?.address || "",
       phoneNumber: shop?.phoneNumber || "",
       description: shop?.description || "",
     },
-    resolver: zodResolver(createShopOwnerDto),
+    resolver: zodResolver(shop?.ownerId ? updateShopDto : createShopDto),
   });
   const shopOwners = api.shop.getAllShopOwners.useQuery();
-  const createShopMutation = api.shop.createShop.useMutation({});
+  const createShopMutation = api.shop.createShop.useMutation();
+  const updateShopMutation = api.shop.updateShop.useMutation();
+
+  console.log(shop);
 
   const submitHandler = async (data: any) => {
-    if (data.shop_owner === "") {
-      return setError("shop_owner", {
-        message: "Shop owner is required.",
-      });
-    }
+    // if (data.ownerId === "") {
+    //   return setError("shop_owner", {
+    //     message: "Shop owner is required.",
+    //   });
+    // }
+
+    console.log(data);
+
     try {
-      const res = await createShopMutation.mutate(data);
+      console.log(data.id);
+      if (!data.id) {
+        console.log("created");
+        createShopMutation.mutate(data);
+      } else {
+        console.log("updated");
+        updateShopMutation.mutate(data);
+      }
     } catch (error: any) {
       // setError(error.response.data.error);
     }
   };
+
+  console.log(errors);
 
   return (
     <Card heading="Add Shop">
@@ -81,8 +98,8 @@ const AddShopForm = ({ shop }: { shop?: IUpdateShop }) => {
             validationSchema={{ required: "Shop name is required" }}
           />
           <InputField
-            name="Phone Number"
-            label="phoneNumber"
+            name="phoneNumber"
+            label="Phone Number"
             register={register}
             errors={errors}
             validationSchema={{ required: "Location is required" }}
@@ -95,7 +112,7 @@ const AddShopForm = ({ shop }: { shop?: IUpdateShop }) => {
           <textarea
             className="w-full rounded border border-gray-600 bg-transparent p-2 outline-none"
             rows={5}
-            onChange={(e) => {}}
+            {...register("description")}
           />
         </div>
         <button

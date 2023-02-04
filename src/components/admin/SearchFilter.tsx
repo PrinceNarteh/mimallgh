@@ -1,7 +1,7 @@
 "use client";
 
 import { User } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldErrorsImpl } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
@@ -18,7 +18,10 @@ interface ISearchFilter {
 
 const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
   const [inputValue, setInputValue] = useState("");
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState({
+    id: "",
+    fullName: "",
+  });
   const [open, setOpen] = useState(false);
 
   const owners = shopOwners.map((shopOwner) => ({
@@ -26,6 +29,10 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
     fullName:
       `${shopOwner.firstName} ${shopOwner.lastName}` + shopOwner.middleName,
   }));
+
+  useEffect(() => {
+    setValue("ownerId", selected.id);
+  }, [selected]);
 
   return (
     <div className="relative w-full font-medium">
@@ -36,9 +43,9 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
         }`}
       >
         {selected
-          ? selected?.length > 25
-            ? selected?.substring(0, 25) + "..."
-            : selected
+          ? selected?.fullName.length > 25
+            ? selected?.fullName.substring(0, 25) + "..."
+            : selected.fullName
           : "Select Shop Owner"}
         <BiChevronDown size={20} className={`${open && "rotate-180"}`} />
       </div>
@@ -62,8 +69,8 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
             key={shopOwner?.id}
             className={`p-2 text-sm hover:bg-sky-600 hover:text-white
             ${
-              shopOwner?.fullName?.toLowerCase() === selected?.toLowerCase() &&
-              "bg-sky-600 text-white"
+              shopOwner?.fullName?.toLowerCase() ===
+                selected?.fullName.toLowerCase() && "bg-sky-600 text-white"
             }
             ${
               shopOwner?.fullName?.toLowerCase().startsWith(inputValue)
@@ -72,10 +79,10 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
             }`}
             onClick={() => {
               if (
-                shopOwner?.fullName?.toLowerCase() !== selected.toLowerCase()
+                shopOwner?.fullName?.toLowerCase() !==
+                selected.fullName.toLowerCase()
               ) {
-                setValue("shop_owner", shopOwner.id);
-                setSelected(shopOwner.fullName);
+                setSelected(shopOwner);
                 setOpen(false);
                 setInputValue("");
               }
