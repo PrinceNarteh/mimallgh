@@ -1,6 +1,10 @@
 import React from "react";
+import { useRouter } from "next/router";
+import { useToaster } from "react-hot-toast";
 
 const Shops = () => {
+  const router = useRouter();
+
   return (
     <div className="mx-auto max-w-5xl">
       <div className="w-full py-4 px-2">
@@ -19,7 +23,10 @@ const Shops = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="rounded bg-light-gray">
+            <tr
+              className="cursor-pointer rounded bg-light-gray"
+              onClick={() => router.push(`/admin/shops/${123}`)}
+            >
               <td className="text-center">
                 <input type="checkbox" />
               </td>
