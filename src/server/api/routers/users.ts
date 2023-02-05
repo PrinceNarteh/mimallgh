@@ -34,6 +34,18 @@ export const authRouter = createTRPCRouter({
         });
       }
     }),
+  getUserById: publicProcedure
+    .input(
+      z.object({ id: z.string({ required_error: "ID is required" }).cuid() })
+    )
+    .query(async ({ input, ctx }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+      return user;
+    }),
   getUsersByRole: publicProcedure
     .input(
       z.object({

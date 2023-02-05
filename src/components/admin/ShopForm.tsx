@@ -11,6 +11,7 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
   const {
     register,
     formState: { errors },
+    getValues,
     setValue,
     setError,
     handleSubmit,
@@ -29,8 +30,6 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation();
-
-  console.log(shop);
 
   const submitHandler = async (data: any) => {
     // if (data.ownerId === "") {
@@ -58,7 +57,7 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
   console.log(errors);
 
   return (
-    <Card heading="Add Shop">
+    <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
       <form className="w-full" onSubmit={handleSubmit(submitHandler)}>
         <div className="my-2 w-full">
           <label
@@ -119,7 +118,7 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
           type="submit"
           className="mt-3 rounded bg-blue-600 py-2 px-4 text-white"
         >
-          Create Account
+          {`${getValues().id ? "Edit" : "Add"} Shop`}
         </button>
       </form>
     </Card>

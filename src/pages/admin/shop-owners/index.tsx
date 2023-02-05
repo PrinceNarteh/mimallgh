@@ -34,7 +34,7 @@ const ShopOwnersList = () => {
               data?.map((shopOwner, idx) => (
                 <tr
                   className="cursor-pointer rounded bg-light-gray"
-                  onClick={() => navigate("1234")}
+                  onClick={() => navigate(shopOwner.id)}
                   key={idx}
                 >
                   <td className="text-center">
