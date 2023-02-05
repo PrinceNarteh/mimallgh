@@ -1,9 +1,13 @@
 import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRouter } from "next/router";
+import { api } from "../../../utils/api";
 
 const ShopOwnersList = () => {
   const router = useRouter();
+  const { data, isSuccess } = api.users.getUsersByRole.useQuery({
+    role: "shop_owner",
+  });
 
   const navigate = (shopOwnerId: string) =>
     router.push(`/admin/shop-owners/${shopOwnerId}`);
@@ -26,35 +30,26 @@ const ShopOwnersList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr
-              className="cursor-pointer rounded bg-light-gray"
-              onClick={() => navigate("1234")}
-            >
-              <td className="text-center">
-                <input type="checkbox" />
-              </td>
-              <td className="py-5 text-center">1</td>
-              <td className="py-5 text-center">Jane Doe</td>
-              <td className="py-5 text-center">jane.doe@email.com</td>
-              <td className="py-5 text-center">020 123 4567</td>
-              <td className="py-5 text-center">The Web</td>
-              <td className="flex justify-center py-5">
-                <BsThreeDotsVertical />
-              </td>
-            </tr>
-            <tr className="rounded bg-light-gray">
-              <td className="text-center">
-                <input type="checkbox" />
-              </td>
-              <td className="py-5 text-center ">2</td>
-              <td className="py-5 text-center ">John Doe</td>
-              <td className="py-5 text-center">john.doe@email.com</td>
-              <td className="py-5 text-center ">024 123 4567</td>
-              <td className="py-5 text-center ">Gye Nyame Cold Store</td>
-              <td className="flex justify-center py-5">
-                <BsThreeDotsVertical />
-              </td>
-            </tr>
+            {isSuccess &&
+              data?.map((shopOwner, idx) => (
+                <tr
+                  className="cursor-pointer rounded bg-light-gray"
+                  onClick={() => navigate("1234")}
+                  key={idx}
+                >
+                  <td className="text-center">
+                    <input type="checkbox" />
+                  </td>
+                  <td className="py-5 text-center">{idx + 1}</td>
+                  <td className="py-5 text-center">{`${shopOwner.firstName} ${shopOwner.lastName}`}</td>
+                  <td className="py-5 text-center">jane.doe@email.com</td>
+                  <td className="py-5 text-center">020 123 4567</td>
+                  <td className="py-5 text-center">The Web</td>
+                  <td className="flex justify-center py-5">
+                    <BsThreeDotsVertical />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

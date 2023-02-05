@@ -3,7 +3,7 @@ import { api } from "../../../utils/api";
 
 const Shops = () => {
   const router = useRouter();
-  const { data, isSuccess } = api.shop.getAllShops.useQuery();
+  const { data, isSuccess } = api.shops.getAllShops.useQuery();
 
   console.log(data);
 
@@ -29,7 +29,7 @@ const Shops = () => {
               data.map((shop, idx) => (
                 <tr
                   className="cursor-pointer rounded bg-light-gray"
-                  onClick={() => router.push(`/admin/shops/${123}`)}
+                  onClick={() => router.push(`/admin/shops/${shop.id}`)}
                   key={idx}
                 >
                   <td className="text-center">

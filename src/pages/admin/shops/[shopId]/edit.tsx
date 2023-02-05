@@ -12,7 +12,7 @@ const AddShop = () => {
     push(`/admin/shops`);
   }
 
-  const shop = api.shop.getShopById.useQuery(shopId as string);
+  const shop = api.shops.getShopById.useQuery(shopId as string);
 
   if (shop === null) {
     push(`/admin/shops`);

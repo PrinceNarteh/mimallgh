@@ -13,14 +13,6 @@ export const shopRouter = createTRPCRouter({
     const shops = await ctx.prisma.shop.findMany();
     return shops;
   }),
-  getAllShopOwners: publicProcedure.query(async ({ ctx }) => {
-    const shopOwners = await ctx.prisma.user.findMany({
-      where: {
-        role: Role.SHOP_OWNER,
-      },
-    });
-    return shopOwners;
-  }),
   getShopById: publicProcedure
     .input(z.string().cuid())
     .query(async ({ input, ctx }) => {

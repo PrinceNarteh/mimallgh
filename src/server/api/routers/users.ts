@@ -1,9 +1,11 @@
 import { Role } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import bcrypt from "bcryptjs";
+import { z } from "zod";
 
 import { createUserDto } from "../../../utils/validations";
 import { createTRPCRouter, publicProcedure } from "../trpc";
+import { mapRoleStringToEnum } from "../../../utils/mapper";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
@@ -30,6 +32,26 @@ export const authRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
         });
+      }
+    }),
+  getUsersByRole: publicProcedure
+    .input(
+      z.object({
+        role: z.enum(["admin", "user", "shop_owner"], {
+          required_error: "Role is required.",
+        }),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      try {
+        const users = await ctx.prisma.user.findMany({
+          where: {
+            role: mapRoleStringToEnum[input.role],
+          },
+        });
+        return users;
+      } catch (error) {
+        console.log(error);
       }
     }),
 });

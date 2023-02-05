@@ -26,9 +26,9 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
     },
     resolver: zodResolver(shop?.ownerId ? updateShopDto : createShopDto),
   });
-  const shopOwners = api.shop.getAllShopOwners.useQuery();
-  const createShopMutation = api.shop.createShop.useMutation();
-  const updateShopMutation = api.shop.updateShop.useMutation();
+  const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
+  const createShopMutation = api.shops.createShop.useMutation();
+  const updateShopMutation = api.shops.updateShop.useMutation();
 
   console.log(shop);
 

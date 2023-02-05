@@ -1,8 +1,7 @@
-import { createTRPCRouter } from "./trpc";
-import { exampleRouter } from "./routers/example";
-import { authRouter } from "./routers/auth";
 import { productsRouter } from "./routers/products";
-import { shopRouter } from "./routers/shop";
+import { shopRouter } from "./routers/shops";
+import { authRouter } from "./routers/users";
+import { createTRPCRouter } from "./trpc";
 
 /**
  * This is the primary router for your server.
@@ -10,10 +9,9 @@ import { shopRouter } from "./routers/shop";
  * All routers added in /api/routers should be manually added here
  */
 export const appRouter = createTRPCRouter({
-  example: exampleRouter,
-  auth: authRouter,
-  product: productsRouter,
-  shop: shopRouter,
+  users: authRouter,
+  products: productsRouter,
+  shops: shopRouter,
 });
 
 // export type definition of API
