@@ -26,34 +26,23 @@ const ShopOwnerDetails = () => {
       </Link>
       <div className="mx-auto mt-5 max-w-3xl space-y-5">
         <Card heading="Shop Owner Details">
-          <div className="flex items-center justify-between py-4 px-4">
-            <div className="font-bold">Name</div>
-            <div>{`${data?.firstName} ${data?.middleName} ${data?.lastName}`}</div>
-          </div>
-          <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
-            <div className="font-bold">Email</div>
-            <div>{data?.email}</div>
-          </div>
-          <div className="flex items-center justify-between py-4 px-4">
-            <div className="font-bold">Phone Number</div>
-            <div>{data?.phoneNumber}</div>
-          </div>
-          <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
-            <div className="font-bold">Address</div>
-            <div>{data?.address}</div>
-          </div>
-          <div className="flex items-center justify-between py-4 px-4">
-            <div className="font-bold">Phone Number</div>
-            <div>{data?.phoneNumber}</div>
-          </div>
-          <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
-            <div className="font-bold">Status</div>
-            <div>{data?.active ? "Active" : "Inactive"}</div>
-          </div>
-          <div className="flex items-center justify-between py-4 px-4">
-            <div className="font-bold">Date Joined</div>
-            <div>{data?.createdAt.toDateString()}</div>
-          </div>
+          <DetailItem
+            label="Name"
+            value={`${data?.firstName} ${data?.middleName} ${data?.lastName}`}
+          />
+          <DetailItem label="Shop Name" value={`${data?.lastName}`} dark />
+          <DetailItem label="Email" value={`${data?.email}`} dark />
+          <DetailItem label="Phone Number" value={`${data?.phoneNumber}`} />
+          <DetailItem label="Address" value={`${data?.address}`} dark />
+          <DetailItem
+            label="Status"
+            value={`${data?.active ? "Active" : "Inactive"}`}
+          />
+          <DetailItem
+            label="Date Joined"
+            value={`${data?.createdAt.toDateString()}`}
+            dark
+          />
         </Card>
         <div className="flex justify-end gap-5">
           <Link
@@ -68,5 +57,24 @@ const ShopOwnerDetails = () => {
     </div>
   );
 };
+
+const DetailItem = ({
+  label,
+  value,
+  dark,
+}: {
+  label: string;
+  value: string;
+  dark?: boolean;
+}) => (
+  <div
+    className={`flex items-center justify-between py-4 px-4 ${
+      dark && "bg-dark-gray"
+    }`}
+  >
+    <div className="font-bold">{label}</div>
+    <div>{value}</div>
+  </div>
+);
 
 export default ShopOwnerDetails;

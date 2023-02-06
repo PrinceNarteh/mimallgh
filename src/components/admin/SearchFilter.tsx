@@ -92,9 +92,9 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
           </li>
         ))}
       </ul>
-      {errors && errors["shop_owner"] && (
+      {errors && errors["ownerId"] && (
         <span className="pl-1 text-sm text-red-500">
-          {errors["shop_owner"]?.message as string}
+          {errors["ownerId"]?.message as string}
         </span>
       )}
     </div>

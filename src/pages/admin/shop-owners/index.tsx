@@ -5,9 +5,7 @@ import { api } from "../../../utils/api";
 
 const ShopOwnersList = () => {
   const router = useRouter();
-  const { data, isSuccess } = api.users.getUsersByRole.useQuery({
-    role: "shop_owner",
-  });
+  const { data, isSuccess } = api.users.getAllShopOwners.useQuery();
 
   const navigate = (shopOwnerId: string) =>
     router.push(`/admin/shop-owners/${shopOwnerId}`);
@@ -41,10 +39,10 @@ const ShopOwnersList = () => {
                     <input type="checkbox" />
                   </td>
                   <td className="py-5 text-center">{idx + 1}</td>
-                  <td className="py-5 text-center">{`${shopOwner.firstName} ${shopOwner.lastName}`}</td>
-                  <td className="py-5 text-center">jane.doe@email.com</td>
-                  <td className="py-5 text-center">020 123 4567</td>
-                  <td className="py-5 text-center">The Web</td>
+                  <td className="py-5 text-center">{`${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`}</td>
+                  <td className="py-5 text-center">{shopOwner.email}</td>
+                  <td className="py-5 text-center">{shopOwner.phoneNumber}</td>
+                  <td className="py-5 text-center">{shopOwner.shop?.name}</td>
                   <td className="flex justify-center py-5">
                     <BsThreeDotsVertical />
                   </td>

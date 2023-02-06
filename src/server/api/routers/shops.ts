@@ -10,13 +10,34 @@ import {
 
 export const shopRouter = createTRPCRouter({
   getAllShops: publicProcedure.query(async ({ ctx }) => {
-    const shops = await ctx.prisma.shop.findMany();
+    const shops = await ctx.prisma.shop.findMany({
+      include: {
+        owner: {
+          select: {
+            firstName: true,
+            middleName: true,
+            lastName: true,
+          },
+        },
+      },
+    });
     return shops;
   }),
   getShopById: publicProcedure
     .input(z.string().cuid())
     .query(async ({ input, ctx }) => {
-      const shop = await ctx.prisma.shop.findUnique({ where: { id: input } });
+      const shop = await ctx.prisma.shop.findUnique({
+        where: { id: input },
+        include: {
+          owner: {
+            select: {
+              firstName: true,
+              middleName: true,
+              lastName: true,
+            },
+          },
+        },
+      });
       return shop;
     }),
   createShop: publicProcedure

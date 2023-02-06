@@ -17,6 +17,8 @@ const ShopDetails = () => {
 
   const { data } = api.shops.getShopById.useQuery(shopId as string);
 
+  console.log(data);
+
   return (
     <div>
       <Link href={`/admin/shops`} className="flex cursor-pointer items-center">
@@ -30,7 +32,7 @@ const ShopDetails = () => {
           </div>
           <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
             <div className="font-bold">Owner</div>
-            <div>The Web</div>
+            <div>{`${data?.owner.firstName} ${data?.owner.middleName} ${data?.owner.lastName}`}</div>
           </div>
           <div className="flex items-center justify-between py-4 px-4">
             <div className="font-bold">Location</div>

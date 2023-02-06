@@ -5,8 +5,6 @@ const Shops = () => {
   const router = useRouter();
   const { data, isSuccess } = api.shops.getAllShops.useQuery();
 
-  console.log(data);
-
   return (
     <div className="mx-auto max-w-5xl">
       <div className="w-full py-4 px-2">
@@ -37,7 +35,9 @@ const Shops = () => {
                   </td>
                   <td className="py-5 text-center ">{idx + 1}</td>
                   <td className="py-5 text-center ">{shop.name}</td>
-                  <td className="py-5 text-center ">Shop Owner</td>
+                  <td className="py-5 text-center ">
+                    <div>{`${shop?.owner.firstName} ${shop?.owner.middleName} ${shop?.owner.lastName}`}</div>
+                  </td>
                   <td className="py-5 text-center">{shop.location}</td>
                   <td className="py-5 text-center ">{shop.phoneNumber}</td>
                   <td className="py-5 text-center ">D</td>

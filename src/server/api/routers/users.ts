@@ -2,7 +2,6 @@ import { Role } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-
 import { createUserDto } from "../../../utils/validations";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { mapRoleStringToEnum } from "../../../utils/mapper";
@@ -65,5 +64,39 @@ export const authRouter = createTRPCRouter({
       } catch (error) {
         console.log(error);
       }
+    }),
+  getAllShopOwners: publicProcedure.query(async ({ ctx }) => {
+    const shopOwners = await ctx.prisma.user.findMany({
+      where: {
+        role: Role.SHOP_OWNER,
+      },
+      include: {
+        shop: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return shopOwners;
+  }),
+  getShopOwnerBy: publicProcedure
+    .input(
+      z.object({ id: z.string({ required_error: "ID is required" }).cuid() })
+    )
+    .query(async ({ input, ctx }) => {
+      const shopOwners = await ctx.prisma.user.findUnique({
+        where: {
+          id: input.id,
+        },
+        include: {
+          shop: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      });
+      return shopOwners;
     }),
 });

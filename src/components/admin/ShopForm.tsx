@@ -32,11 +32,11 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
   const updateShopMutation = api.shops.updateShop.useMutation();
 
   const submitHandler = async (data: any) => {
-    // if (data.ownerId === "") {
-    //   return setError("shop_owner", {
-    //     message: "Shop owner is required.",
-    //   });
-    // }
+    if (data.ownerId === "") {
+      return setError("ownerId", {
+        message: "Shop owner is required.",
+      });
+    }
 
     console.log(data);
 
