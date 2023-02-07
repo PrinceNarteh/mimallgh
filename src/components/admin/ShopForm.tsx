@@ -19,11 +19,9 @@ const AddShopForm = ({
   shop?:
     | (Shop & {
         branches: {
-          shopId?: string;
           address: string;
           location: string;
           phoneNumber: string;
-          id: string;
         }[];
       })
     | null;
@@ -264,8 +262,6 @@ const AddShopForm = ({
               address: "",
               location: "",
               phoneNumber: "",
-              id: "",
-              shopId: shop?.id,
             })
           }
         >

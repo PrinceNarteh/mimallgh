@@ -83,7 +83,7 @@ export const shopRouter = createTRPCRouter({
           });
         }
 
-        const { branches, ...update }: Shop & { branches: Branch[] } = shop;
+        const { branches, id, ...update }: Shop & { branches: Branch[] } = shop;
 
         const newBranches = branches.map((branch) => ({
           location: branch.location,
@@ -91,20 +91,14 @@ export const shopRouter = createTRPCRouter({
           phoneNumber: branch.phoneNumber,
         }));
 
+        console.log(newBranches);
+
         const res = await ctx.prisma.shop.update({
           where: {
             id: input.id,
           },
           data: {
-            ...update,
-            branches: {
-              deleteMany: {
-                shopId: input.id,
-              },
-              createMany: {
-                data: newBranches,
-              },
-            },
+            whatsappNumber: "0241234567",
           },
           include: {
             branches: true,

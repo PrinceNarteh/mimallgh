@@ -130,10 +130,11 @@ export const updateShopDto = createShopDto.extend({
   id: z.string({ required_error: "" }).cuid(),
   branches: z.array(
     z.object({
-      id: z.string({ required_error: "" }).cuid(),
+      id: z.string({ required_error: "" }).cuid().optional(),
       shopId: z
         .string({ required_error: "Shop Owner Id is required" })
-        .cuid("Enter valid ID"),
+        .cuid("Enter valid ID")
+        .optional(),
       location: z
         .string({ required_error: "Location is required." })
         .min(1)
