@@ -31,7 +31,11 @@ const SearchFilter = ({ shopOwners, setValue, errors }: ISearchFilter) => {
   }));
 
   useEffect(() => {
-    setValue("ownerId", selected.id);
+    setValue("ownerId", selected.id, {
+      shouldDirty: true,
+      shouldValidate: true,
+      shouldTouch: true,
+    });
   }, [selected]);
 
   return (

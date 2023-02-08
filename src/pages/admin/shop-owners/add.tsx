@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { MouseEvent, useState, useCallback, MouseEventHandler } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import Card from "../../../components/admin/Card";
@@ -17,8 +17,9 @@ const AddShopOwner = () => {
   } = useForm({
     resolver: zodResolver(createShopOwnerDto),
   });
+  const [state, setState] = useState("");
 
-  const createUser = api.auth.register.useMutation({
+  const createUser = api.users.register.useMutation({
     onSuccess: () => {
       toast.success("Shop owner created successfully.");
     },
@@ -37,7 +38,10 @@ const AddShopOwner = () => {
   return (
     <div className="mx-auto max-w-4xl">
       <Card heading="Add Shop Owner">
-        <form className="w-full" onSubmit={handleSubmit(submitHandler)}>
+        <form
+          className="w-full space-y-3"
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <div className="flex flex-col gap-5 lg:flex-row">
             <InputField
               name="firstName"
@@ -69,21 +73,58 @@ const AddShopOwner = () => {
             errors={errors}
             validationSchema={{ required: "Email is required" }}
           />
-          <InputField
-            name="address"
-            label="Address"
-            register={register}
-            errors={errors}
-            validationSchema={{ required: "Address is required" }}
-          />
-
-          <InputField
-            name="phoneNumber"
-            label="Phone Number"
-            register={register}
-            errors={errors}
-            validationSchema={{ required: "Phone number is required" }}
-          />
+          <div className="flex flex-col gap-5 md:flex-row">
+            <InputField
+              name="address"
+              label="Address"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Address is required" }}
+            />
+            <InputField
+              name="nationality"
+              label="Nationality"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Nationality is required" }}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor=""
+              className="mb-1.5 block pl-2 capitalize tracking-widest"
+            >
+              ID Card Type
+            </label>
+            <div className="flex flex-col gap-5 md:flex-row">
+              <select className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none">
+                <option value="">Select Card</option>
+                <option value="ghana-card">Ghana Card</option>
+                <option value="student-id">Student ID</option>
+                <option value="voters-id">Voters ID</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Card Number"
+                className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-5 md:flex-row">
+            <InputField
+              name="phoneNumber"
+              label="Phone Number"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Phone number is required" }}
+            />
+            <InputField
+              name="alternatePhoneNumber"
+              label="Alternate Phone Number"
+              register={register}
+              errors={errors}
+            />
+          </div>
 
           <div className="flex flex-col gap-5 md:flex-row">
             <InputField
