@@ -38,8 +38,6 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
       });
     }
 
-    console.log(data);
-
     try {
       console.log(data.id);
       if (!data.id) {
@@ -54,7 +52,10 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
     }
   };
 
-  console.log(errors);
+  const owners = shopOwners?.data?.map((shopOwner) => ({
+    id: shopOwner.id,
+    label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
+  }));
 
   return (
     <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
@@ -67,7 +68,8 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
             Shop Owner
           </label>
           <SearchFilter
-            shopOwners={shopOwners.data || []}
+            field="ownerId"
+            options={owners || []}
             errors={errors}
             setValue={setValue}
           />

@@ -15,15 +15,27 @@ export const createProductDto = z.object({
   brand: z
     .string({ required_error: "Brand is required" })
     .min(2, "Brand should be 2 or more characters"),
-  category: z
-    .string({ required_error: "Category is required" })
-    .min(2, "Category should be 2 or more characters"),
+  category: z.enum([
+    "accommodations_and_building",
+    "fashion_and_wears",
+    "food",
+    "furniture",
+    "grocery_and_general",
+    "health_and_wellness",
+    "home_and_electricals",
+    "money_and_energy",
+    "personal-care_and_beauty",
+    "recreation",
+    "stationery_and_printing",
+    "tech",
+    "transport_and_machines",
+  ]),
   ratings: z
     .number()
     .min(1, "Minimum rating should be 1")
     .max(5, "Maximum rating should be 5")
     .optional(),
-  images: z.string().url(),
+  images: z.string().url().optional(),
 });
 
 export const updateProductDto = createProductDto.partial();

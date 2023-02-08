@@ -8,7 +8,6 @@ import { api } from "../../../utils/api";
 import { createShopOwnerDto } from "../../../utils/validations";
 
 const AddShopOwner = () => {
-  // const [error, setError] = useState("");
   const {
     register,
     formState: { errors },
@@ -17,7 +16,6 @@ const AddShopOwner = () => {
   } = useForm({
     resolver: zodResolver(createShopOwnerDto),
   });
-  const [state, setState] = useState("");
 
   const createUser = api.users.register.useMutation({
     onSuccess: () => {

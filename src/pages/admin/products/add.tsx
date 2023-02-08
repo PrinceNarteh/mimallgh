@@ -1,10 +1,9 @@
-import React from "react";
-import AddProductForm from "../../../components/admin/AddProduct";
+import AdminAddProductForm from "../../../components/admin/AdminAddProductForm";
 
 const AddProduct = () => {
   return (
     <div>
-      <AddProductForm />
+      <AdminAddProductForm />
     </div>
   );
 };
