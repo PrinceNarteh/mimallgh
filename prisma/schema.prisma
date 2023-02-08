@@ -86,6 +86,22 @@ model Shop {
     products    Product[]
 }
 
+enum Category {
+    ACCOMMODATIONS_AND_BUILING
+    FASHION_AND_WEARS
+    FOOD
+    FURNITURE
+    GROCERY_AND_GENERAL
+    HEALTH_AND_WELLNESS
+    HOME_AND_ELECTRICALS
+    MONEY_AND_ENERGY
+    PERSONAL_CARE_AND_BEAUTY
+    RECREATION
+    STATIONERY_AND_PRINTING
+    TECH
+    TRANSPORT_AND_MACHINE
+}
+
 model Product {
     id                 String   @id @default(cuid())
     title              String
@@ -94,7 +110,7 @@ model Product {
     discountPercentage Float    @default(0)
     stock              Int      @default(0)
     brand              String
-    category           String
+    category           Category
     images             String
     shopId             String
     shop               Shop     @relation(fields: [shopId], references: [id])

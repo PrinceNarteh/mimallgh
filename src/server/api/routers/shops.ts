@@ -14,6 +14,7 @@ export const shopRouter = createTRPCRouter({
       include: {
         owner: {
           select: {
+            id: true,
             firstName: true,
             middleName: true,
             lastName: true,

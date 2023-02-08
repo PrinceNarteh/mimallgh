@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Role, Category } from "@prisma/client";
 
 export const mapRoleEnumToString: Record<Role, string> = {
   [Role.ADMIN]: "admin",
@@ -11,3 +11,5 @@ export const mapRoleStringToEnum: Record<string, Role> = {
   user: Role.USER,
   shop_owner: Role.SHOP_OWNER,
 };
+
+export const mapCategoryToString: Record<string, Category> = {};

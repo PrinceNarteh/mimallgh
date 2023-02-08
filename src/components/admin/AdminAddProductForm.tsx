@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";
 import { SelectOption } from "./SelectOption";
+import SearchFilter from "./SearchFilter";
+import { api } from "../../utils/api";
 
 const categories = [
   {
@@ -29,9 +31,11 @@ const AdminAddProductForm = () => {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useForm();
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const getAllShops = api.shops.getAllShops.useQuery();
 
   const selectedImages = (e: ChangeEvent<HTMLInputElement>) => {
     let files: FileList | null = e.target.files;
@@ -55,6 +59,11 @@ const AdminAddProductForm = () => {
     setPreviewImages(imagesArray);
   }, [images]);
 
+  const shops = getAllShops?.data?.map((shop) => ({
+    id: shop.id,
+    label: `${shop.name} - ${shop.owner.firstName} ${shop.owner.middleName} ${shop.owner.lastName}`,
+  }));
+
   return (
     <div
       className="mx-auto max-w-4xl pb-5
@@ -62,6 +71,15 @@ const AdminAddProductForm = () => {
     >
       <Card heading={"Add Product"}>
         <div className="space-y-4">
+          <label className="-mb-2 block pl-2 capitalize tracking-widest">
+            Shop
+          </label>
+          <SearchFilter
+            errors={errors}
+            field="shopId"
+            setValue={setValue}
+            options={shops || []}
+          />
           <InputField
             label="Name"
             name="name"
