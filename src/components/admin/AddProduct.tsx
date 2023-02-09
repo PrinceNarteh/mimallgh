@@ -87,7 +87,41 @@ const AddProductForm = () => {
               onChange={(e) => {}}
             />
           </div>
-          <input type="file" name="" id="" onChange={selectedImages} multiple />
+          <div className="">
+            <label
+              className="mb-2 block bg-light-gray pl-2 capitalize tracking-widest"
+              htmlFor="user_avatar"
+            >
+              Product Video
+            </label>
+            <input
+              className="block w-full cursor-pointer rounded-lg border bg-dark-gray file:border-none file:bg-light-gray file:px-5 file:py-3 file:text-white"
+              aria-describedby="user_avatar_help"
+              id="user_avatar"
+              type="file"
+              onChange={selectedImages}
+              multiple
+              accept=".png, .jpg, .jpeg"
+            ></input>
+          </div>
+
+          <div className="">
+            <label
+              className="mb-2 block bg-light-gray pl-2 capitalize tracking-widest"
+              htmlFor="user_avatar"
+            >
+              Product Image(s)
+            </label>
+            <input
+              className="block w-full cursor-pointer rounded-lg border bg-dark-gray file:border-none file:bg-light-gray file:px-5 file:py-3 file:text-white"
+              aria-describedby="user_avatar_help"
+              id="user_avatar"
+              type="file"
+              onChange={selectedImages}
+              multiple
+              accept=".png, .jpg, .jpeg"
+            ></input>
+          </div>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-7 ">
           {previewImages.map((image, index) => (

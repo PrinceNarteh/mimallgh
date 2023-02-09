@@ -7,6 +7,7 @@ import Image from "next/image";
 import { SelectOption } from "./SelectOption";
 import SearchFilter from "./SearchFilter";
 import { api } from "../../utils/api";
+import { TbCloudUpload } from "react-icons/tb";
 
 const categories = [
   {
@@ -159,28 +160,46 @@ const AdminAddProductForm = () => {
               accept=".png, .jpg, .jpeg"
             ></input>
           </div>
-        </div>
-        <div className="mt-10 flex flex-wrap justify-center gap-7 ">
-          {previewImages.map((image, index) => (
-            <div
-              key={index}
-              className="relative h-32 w-32 rounded-md bg-slate-500"
-            >
-              <AiOutlineCloseCircle
-                onClick={() => deleteHandler(index)}
-                className="absolute -right-2 -top-2 z-10 cursor-pointer rounded-full bg-white text-2xl text-orange-500"
-              />
-              <div className="overflow-hidden">
-                <Image
-                  src={image}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  alt=""
-                  className="rounded"
+          <div className="mt-10 flex flex-wrap justify-center gap-7 ">
+            {previewImages.map((image, index) => (
+              <div
+                key={index}
+                className="relative h-32 w-32 rounded-md bg-slate-500"
+              >
+                <AiOutlineCloseCircle
+                  onClick={() => deleteHandler(index)}
+                  className="absolute -right-2 -top-2 z-10 cursor-pointer rounded-full bg-white text-2xl text-orange-500"
                 />
+                <div className="overflow-hidden">
+                  <Image
+                    src={image}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    alt=""
+                    className="rounded"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5">
+          <label
+            className="mb-2 block bg-light-gray pl-2 capitalize tracking-widest"
+            htmlFor="user_avatar"
+          >
+            Product Video
+          </label>
+          <input
+            className="block w-full cursor-pointer rounded-lg border bg-dark-gray file:border-none file:bg-light-gray file:px-5 file:py-3 file:text-white"
+            aria-describedby="user_avatar_help"
+            id="user_avatar"
+            type="file"
+            onChange={selectedImages}
+            multiple
+            accept=".png, .jpg, .jpeg"
+          ></input>
         </div>
       </Card>
     </div>
