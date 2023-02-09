@@ -4,7 +4,6 @@ import Link from "next/link";
 import React from "react";
 
 import { IoIosArrowBack } from "react-icons/io";
-import { MdOutlineDashboard } from "react-icons/md";
 
 const SideBar = ({ menus, open }: { menus: any; open: boolean }) => {
   return (

@@ -5,16 +5,6 @@ import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";
 
-//  title              String
-//     description        String
-//     price              Float
-//     discountPercentage Float    @default(0)
-//     stock              Int      @default(0)
-//     brand              String
-//     category           String
-//     images             String
-//     shopId             String
-
 const AddProductForm = () => {
   const {
     register,
