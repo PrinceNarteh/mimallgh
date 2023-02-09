@@ -65,10 +65,7 @@ const AdminAddProductForm = () => {
   }));
 
   return (
-    <div
-      className="mx-auto max-w-4xl pb-5
-    "
-    >
+    <div className="mx-auto max-w-4xl pb-5">
       <Card heading={"Add Product"}>
         <div className="space-y-4">
           <label className="-mb-2 block pl-2 capitalize tracking-widest">
@@ -95,8 +92,8 @@ const AdminAddProductForm = () => {
               errors={errors}
             />
             <InputField
-              label="Discount Percentage"
-              name="discountPercentage"
+              label="Discount"
+              name="discount"
               register={register}
               errors={errors}
             />
