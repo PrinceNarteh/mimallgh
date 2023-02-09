@@ -1,11 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Shop } from "@prisma/client";
 import { useForm } from "react-hook-form";
+import { FiInstagram } from "react-icons/fi";
+import { ImFacebook2, ImWhatsapp } from "react-icons/im";
+
 import { api } from "../../utils/api";
 import { createShopDto, updateShopDto } from "../../utils/validations";
+import InputField from "../InputField";
 import Card from "./Card";
 import SearchFilter from "./SearchFilter";
-import InputField from "../InputField";
-import { Shop } from "@prisma/client";
 
 const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
   const {
@@ -115,6 +118,71 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
             rows={5}
             {...register("description")}
           />
+        </div>
+        <div className="mt-5">
+          <label htmlFor="">Working Hours</label>
+          <div className="flex flex-col gap-5 lg:flex-row">
+            <div className="flex w-full rounded-lg border border-gray-600 bg-gray-700">
+              <div className="w-fit whitespace-nowrap rounded-l-lg bg-gray-600 p-2">
+                Opening Time
+              </div>
+              <input
+                type="time"
+                id="email-address-icon"
+                className="block w-full bg-transparent p-2.5 text-sm outline-none"
+                placeholder="Facebook"
+              />
+            </div>
+            <div className="flex w-full rounded-lg border border-gray-600 bg-gray-700">
+              <div className="w-fit whitespace-nowrap rounded-l-lg bg-gray-600 p-2">
+                Closing Time
+              </div>
+              <input
+                type="time"
+                id="email-address-icon"
+                className="block w-full bg-transparent p-2.5 text-sm outline-none"
+                placeholder="Facebook"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-5">
+          <label htmlFor="">Social Media Handlers</label>
+          <div className="mt-3 flex flex-col gap-5 lg:flex-row">
+            <div className="relative w-full">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <ImFacebook2 />
+              </div>
+              <input
+                type="text"
+                id="email-address-icon"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                placeholder="Facebook"
+              />
+            </div>
+            <div className="relative w-full">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <FiInstagram />
+              </div>
+              <input
+                type="text"
+                id="email-address-icon"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                placeholder="Instagram"
+              />
+            </div>
+            <div className="relative w-full">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <ImWhatsapp />
+              </div>
+              <input
+                type="text"
+                id="email-address-icon"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                placeholder="Whatsapp"
+              />
+            </div>
+          </div>
         </div>
         <button
           type="submit"

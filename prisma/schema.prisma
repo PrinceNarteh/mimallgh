@@ -75,19 +75,36 @@ model VerificationToken {
 }
 
 model Shop {
-    id          String    @id @default(cuid())
-    name        String
-    description String
+    id              String    @id @default(cuid())
+    name            String
+    description     String
+    location        String
+    address         String?
+    phoneNumber     String
+    whatsappNumber  String?
+    instagramHandle String?
+    facebookHandle  String?
+    openingTime     String
+    closingTime     String
+    ownerId         String    @unique
+    owner           User      @relation(fields: [ownerId], references: [id])
+    products        Product[]
+    branches        Branch[]
+}
+
+model Branch {
+    id          String  @id @default(cuid())
     location    String
     address     String?
     phoneNumber String
-    ownerId     String    @unique
-    owner       User      @relation(fields: [ownerId], references: [id])
-    products    Product[]
+    openingTime String
+    closingTime String
+    Shop        Shop?   @relation(fields: [shopId], references: [id])
+    shopId      String?
 }
 
 enum Category {
-    ACCOMMODATIONS_AND_BUILING
+    ACCOMMODATIONS_AND_BUILDING
     FASHION_AND_WEARS
     FOOD
     FURNITURE

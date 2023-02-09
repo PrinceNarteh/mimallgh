@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ProductDetails = () => {
   return (
-    <div className="mx-auto my-5 max-w-7xl">
+    <div className="mx-auto my-5 max-w-5xl">
       <div className="relative flex flex-col gap-5 px-7 md:flex-row">
         <div className="top-10 h-fit md:sticky">
           <div className="relative flex h-[400px] justify-center">
@@ -141,12 +141,12 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10 px-7">
+      <div className="mt-10 px-7 pb-5">
         <h3 className="sh-underline text-2xl font-semibold">
           Related Products
         </h3>
-        <div className="flex h-60 flex-wrap justify-center gap-5">
-          <div className="h-60 w-60 cursor-pointer">
+        <div className="flex h-60 flex-wrap justify-center gap-5 pt-5">
+          <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
                 src={productOne}
@@ -167,7 +167,7 @@ const ProductDetails = () => {
               </p>
             </div>
           </div>
-          <div className="h-60 w-60 cursor-pointer">
+          <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
                 src={productOne}
@@ -188,7 +188,7 @@ const ProductDetails = () => {
               </p>
             </div>
           </div>
-          <div className="h-60 w-60 cursor-pointer">
+          <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
                 src={productOne}
@@ -209,7 +209,7 @@ const ProductDetails = () => {
               </p>
             </div>
           </div>
-          <div className="h-60 w-60 cursor-pointer">
+          <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
                 src={productOne}
