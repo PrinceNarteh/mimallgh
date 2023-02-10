@@ -97,8 +97,6 @@ model Branch {
     location    String
     address     String?
     phoneNumber String
-    openingTime String
-    closingTime String
     Shop        Shop?   @relation(fields: [shopId], references: [id])
     shopId      String?
 }

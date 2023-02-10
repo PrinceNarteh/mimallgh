@@ -112,10 +112,45 @@ export const createShopDto = z.object({
     .string({ required_error: "Phone number is required" })
     .length(10, "Phone number must be 10 characters"),
   description: z.string(),
+  openingTime: z.string().datetime(),
+  closingTime: z.string().datetime(),
+  branches: z.array(
+    z.object({
+      shopId: z
+        .string({ required_error: "Shop Id is required" })
+        .cuid("Enter valid ID"),
+      location: z.string({ required_error: "Location is required." }).min(1),
+      address: z
+        .string({ required_error: "Location is required." })
+        .min(1)
+        .optional(),
+      phoneNumber: z.string({ required_error: "Location is required." }).min(1),
+    })
+  ),
 });
 
 export const updateShopDto = createShopDto.extend({
   id: z.string({ required_error: "" }).cuid(),
+  branches: z.array(
+    z.object({
+      id: z.string({ required_error: "" }).cuid(),
+      shopId: z
+        .string({ required_error: "Shop Owner Id is required" })
+        .cuid("Enter valid ID"),
+      location: z
+        .string({ required_error: "Location is required." })
+        .min(1)
+        .optional(),
+      address: z
+        .string({ required_error: "Location is required." })
+        .min(1)
+        .optional(),
+      phoneNumber: z
+        .string({ required_error: "Location is required." })
+        .min(1)
+        .optional(),
+    })
+  ),
 });
 
 export type IUpdateShop = z.infer<typeof updateShopDto>;

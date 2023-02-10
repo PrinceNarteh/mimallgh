@@ -1,22 +1,32 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Shop } from "@prisma/client";
-import { useForm } from "react-hook-form";
+import { Shop, Branch } from "@prisma/client";
+import { useFieldArray, useForm } from "react-hook-form";
 import { FiInstagram } from "react-icons/fi";
 import { ImFacebook2, ImWhatsapp } from "react-icons/im";
 
 import { api } from "../../utils/api";
 import { createShopDto, updateShopDto } from "../../utils/validations";
 import InputField from "../InputField";
+import { Button } from "./Button";
 import Card from "./Card";
 import SearchFilter from "./SearchFilter";
 
-const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
+const AddShopForm = ({
+  shop,
+}: {
+  shop?:
+    | (Shop & {
+        branches: Branch[];
+      })
+    | null;
+}) => {
   const {
     register,
     formState: { errors },
     getValues,
     setValue,
     setError,
+    control,
     handleSubmit,
   } = useForm({
     defaultValues: {
@@ -27,9 +37,15 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
       address: shop?.address || "",
       phoneNumber: shop?.phoneNumber || "",
       description: shop?.description || "",
+      branches: shop?.branches || [],
     },
     resolver: zodResolver(shop?.ownerId ? updateShopDto : createShopDto),
   });
+  const { fields, append } = useFieldArray({
+    name: "branches",
+    control,
+  });
+
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation();
@@ -140,7 +156,7 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
               <input
                 type="time"
                 id="email-address-icon"
-                className="block w-full bg-transparent p-2.5 text-sm outline-none"
+                className="block w-full bg-transparent p-2.5 text-sm outline-none placeholder:text-light-gray"
                 placeholder="Facebook"
               />
             </div>
@@ -178,18 +194,44 @@ const AddShopForm = ({ shop }: { shop?: Shop | null }) => {
               <input
                 type="text"
                 id="email-address-icon"
-                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 file:text-light-gray focus:border-blue-500  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Whatsapp"
               />
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="mt-3 rounded bg-blue-600 py-2 px-4 text-white"
-        >
+        <fieldset className="my-5 rounded border border-gray-500 py-2 px-5">
+          <legend>Branch(es)</legend>
+          <div>
+            <InputField
+              name="location"
+              label="Location"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Location is required" }}
+            />
+          </div>
+          <div className="flex flex-col gap-5 lg:flex-row">
+            <InputField
+              name="address"
+              label="Address"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Address is required" }}
+            />
+            <InputField
+              name="phoneNumber"
+              label="Phone Number"
+              register={register}
+              errors={errors}
+              validationSchema={{ required: "Location is required" }}
+            />
+          </div>
+          <Button>Add Branch</Button>
+        </fieldset>
+        <Button type="submit">
           {`${getValues().id ? "Edit" : "Add"} Shop`}
-        </button>
+        </Button>
       </form>
     </Card>
   );

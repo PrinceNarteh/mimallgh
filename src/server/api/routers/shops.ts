@@ -20,6 +20,7 @@ export const shopRouter = createTRPCRouter({
             lastName: true,
           },
         },
+        branches: true,
       },
     });
     return shops;
@@ -46,7 +47,14 @@ export const shopRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       try {
         const res = await ctx.prisma.shop.create({
-          data: input,
+          data: {
+            ...input,
+            branches: {
+              createMany: {
+                data: input.branches,
+              },
+            },
+          },
         });
         return res;
       } catch (error) {
@@ -60,11 +68,37 @@ export const shopRouter = createTRPCRouter({
     .input(updateShopDto)
     .mutation(async ({ input, ctx }) => {
       try {
+        const shop = await ctx.prisma.shop.findUnique({
+          where: { id: input.id },
+          include: {
+            branches: true,
+          },
+        });
+
+        if (!shop) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Shop Not Found",
+          });
+        }
+
+        const { branches, ...update } = shop;
+
         const res = await ctx.prisma.shop.update({
           where: {
             id: input.id,
           },
-          data: input,
+          data: {
+            ...update,
+            branches: {
+              deleteMany: {
+                shopId: input.id,
+              },
+              createMany: {
+                data: branches,
+              },
+            },
+          },
         });
         return res;
       } catch (error) {
