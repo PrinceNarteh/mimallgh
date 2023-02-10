@@ -41,7 +41,7 @@ const AddShopForm = ({
     },
     resolver: zodResolver(shop?.ownerId ? updateShopDto : createShopDto),
   });
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "branches",
     control,
   });
@@ -200,35 +200,63 @@ const AddShopForm = ({
             </div>
           </div>
         </div>
-        <fieldset className="my-5 rounded border border-gray-500 py-2 px-5">
-          <legend>Branch(es)</legend>
-          <div>
-            <InputField
-              name="location"
-              label="Location"
-              register={register}
-              errors={errors}
-              validationSchema={{ required: "Location is required" }}
-            />
-          </div>
-          <div className="flex flex-col gap-5 lg:flex-row">
-            <InputField
-              name="address"
-              label="Address"
-              register={register}
-              errors={errors}
-              validationSchema={{ required: "Address is required" }}
-            />
-            <InputField
-              name="phoneNumber"
-              label="Phone Number"
-              register={register}
-              errors={errors}
-              validationSchema={{ required: "Location is required" }}
-            />
-          </div>
-          <Button>Add Branch</Button>
-        </fieldset>
+        <div className="my-5">
+          <h3>Branch(es)</h3>
+        </div>
+        {fields.map((field, index) => (
+          <fieldset
+            key={field.id}
+            className="my-5 rounded border border-gray-500 py-2 px-5"
+          >
+            <legend>Branch</legend>
+            <div>
+              <InputField
+                name={`branches.${index}.location`}
+                label="Location"
+                register={register}
+                errors={errors}
+                validationSchema={{ required: "Location is required" }}
+              />
+            </div>
+            <div className="flex flex-col gap-5 lg:flex-row">
+              <InputField
+                name={`branches.${index}.address`}
+                label="Address"
+                register={register}
+                errors={errors}
+                validationSchema={{ required: "Address is required" }}
+              />
+              <InputField
+                name={`branches.${index}.phoneNumber`}
+                label="Phone Number"
+                register={register}
+                errors={errors}
+                validationSchema={{ required: "Location is required" }}
+              />
+            </div>
+            <div className="my-2 flex justify-end">
+              <button
+                className="rounded bg-red-600 py-1 px-2 text-sm"
+                onClick={() => remove(index)}
+              >
+                Remove
+              </button>
+            </div>
+          </fieldset>
+        ))}
+        <Button
+          onClick={() =>
+            append({
+              address: "",
+              location: "",
+              phoneNumber: "",
+              shopId: null,
+              id: "",
+            })
+          }
+        >
+          Add Branch
+        </Button>
         <Button type="submit">
           {`${getValues().id ? "Edit" : "Add"} Shop`}
         </Button>
