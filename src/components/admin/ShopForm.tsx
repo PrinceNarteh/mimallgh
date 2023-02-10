@@ -16,7 +16,13 @@ const AddShopForm = ({
 }: {
   shop?:
     | (Shop & {
-        branches: Branch[];
+        branches: {
+          shopId?: string;
+          address: string;
+          location: string;
+          phoneNumber: string;
+          id: string;
+        }[];
       })
     | null;
 }) => {
@@ -28,6 +34,7 @@ const AddShopForm = ({
     setError,
     control,
     handleSubmit,
+    getFieldState,
   } = useForm({
     defaultValues: {
       id: shop?.id || null,
@@ -35,6 +42,8 @@ const AddShopForm = ({
       name: shop?.name || "",
       location: shop?.location || "",
       address: shop?.address || "",
+      openingTime: shop?.openingTime || "",
+      closingTime: shop?.closingTime || "",
       phoneNumber: shop?.phoneNumber || "",
       description: shop?.description || "",
       branches: shop?.branches || [],
@@ -58,7 +67,7 @@ const AddShopForm = ({
     }
 
     try {
-      console.log(data.id);
+      console.log(data);
       if (!data.id) {
         console.log("created");
         createShopMutation.mutate(data);
@@ -75,6 +84,8 @@ const AddShopForm = ({
     id: shopOwner.id,
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
+
+  console.log(errors);
 
   return (
     <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
@@ -144,9 +155,9 @@ const AddShopForm = ({
               </div>
               <input
                 type="time"
-                id="email-address-icon"
                 className="block w-full bg-transparent p-2.5 text-sm outline-none"
                 placeholder="Facebook"
+                {...register("openingTime")}
               />
             </div>
             <div className="flex w-full rounded-lg border border-gray-600 bg-gray-700">
@@ -158,6 +169,7 @@ const AddShopForm = ({
                 id="email-address-icon"
                 className="block w-full bg-transparent p-2.5 text-sm outline-none placeholder:text-light-gray"
                 placeholder="Facebook"
+                {...register("closingTime")}
               />
             </div>
           </div>
@@ -250,8 +262,8 @@ const AddShopForm = ({
               address: "",
               location: "",
               phoneNumber: "",
-              shopId: null,
               id: "",
+              shopId: shop?.id,
             })
           }
         >

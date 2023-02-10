@@ -51,6 +51,25 @@ const ShopDetails = () => {
             <div>{data?.description}</div>
           </div>
         </Card>
+
+        {data?.branches.length &&
+          data.branches.map((branch, index) => (
+            <Card heading={`${branch.location} Branch`}>
+              <div className="flex items-center justify-between py-4 px-4">
+                <div className="font-bold">Location</div>
+                <div>{branch.location}</div>
+              </div>
+              <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
+                <div className="font-bold">Address</div>
+                <div>{branch.address}</div>
+              </div>
+              <div className="flex items-center justify-between py-4 px-4">
+                <div className="font-bold">Phone Number</div>
+                <div>{branch.phoneNumber}</div>
+              </div>
+            </Card>
+          ))}
+
         <div className="flex justify-end gap-5">
           <Link
             href={`/admin/shops/${data?.id}/edit`}

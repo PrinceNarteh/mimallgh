@@ -112,13 +112,10 @@ export const createShopDto = z.object({
     .string({ required_error: "Phone number is required" })
     .length(10, "Phone number must be 10 characters"),
   description: z.string(),
-  openingTime: z.string().datetime(),
-  closingTime: z.string().datetime(),
+  openingTime: z.string(),
+  closingTime: z.string(),
   branches: z.array(
     z.object({
-      shopId: z
-        .string({ required_error: "Shop Id is required" })
-        .cuid("Enter valid ID"),
       location: z.string({ required_error: "Location is required." }).min(1),
       address: z
         .string({ required_error: "Location is required." })

@@ -38,6 +38,7 @@ export const shopRouter = createTRPCRouter({
               lastName: true,
             },
           },
+          branches: true,
         },
       });
       return shop;
