@@ -84,9 +84,9 @@ const SearchFilter = ({
             className="w-full bg-transparent p-2 outline-none placeholder:text-gray-700"
           />
         </div>
-        {options?.map((option) => (
+        {options?.map((option, idx) => (
           <li
-            key={option?.id}
+            key={idx}
             className={`p-2 text-sm hover:bg-sky-600 hover:text-white
             ${
               option?.label?.toLowerCase() === selected?.label.toLowerCase() &&

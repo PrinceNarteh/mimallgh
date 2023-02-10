@@ -54,7 +54,7 @@ const ShopDetails = () => {
 
         {data?.branches.length &&
           data.branches.map((branch, index) => (
-            <Card heading={`${branch.location} Branch`}>
+            <Card heading={`${branch.location} Branch`} key={index}>
               <div className="flex items-center justify-between py-4 px-4">
                 <div className="font-bold">Location</div>
                 <div>{branch.location}</div>
