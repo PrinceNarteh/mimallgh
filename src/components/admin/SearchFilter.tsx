@@ -15,13 +15,34 @@ interface ISearchFilter {
     }>
   >;
   field: string;
+  value: string;
 }
 
-const SearchFilter = ({ options, setValue, errors, field }: ISearchFilter) => {
+const SearchFilter = ({
+  options,
+  setValue,
+  errors,
+  field,
+  value,
+}: ISearchFilter) => {
   const [inputValue, setInputValue] = useState("");
-  const [selected, setSelected] = useState({
-    id: "",
-    label: "",
+  const [selected, setSelected] = useState(() => {
+    if (value) {
+      const option = options.find((option) => option.id === value);
+      if (option) {
+        return option;
+      } else {
+        return {
+          id: "",
+          label: "",
+        };
+      }
+    } else {
+      return {
+        id: "",
+        label: "",
+      };
+    }
   });
   const [open, setOpen] = useState(false);
 

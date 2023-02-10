@@ -55,6 +55,8 @@ const AddShopForm = ({
     control,
   });
 
+  console.log(getValues());
+
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation();
@@ -102,6 +104,7 @@ const AddShopForm = ({
             options={owners || []}
             errors={errors}
             setValue={setValue}
+            value={getValues().ownerId}
           />
         </div>
         <div className="flex flex-col gap-5 lg:flex-row">
