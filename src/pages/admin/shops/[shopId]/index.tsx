@@ -15,7 +15,7 @@ const ShopDetails = () => {
     push(`/admin/shops`);
   }
 
-  const { data } = api.shops.getShopById.useQuery(shopId as string);
+  const { data } = api.shops.getShopById.useQuery({ shopId: shopId as string });
 
   console.log(data);
 

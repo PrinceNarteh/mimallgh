@@ -3,6 +3,7 @@ import { Shop, Branch } from "@prisma/client";
 import { useFieldArray, useForm } from "react-hook-form";
 import { FiInstagram } from "react-icons/fi";
 import { ImFacebook2, ImWhatsapp } from "react-icons/im";
+import { useRouter } from "next/router";
 
 import { api } from "../../utils/api";
 import { createShopDto, updateShopDto } from "../../utils/validations";
@@ -10,6 +11,7 @@ import InputField from "../InputField";
 import { Button } from "./Button";
 import Card from "./Card";
 import SearchFilter from "./SearchFilter";
+import { toast } from "react-hot-toast";
 
 const AddShopForm = ({
   shop,
@@ -34,7 +36,6 @@ const AddShopForm = ({
     setError,
     control,
     handleSubmit,
-    getFieldState,
   } = useForm({
     defaultValues: {
       id: shop?.id || null,
@@ -54,28 +55,26 @@ const AddShopForm = ({
     name: "branches",
     control,
   });
-
-  console.log(getValues());
+  const router = useRouter();
 
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
-  const updateShopMutation = api.shops.updateShop.useMutation();
+  const updateShopMutation = api.shops.updateShop.useMutation({
+    onSuccess: (value) => {
+      console.log(value);
+      toast.success("Update successful");
+      router.push(`/admin/shops/${shop?.id}`);
+    },
+  });
 
   const submitHandler = async (data: any) => {
-    if (data.ownerId === "") {
-      return setError("ownerId", {
-        message: "Shop owner is required.",
-      });
-    }
-
     try {
-      console.log(data);
       if (!data.id) {
         console.log("created");
         createShopMutation.mutate(data);
       } else {
         console.log("updated");
-        updateShopMutation.mutate(data);
+        const res = updateShopMutation.mutate(data);
       }
     } catch (error: any) {
       // setError(error.response.data.error);

@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Role, Branch, Shop } from "@prisma/client";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { createShopDto, updateShopDto } from "../../../utils/validations";
@@ -26,10 +26,10 @@ export const shopRouter = createTRPCRouter({
     return shops;
   }),
   getShopById: publicProcedure
-    .input(z.string().cuid())
+    .input(z.object({ shopId: z.string().cuid() }))
     .query(async ({ input, ctx }) => {
       const shop = await ctx.prisma.shop.findUnique({
-        where: { id: input },
+        where: { id: input.shopId },
         include: {
           owner: {
             select: {
@@ -83,7 +83,13 @@ export const shopRouter = createTRPCRouter({
           });
         }
 
-        const { branches, ...update } = shop;
+        const { branches, ...update }: Shop & { branches: Branch[] } = shop;
+
+        const newBranches = branches.map((branch) => ({
+          location: branch.location,
+          address: branch.address,
+          phoneNumber: branch.phoneNumber,
+        }));
 
         const res = await ctx.prisma.shop.update({
           where: {
@@ -96,13 +102,18 @@ export const shopRouter = createTRPCRouter({
                 shopId: input.id,
               },
               createMany: {
-                data: branches,
+                data: newBranches,
               },
             },
           },
+          include: {
+            branches: true,
+          },
         });
+        console.log(res);
         return res;
       } catch (error) {
+        console.log(error);
         return new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
