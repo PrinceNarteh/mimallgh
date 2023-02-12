@@ -114,6 +114,9 @@ export const createShopDto = z.object({
   description: z.string(),
   openingTime: z.string(),
   closingTime: z.string(),
+  facebookHandle: z.string().optional(),
+  instagramHandle: z.string().optional(),
+  whatsappNumber: z.string().optional(),
   branches: z.array(
     z.object({
       location: z.string({ required_error: "Location is required." }).min(1),
@@ -135,18 +138,12 @@ export const updateShopDto = createShopDto.extend({
         .string({ required_error: "Shop Owner Id is required" })
         .cuid("Enter valid ID")
         .optional(),
-      location: z
-        .string({ required_error: "Location is required." })
-        .min(1)
-        .optional(),
+      location: z.string({ required_error: "Location is required." }).min(1),
       address: z
         .string({ required_error: "Location is required." })
         .min(1)
         .optional(),
-      phoneNumber: z
-        .string({ required_error: "Location is required." })
-        .min(1)
-        .optional(),
+      phoneNumber: z.string({ required_error: "Location is required." }).min(1),
     })
   ),
 });

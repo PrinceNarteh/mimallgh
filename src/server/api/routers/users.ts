@@ -61,9 +61,7 @@ export const authRouter = createTRPCRouter({
           },
         });
         return users;
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }),
   getAllShopOwners: publicProcedure.query(async ({ ctx }) => {
     const shopOwners = await ctx.prisma.user.findMany({

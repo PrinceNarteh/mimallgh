@@ -30,7 +30,6 @@ const Login = () => {
       ...data,
       redirect: false,
     });
-    console.log(session);
     if (res?.error === null) {
       router.push("/shop");
     }

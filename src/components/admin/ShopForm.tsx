@@ -45,6 +45,9 @@ const AddShopForm = ({
       closingTime: shop?.closingTime || "",
       phoneNumber: shop?.phoneNumber || "",
       description: shop?.description || "",
+      facebookHandle: shop?.facebookHandle || "",
+      instagramHandle: shop?.instagramHandle || "",
+      whatsappNumber: shop?.whatsappNumber || "",
       branches: shop?.branches || [],
     },
     resolver: zodResolver(shop?.ownerId ? updateShopDto : createShopDto),
@@ -59,7 +62,6 @@ const AddShopForm = ({
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation({
     onSuccess: (value) => {
-      console.log(value);
       toast.success("Update successful");
       router.push(`/admin/shops/${shop?.id}`);
     },
@@ -68,10 +70,8 @@ const AddShopForm = ({
   const submitHandler = async (data: any) => {
     try {
       if (!data.id) {
-        console.log("created");
         createShopMutation.mutate(data);
       } else {
-        console.log("updated");
         const res = updateShopMutation.mutate(data);
       }
     } catch (error: any) {
@@ -83,8 +83,6 @@ const AddShopForm = ({
     id: shopOwner.id,
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
-
-  console.log(errors);
 
   return (
     <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
@@ -186,6 +184,7 @@ const AddShopForm = ({
                 id="email-address-icon"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Facebook"
+                {...register("facebookHandle")}
               />
             </div>
             <div className="relative w-full">
@@ -197,6 +196,7 @@ const AddShopForm = ({
                 id="email-address-icon"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Instagram"
+                {...register("instagramHandle")}
               />
             </div>
             <div className="relative w-full">
@@ -208,6 +208,7 @@ const AddShopForm = ({
                 id="email-address-icon"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 file:text-light-gray focus:border-blue-500  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Whatsapp"
+                {...register("whatsappNumber")}
               />
             </div>
           </div>

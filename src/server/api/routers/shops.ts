@@ -83,7 +83,7 @@ export const shopRouter = createTRPCRouter({
           });
         }
 
-        const { branches, id, ...update }: Shop & { branches: Branch[] } = shop;
+        const { branches, id, ownerId, ...update } = input;
 
         const newBranches = branches.map((branch) => ({
           location: branch.location,
@@ -91,23 +91,27 @@ export const shopRouter = createTRPCRouter({
           phoneNumber: branch.phoneNumber,
         }));
 
-        console.log(newBranches);
-
         const res = await ctx.prisma.shop.update({
           where: {
             id: input.id,
           },
           data: {
-            whatsappNumber: "0241234567",
+            ...update,
+            branches: {
+              deleteMany: {
+                shopId: input.id,
+              },
+              createMany: {
+                data: newBranches,
+              },
+            },
           },
           include: {
             branches: true,
           },
         });
-        console.log(res);
         return res;
       } catch (error) {
-        console.log(error);
         return new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
