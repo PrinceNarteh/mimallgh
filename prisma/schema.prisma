@@ -47,23 +47,33 @@ enum Role {
     SHOP_OWNER
 }
 
+enum Level {
+    LEVEL_ONE
+    LEVEL_TWO
+    LEVEL_THREE
+    SUPER_USER
+}
+
 model User {
-    id          String    @id @default(cuid())
-    firstName   String
-    lastName    String
-    middleName  String?
-    address     String?
-    phoneNumber String
-    email       String    @unique
-    password    String
-    image       String?
-    active      Boolean   @default(true)
-    role        Role
-    accounts    Account[]
-    sessions    Session[]
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    shop        Shop?
+    id              String    @id @default(cuid())
+    firstName       String
+    lastName        String
+    middleName      String?
+    address         String?
+    phoneNumber     String
+    alternateNumber String?
+    nationality     String
+    email           String    @unique
+    password        String
+    image           String?
+    active          Boolean   @default(true)
+    role            Role
+    level           Level?
+    accounts        Account[]
+    sessions        Session[]
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime  @updatedAt
+    shop            Shop?
 }
 
 model VerificationToken {
@@ -81,11 +91,14 @@ model Shop {
     location        String
     address         String?
     phoneNumber     String
+    alternateNumber String?
     whatsappNumber  String?
     instagramHandle String?
     facebookHandle  String?
     openingTime     String
     closingTime     String
+    cardType        String?
+    cardNumber      String?
     ownerId         String    @unique
     owner           User      @relation(fields: [ownerId], references: [id])
     products        Product[]

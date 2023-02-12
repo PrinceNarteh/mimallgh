@@ -1,19 +1,34 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import Card from "./Card";
-import InputField from "../InputField";
 import { api } from "../../utils/api";
-import { createShopOwnerDto } from "../../utils/validations";
+import { createAdminDto, ICreateAdminDto } from "../../utils/validations";
+import InputField from "../InputField";
+import Card from "./Card";
 
-const AdminForm = () => {
+const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
   const {
     register,
     formState: { errors },
     setError,
     handleSubmit,
   } = useForm({
-    resolver: zodResolver(createShopOwnerDto),
+    defaultValues: {
+      id: admin?.id || "",
+      firstName: admin?.firstName || "",
+      lastName: admin?.lastName || "",
+      middleName: admin?.middleName || "",
+      email: admin?.email || "",
+      address: admin?.address || "",
+      nationality: admin?.nationality || "",
+      cardType: admin?.cardType || "",
+      cardNumber: admin?.cardNumber || "",
+      phoneNumber: admin?.phoneNumber || "",
+      alternateNumber: admin?.alternateNumber || "",
+      password: admin?.password || "",
+      level: admin?.level || "",
+    },
+    resolver: zodResolver(createAdminDto),
   });
 
   const createUser = api.users.register.useMutation({
@@ -33,8 +48,8 @@ const AdminForm = () => {
   };
 
   return (
-    <div className="mx-auto max-w-4xl">
-      <Card heading="Add Shop Owner">
+    <div className="mx-auto max-w-4xl pb-7">
+      <Card heading="Add Administrator">
         <form
           className="w-full space-y-3"
           onSubmit={handleSubmit(submitHandler)}
@@ -96,9 +111,9 @@ const AdminForm = () => {
             <div className="flex flex-col gap-5 md:flex-row">
               <select className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none">
                 <option value="">Select Card</option>
-                <option value="ghana-card">Ghana Card</option>
-                <option value="student-id">Student ID</option>
-                <option value="voters-id">Voters ID</option>
+                <option value="ghana_card">Ghana Card</option>
+                <option value="student_id">Student ID</option>
+                <option value="voters_id">Voters ID</option>
               </select>
               <input
                 type="text"
@@ -109,17 +124,17 @@ const AdminForm = () => {
           </div>
           <div className="flex flex-col gap-5 md:flex-row">
             <InputField
-              name="phoneNumber"
               label="Phone Number"
               register={register}
               errors={errors}
               validationSchema={{ required: "Phone number is required" }}
+              {...register("phoneNumber")}
             />
             <InputField
-              name="alternatePhoneNumber"
               label="Alternate Phone Number"
               register={register}
               errors={errors}
+              {...register("alternateNumber")}
             />
           </div>
 

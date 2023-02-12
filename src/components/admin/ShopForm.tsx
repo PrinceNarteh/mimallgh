@@ -18,13 +18,15 @@ const AddShopForm = ({
 }: {
   shop?:
     | (Shop & {
-        branches: {
-          address: string;
-          location: string;
-          phoneNumber: string;
-        }[];
+        owner: {
+          firstName: string;
+          lastName: string;
+          middleName: string | null;
+        };
+        branches: Branch[];
       })
-    | null;
+    | null
+    | undefined;
 }) => {
   const {
     register,
@@ -263,6 +265,8 @@ const AddShopForm = ({
               address: "",
               location: "",
               phoneNumber: "",
+              id: "",
+              shopId: "",
             })
           }
         >

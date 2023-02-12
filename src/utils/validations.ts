@@ -55,6 +55,10 @@ export const createUserDto = z.object({
   phoneNumber: z
     .string({ required_error: "Phone number is required." })
     .length(10, "Phone number must be ten numbers"),
+  alternateNumber: z
+    .string()
+    .length(10, "Phone number must be ten numbers")
+    .optional(),
   password: z
     .string({ required_error: "Password name is required." })
     .min(6, "Password should be six character or more"),
@@ -89,6 +93,18 @@ export const createShopOwnerDto = createUserDto
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+export const createAdminDto = createUserDto.extend({
+  id: z.string().cuid().optional(),
+  nationality: z.string({ required_error: "Nationality is required" }).min(1),
+  cardType: z.enum(["ghana_card", "student_id", "voters_id"]),
+  cardNumber: z
+    .string({ required_error: "Card number is required" })
+    .min(1, "Card number cannot be empty"),
+  level: z.enum(["level_one", "level_two", "level_three", "super_user"]),
+});
+
+export type ICreateAdminDto = z.infer<typeof createAdminDto>;
 
 export const loginDto = z.object({
   email: z.string({ required_error: "Email is required" }).email(),
