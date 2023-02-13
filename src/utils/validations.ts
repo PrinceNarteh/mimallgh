@@ -55,13 +55,11 @@ export const createUserDto = z.object({
   phoneNumber: z
     .string({ required_error: "Phone number is required." })
     .length(10, "Phone number must be ten numbers"),
-  alternateNumber: z
-    .string()
-    .length(10, "Phone number must be ten numbers")
-    .optional(),
+  alternateNumber: z.string().optional(),
   password: z
     .string({ required_error: "Password name is required." })
     .min(6, "Password should be six character or more"),
+  nationality: z.string({ required_error: "Nationality is required" }).min(1),
   image: z.string({ required_error: "Password name is required." }).optional(),
   role: z.enum(["admin", "shop_owner", "user"], {
     required_error: "Role is required",
@@ -96,7 +94,6 @@ export const createShopOwnerDto = createUserDto
 
 export const createAdminDto = createUserDto.extend({
   id: z.string().cuid().optional(),
-  nationality: z.string({ required_error: "Nationality is required" }).min(1),
   cardType: z.enum(["ghana_card", "student_id", "voters_id"]),
   cardNumber: z
     .string({ required_error: "Card number is required" })

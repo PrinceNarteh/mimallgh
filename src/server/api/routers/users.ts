@@ -2,9 +2,9 @@ import { Role } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { createUserDto } from "../../../utils/validations";
+import { createAdminDto, createUserDto } from "../../../utils/validations";
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { mapRoleStringToEnum } from "../../../utils/mapper";
+import { mapRoleStringToEnum, mapStringToLevel } from "../../../utils/mapper";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
@@ -96,5 +96,72 @@ export const authRouter = createTRPCRouter({
         },
       });
       return shopOwners;
+    }),
+  createAdmin: publicProcedure
+    .input(createAdminDto)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const hashedPassword = await bcrypt.hash(input.password, 12);
+        const admin = await ctx.prisma.user.create({
+          data: {
+            ...input,
+            password: hashedPassword,
+            role: Role.ADMIN,
+            level: mapStringToLevel[input.level],
+          },
+        });
+      } catch (error: any) {
+        if (error.message.includes("User_email_key")) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message: "Email already in used.",
+          });
+        }
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong",
+        });
+      }
+    }),
+  updateAdmin: publicProcedure
+    .input(createAdminDto)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        let admin = await ctx.prisma.user.findUnique({
+          where: {
+            id: input.id,
+          },
+        });
+
+        if (!admin) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "User not found",
+          });
+        }
+
+        admin = await ctx.prisma.user.update({
+          where: {
+            id: input.id,
+          },
+          data: {
+            ...input,
+            role: mapRoleStringToEnum[input.role],
+            level: mapStringToLevel[input.level],
+          },
+        });
+        return admin;
+      } catch (error: any) {
+        if (error.message.includes("User_email_key")) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message: "Email already in used.",
+          });
+        }
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong",
+        });
+      }
     }),
 });

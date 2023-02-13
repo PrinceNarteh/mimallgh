@@ -32,7 +32,7 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
     resolver: zodResolver(createAdminDto),
   });
 
-  const createUser = api.users.register.useMutation({
+  const createAdmin = api.users.createAdmin.useMutation({
     onSuccess: () => {
       toast.success("Shop owner created successfully.");
     },
@@ -40,12 +40,18 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
       setError("email", { message: error.message });
     },
   });
+  const updateAdmin = api.users.updateAdmin.useMutation();
 
   const submitHandler = async (data: any) => {
-    createUser.mutate({
-      ...data,
-      role: "shop_owner",
-    });
+    try {
+      if (!data.id) {
+        createAdmin.mutate(data);
+      } else {
+        updateAdmin.mutate(data);
+      }
+    } catch (error: any) {
+      // setError(error.response.data.error);
+    }
   };
 
   return (
