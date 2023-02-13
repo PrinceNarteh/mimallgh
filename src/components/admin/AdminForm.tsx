@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+
 import { api } from "../../utils/api";
 import { createAdminDto, ICreateAdminDto } from "../../utils/validations";
 import InputField from "../InputField";
@@ -101,25 +102,42 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
               validationSchema={{ required: "Nationality is required" }}
             />
           </div>
-          <div>
-            <label
-              htmlFor=""
-              className="mb-1.5 block pl-2 capitalize tracking-widest"
-            >
-              ID Card Type
-            </label>
-            <div className="flex flex-col gap-5 md:flex-row">
-              <select className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none">
+          <div className="flex flex-col gap-5 md:flex-row">
+            <div className="my-2 w-full">
+              <label
+                htmlFor=""
+                className="mb-1.5 block pl-2 capitalize tracking-widest"
+              >
+                ID Card Type
+              </label>
+              <select
+                className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
+                {...register("cardType")}
+              >
                 <option value="">Select Card</option>
                 <option value="ghana_card">Ghana Card</option>
                 <option value="student_id">Student ID</option>
                 <option value="voters_id">Voters ID</option>
               </select>
+            </div>
+            <div className="my-2 w-full">
+              <label
+                htmlFor={"cardNumber"}
+                className="mb-1.5 block pl-2 capitalize tracking-widest"
+              >
+                Card Number
+              </label>
               <input
+                id="cardNumber"
                 type="text"
-                placeholder="Card Number"
+                {...register("cardNumber")}
                 className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
               />
+              {errors && errors["cardNumber"] && (
+                <span className="pl-1 text-sm text-red-500">
+                  {errors["cardNumber"]?.message as string}
+                </span>
+              )}
             </div>
           </div>
           <div className="flex flex-col gap-5 md:flex-row">
@@ -131,10 +149,10 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
               {...register("phoneNumber")}
             />
             <InputField
+              name="alternateNumber"
               label="Alternate Phone Number"
               register={register}
               errors={errors}
-              {...register("alternateNumber")}
             />
           </div>
 
@@ -155,6 +173,24 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
               errors={errors}
               validationSchema={{ required: "Confirm password is required" }}
             />
+          </div>
+          <div>
+            <label
+              htmlFor="level"
+              className="mb-1.5 block pl-2 capitalize tracking-widest"
+            >
+              Level
+            </label>
+            <select
+              id="level"
+              className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
+              {...register("level")}
+            >
+              <option value="level_one">Level One</option>
+              <option value="level_two">Level Two</option>
+              <option value="level_three">Level Three</option>
+              <option value="super_user">Super User</option>
+            </select>
           </div>
           <button
             type="submit"

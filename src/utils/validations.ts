@@ -165,3 +165,31 @@ export const updateShopDto = createShopDto.extend({
 });
 
 export type IUpdateShop = z.infer<typeof updateShopDto>;
+
+const validateCardType = (cartType: string) => {
+  switch (cartType) {
+    case "ghana_card":
+      return /GHA-[0-9]{9}-[0-9]/gi;
+      break;
+    case "student_id":
+      return /[A-Z]{2}\/[A-Z]{3}\/[0-9]{2}\/[0-9]{4}/gi;
+    case "voters_id":
+      return /[0-9]{10}/g;
+    default:
+      break;
+  }
+};
+
+const placeHolder = (cartType: string) => {
+  switch (cartType) {
+    case "ghana_card":
+      return "GHA-123456789-0";
+    case "student_id":
+      return "ED/ACT/23/0123";
+    case "voters_id":
+      return "8393001234";
+    default:
+      return "";
+      break;
+  }
+};
