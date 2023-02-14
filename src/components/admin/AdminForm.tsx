@@ -8,12 +8,11 @@ import { createAdminDto, updateAdminDto } from "../../utils/validations";
 import InputField from "../InputField";
 import Card from "./Card";
 
-const AdminForm = ({ admin }: { admin?: User }) => {
+const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
   const {
     register,
     formState: { errors },
     reset,
-    setError,
     handleSubmit,
   } = useForm({
     defaultValues: {

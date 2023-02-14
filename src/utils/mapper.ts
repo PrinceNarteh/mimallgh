@@ -26,6 +26,13 @@ export const mapStringToLevel: Record<string, Level> = {
   super_user: Level.SUPER_USER,
 };
 
+export const mapLevelToText = (level: string | null) => {
+  return level
+    ?.split("_")
+    .map((l) => l[0] + l.substring(1).toLowerCase())
+    .join(" ");
+};
+
 export const mapCategoryToString: Record<Category, string> = {
   [Category.ACCOMMODATIONS_AND_BUILDING]: "accommodations_and_building",
   [Category.FASHION_AND_WEARS]: "fashion_and_wears",

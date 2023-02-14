@@ -2,7 +2,11 @@ import { Role } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { createAdminDto, createUserDto } from "../../../utils/validations";
+import {
+  createAdminDto,
+  createUserDto,
+  updateAdminDto,
+} from "../../../utils/validations";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { mapRoleStringToEnum, mapStringToLevel } from "../../../utils/mapper";
 
@@ -125,7 +129,7 @@ export const authRouter = createTRPCRouter({
       }
     }),
   updateAdmin: publicProcedure
-    .input(createAdminDto)
+    .input(updateAdminDto)
     .mutation(async ({ input, ctx }) => {
       try {
         let admin = await ctx.prisma.user.findUnique({
