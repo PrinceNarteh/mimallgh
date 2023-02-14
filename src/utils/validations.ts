@@ -107,6 +107,10 @@ export const createAdminDto = createUserDto.extend({
     .default("admin"),
 });
 
+export const updateAdminDto = createAdminDto.extend({
+  id: z.string({ required_error: "ID is required" }).cuid(),
+});
+
 export const loginDto = z.object({
   email: z.string({ required_error: "Email is required" }).email(),
   password: z

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import { api } from "../../utils/api";
-import { createAdminDto } from "../../utils/validations";
+import { createAdminDto, updateAdminDto } from "../../utils/validations";
 import InputField from "../InputField";
 import Card from "./Card";
 
@@ -32,35 +32,33 @@ const AdminForm = ({ admin }: { admin?: User }) => {
       level: admin?.level || "",
       role: admin?.role || "admin",
     },
-    resolver: zodResolver(createAdminDto),
+    resolver: zodResolver(admin?.id ? updateAdminDto : createAdminDto),
   });
 
   const createAdmin = api.users.createAdmin.useMutation({
-    onSuccess: () => {
-      toast.success("Shop owner created successfully.");
-      reset();
-    },
     onError: (error) => {
-      setError("email", { message: error.message });
+      toast.error(error.message);
     },
   });
   const updateAdmin = api.users.updateAdmin.useMutation();
 
   const submitHandler = async (data: any) => {
-    try {
-      if (!data.id) {
-        createAdmin.mutate(data);
-        toast.success("Admin created successfully");
-      } else {
-        updateAdmin.mutate(data);
-        toast.success("Admin updated successfully");
-      }
-    } catch (error: any) {
-      // setError(error.response.data.error);
+    if (!data.id) {
+      createAdmin.mutate(data, {
+        onSuccess: () => {
+          toast.success("Admin created successfully");
+          reset();
+        },
+      });
+    } else {
+      updateAdmin.mutate(data, {
+        onSuccess: () => {
+          toast.success("Admin updated successfully");
+          reset();
+        },
+      });
     }
   };
-
-  console.log(errors);
 
   return (
     <div className="mx-auto max-w-4xl pb-7">
