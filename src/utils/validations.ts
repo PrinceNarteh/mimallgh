@@ -93,15 +93,19 @@ export const createShopOwnerDto = createUserDto
   });
 
 export const createAdminDto = createUserDto.extend({
-  id: z.string().cuid().optional(),
   cardType: z.enum(["ghana_card", "student_id", "voters_id"]),
   cardNumber: z
     .string({ required_error: "Card number is required" })
     .min(1, "Card number cannot be empty"),
   level: z.enum(["level_one", "level_two", "level_three", "super_user"]),
+  role: z
+    .enum(["admin", "shop_owner", "user"], {
+      required_error: "Role is required",
+      invalid_type_error:
+        "Invalid role value. Expect 'admin' | 'shop_owner' | 'user'",
+    })
+    .default("admin"),
 });
-
-export type ICreateAdminDto = z.infer<typeof createAdminDto>;
 
 export const loginDto = z.object({
   email: z.string({ required_error: "Email is required" }).email(),

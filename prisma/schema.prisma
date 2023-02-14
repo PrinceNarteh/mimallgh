@@ -66,6 +66,8 @@ model User {
     email           String    @unique
     password        String
     image           String?
+    cardType        String?
+    cardNumber      String?
     active          Boolean   @default(true)
     role            Role
     level           Level?
@@ -97,8 +99,6 @@ model Shop {
     facebookHandle  String?
     openingTime     String
     closingTime     String
-    cardType        String?
-    cardNumber      String?
     ownerId         String    @unique
     owner           User      @relation(fields: [ownerId], references: [id])
     products        Product[]

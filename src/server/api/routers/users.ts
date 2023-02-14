@@ -111,6 +111,7 @@ export const authRouter = createTRPCRouter({
           },
         });
       } catch (error: any) {
+        console.log(error);
         if (error.message.includes("User_email_key")) {
           throw new TRPCError({
             code: "CONFLICT",

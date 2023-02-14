@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+import { Toaster } from "react-hot-toast";
 import { Poppins } from "@next/font/google";
 import { api } from "../utils/api";
 import MainNavbar from "../components/layout/MainNavbar";
@@ -47,6 +48,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           </>
         )}
       </SessionProvider>
+      <Toaster />
       <ReactQueryDevtools />
     </div>
   );

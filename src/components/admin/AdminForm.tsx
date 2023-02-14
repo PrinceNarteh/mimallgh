@@ -1,16 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import { api } from "../../utils/api";
-import { createAdminDto, ICreateAdminDto } from "../../utils/validations";
+import { createAdminDto } from "../../utils/validations";
 import InputField from "../InputField";
 import Card from "./Card";
 
-const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
+const AdminForm = ({ admin }: { admin?: User }) => {
   const {
     register,
     formState: { errors },
+    reset,
     setError,
     handleSubmit,
   } = useForm({
@@ -28,6 +30,7 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
       alternateNumber: admin?.alternateNumber || "",
       password: admin?.password || "",
       level: admin?.level || "",
+      role: admin?.role || "admin",
     },
     resolver: zodResolver(createAdminDto),
   });
@@ -35,6 +38,7 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
   const createAdmin = api.users.createAdmin.useMutation({
     onSuccess: () => {
       toast.success("Shop owner created successfully.");
+      reset();
     },
     onError: (error) => {
       setError("email", { message: error.message });
@@ -46,13 +50,17 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
     try {
       if (!data.id) {
         createAdmin.mutate(data);
+        toast.success("Admin created successfully");
       } else {
         updateAdmin.mutate(data);
+        toast.success("Admin updated successfully");
       }
     } catch (error: any) {
       // setError(error.response.data.error);
     }
   };
+
+  console.log(errors);
 
   return (
     <div className="mx-auto max-w-4xl pb-7">
@@ -149,10 +157,10 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
           <div className="flex flex-col gap-5 md:flex-row">
             <InputField
               label="Phone Number"
+              name="phoneNumber"
               register={register}
               errors={errors}
               validationSchema={{ required: "Phone number is required" }}
-              {...register("phoneNumber")}
             />
             <InputField
               name="alternateNumber"
@@ -197,6 +205,11 @@ const AdminForm = ({ admin }: { admin?: ICreateAdminDto }) => {
               <option value="level_three">Level Three</option>
               <option value="super_user">Super User</option>
             </select>
+            {errors && errors["level"] && (
+              <span className="pl-1 text-sm text-red-500">
+                {errors["level"]?.message as string}
+              </span>
+            )}
           </div>
           <button
             type="submit"
