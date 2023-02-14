@@ -8,6 +8,21 @@ import { createAdminDto, updateAdminDto } from "../../utils/validations";
 import InputField from "../InputField";
 import Card from "./Card";
 
+const convertLevelToString = (level: string) => {
+  switch (level) {
+    case "LEVEL_ONE":
+      return "level_one";
+    case "LEVEL_TWO":
+      return "level_two";
+    case "LEVEL_THREE":
+      return "level_three";
+    case "SUPER_USER":
+      return "super_user";
+    default:
+      break;
+  }
+};
+
 const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
   const {
     register,
@@ -28,7 +43,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
       phoneNumber: admin?.phoneNumber || "",
       alternateNumber: admin?.alternateNumber || "",
       password: admin?.password || "",
-      level: admin?.level || "",
+      level: (admin?.level && convertLevelToString(admin.level)) || "",
       role: admin?.role || "admin",
     },
     resolver: zodResolver(admin?.id ? updateAdminDto : createAdminDto),
@@ -197,10 +212,24 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
               {...register("level")}
             >
-              <option value="level_one">Level One</option>
-              <option value="level_two">Level Two</option>
-              <option value="level_three">Level Three</option>
-              <option value="super_user">Super User</option>
+              <option value="level_one" selected={admin?.level === "LEVEL_ONE"}>
+                Level One
+              </option>
+              <option value="level_two" selected={admin?.level === "LEVEL_TWO"}>
+                Level Two
+              </option>
+              <option
+                value="level_three"
+                selected={admin?.level === "LEVEL_THREE"}
+              >
+                Level Three
+              </option>
+              <option
+                value="super_user"
+                selected={admin?.level === "SUPER_USER"}
+              >
+                Super User
+              </option>
             </select>
             {errors && errors["level"] && (
               <span className="pl-1 text-sm text-red-500">

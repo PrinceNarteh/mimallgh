@@ -73,7 +73,7 @@ const DetailItem = ({
   dark,
 }: {
   label: string;
-  value: string;
+  value?: string;
   dark?: boolean;
 }) => (
   <div
