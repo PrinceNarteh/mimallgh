@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@prisma/client";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -26,7 +27,7 @@ const convertLevelToString = (level: string) => {
 const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
     handleSubmit,
   } = useForm({
@@ -48,6 +49,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
     },
     resolver: zodResolver(admin?.id ? updateAdminDto : createAdminDto),
   });
+  const router = useRouter();
 
   const createAdmin = api.users.createAdmin.useMutation({
     onError: (error) => {
@@ -59,24 +61,28 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
   const submitHandler = async (data: any) => {
     if (!data.id) {
       createAdmin.mutate(data, {
-        onSuccess: () => {
+        onSuccess: (data) => {
           toast.success("Admin created successfully");
           reset();
+          router.push(`/admin/administrators/${data.id}`);
         },
       });
     } else {
       updateAdmin.mutate(data, {
-        onSuccess: () => {
+        onSuccess: (data) => {
           toast.success("Admin updated successfully");
           reset();
+          router.push(`/admin/administrators/${data.id}`);
         },
       });
     }
   };
 
+  console.log(errors);
+
   return (
     <div className="mx-auto max-w-4xl pb-7">
-      <Card heading="Add Administrator">
+      <Card heading={`${admin?.id ? "Edit" : "Add"} Administrator`}>
         <form
           className="w-full space-y-3"
           onSubmit={handleSubmit(submitHandler)}
@@ -181,25 +187,26 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               errors={errors}
             />
           </div>
-
-          <div className="flex flex-col gap-5 md:flex-row">
-            <InputField
-              name="password"
-              label="Password"
-              type="password"
-              register={register}
-              errors={errors}
-              validationSchema={{ required: "Password is required" }}
-            />
-            <InputField
-              name="confirmPassword"
-              label="Confirm Password"
-              type="password"
-              register={register}
-              errors={errors}
-              validationSchema={{ required: "Confirm password is required" }}
-            />
-          </div>
+          {!admin?.id && (
+            <div className="flex flex-col gap-5 md:flex-row">
+              <InputField
+                name="password"
+                label="Password"
+                type="password"
+                register={register}
+                errors={errors}
+                validationSchema={{ required: "Password is required" }}
+              />
+              <InputField
+                name="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                register={register}
+                errors={errors}
+                validationSchema={{ required: "Confirm password is required" }}
+              />
+            </div>
+          )}
           <div>
             <label
               htmlFor="level"
@@ -240,8 +247,9 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
           <button
             type="submit"
             className="rounded bg-blue-600 py-2 px-4 text-white"
+            disabled={isSubmitting}
           >
-            Create Account
+            {`${admin?.id ? "Edit" : "Add"} Administrator`}
           </button>
         </form>
       </Card>

@@ -99,12 +99,12 @@ export const createAdminDto = createUserDto.extend({
     .min(1, "Card number cannot be empty"),
   level: z.enum(["level_one", "level_two", "level_three", "super_user"]),
   role: z
-    .enum(["admin", "shop_owner", "user"], {
+    .enum(["ADMIN", "SHOP_OWNER", "USER"], {
       required_error: "Role is required",
       invalid_type_error:
-        "Invalid role value. Expect 'admin' | 'shop_owner' | 'user'",
+        "Invalid role value. Expect 'admin' | 'SHOP_OWNER' | 'USER'",
     })
-    .default("admin"),
+    .default("ADMIN"),
 });
 
 export const updateAdminDto = createAdminDto.extend({

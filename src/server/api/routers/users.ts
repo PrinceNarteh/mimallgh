@@ -145,6 +145,8 @@ export const authRouter = createTRPCRouter({
           });
         }
 
+        console.log(input);
+
         admin = await ctx.prisma.user.update({
           where: {
             id: input.id,
