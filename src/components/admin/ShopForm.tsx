@@ -23,7 +23,13 @@ const AddShopForm = ({
           lastName: string;
           middleName: string | null;
         };
-        branches: Branch[];
+        branches: {
+          id?: string;
+          location: string;
+          address: string | null;
+          phoneNumber: string;
+          shopId?: string | null;
+        }[];
       })
     | null
     | undefined;
@@ -61,22 +67,23 @@ const AddShopForm = ({
 
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
-  const updateShopMutation = api.shops.updateShop.useMutation({
-    onSuccess: (value) => {
-      toast.success("Update successful");
-      router.push(`/admin/shops/${shop?.id}`);
-    },
-  });
+  const updateShopMutation = api.shops.updateShop.useMutation();
 
   const submitHandler = async (data: any) => {
-    try {
-      if (!data.id) {
-        createShopMutation.mutate(data);
-      } else {
-        const res = updateShopMutation.mutate(data);
-      }
-    } catch (error: any) {
-      // setError(error.response.data.error);
+    if (!data.id) {
+      createShopMutation.mutate(data, {
+        onSuccess() {
+          toast.success("Shop created successfully");
+          router.push(`/admin/shops/${shop?.id}`);
+        },
+      });
+    } else {
+      updateShopMutation.mutate(data, {
+        onSuccess: () => {
+          toast.success("Update successful");
+          router.push(`/admin/shops/${shop?.id}`);
+        },
+      });
     }
   };
 
@@ -84,6 +91,8 @@ const AddShopForm = ({
     id: shopOwner.id,
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
+
+  console.log(errors);
 
   return (
     <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
@@ -258,19 +267,19 @@ const AddShopForm = ({
             </div>
           </fieldset>
         ))}
-        <Button
-          onClick={() =>
-            append({
-              address: "",
-              location: "",
-              phoneNumber: "",
-              id: "",
-              shopId: "",
-            })
-          }
-        >
-          Add Branch
-        </Button>
+        <div className="flex justify-end border-b border-b-gray-500">
+          <Button
+            onClick={() =>
+              append({
+                address: "",
+                location: "",
+                phoneNumber: "",
+              })
+            }
+          >
+            Add Branch
+          </Button>
+        </div>
         <Button type="submit">
           {`${getValues().id ? "Edit" : "Add"} Shop`}
         </Button>

@@ -7,6 +7,7 @@ import Card from "../../components/admin/Card";
 import InputField from "../../components/InputField";
 import { api } from "../../utils/api";
 import { createShopOwnerDto, createUserDto } from "../../utils/validations";
+import { Button } from "./Button";
 
 const ShopOwnerForm = ({
   shopOwner,
@@ -188,12 +189,9 @@ const ShopOwnerForm = ({
               />
             </div>
           )}
-          <button
-            type="submit"
-            className="rounded bg-blue-600 py-2 px-4 text-white"
-          >
+          <Button type="submit">
             {`${shopOwner?.id ? "Edit" : "Add"} Shop Owner`}
-          </button>
+          </Button>
         </form>
       </Card>
     </div>

@@ -4,6 +4,7 @@ import InputField from "../../components/InputField";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";
+import { Button } from "./Button";
 
 const AddProductForm = () => {
   const {
@@ -144,6 +145,7 @@ const AddProductForm = () => {
               </div>
             </div>
           ))}
+          <Button type="submit">Add Product</Button>
         </div>
       </Card>
     </div>

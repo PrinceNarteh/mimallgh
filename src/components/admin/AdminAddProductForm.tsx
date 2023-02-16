@@ -8,6 +8,7 @@ import { SelectOption } from "./SelectOption";
 import SearchFilter from "./SearchFilter";
 import { api } from "../../utils/api";
 import { TbCloudUpload } from "react-icons/tb";
+import { Button } from "./Button";
 
 const categories = [
   {
@@ -184,7 +185,7 @@ const AdminAddProductForm = () => {
           </div>
         </div>
 
-        <div className="mt-5">
+        <div className="my-5">
           <label
             className="mb-2 block bg-light-gray pl-2 capitalize tracking-widest"
             htmlFor="user_avatar"
@@ -201,6 +202,7 @@ const AdminAddProductForm = () => {
             accept=".png, .jpg, .jpeg"
           ></input>
         </div>
+        <Button type="submit">Add Product</Button>
       </Card>
     </div>
   );

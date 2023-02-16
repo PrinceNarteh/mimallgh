@@ -17,7 +17,7 @@ export const Button = ({
     <button
       {...props}
       className={`my-3 flex items-center gap-2 rounded py-2  px-4 text-white duration-300 hover:scale-105 ${
-        variant === "primary" ? "bg-blue-800" : "bg-red-700"
+        variant === "primary" ? "bg-blue-600" : "bg-red-700"
       }`}
     >
       {children}

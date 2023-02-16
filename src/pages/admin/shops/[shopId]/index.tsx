@@ -17,8 +17,6 @@ const ShopDetails = () => {
 
   const { data } = api.shops.getShopById.useQuery({ shopId: shopId as string });
 
-  console.log(data);
-
   return (
     <div>
       <Link href={`/admin/shops`} className="flex cursor-pointer items-center">
