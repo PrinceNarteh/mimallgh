@@ -6,6 +6,7 @@ import {
   createAdminDto,
   createUserDto,
   updateAdminDto,
+  updateUserDto,
 } from "../../../utils/validations";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { mapRoleStringToEnum, mapStringToLevel } from "../../../utils/mapper";
@@ -20,11 +21,39 @@ export const authRouter = createTRPCRouter({
           data: {
             ...input,
             password: hashedPassword,
-            role: Role.SHOP_OWNER,
+            role: mapRoleStringToEnum[input.role]!,
           },
         });
         return user;
       } catch (error: any) {
+        if (error.message.includes("User_email_key")) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message: "Email already in used.",
+          });
+        }
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong",
+        });
+      }
+    }),
+  updateUser: publicProcedure
+    .input(updateUserDto)
+    .mutation(async ({ input, ctx }) => {
+      console.log(input);
+      try {
+        const user = await ctx.prisma.user.update({
+          where: {
+            id: input?.id,
+          },
+          data: {
+            ...input,
+          },
+        });
+        return user;
+      } catch (error: any) {
+        // console.log(error);
         if (error.message.includes("User_email_key")) {
           throw new TRPCError({
             code: "CONFLICT",
@@ -145,7 +174,7 @@ export const authRouter = createTRPCRouter({
           });
         }
 
-        console.log(input);
+        console.log(input.role);
 
         admin = await ctx.prisma.user.update({
           where: {
@@ -153,7 +182,7 @@ export const authRouter = createTRPCRouter({
           },
           data: {
             ...input,
-            role: mapRoleStringToEnum[input.role],
+            role: input.role,
             level: mapStringToLevel[input.level],
           },
         });

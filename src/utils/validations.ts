@@ -61,33 +61,25 @@ export const createUserDto = z.object({
     .min(6, "Password should be six character or more"),
   nationality: z.string({ required_error: "Nationality is required" }).min(1),
   image: z.string({ required_error: "Password name is required." }).optional(),
-  role: z.enum(["admin", "shop_owner", "user"], {
+  role: z.enum(["ADMIN", "SHOP_OWNER", "USER"], {
     required_error: "Role is required",
     invalid_type_error:
-      "Invalid role value. Expect 'admin' | 'shop_owner' | 'user'",
+      "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
   }),
 });
 
-export const updateUserDto = createUserDto
-  .extend({
-    id: z.string({ required_error: "ID is required." }).cuid(),
-  })
-  .optional();
+export const updateUserDto = createUserDto.extend({
+  id: z.string({ required_error: "ID is required." }).cuid(),
+});
 
 export const createShopOwnerDto = createUserDto
   .extend({
     confirmPassword: z
       .string({ required_error: "Confirm password name is required." })
       .min(6, "Password must be at least 6 characters"),
-    role: z
-      .enum(["admin", "shop_owner", "user"], {
-        required_error: "Role is required",
-        invalid_type_error:
-          "Invalid role value. Expect 'admin' | 'shop_owner' | 'user'",
-      })
-      .default("shop_owner"),
   })
-  .refine((val) => val.password === val.confirmPassword, {
+  .optional()
+  .refine((val) => val?.password === val?.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
@@ -102,7 +94,7 @@ export const createAdminDto = createUserDto.extend({
     .enum(["ADMIN", "SHOP_OWNER", "USER"], {
       required_error: "Role is required",
       invalid_type_error:
-        "Invalid role value. Expect 'admin' | 'SHOP_OWNER' | 'USER'",
+        "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
     })
     .default("ADMIN"),
 });

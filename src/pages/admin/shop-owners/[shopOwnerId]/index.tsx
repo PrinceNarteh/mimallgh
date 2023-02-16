@@ -29,8 +29,9 @@ const ShopOwnerDetails = () => {
           <DetailItem
             label="Name"
             value={`${data?.firstName} ${data?.middleName} ${data?.lastName}`}
+            dark
           />
-          <DetailItem label="Shop Name" value={`${data?.lastName}`} dark />
+          <DetailItem label="Shop Name" value={`${data?.lastName}`} />
           <DetailItem label="Email" value={`${data?.email}`} dark />
           <DetailItem label="Phone Number" value={`${data?.phoneNumber}`} />
           <DetailItem label="Address" value={`${data?.address}`} dark />
@@ -46,7 +47,7 @@ const ShopOwnerDetails = () => {
         </Card>
         <div className="flex justify-end gap-5">
           <Link
-            href={`/admin/shops/${data?.id}/edit`}
+            href={`/admin/shop-owners/${data?.id}/edit`}
             className="rounded bg-blue-800 py-2 px-7 font-bold"
           >
             Edit

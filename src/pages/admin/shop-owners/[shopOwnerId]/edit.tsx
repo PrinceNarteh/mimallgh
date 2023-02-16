@@ -1,18 +1,27 @@
 import { useRouter } from "next/router";
 import React from "react";
+import ShopOwnerForm from "../../../../components/admin/ShopOwnerForm";
+import { api } from "../../../../utils/api";
 
 const EditShopOwner = () => {
   const {
-    query: { shopId },
+    query: { shopOwnerId },
     push,
   } = useRouter();
 
-  if (!shopId) {
-    push(`/admin/shops`);
+  if (!shopOwnerId) {
+    push(`/admin/shop-owners`);
   }
 
-  const shop = api.shops.getShopById.useQuery({ shopId: shopId as string });
-  return <div>Edit Shop Owner</div>;
+  const shopOwner = api.users.getUserById.useQuery({
+    id: shopOwnerId as string,
+  });
+
+  return (
+    <div>
+      <ShopOwnerForm shopOwner={shopOwner.data} />
+    </div>
+  );
 };
 
 export default EditShopOwner;
