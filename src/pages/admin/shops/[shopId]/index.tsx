@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { MdArrowBackIosNew } from "react-icons/md";
+import { Button } from "../../../../components/admin/Button";
 import Card from "../../../../components/admin/Card";
 import { api } from "../../../../utils/api";
 
@@ -18,7 +19,7 @@ const ShopDetails = () => {
   const { data } = api.shops.getShopById.useQuery({ shopId: shopId as string });
 
   return (
-    <div>
+    <div className="pb-10">
       <Link href={`/admin/shops`} className="flex cursor-pointer items-center">
         <MdArrowBackIosNew className="mr-2" /> Back
       </Link>
@@ -68,14 +69,11 @@ const ShopDetails = () => {
             </Card>
           ))}
 
-        <div className="flex justify-end gap-5">
-          <Link
-            href={`/admin/shops/${data?.id}/edit`}
-            className="rounded bg-blue-800 py-2 px-7 font-bold"
-          >
+        <div className="flex items-center justify-end gap-5">
+          <Link href={`/admin/shops/${data?.id}/edit`} className="link">
             Edit
           </Link>
-          <button>Delete</button>
+          <Button>Delete</Button>
         </div>
       </div>
     </div>

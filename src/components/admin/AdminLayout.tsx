@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Header from "./Header";
 import { adminMenus, shopMenus } from "./menus";
+import Modal from "./Modal";
 
 const SideBar = dynamic(() => import("./SideBar"), { ssr: false });
 
@@ -25,7 +26,10 @@ export default function AdminLayout({ children }: IAdminLayout) {
         } duration-300`}
       >
         <Header open={open} setOpen={setOpen} />
-        <div className="mt-5 px-4">{children}</div>
+        <div className="relative min-h-[calc(100vh_-_73px)]">
+          <div className="mt-5 px-4">{children}</div>
+          <Modal />
+        </div>
       </div>
     </div>
   );

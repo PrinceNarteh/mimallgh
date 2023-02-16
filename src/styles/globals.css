@@ -10,3 +10,9 @@
   display: block;
   background-color: deeppink;
 }
+
+@layer components {
+  .link {
+    @apply rounded bg-blue-800 py-2 px-7 font-bold duration-200 hover:scale-105;
+  }
+}

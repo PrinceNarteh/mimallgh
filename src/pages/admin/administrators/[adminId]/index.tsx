@@ -58,7 +58,7 @@ const AdministratorDetails = () => {
         <div className="flex items-center justify-end gap-5">
           <Link
             href={`/admin/administrators/${data?.id}/edit`}
-            className="rounded bg-blue-800 py-2 px-7 font-bold duration-200 hover:scale-105"
+            className="link"
           >
             Edit
           </Link>

@@ -46,10 +46,7 @@ const ShopOwnerDetails = () => {
           />
         </Card>
         <div className="flex justify-end gap-5">
-          <Link
-            href={`/admin/shop-owners/${data?.id}/edit`}
-            className="rounded bg-blue-800 py-2 px-7 font-bold"
-          >
+          <Link href={`/admin/shop-owners/${data?.id}/edit`} className="link">
             Edit
           </Link>
           <button>Delete</button>
