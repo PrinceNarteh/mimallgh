@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { api } from "../../utils/api";
 import { createAdminDto, updateAdminDto } from "../../utils/validations";
 import InputField from "../InputField";
+import { Button } from "./Button";
 import Card from "./Card";
 
 const convertLevelToString = (level: string) => {
@@ -244,13 +245,13 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               </span>
             )}
           </div>
-          <button
+          <Button
             type="submit"
             className="rounded bg-blue-600 py-2 px-4 text-white"
             disabled={isSubmitting}
           >
             {`${admin?.id ? "Edit" : "Add"} Administrator`}
-          </button>
+          </Button>
         </form>
       </Card>
     </div>

@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import React from "react";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Card from "../../../../components/admin/Card";
+import { Button } from "../../../../components/admin/Button";
 import { api } from "../../../../utils/api";
 import { mapLevelToText } from "../../../../utils/mapper";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const AdministratorDetails = () => {
   const {
@@ -21,7 +23,7 @@ const AdministratorDetails = () => {
   });
 
   return (
-    <div>
+    <div className="pb-5">
       <Link
         href={`/admin/administrators`}
         className="flex cursor-pointer items-center"
@@ -53,14 +55,17 @@ const AdministratorDetails = () => {
             value={mapLevelToText(data?.level as string)}
           />
         </Card>
-        <div className="flex justify-end gap-5">
+        <div className="flex items-center justify-end gap-5">
           <Link
             href={`/admin/administrators/${data?.id}/edit`}
-            className="rounded bg-blue-800 py-2 px-7 font-bold"
+            className="rounded bg-blue-800 py-2 px-7 font-bold duration-200 hover:scale-105"
           >
             Edit
           </Link>
-          <button>Delete</button>
+          <Button variant="danger">
+            <HiOutlineTrash />
+            Delete
+          </Button>
         </div>
       </div>
     </div>
