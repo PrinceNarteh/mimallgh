@@ -28,12 +28,11 @@ const Home = () => {
       <section className="mx-auto mb-10 w-11/12">
         <SectionHeader label={"Today's Best Deal"} />
         <div className="mt-5 flex flex-wrap justify-evenly">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {Array(6)
+            .fill(null)
+            .map((_, idx) => (
+              <ProductCard id={idx.toString()} />
+            ))}
         </div>
       </section>
 

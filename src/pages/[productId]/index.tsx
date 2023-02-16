@@ -1,5 +1,4 @@
 import React from "react";
-import productOne from "../../../assets/images/product-1.jpg";
 import Image from "next/image";
 
 const ProductDetails = () => {
@@ -9,16 +8,16 @@ const ProductDetails = () => {
         <div className="top-10 h-fit md:sticky">
           <div className="relative flex h-[400px] justify-center">
             <Image
-              src={productOne}
+              src={"/images/product-1.jpg"}
               alt="product-one"
               fill
               style={{ objectFit: "contain" }}
             />
           </div>
-          <div className="flex justify-center gap-3">
+          <div className="mt-5 flex justify-center gap-3">
             <div className="relative h-20 w-20 cursor-pointer rounded border border-gray-400">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -26,7 +25,7 @@ const ProductDetails = () => {
             </div>
             <div className="relative h-20 w-20 cursor-pointer rounded border border-gray-400">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -34,7 +33,7 @@ const ProductDetails = () => {
             </div>
             <div className="relative h-20 w-20 cursor-pointer rounded border border-gray-400">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -42,7 +41,7 @@ const ProductDetails = () => {
             </div>
             <div className="relative h-20 w-20 cursor-pointer rounded border border-gray-400">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -149,7 +148,7 @@ const ProductDetails = () => {
           <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -170,7 +169,7 @@ const ProductDetails = () => {
           <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -191,7 +190,7 @@ const ProductDetails = () => {
           <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
@@ -212,7 +211,7 @@ const ProductDetails = () => {
           <div className="h-60 w-52 cursor-pointer">
             <div className="relative h-40 w-60">
               <Image
-                src={productOne}
+                src={"/images/product-1.jpg"}
                 alt="product-one"
                 fill
                 style={{ objectFit: "contain" }}
