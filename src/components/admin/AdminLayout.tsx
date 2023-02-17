@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDialog } from "../../hooks/useDialog";
 import Header from "./Header";
 import { adminMenus, shopMenus } from "./menus";
 import Modal from "./Modal";
@@ -13,6 +14,7 @@ interface IAdminLayout {
 
 export default function AdminLayout({ children }: IAdminLayout) {
   const [open, setOpen] = useState(true);
+  const { isOpen } = useDialog();
   const { pathname } = useRouter();
 
   const menus = pathname.startsWith("/shop") ? shopMenus : adminMenus;
@@ -28,7 +30,7 @@ export default function AdminLayout({ children }: IAdminLayout) {
         <Header open={open} setOpen={setOpen} />
         <div className="relative min-h-[calc(100vh_-_73px)]">
           <div className="mt-5 px-4">{children}</div>
-          <Modal />
+          {isOpen && <Modal />}
         </div>
       </div>
     </div>

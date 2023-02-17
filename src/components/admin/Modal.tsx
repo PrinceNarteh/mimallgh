@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./Button";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { useDialog } from "../../hooks/useDialog";
 
 const Modal = () => {
+  const modalRef = useRef<React.LegacyRef<HTMLDivElement> | undefined>(null);
+  const { message, setIsOpen } = useDialog();
+
+  useEffect(() => {
+    let handler = (ev: MouseEvent) => {
+      if (!modalRef.current?.contains(ev.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   return (
     <div className="absolute inset-0 grid min-h-full place-content-center bg-gray-800/80">
-      <div className="w-full max-w-sm divide-y divide-gray-500 rounded bg-gray-900 p-5">
-        <div className="flex flex-col items-center pb-2">
+      <div
+        onClick={(e) => {}}
+        className="w-full max-w-sm rounded-md bg-gray-900 py-5 px-10"
+        ref={modalRef}
+      >
+        <div className="flex flex-col items-center space-y-5 pb-2 text-center text-lg">
           <RiErrorWarningLine className="my-3 text-6xl" />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi at
-          dolorum id nihil consequuntur aperiam iure sint? Voluptatum ad cum
-          officiis sapiente? Dolorum architecto non veniam cumque iste, quae
-          reiciendis!
+          <div>
+            <p>Are you sure you wan't to delete</p>
+            <p className="mt-0 text-xl font-bold">{message}?</p>
+          </div>
+          <p>You won't be able to revert this!</p>
         </div>
-        <div className="mb-0 flex items-center justify-center gap-3">
-          <Button>Cancel</Button>
-          <Button variant="danger">Delete</Button>
+        <div className="flex items-center justify-center gap-3">
+          <Button>No, Cancel</Button>
+          <Button variant="danger">Yes, Delete</Button>
         </div>
       </div>
     </div>

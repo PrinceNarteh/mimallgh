@@ -11,6 +11,7 @@ import { api } from "../utils/api";
 import MainNavbar from "../components/layout/MainNavbar";
 import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
+import DialogContextProvider from "../context/dialogContext";
 
 const AdminLayout = dynamic(() => import("../components/admin/AdminLayout"), {
   ssr: false,
@@ -31,9 +32,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <div className={poppins.className}>
       <SessionProvider session={session}>
         {pathname.startsWith("/shop") || pathname.startsWith("/admin") ? (
-          <AdminLayout>
-            <Component {...pageProps} />
-          </AdminLayout>
+          <DialogContextProvider>
+            <AdminLayout>
+              <Component {...pageProps} />
+            </AdminLayout>
+          </DialogContextProvider>
         ) : (
           <>
             {pathname.startsWith("/auth") ? (
