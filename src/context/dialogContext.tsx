@@ -25,7 +25,7 @@ export default function DialogContextProvider({
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [response, setResponse] = useState<boolean | null>(null);
-  const [message, setMessage] = useState<string>("John Doe");
+  const [message, setMessage] = useState<string>("");
 
   return (
     <DialogContext.Provider

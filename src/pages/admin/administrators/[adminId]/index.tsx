@@ -1,18 +1,31 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Card from "../../../../components/admin/Card";
 import { Button } from "../../../../components/admin/Button";
 import { api } from "../../../../utils/api";
 import { mapLevelToText } from "../../../../utils/mapper";
 import { HiOutlineTrash } from "react-icons/hi";
+import { useDialog } from "../../../../hooks/useDialog";
+
+interface IDialog {
+  id: string;
+  isLoading: boolean;
+  message: string;
+}
 
 const AdministratorDetails = () => {
   const {
     query: { adminId },
     push,
   } = useRouter();
+  const { setIsOpen, response } = useDialog();
+  const [dialog, setDialog] = useState<IDialog>({
+    id: "",
+    message: "",
+    isLoading: false,
+  });
 
   if (!adminId) {
     push(`/admin/administrators`);
@@ -21,6 +34,15 @@ const AdministratorDetails = () => {
   const { data } = api.users.getUserById.useQuery({
     id: adminId as string,
   });
+
+  const handleDialog = ({ message, isLoading, id }: IDialog) => {
+    setDialog({ id, message, isLoading });
+  };
+
+  const handleDelete = (id: string | undefined) => {
+    setIsOpen(true);
+    handleDialog({ id: "123", isLoading: true, message: "Are you sure?" });
+  };
 
   return (
     <div className="pb-5">
@@ -62,7 +84,7 @@ const AdministratorDetails = () => {
           >
             Edit
           </Link>
-          <Button variant="danger">
+          <Button variant="danger" onClick={() => handleDelete(data?.id)}>
             <HiOutlineTrash />
             Delete
           </Button>

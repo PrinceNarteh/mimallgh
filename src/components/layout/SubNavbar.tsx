@@ -8,24 +8,12 @@ const menus = [
     link: "/",
   },
   {
-    label: "Cart",
-    link: "/cart",
+    label: "Sell",
+    link: "/sell",
   },
   {
-    label: "Account",
-    link: "/account",
-  },
-  {
-    label: "Sell Adv.",
-    link: "/sell-adv",
-  },
-  {
-    label: "Order & Returns",
-    link: "/order-and-returns",
-  },
-  {
-    label: "Delivery",
-    link: "/delivery",
+    label: "Advertise",
+    link: "/advertise",
   },
   {
     label: "Help",
@@ -36,8 +24,8 @@ const menus = [
 const SubNavbar = () => {
   return (
     <div className="bg-gray-300">
-      <div className="max-w-7xl mx-auto py-3 flex justify-between">
-        <div className="flex items-center space-x-2 cursor-pointer">
+      <div className="mx-auto flex max-w-7xl justify-between py-3">
+        <div className="flex cursor-pointer items-center space-x-2">
           <BiMenu className="text-2xl" />
           <span className="">Markets Near You</span>
         </div>

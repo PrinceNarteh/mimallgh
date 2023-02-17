@@ -5,7 +5,7 @@ import { useDialog } from "../../hooks/useDialog";
 
 const Modal = () => {
   const modalRef = useRef<React.LegacyRef<HTMLDivElement> | undefined>(null);
-  const { message, setIsOpen } = useDialog();
+  const { message, setIsOpen, setResponse } = useDialog();
 
   useEffect(() => {
     let handler = (ev: MouseEvent) => {
@@ -37,8 +37,23 @@ const Modal = () => {
           <p>You won't be able to revert this!</p>
         </div>
         <div className="flex items-center justify-center gap-3">
-          <Button>No, Cancel</Button>
-          <Button variant="danger">Yes, Delete</Button>
+          <Button
+            onClick={() => {
+              setResponse(false);
+              setIsOpen(false);
+            }}
+          >
+            No, Cancel
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setResponse(true);
+              setIsOpen(false);
+            }}
+          >
+            Yes, Delete
+          </Button>
         </div>
       </div>
     </div>
