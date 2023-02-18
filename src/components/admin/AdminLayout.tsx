@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useState } from "react";
+
 import { useDialog } from "../../hooks/useDialog";
+import { adminMenus, shopMenus } from "../../utils/menus";
 import Header from "./Header";
-import { adminMenus, shopMenus } from "./menus";
 import Modal from "./Modal";
 
 const SideBar = dynamic(() => import("./SideBar"), { ssr: false });

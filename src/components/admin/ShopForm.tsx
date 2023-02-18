@@ -12,6 +12,9 @@ import InputField from "../InputField";
 import { Button } from "./Button";
 import Card from "./Card";
 import SearchFilter from "./SearchFilter";
+import SelectField from "./SelectField";
+import { SelectOption } from "./SelectOption";
+import { locations } from "../../utils/menus";
 
 const AddShopForm = ({
   shop,
@@ -121,12 +124,12 @@ const AddShopForm = ({
               errors={errors}
               validationSchema={{ required: "Shop name is required" }}
             />
-            <InputField
-              name="location"
+            <SelectField
               label="Location"
-              register={register}
+              options={locations}
               errors={errors}
-              validationSchema={{ required: "Location is required" }}
+              register={register}
+              {...register("location", { required: "Location is required." })}
             />
           </div>
           <div className="flex flex-col gap-5 lg:flex-row">
@@ -234,12 +237,14 @@ const AddShopForm = ({
             >
               <legend>Branch</legend>
               <div>
-                <InputField
-                  name={`branches.${index}.location`}
+                <SelectField
                   label="Location"
-                  register={register}
+                  options={locations}
                   errors={errors}
-                  validationSchema={{ required: "Location is required" }}
+                  register={register}
+                  {...register("location", {
+                    required: "Location is required.",
+                  })}
                 />
               </div>
               <div className="flex flex-col gap-5 lg:flex-row">
