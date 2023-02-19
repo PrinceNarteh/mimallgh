@@ -25,10 +25,11 @@ const menus = [
 const SubNavbar = () => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<any>(null);
+  const btnRef = useRef<any>(null);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      console.log(e);
+      if (btnRef.current.contains(e.target)) return;
       if (!menuRef.current.contains(e.target)) {
         setOpen(false);
       }
@@ -49,6 +50,7 @@ const SubNavbar = () => {
         <div
           className="flex cursor-pointer items-center space-x-2"
           onClick={() => setOpen(!open)}
+          ref={btnRef}
         >
           <BiMenu className="text-2xl" />
           <span className="">Markets Near You</span>

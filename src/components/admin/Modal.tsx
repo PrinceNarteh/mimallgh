@@ -4,7 +4,7 @@ import { RiErrorWarningLine } from "react-icons/ri";
 import { useDialog } from "../../hooks/useDialog";
 
 const Modal = () => {
-  const modalRef = useRef<React.LegacyRef<HTMLDivElement> | undefined>(null);
+  const modalRef = useRef<any>(null);
   const { message, setIsOpen, setResponse } = useDialog();
 
   useEffect(() => {
