@@ -5,6 +5,7 @@ import { z } from "zod";
 import {
   createAdminDto,
   createUserDto,
+  IdDto,
   updateAdminDto,
   updateUserDto,
 } from "../../../utils/validations";
@@ -41,7 +42,6 @@ export const authRouter = createTRPCRouter({
   updateUser: publicProcedure
     .input(updateUserDto)
     .mutation(async ({ input, ctx }) => {
-      console.log(input);
       try {
         const user = await ctx.prisma.user.update({
           where: {
@@ -53,7 +53,6 @@ export const authRouter = createTRPCRouter({
         });
         return user;
       } catch (error: any) {
-        // console.log(error);
         if (error.message.includes("User_email_key")) {
           throw new TRPCError({
             code: "CONFLICT",
@@ -66,18 +65,28 @@ export const authRouter = createTRPCRouter({
         });
       }
     }),
-  getUserById: publicProcedure
-    .input(
-      z.object({ id: z.string({ required_error: "ID is required" }).cuid() })
-    )
-    .query(async ({ input, ctx }) => {
-      const user = await ctx.prisma.user.findUnique({
+  deleteUser: publicProcedure.input(IdDto).mutation(async ({ input, ctx }) => {
+    try {
+      await ctx.prisma.user.delete({
         where: {
           id: input.id,
         },
       });
-      return user;
-    }),
+    } catch (error: any) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Something went wrong",
+      });
+    }
+  }),
+  getUserById: publicProcedure.input(IdDto).query(async ({ input, ctx }) => {
+    const user = await ctx.prisma.user.findUnique({
+      where: {
+        id: input.id,
+      },
+    });
+    return user;
+  }),
   getUsersByRole: publicProcedure
     .input(
       z.object({

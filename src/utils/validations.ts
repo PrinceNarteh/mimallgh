@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+export const IdDto = z.object({
+  id: z.string({ required_error: "ID is required" }).cuid(),
+});
+
 export const createProductDto = z.object({
   title: z.string(),
   description: z

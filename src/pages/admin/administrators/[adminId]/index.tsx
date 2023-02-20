@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { HiOutlineTrash } from "react-icons/hi";
 import { MdArrowBackIosNew } from "react-icons/md";
-import Card from "../../../../components/admin/Card";
+
 import { Button } from "../../../../components/admin/Button";
+import Card from "../../../../components/admin/Card";
+import Modal from "../../../../components/admin/Modal";
 import { api } from "../../../../utils/api";
 import { mapLevelToText } from "../../../../utils/mapper";
-import { HiOutlineTrash } from "react-icons/hi";
-import { useDialog } from "../../../../hooks/useDialog";
 
 interface IDialog {
   id: string;
@@ -20,12 +22,11 @@ const AdministratorDetails = () => {
     query: { adminId },
     push,
   } = useRouter();
-  const { setIsOpen, response } = useDialog();
-  const [dialog, setDialog] = useState<IDialog>({
-    id: "",
+  const [dialog, setDialog] = useState({
     message: "",
-    isLoading: false,
+    isOpen: false,
   });
+  const deleteUser = api.users.deleteUser.useMutation();
 
   if (!adminId) {
     push(`/admin/administrators`);
@@ -35,14 +36,34 @@ const AdministratorDetails = () => {
     id: adminId as string,
   });
 
-  const handleDialog = ({ message, isLoading, id }: IDialog) => {
-    setDialog({ id, message, isLoading });
-  };
+  const handleDelete = () =>
+    setDialog({
+      isOpen: true,
+      message: `${data?.firstName} ${data?.lastName}`,
+    });
 
-  const handleDelete = (id: string | undefined) => {
-    setIsOpen(true);
-    handleDialog({ id: "123", isLoading: true, message: "Are you sure?" });
-  };
+  function confirmDelete(choose: boolean) {
+    if (choose) {
+      deleteUser.mutate(
+        { id: adminId as string },
+        {
+          onSuccess: () => {
+            toast.success("Admin deleted successfully!");
+            setDialog({
+              isOpen: false,
+              message: "",
+            });
+            push(`/admin/administrators`);
+          },
+        }
+      );
+    } else {
+      setDialog({
+        isOpen: false,
+        message: "",
+      });
+    }
+  }
 
   return (
     <div className="pb-5">
@@ -84,12 +105,15 @@ const AdministratorDetails = () => {
           >
             Edit
           </Link>
-          <Button variant="danger" onClick={() => handleDelete(data?.id)}>
+          <Button variant="danger" onClick={() => handleDelete()}>
             <HiOutlineTrash />
             Delete
           </Button>
         </div>
       </div>
+      {dialog.isOpen ? (
+        <Modal onDialog={confirmDelete} message={dialog.message} />
+      ) : null}
     </div>
   );
 };

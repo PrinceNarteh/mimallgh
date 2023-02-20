@@ -19,8 +19,6 @@ const EditShopOwner = () => {
     push("/admin/administrators");
   }
 
-  console.log(admin.data);
-
   return (
     <div>
       <AdminForm admin={admin.data} />

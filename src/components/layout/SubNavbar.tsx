@@ -42,8 +42,6 @@ const SubNavbar = () => {
     };
   });
 
-  console.log(menuRef);
-
   return (
     <div className="bg-gray-300">
       <div className="relative mx-auto flex max-w-7xl justify-between py-3">
@@ -65,9 +63,10 @@ const SubNavbar = () => {
           }
         `}
         >
-          {locations.map((location) => (
+          {locations.slice(1).map((location, idx) => (
             <div
-              className={`cursor-pointer px-5 py-2 duration-500 hover:bg-[#ff0000] hover:text-white
+              key={idx}
+              className={`cursor-pointer px-7 py-2 duration-500 hover:bg-[#ff0000] hover:text-white
               ${open ? "opacity-100" : "opacity-0"}
               `}
             >
