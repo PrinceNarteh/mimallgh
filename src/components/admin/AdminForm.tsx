@@ -30,6 +30,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
     register,
     formState: { errors, isSubmitting },
     reset,
+    getValues,
     handleSubmit,
   } = useForm({
     defaultValues: {
@@ -46,7 +47,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
       alternateNumber: admin?.alternateNumber || "",
       password: admin?.password || "",
       level: (admin?.level && convertLevelToString(admin.level)) || "",
-      role: admin?.role || "admin",
+      role: admin?.role || "ADMIN",
     },
     resolver: zodResolver(admin?.id ? updateAdminDto : createAdminDto),
   });
@@ -79,6 +80,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
     }
   };
 
+  console.log(getValues());
   console.log(errors);
 
   return (
@@ -146,6 +148,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               <select
                 className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
                 {...register("cardType")}
+                defaultValue={getValues().cardType}
               >
                 <option value="">Select Card</option>
                 <option value="ghana_card">Ghana Card</option>
