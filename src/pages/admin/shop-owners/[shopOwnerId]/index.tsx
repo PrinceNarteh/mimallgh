@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+
 import { MdArrowBackIosNew } from "react-icons/md";
 import Card from "../../../../components/admin/Card";
+import Modal from "../../../../components/admin/Modal";
 import { api } from "../../../../utils/api";
 
 const ShopOwnerDetails = () => {
@@ -10,14 +13,35 @@ const ShopOwnerDetails = () => {
     query: { shopOwnerId },
     push,
   } = useRouter();
+  const [openDialog, setOpenDialog] = useState(false);
 
   if (!shopOwnerId) {
     push(`/admin/shop-owners`);
   }
+  const deleteUser = api.users.deleteUser.useMutation();
 
   const { data } = api.users.getUserById.useQuery({
     id: shopOwnerId as string,
   });
+
+  const handleDelete = () => setOpenDialog(true);
+
+  function confirmDelete(choose: boolean) {
+    if (choose) {
+      deleteUser.mutate(
+        { id: shopOwnerId as string },
+        {
+          onSuccess: () => {
+            toast.success("Admin deleted successfully!");
+            setOpenDialog(false);
+            push(`/admin/administrators`);
+          },
+        }
+      );
+    } else {
+      setOpenDialog(false);
+    }
+  }
 
   return (
     <div>
@@ -52,6 +76,12 @@ const ShopOwnerDetails = () => {
           <button>Delete</button>
         </div>
       </div>
+      {openDialog ? (
+        <Modal
+          onDialog={confirmDelete}
+          message={openDialog ? `${data?.firstName} ${data?.lastName}` : ""}
+        />
+      ) : null}
     </div>
   );
 };

@@ -11,21 +11,12 @@ import Modal from "../../../../components/admin/Modal";
 import { api } from "../../../../utils/api";
 import { mapLevelToText } from "../../../../utils/mapper";
 
-interface IDialog {
-  id: string;
-  isLoading: boolean;
-  message: string;
-}
-
 const AdministratorDetails = () => {
   const {
     query: { adminId },
     push,
   } = useRouter();
-  const [dialog, setDialog] = useState({
-    message: "",
-    isOpen: false,
-  });
+  const [openDialog, setOpenDialog] = useState(false);
   const deleteUser = api.users.deleteUser.useMutation();
 
   if (!adminId) {
@@ -36,11 +27,7 @@ const AdministratorDetails = () => {
     id: adminId as string,
   });
 
-  const handleDelete = () =>
-    setDialog({
-      isOpen: true,
-      message: `${data?.firstName} ${data?.lastName}`,
-    });
+  const handleDelete = () => setOpenDialog(true);
 
   function confirmDelete(choose: boolean) {
     if (choose) {
@@ -49,19 +36,13 @@ const AdministratorDetails = () => {
         {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
-            setDialog({
-              isOpen: false,
-              message: "",
-            });
+            setOpenDialog(false);
             push(`/admin/administrators`);
           },
         }
       );
     } else {
-      setDialog({
-        isOpen: false,
-        message: "",
-      });
+      setOpenDialog(false);
     }
   }
 
@@ -111,8 +92,11 @@ const AdministratorDetails = () => {
           </Button>
         </div>
       </div>
-      {dialog.isOpen ? (
-        <Modal onDialog={confirmDelete} message={dialog.message} />
+      {openDialog ? (
+        <Modal
+          onDialog={confirmDelete}
+          message={openDialog ? `${data?.firstName} ${data?.lastName}` : ""}
+        />
       ) : null}
     </div>
   );
