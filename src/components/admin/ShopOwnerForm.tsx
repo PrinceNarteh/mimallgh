@@ -75,9 +75,6 @@ const ShopOwnerForm = ({
     }
   };
 
-  console.log(shopOwner);
-  console.log(errors);
-
   return (
     <div className="mx-auto max-w-4xl">
       <Card heading={`${shopOwner?.id ? "Edit" : "Add"} Shop Owner`}>

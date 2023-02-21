@@ -1,20 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Branch, Shop } from "@prisma/client";
+import { Shop } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useFieldArray, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { FiInstagram } from "react-icons/fi";
 import { ImFacebook2, ImWhatsapp } from "react-icons/im";
 
-import { toast } from "react-hot-toast";
 import { api } from "../../utils/api";
+import { locations } from "../../utils/menus";
 import { createShopDto, updateShopDto } from "../../utils/validations";
 import InputField from "../InputField";
 import { Button } from "./Button";
 import Card from "./Card";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
-import { SelectOption } from "./SelectOption";
-import { locations } from "../../utils/menus";
 
 const AddShopForm = ({
   shop,

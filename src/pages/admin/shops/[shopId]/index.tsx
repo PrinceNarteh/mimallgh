@@ -8,6 +8,7 @@ import { Button } from "../../../../components/admin/Button";
 import Card from "../../../../components/admin/Card";
 import Modal from "../../../../components/admin/Modal";
 import { api } from "../../../../utils/api";
+import { capitalize } from "../../../../utils/utilities";
 
 const ShopDetails = () => {
   const {
@@ -32,7 +33,7 @@ const ShopDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/admin/administrators`);
+            push(`/admin/shops`);
           },
         }
       );
@@ -76,10 +77,13 @@ const ShopDetails = () => {
 
         {data?.branches.length
           ? data.branches.map((branch, index) => (
-              <Card heading={`${branch.location} Branch`} key={index}>
+              <Card
+                heading={`${capitalize(branch.location)} Branch`}
+                key={index}
+              >
                 <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
                   <div className="font-bold">Location</div>
-                  <div>{branch.location}</div>
+                  <div>{capitalize(branch.location)}</div>
                 </div>
                 <div className="flex items-center justify-between  py-4 px-4">
                   <div className="font-bold">Address</div>
@@ -97,7 +101,9 @@ const ShopDetails = () => {
           <Link href={`/admin/shops/${data?.id}/edit`} className="link">
             Edit
           </Link>
-          <Button onClick={handleDelete}>Delete</Button>
+          <Button onClick={handleDelete} variant="danger">
+            Delete
+          </Button>
         </div>
       </div>
       {openDialog ? (
