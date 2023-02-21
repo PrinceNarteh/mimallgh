@@ -100,7 +100,7 @@ model Shop {
     openingTime     String
     closingTime     String
     ownerId         String    @unique
-    owner           User      @relation(fields: [ownerId], references: [id])
+    owner           User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     products        Product[]
     branches        Branch[]
 }
@@ -110,7 +110,7 @@ model Branch {
     location    String
     address     String?
     phoneNumber String
-    Shop        Shop?   @relation(fields: [shopId], references: [id])
+    Shop        Shop?   @relation(fields: [shopId], references: [id], onDelete: Cascade)
     shopId      String?
 }
 
@@ -141,7 +141,7 @@ model Product {
     category           Category
     images             String
     shopId             String
-    shop               Shop     @relation(fields: [shopId], references: [id])
+    shop               Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
     createdAt          DateTime @default(now())
     updatedAt          DateTime @updatedAt
 }

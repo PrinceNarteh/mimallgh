@@ -44,7 +44,7 @@ const SelectField = ({
         {...register(name, validationSchema)}
       >
         {options.map(({ label, value }, index) => (
-          <option value={value} className="bg-light-gray">
+          <option key={index} value={value} className="bg-light-gray">
             {label}
           </option>
         ))}

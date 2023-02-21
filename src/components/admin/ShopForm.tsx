@@ -242,25 +242,24 @@ const AddShopForm = ({
                   options={locations}
                   errors={errors}
                   register={register}
-                  {...register("location", {
-                    required: "Location is required.",
-                  })}
+                  name={`branches.${index}.location`}
+                  validationSchema={{ required: "Location is required" }}
                 />
               </div>
               <div className="flex flex-col gap-5 lg:flex-row">
                 <InputField
-                  name={`branches.${index}.address`}
+                  errors={errors}
                   label="Address"
                   register={register}
-                  errors={errors}
+                  name={`branches.${index}.address`}
                   validationSchema={{ required: "Address is required" }}
                 />
                 <InputField
-                  name={`branches.${index}.phoneNumber`}
+                  errors={errors}
                   label="Phone Number"
                   register={register}
-                  errors={errors}
-                  validationSchema={{ required: "Location is required" }}
+                  name={`branches.${index}.phoneNumber`}
+                  validationSchema={{ required: "Phone number is required" }}
                 />
               </div>
               <div className="my-2 flex justify-end">

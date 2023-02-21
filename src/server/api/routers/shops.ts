@@ -1,7 +1,11 @@
 import { Role, Branch, Shop } from "@prisma/client";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { createShopDto, updateShopDto } from "../../../utils/validations";
+import {
+  createShopDto,
+  IdDto,
+  updateShopDto,
+} from "../../../utils/validations";
 import {
   adminProtectedProcedure,
   createTRPCRouter,
@@ -118,15 +122,18 @@ export const shopRouter = createTRPCRouter({
         });
       }
     }),
-  deleteShop: publicProcedure
-    .input(z.string().cuid())
-    .mutation(async ({ input, ctx }) => {
-      try {
-        await ctx.prisma.shop.delete({
-          where: {
-            id: input,
-          },
-        });
-      } catch (error) {}
-    }),
+  deleteShop: publicProcedure.input(IdDto).mutation(async ({ input, ctx }) => {
+    try {
+      await ctx.prisma.shop.delete({
+        where: {
+          id: input.id,
+        },
+      });
+    } catch (error) {
+      return new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Something went wrong",
+      });
+    }
+  }),
 });

@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { MdArrowBackIosNew } from "react-icons/md";
+
 import { Button } from "../../../../components/admin/Button";
 import Card from "../../../../components/admin/Card";
+import Modal from "../../../../components/admin/Modal";
 import { api } from "../../../../utils/api";
 
 const ShopDetails = () => {
@@ -11,12 +14,32 @@ const ShopDetails = () => {
     query: { shopId },
     push,
   } = useRouter();
+  const [openDialog, setOpenDialog] = useState(false);
 
   if (!shopId) {
     push(`/admin/shops`);
   }
-
   const { data } = api.shops.getShopById.useQuery({ shopId: shopId as string });
+  const deleteShop = api.shops.deleteShop.useMutation();
+
+  const handleDelete = () => setOpenDialog(true);
+
+  function confirmDelete(choose: boolean) {
+    if (choose) {
+      deleteShop.mutate(
+        { id: shopId as string },
+        {
+          onSuccess: () => {
+            toast.success("Admin deleted successfully!");
+            setOpenDialog(false);
+            push(`/admin/administrators`);
+          },
+        }
+      );
+    } else {
+      setOpenDialog(false);
+    }
+  }
 
   return (
     <div className="pb-10">
@@ -51,31 +74,38 @@ const ShopDetails = () => {
           </div>
         </Card>
 
-        {data?.branches.length &&
-          data.branches.map((branch, index) => (
-            <Card heading={`${branch.location} Branch`} key={index}>
-              <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
-                <div className="font-bold">Location</div>
-                <div>{branch.location}</div>
-              </div>
-              <div className="flex items-center justify-between  py-4 px-4">
-                <div className="font-bold">Address</div>
-                <div>{branch.address}</div>
-              </div>
-              <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
-                <div className="font-bold">Phone Number</div>
-                <div>{branch.phoneNumber}</div>
-              </div>
-            </Card>
-          ))}
+        {data?.branches.length
+          ? data.branches.map((branch, index) => (
+              <Card heading={`${branch.location} Branch`} key={index}>
+                <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
+                  <div className="font-bold">Location</div>
+                  <div>{branch.location}</div>
+                </div>
+                <div className="flex items-center justify-between  py-4 px-4">
+                  <div className="font-bold">Address</div>
+                  <div>{branch.address}</div>
+                </div>
+                <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
+                  <div className="font-bold">Phone Number</div>
+                  <div>{branch.phoneNumber}</div>
+                </div>
+              </Card>
+            ))
+          : null}
 
         <div className="flex items-center justify-end gap-5">
           <Link href={`/admin/shops/${data?.id}/edit`} className="link">
             Edit
           </Link>
-          <Button>Delete</Button>
+          <Button onClick={handleDelete}>Delete</Button>
         </div>
       </div>
+      {openDialog ? (
+        <Modal
+          onDialog={confirmDelete}
+          message={openDialog ? `${data?.name}` : ""}
+        />
+      ) : null}
     </div>
   );
 };
