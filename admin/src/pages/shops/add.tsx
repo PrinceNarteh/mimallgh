@@ -1,4 +1,4 @@
-import ShopForm from "../../../components/admin/ShopForm";
+import ShopForm from "../../components/ShopForm";
 
 const AddShop = () => {
   return (

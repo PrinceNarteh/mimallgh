@@ -10,7 +10,7 @@ const EditShopOwner = () => {
   } = useRouter();
 
   if (!shopOwnerId) {
-    push(`/admin/shop-owners`);
+    push(`/shop-owners`);
   }
 
   const shopOwner = api.users.getUserById.useQuery({

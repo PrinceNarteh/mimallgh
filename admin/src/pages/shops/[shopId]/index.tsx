@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { MdArrowBackIosNew } from "react-icons/md";
 
-import { Button } from "../../../../components/admin/Button";
-import Card from "../../../../components/admin/Card";
-import Modal from "../../../../components/admin/Modal";
-import { api } from "../../../../utils/api";
-import { capitalize } from "../../../../utils/utilities";
+import { Button } from "../../../components/Button";
+import Card from "../../../components/Card";
+import Modal from "../../../components/Modal";
+import { api } from "../../../utils/api";
+import { capitalize } from "../../../utils/utilities";
 
 const ShopDetails = () => {
   const {
@@ -18,7 +18,7 @@ const ShopDetails = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   if (!shopId) {
-    push(`/admin/shops`);
+    push(`/shops`);
   }
   const { data } = api.shops.getShopById.useQuery(
     { shopId: shopId as string },
@@ -38,7 +38,7 @@ const ShopDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/admin/shops`);
+            push(`/shops`);
           },
         }
       );
@@ -49,7 +49,7 @@ const ShopDetails = () => {
 
   return (
     <div className="pb-10">
-      <Link href={`/admin/shops`} className="flex cursor-pointer items-center">
+      <Link href={`/shops`} className="flex cursor-pointer items-center">
         <MdArrowBackIosNew className="mr-2" /> Back
       </Link>
       <div className="mx-auto max-w-3xl space-y-5">
@@ -103,7 +103,7 @@ const ShopDetails = () => {
           : null}
 
         <div className="flex items-center justify-end gap-5">
-          <Link href={`/admin/shops/${data?.id}/edit`} className="link">
+          <Link href={`/shops/${data?.id}/edit`} className="link">
             Edit
           </Link>
           <Button onClick={handleDelete} variant="danger">

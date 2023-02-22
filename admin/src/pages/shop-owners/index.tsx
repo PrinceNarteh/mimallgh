@@ -8,7 +8,7 @@ const ShopOwnersList = () => {
   const { data, isSuccess } = api.users.getAllShopOwners.useQuery();
 
   const navigate = (shopOwnerId: string) =>
-    router.push(`/admin/shop-owners/${shopOwnerId}`);
+    router.push(`/shop-owners/${shopOwnerId}`);
 
   return (
     <div className="mx-auto max-w-5xl">

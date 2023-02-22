@@ -37,7 +37,7 @@ const AdministratorDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/admin/administrators`);
+            push(`/administrators`);
           },
         }
       );

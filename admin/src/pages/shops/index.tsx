@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { api } from "../../../utils/api";
+import { api } from "../../utils/api";
 
 const Shops = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Shops = () => {
               data.map((shop, idx) => (
                 <tr
                   className="cursor-pointer rounded bg-light-gray"
-                  onClick={() => router.push(`/admin/shops/${shop.id}`)}
+                  onClick={() => router.push(`/shops/${shop.id}`)}
                   key={idx}
                 >
                   <td className="text-center">

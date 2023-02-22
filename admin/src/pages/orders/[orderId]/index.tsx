@@ -6,7 +6,7 @@ import OrderDetails from "../../../components/OrderDetails";
 const OrderDetail = () => {
   return (
     <div>
-      <Link href={`/admin/orders`} className="flex cursor-pointer items-center">
+      <Link href={`/orders`} className="flex cursor-pointer items-center">
         <MdArrowBackIosNew className="mr-2" /> Back
       </Link>
       <OrderDetails />

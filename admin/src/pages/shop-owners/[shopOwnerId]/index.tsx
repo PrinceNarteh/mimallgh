@@ -16,7 +16,7 @@ const ShopOwnerDetails = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   if (!shopOwnerId) {
-    push(`/admin/shop-owners`);
+    push(`/shop-owners`);
   }
   const deleteUser = api.users.deleteUser.useMutation();
 
@@ -34,7 +34,7 @@ const ShopOwnerDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/admin/administrators`);
+            push(`/administrators`);
           },
         }
       );
@@ -45,7 +45,7 @@ const ShopOwnerDetails = () => {
 
   return (
     <div>
-      <Link href={`/admin/shops`} className="flex cursor-pointer items-center">
+      <Link href={`/shops`} className="flex cursor-pointer items-center">
         <MdArrowBackIosNew className="mr-2" /> Back
       </Link>
       <div className="mx-auto mt-5 max-w-3xl space-y-5">
@@ -70,7 +70,7 @@ const ShopOwnerDetails = () => {
           />
         </Card>
         <div className="flex justify-end gap-5">
-          <Link href={`/admin/shop-owners/${data?.id}/edit`} className="link">
+          <Link href={`/shop-owners/${data?.id}/edit`} className="link">
             Edit
           </Link>
           <button>Delete</button>

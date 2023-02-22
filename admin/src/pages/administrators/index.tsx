@@ -11,7 +11,7 @@ const AdministratorsList = () => {
   });
 
   const navigate = (adminId: string) =>
-    router.push(`/admin/administrators/${adminId}`);
+    router.push(`/administrators/${adminId}`);
 
   return (
     <div className="mx-auto max-w-5xl">

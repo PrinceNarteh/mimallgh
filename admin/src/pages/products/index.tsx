@@ -1,15 +1,14 @@
-import { products } from "../../../../data/data";
+import { products } from "../../../data/data";
 import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
-import Card from "../../../components/admin/Card";
-import Status from "../../../components/admin/Status";
+import Card from "../../components/Card";
+import Status from "../../components/Status";
 import { useRouter } from "next/router";
 
 const ProductList = () => {
   const router = useRouter();
 
-  const navigate = (productId: string) =>
-    router.push(`/admin/products/${productId}`);
+  const navigate = (productId: string) => router.push(`/products/${productId}`);
 
   return (
     <div className="mx-auto max-w-6xl">
