@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { MdArrowBackIosNew } from "react-icons/md";
-import OrderDetails from "../../../../components/admin/OrderDetails";
+import OrderDetails from "../../../components/OrderDetails";
 
 const OrderDetail = () => {
   return (

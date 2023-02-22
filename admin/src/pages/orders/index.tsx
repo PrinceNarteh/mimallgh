@@ -1,7 +1,4 @@
-import Link from "next/link";
-import React from "react";
-import { MdArrowBackIosNew } from "react-icons/md";
-import OrderListTable from "../../../components/admin/OrderListTable";
+import OrderListTable from "../../components/OrderListTable";
 
 const OrdersList = () => {
   return (
