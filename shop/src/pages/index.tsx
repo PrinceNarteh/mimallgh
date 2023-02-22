@@ -1,88 +1,152 @@
-import Image from "next/image";
-import Link from "next/link";
-import Header from "../components/Header";
-import SectionHeader from "../components/layout/SectionHeader";
-import ProductCard from "../components/ProductCard";
-import Section from "../components/Section";
+import { AiOutlineFall, AiOutlineRise } from "react-icons/ai";
+import Card from "../../components/admin/Card";
 
-const Home = () => {
+const Admin = () => {
   return (
-    <div className="">
-      <Header />
-      <div className="flex justify-center divide-x-2 divide-gray-500 py-5">
-        <h3 className="px-10 text-3xl">Top Deals</h3>
-        <h3 className="px-10 text-3xl">Product Videos</h3>
-        <h3 className="px-10 text-3xl">Trending</h3>
-      </div>
-      <section className="mx-auto w-11/12 py-10">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div className="relative h-56 overflow-hidden rounded-2xl bg-teal-500 shadow-lg">
-            <Image src={"/images/iphone-1.jpg"} fill={true} alt="iPhone-1" />
-          </div>
-          <div className="relative h-56 overflow-hidden rounded-2xl bg-teal-500 shadow-lg">
-            <Image src={"/images/iphone-2.jpg"} fill={true} alt="iPhone-2" />
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto mb-10 w-11/12">
-        <SectionHeader label={"Today's Best Deal"} />
-        <div className="mt-5 flex flex-wrap justify-evenly">
-          {Array(6)
-            .fill(null)
-            .map((_, idx) => (
-              <ProductCard id={idx.toString()} />
-            ))}
-        </div>
-      </section>
-
-      <section className="min-h-screen bg-gray-200 py-10">
-        <div className="mx-auto w-11/12 space-y-10">
-          <div className="relative h-60 overflow-hidden rounded-lg">
-            <Image src={"/images/banner-1.jpg"} fill={true} alt="banner" />
-          </div>
-          <div className="h-96 rounded-lg bg-teal-500"></div>
-        </div>
-      </section>
-
-      <Section label="Top Deals">
-        <div className="flex gap-5">
-          {Array(8)
-            .fill(null)
-            .map((_, idx) => (
-              <div key={idx} className="h-40 w-40 rounded-lg bg-gray-400"></div>
-            ))}
-        </div>
-      </Section>
-
-      <section className="bg-gray-200 py-10">
-        <div className="mx-auto w-11/12 space-y-10">
-          <div className="flex h-40 items-center justify-center bg-gray-900">
-            <span className="text-4xl text-white">Trending</span>
-          </div>
-          <div className="flex h-80 bg-white">
-            <div className="flex h-full w-60 flex-col items-start justify-between border-r-2 p-7">
-              <h3 className="mb-5 text-4xl font-semibold">Foods</h3>
-              <div>
-                <p className="text-xl font-semibold">Processed Food</p>
-                <p className="text-xl font-semibold">Raw Food</p>
+    <>
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+        <Card heading="Total Sells">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-extrabold">$3799.00</h3>
+            <div className="flex flex-col items-end">
+              <div className="flex items-center gap-2 text-2xl">
+                <AiOutlineRise className="font-bold text-green-500" /> 37.5%
               </div>
-              <Link href="/more" className="font-semibold text-orange-500">
-                Read More
-              </Link>
-            </div>
-            <div className="flex gap-7 p-7">
-              {Array(4)
-                .fill(null)
-                .map((_, idx) => (
-                  <div key={idx} className="h-full w-60 bg-gray-400"></div>
-                ))}
+              <p className="text-xs">Compared to previous month</p>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </Card>
+        <Card heading="Average Order Value">
+          <div className="flex items-center justify-between gap-5">
+            <h3 className="text-xl font-extrabold">$279.00</h3>
+            <div className="flex flex-col items-end">
+              <div className="flex items-center gap-2 text-2xl">
+                <AiOutlineFall className="font-bold text-red-500" /> 12.5%
+              </div>
+              <p className="text-xs">Compared to previous month</p>
+            </div>
+          </div>
+        </Card>
+        <Card heading="Total Orders">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-extrabold">600</h3>
+            <div className="flex flex-col items-end">
+              <div className="flex items-center gap-2 text-2xl">
+                <AiOutlineRise className="font-bold text-green-500" /> 21.5%
+              </div>
+              <p className="text-xs">Compared to previous month</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+      <div className="mt-5">
+        <Card heading="Recent Orders">
+          <div className="overflow-auto">
+            <table className="w-full max-w-full">
+              <thead>
+                <tr className="text-left">
+                  <th className="w-20 px-2 py-4">No.</th>
+                  <th className="w-32 px-2 py-4">Status</th>
+                  <th className="max-w-xl px-2 py-4">Customer Name</th>
+                  <th className="w-40 px-2 py-4">Date</th>
+                  <th className="w-20 px-2 py-4">Total</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-500">
+                <tr>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    #00745
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Pending
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    05-01-2023
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    $2,742.00
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    #00745
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Pending
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    05-01-2023
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    $2,742.00
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    #00745
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    <span className="rounded-sm bg-blue-300 bg-opacity-30 p-1.5 text-xs font-medium uppercase tracking-wider text-blue-800">
+                      Pending
+                    </span>
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    05-01-2023
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    $2,742.00
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    #00745
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Pending
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    05-01-2023
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    $2,742.00
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    #00745
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Pending
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    05-01-2023
+                  </td>
+                  <td className="text-md whitespace-nowrap px-2 py-4">
+                    $2,742.00
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      </div>
+    </>
   );
 };
 
-export default Home;
+export default Admin;
