@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../components/admin/Card";
+import Card from "../components/Card";
 import { AiOutlineRise, AiOutlineFall } from "react-icons/ai";
 
 const Home = () => {

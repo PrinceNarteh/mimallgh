@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { adminMenus, shopMenus } from "./../utils/menus";
 import Header from "./Header";
 
 const SideBar = dynamic(() => import("./SideBar"), { ssr: false });
@@ -13,13 +11,10 @@ interface IAdminLayout {
 
 export default function AdminLayout({ children }: IAdminLayout) {
   const [open, setOpen] = useState(true);
-  const { pathname } = useRouter();
-
-  const menus = pathname.startsWith("/shop") ? shopMenus : adminMenus;
 
   return (
     <div>
-      <SideBar open={open} menus={menus} />
+      <SideBar open={open} />
       <div
         className={`min-h-screen bg-dark-gray text-off-white ${
           !open ? "ml-16" : "ml-60"

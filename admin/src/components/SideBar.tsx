@@ -1,11 +1,10 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
+import { menus } from "../utils/menus";
 
 import { IoIosArrowBack } from "react-icons/io";
 
-const SideBar = ({ menus, open }: { menus: any; open: boolean }) => {
+const SideBar = ({ open }: { open: boolean }) => {
   return (
     <div
       className={`fixed top-0 left-0 h-screen  bg-gray-900 ${

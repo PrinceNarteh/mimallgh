@@ -4,10 +4,10 @@ import { FiShoppingBag } from "react-icons/fi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
 
-export const adminMenus = [
+export const menus = [
   {
     name: "Dashboard",
-    link: "/admin",
+    link: "/",
     icon: MdOutlineDashboard,
   },
   {
@@ -16,11 +16,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Administrators List",
-        link: "/admin/administrators",
+        link: "/administrators",
       },
       {
         name: "Add Administrator",
-        link: "/admin/administrators/add",
+        link: "/administrators/add",
       },
     ],
   },
@@ -30,11 +30,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Product List",
-        link: "/admin/products",
+        link: "/products",
       },
       {
         name: "Add Product",
-        link: "/admin/products/add",
+        link: "/products/add",
       },
     ],
   },
@@ -44,11 +44,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Shop List",
-        link: "/admin/shops",
+        link: "/shops",
       },
       {
         name: "Add Shop",
-        link: "/admin/shops/add",
+        link: "/shops/add",
       },
     ],
   },
@@ -58,11 +58,11 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Shop Owners List",
-        link: "/admin/shop-owners",
+        link: "/shop-owners",
       },
       {
         name: "Add Shop Owner",
-        link: "/admin/shop-owners/add",
+        link: "/shop-owners/add",
       },
     ],
   },
@@ -72,43 +72,7 @@ export const adminMenus = [
     subLinks: [
       {
         name: "Order List",
-        link: "/admin/orders",
-      },
-    ],
-  },
-];
-
-export const shopMenus = [
-  {
-    name: "Dashboard",
-    link: "/shop",
-    icon: MdOutlineDashboard,
-  },
-  {
-    name: "Products",
-    icon: FiShoppingBag,
-    subLinks: [
-      {
-        name: "Product List",
-        link: "/shop/products",
-      },
-      {
-        name: "Add Product",
-        link: "/shop/products/add-product",
-      },
-    ],
-  },
-  {
-    name: "Orders",
-    icon: TiShoppingCart,
-    subLinks: [
-      {
-        name: "Order List",
-        link: "/shop/orders",
-      },
-      {
-        name: "Order Details",
-        link: "/shop/orders/1",
+        link: "/orders",
       },
     ],
   },
