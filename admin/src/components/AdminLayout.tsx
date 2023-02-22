@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { adminMenus, shopMenus } from "../../utils/menus";
+import { adminMenus, shopMenus } from "./../utils/menus";
 import Header from "./Header";
 
 const SideBar = dynamic(() => import("./SideBar"), { ssr: false });

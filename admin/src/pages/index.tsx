@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "../components/Header";
+import Banner from "../components/Banner";
 import SectionHeader from "../components/layout/SectionHeader";
 import ProductCard from "../components/ProductCard";
 import Section from "../components/Section";
@@ -8,7 +8,7 @@ import Section from "../components/Section";
 const Home = () => {
   return (
     <div className="">
-      <Header />
+      <Banner />
       <div className="flex justify-center divide-x-2 divide-gray-500 py-5">
         <h3 className="px-10 text-3xl">Top Deals</h3>
         <h3 className="px-10 text-3xl">Product Videos</h3>

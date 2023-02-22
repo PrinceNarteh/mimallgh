@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import { api } from "../../utils/api";
-import { createAdminDto, updateAdminDto } from "../../utils/validations";
-import InputField from "../InputField";
+import { api } from "./../utils/api";
+import { createAdminDto, updateAdminDto } from "./../utils/validations";
+import InputField from "./InputField";
 import { Button } from "./Button";
 import Card from "./Card";
 

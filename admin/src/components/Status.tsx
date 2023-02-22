@@ -1,6 +1,11 @@
 import React from "react";
 
-const Status = ({ variant = "success", children }) => {
+interface IStatus {
+  variant: "success" | "primary" | "danger";
+  children: React.ReactNode;
+}
+
+const Status = ({ variant = "success", children }: IStatus) => {
   let color = "";
 
   switch (variant) {
@@ -22,7 +27,7 @@ const Status = ({ variant = "success", children }) => {
 
   return (
     <span
-      className={`p-1.5 text-xs font-medium tracking-wider uppercase ${bgColor}  bg-opacity-30 rounded-sm`}
+      className={`p-1.5 text-xs font-medium uppercase tracking-wider ${bgColor}  rounded-sm bg-opacity-30`}
     >
       {children}
     </span>

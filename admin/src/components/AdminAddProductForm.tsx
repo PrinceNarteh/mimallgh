@@ -1,14 +1,13 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
-import Card from "./Card";
-import InputField from "../InputField";
+import Image from "next/image";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import Image from "next/image";
-import { SelectOption } from "./SelectOption";
-import SearchFilter from "./SearchFilter";
-import { api } from "../../utils/api";
-import { TbCloudUpload } from "react-icons/tb";
+import { api } from "./../utils/api";
 import { Button } from "./Button";
+import Card from "./Card";
+import InputField from "./InputField";
+import SearchFilter from "./SearchFilter";
+import { SelectOption } from "./SelectOption";
 
 const categories = [
   {

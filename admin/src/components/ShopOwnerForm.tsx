@@ -3,10 +3,10 @@ import { User } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import Card from "../../components/admin/Card";
-import InputField from "../../components/InputField";
-import { api } from "../../utils/api";
-import { createShopOwnerDto, createUserDto } from "../../utils/validations";
+import Card from "./../components/admin/Card";
+import InputField from "./../components/InputField";
+import { api } from "./../utils/api";
+import { createShopOwnerDto, createUserDto } from "./../utils/validations";
 import { Button } from "./Button";
 
 const ShopOwnerForm = ({

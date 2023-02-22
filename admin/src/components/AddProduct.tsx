@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import Card from "../../components/admin/Card";
-import InputField from "../../components/InputField";
+import Card from "./Card";
+import InputField from "./InputField";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";

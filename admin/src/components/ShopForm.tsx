@@ -6,12 +6,12 @@ import { toast } from "react-hot-toast";
 import { FiInstagram } from "react-icons/fi";
 import { ImFacebook2, ImWhatsapp } from "react-icons/im";
 
-import { api } from "../../utils/api";
-import { locations } from "../../utils/menus";
-import { createShopDto, updateShopDto } from "../../utils/validations";
-import InputField from "../InputField";
+import { api } from "./../utils/api";
+import { locations } from "./../utils/menus";
+import { createShopDto, updateShopDto } from "./../utils/validations";
 import { Button } from "./Button";
 import Card from "./Card";
+import InputField from "./InputField";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
 
