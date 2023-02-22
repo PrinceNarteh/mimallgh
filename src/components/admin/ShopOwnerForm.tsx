@@ -18,9 +18,10 @@ const ShopOwnerForm = ({
     register,
     formState: { errors },
     handleSubmit,
+    getValues,
   } = useForm({
     defaultValues: {
-      id: shopOwner?.id || "",
+      ...(shopOwner?.id && { id: shopOwner?.id }),
       firstName: shopOwner?.firstName || "",
       lastName: shopOwner?.lastName || "",
       middleName: shopOwner?.middleName || "",
@@ -36,6 +37,9 @@ const ShopOwnerForm = ({
     },
     resolver: zodResolver(shopOwner?.id ? createUserDto : createShopOwnerDto),
   });
+
+  console.log(getValues());
+  console.log(errors);
 
   const createUser = api.users.register.useMutation({
     onError: (error) => {

@@ -70,23 +70,27 @@ export const createUserDto = z.object({
     invalid_type_error:
       "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
   }),
+  confirmPassword: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .optional(),
 });
 
 export const updateUserDto = createUserDto.extend({
   id: z.string({ required_error: "ID is required." }).cuid(),
 });
 
-export const createShopOwnerDto = createUserDto
-  .extend({
-    confirmPassword: z
-      .string({ required_error: "Confirm password name is required." })
-      .min(6, "Password must be at least 6 characters"),
-  })
-  .optional()
-  .refine((val) => val?.password === val?.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
+// export const createShopOwnerDto = createUserDto
+//   .extend({
+//     confirmPassword: z
+//       .string({ required_error: "Confirm password name is required." })
+//       .min(6, "Password must be at least 6 characters"),
+//   })
+//   .optional()
+//   .refine((val) => val?.password === val?.confirmPassword, {
+//     message: "Passwords don't match",
+//     path: ["confirmPassword"],
+//   });
 
 export const createAdminDto = createUserDto.extend({
   cardType: z.enum(["ghana_card", "student_id", "voters_id"]),
@@ -94,13 +98,11 @@ export const createAdminDto = createUserDto.extend({
     .string({ required_error: "Card number is required" })
     .min(1, "Card number cannot be empty"),
   level: z.enum(["level_one", "level_two", "level_three", "super_user"]),
-  role: z
-    .enum(["ADMIN", "SHOP_OWNER", "USER"], {
-      required_error: "Role is required",
-      invalid_type_error:
-        "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
-    })
-    .default("ADMIN"),
+  role: z.enum(["ADMIN", "SHOP_OWNER", "USER"], {
+    required_error: "Role is required",
+    invalid_type_error:
+      "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
+  }),
 });
 
 export const updateAdminDto = createAdminDto.extend({

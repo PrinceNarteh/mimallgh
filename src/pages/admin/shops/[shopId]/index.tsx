@@ -20,7 +20,12 @@ const ShopDetails = () => {
   if (!shopId) {
     push(`/admin/shops`);
   }
-  const { data } = api.shops.getShopById.useQuery({ shopId: shopId as string });
+  const { data } = api.shops.getShopById.useQuery(
+    { shopId: shopId as string },
+    {
+      cacheTime: 10000,
+    }
+  );
   const deleteShop = api.shops.deleteShop.useMutation();
 
   const handleDelete = () => setOpenDialog(true);
@@ -59,7 +64,7 @@ const ShopDetails = () => {
           </div>
           <div className="flex items-center justify-between py-4 px-4">
             <div className="font-bold">Location</div>
-            <div>{data?.location}</div>
+            <div>{capitalize(data?.location || "")}</div>
           </div>
           <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
             <div className="font-bold">Address</div>
