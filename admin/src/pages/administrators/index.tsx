@@ -1,8 +1,8 @@
 import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { api } from "../../../utils/api";
-import { mapLevelToText } from "../../../utils/mapper";
+import { api } from "../../utils/api";
+import { mapLevelToText } from "../../utils/mapper";
 
 const AdministratorsList = () => {
   const router = useRouter();

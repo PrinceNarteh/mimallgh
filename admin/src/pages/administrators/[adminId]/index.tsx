@@ -5,11 +5,11 @@ import { toast } from "react-hot-toast";
 import { HiOutlineTrash } from "react-icons/hi";
 import { MdArrowBackIosNew } from "react-icons/md";
 
-import { Button } from "../../../../components/admin/Button";
-import Card from "../../../../components/admin/Card";
-import Modal from "../../../../components/admin/Modal";
-import { api } from "../../../../utils/api";
-import { mapLevelToText } from "../../../../utils/mapper";
+import { Button } from "../../../components/Button";
+import Card from "../../../components/Card";
+import Modal from "../../../components/Modal";
+import { api } from "../../../utils/api";
+import { mapLevelToText } from "../../../utils/mapper";
 
 const AdministratorDetails = () => {
   const {
@@ -20,7 +20,7 @@ const AdministratorDetails = () => {
   const deleteUser = api.users.deleteUser.useMutation();
 
   if (!adminId) {
-    push(`/admin/administrators`);
+    push(`/administrators`);
   }
 
   const { data } = api.users.getUserById.useQuery({

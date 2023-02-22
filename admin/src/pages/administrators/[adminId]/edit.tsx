@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
-import AdminForm from "../../../../components/admin/AdminForm";
-import { api } from "../../../../utils/api";
+
+import AdminForm from "../../../components/AdminForm";
+import { api } from "../../../utils/api";
 
 const EditShopOwner = () => {
   const {
@@ -10,13 +11,13 @@ const EditShopOwner = () => {
   } = useRouter();
 
   if (!adminId) {
-    push(`/admin/shops`);
+    push(`/shops`);
   }
 
   const admin = api.users.getUserById.useQuery({ id: adminId as string });
 
   if (!admin) {
-    push("/admin/administrators");
+    push("/administrators");
   }
 
   return (

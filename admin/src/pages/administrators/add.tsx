@@ -1,5 +1,5 @@
 import React from "react";
-import AdminForm from "../../../components/admin/AdminForm";
+import AdminForm from "../../components/AdminForm";
 
 const AddAdministrator = () => {
   return (
