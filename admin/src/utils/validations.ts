@@ -4,47 +4,7 @@ export const IdDto = z.object({
   id: z.string({ required_error: "ID is required" }).cuid(),
 });
 
-export const createProductDto = z.object({
-  title: z.string(),
-  description: z
-    .string({ required_error: "Description is required" })
-    .min(2, "Description should be 2 or more characters"),
-  price: z
-    .number({ required_error: "Price is required" })
-    .gte(0, "Price cannot be negative"),
-  discountPercentage: z.number().gte(0, "Price cannot be negative").optional(),
-  stock: z
-    .number({ required_error: "Stock is required" })
-    .gte(0, "Price cannot be negative"),
-  brand: z
-    .string({ required_error: "Brand is required" })
-    .min(2, "Brand should be 2 or more characters"),
-  category: z.enum([
-    "accommodations_and_building",
-    "fashion_and_wears",
-    "food",
-    "furniture",
-    "grocery_and_general",
-    "health_and_wellness",
-    "home_and_electricals",
-    "money_and_energy",
-    "personal-care_and_beauty",
-    "recreation",
-    "stationery_and_printing",
-    "tech",
-    "transport_and_machines",
-  ]),
-  ratings: z
-    .number()
-    .min(1, "Minimum rating should be 1")
-    .max(5, "Maximum rating should be 5")
-    .optional(),
-  images: z.string().url().optional(),
-});
-
-export const updateProductDto = createProductDto.partial();
-
-export const createUserDto = z.object({
+export const baseUserDto = z.object({
   firstName: z
     .string({ required_error: "First name is required." })
     .min(1, "First name cannot be empty"),
@@ -70,29 +30,9 @@ export const createUserDto = z.object({
     invalid_type_error:
       "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
   }),
-  confirmPassword: z
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .optional(),
 });
 
-export const updateUserDto = createUserDto.extend({
-  id: z.string({ required_error: "ID is required." }).cuid(),
-});
-
-// export const createShopOwnerDto = createUserDto
-//   .extend({
-//     confirmPassword: z
-//       .string({ required_error: "Confirm password name is required." })
-//       .min(6, "Password must be at least 6 characters"),
-//   })
-//   .optional()
-//   .refine((val) => val?.password === val?.confirmPassword, {
-//     message: "Passwords don't match",
-//     path: ["confirmPassword"],
-//   });
-
-export const createAdminDto = createUserDto.extend({
+export const createAdminDto = baseUserDto.extend({
   cardType: z.enum(["ghana_card", "student_id", "voters_id"]),
   cardNumber: z
     .string({ required_error: "Card number is required" })
@@ -109,11 +49,20 @@ export const updateAdminDto = createAdminDto.extend({
   id: z.string({ required_error: "ID is required" }).cuid(),
 });
 
-export const loginDto = z.object({
-  email: z.string({ required_error: "Email is required" }).email(),
-  password: z
-    .string({ required_error: "Password is required" })
-    .max(6, "Password should be six character or more"),
+export const createShopOwnerDto = baseUserDto
+  .extend({
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .optional(),
+  })
+  .refine((val) => val?.password === val?.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+export const updateShopOwnerDto = baseUserDto.extend({
+  id: z.string({ required_error: "ID is required." }).cuid(),
 });
 
 export const createShopDto = z.object({
@@ -167,32 +116,49 @@ export const updateShopDto = createShopDto.extend({
   ),
 });
 
-export type IUpdateShop = z.infer<typeof updateShopDto>;
+export const createProductDto = z.object({
+  title: z.string(),
+  description: z
+    .string({ required_error: "Description is required" })
+    .min(2, "Description should be 2 or more characters"),
+  price: z
+    .number({ required_error: "Price is required" })
+    .gte(0, "Price cannot be negative"),
+  discountPercentage: z.number().gte(0, "Price cannot be negative").optional(),
+  stock: z
+    .number({ required_error: "Stock is required" })
+    .gte(0, "Price cannot be negative"),
+  brand: z
+    .string({ required_error: "Brand is required" })
+    .min(2, "Brand should be 2 or more characters"),
+  category: z.enum([
+    "accommodations_and_building",
+    "fashion_and_wears",
+    "food",
+    "furniture",
+    "grocery_and_general",
+    "health_and_wellness",
+    "home_and_electricals",
+    "money_and_energy",
+    "personal-care_and_beauty",
+    "recreation",
+    "stationery_and_printing",
+    "tech",
+    "transport_and_machines",
+  ]),
+  ratings: z
+    .number()
+    .min(1, "Minimum rating should be 1")
+    .max(5, "Maximum rating should be 5")
+    .optional(),
+  images: z.string().url().optional(),
+});
 
-const validateCardType = (cartType: string) => {
-  switch (cartType) {
-    case "ghana_card":
-      return /GHA-[0-9]{9}-[0-9]/gi;
-      break;
-    case "student_id":
-      return /[A-Z]{2}\/[A-Z]{3}\/[0-9]{2}\/[0-9]{4}/gi;
-    case "voters_id":
-      return /[0-9]{10}/g;
-    default:
-      break;
-  }
-};
+export const updateProductDto = createProductDto.partial();
 
-const placeHolder = (cartType: string) => {
-  switch (cartType) {
-    case "ghana_card":
-      return "GHA-123456789-0";
-    case "student_id":
-      return "ED/ACT/23/0123";
-    case "voters_id":
-      return "8393001234";
-    default:
-      return "";
-      break;
-  }
-};
+export const loginDto = z.object({
+  email: z.string({ required_error: "Email is required" }).email(),
+  password: z
+    .string({ required_error: "Password is required" })
+    .max(6, "Password should be six character or more"),
+});

@@ -3,11 +3,12 @@ import { User } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import Card from "./../components/admin/Card";
+
 import InputField from "./../components/InputField";
 import { api } from "./../utils/api";
-import { createShopOwnerDto, createUserDto } from "./../utils/validations";
+import { createShopOwnerDto, updateShopOwnerDto } from "./../utils/validations";
 import { Button } from "./Button";
+import Card from "./Card";
 
 const ShopOwnerForm = ({
   shopOwner,
@@ -35,7 +36,9 @@ const ShopOwnerForm = ({
       password: shopOwner?.password || "",
       role: shopOwner?.role || "shop_owner",
     },
-    resolver: zodResolver(shopOwner?.id ? createUserDto : createShopOwnerDto),
+    resolver: zodResolver(
+      shopOwner?.id ? updateShopOwnerDto : createShopOwnerDto
+    ),
   });
 
   console.log(getValues());

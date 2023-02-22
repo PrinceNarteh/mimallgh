@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+
 import { api } from "./../utils/api";
 import { Button } from "./Button";
 import Card from "./Card";
