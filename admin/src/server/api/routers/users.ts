@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import {
   createAdminDto,
-  createUserDto,
+  baseUserDto,
   IdDto,
   updateAdminDto,
   updateUserDto,
@@ -14,7 +14,7 @@ import { mapRoleStringToEnum, mapStringToLevel } from "../../../utils/mapper";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
-    .input(createUserDto)
+    .input(baseUserDto)
     .mutation(async ({ input, ctx }) => {
       try {
         const hashedPassword = await bcrypt.hash(input.password, 12);

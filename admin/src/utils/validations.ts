@@ -32,6 +32,12 @@ export const baseUserDto = z.object({
   }),
 });
 
+export const updateUserDto = baseUserDto
+  .extend({
+    id: z.string({ required_error: "ID is required" }).cuid(),
+  })
+  .partial();
+
 export const createAdminDto = baseUserDto.extend({
   cardType: z.enum(["ghana_card", "student_id", "voters_id"]),
   cardNumber: z
