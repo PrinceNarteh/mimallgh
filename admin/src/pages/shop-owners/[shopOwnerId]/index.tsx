@@ -4,9 +4,9 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { MdArrowBackIosNew } from "react-icons/md";
-import Card from "../../../../components/admin/Card";
-import Modal from "../../../../components/admin/Modal";
-import { api } from "../../../../utils/api";
+import Card from "../../../components/Card";
+import Modal from "../../../components/Modal";
+import { api } from "../../../utils/api";
 
 const ShopOwnerDetails = () => {
   const {

@@ -1,5 +1,5 @@
 import React from "react";
-import ShopOwnerForm from "../../../components/admin/ShopOwnerForm";
+import ShopOwnerForm from "../../components/ShopOwnerForm";
 
 const AddShopOwner = () => {
   return (

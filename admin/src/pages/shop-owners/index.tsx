@@ -1,7 +1,7 @@
 import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { api } from "../../../utils/api";
+import { api } from "../../utils/api";
 
 const ShopOwnersList = () => {
   const router = useRouter();

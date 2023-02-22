@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
-import ShopOwnerForm from "../../../../components/admin/ShopOwnerForm";
-import { api } from "../../../../utils/api";
+import ShopOwnerForm from "../../../components/ShopOwnerForm";
+import { api } from "../../../utils/api";
 
 const EditShopOwner = () => {
   const {
