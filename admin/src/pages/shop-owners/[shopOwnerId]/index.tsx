@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { MdArrowBackIosNew } from "react-icons/md";
+import Back from "../../../components/Back";
 import Card from "../../../components/Card";
 import Modal from "../../../components/Modal";
 import { api } from "../../../utils/api";
@@ -45,9 +45,7 @@ const ShopOwnerDetails = () => {
 
   return (
     <div>
-      <Link href={`/shops`} className="flex cursor-pointer items-center">
-        <MdArrowBackIosNew className="mr-2" /> Back
-      </Link>
+      <Back />
       <div className="mx-auto mt-5 max-w-3xl space-y-5">
         <Card heading="Shop Owner Details">
           <DetailItem

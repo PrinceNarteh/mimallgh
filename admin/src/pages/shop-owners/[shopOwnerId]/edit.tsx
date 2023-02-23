@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import Back from "../../../components/Back";
 import ShopOwnerForm from "../../../components/ShopOwnerForm";
 import { api } from "../../../utils/api";
 
@@ -19,6 +20,7 @@ const EditShopOwner = () => {
 
   return (
     <div>
+      <Back />
       <ShopOwnerForm shopOwner={shopOwner.data} />
     </div>
   );

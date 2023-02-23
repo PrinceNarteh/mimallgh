@@ -1,7 +1,12 @@
-import React from "react";
+import Back from "../../../components/Back";
 
 const EditProduct = () => {
-  return <div>EditProduct</div>;
+  return (
+    <div>
+      <Back />
+      EditProduct
+    </div>
+  );
 };
 
 export default EditProduct;

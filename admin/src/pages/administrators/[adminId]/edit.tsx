@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import React from "react";
 
 import AdminForm from "../../../components/AdminForm";
+import Back from "../../../components/Back";
 import { api } from "../../../utils/api";
 
 const EditShopOwner = () => {
@@ -22,6 +22,7 @@ const EditShopOwner = () => {
 
   return (
     <div>
+      <Back />
       <AdminForm admin={admin.data} />
     </div>
   );

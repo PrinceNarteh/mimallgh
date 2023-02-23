@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { HiOutlineTrash } from "react-icons/hi";
-import { MdArrowBackIosNew } from "react-icons/md";
+import Back from "../../../components/Back";
 
 import { Button } from "../../../components/Button";
 import Card from "../../../components/Card";
@@ -48,12 +48,7 @@ const AdministratorDetails = () => {
 
   return (
     <div className="pb-5">
-      <Link
-        href={`/admin/administrators`}
-        className="flex cursor-pointer items-center"
-      >
-        <MdArrowBackIosNew className="mr-2" /> Back
-      </Link>
+      <Back />
       <div className="mx-auto mt-5 max-w-3xl space-y-5">
         <Card heading="Administrator Details">
           <DetailItem

@@ -30,10 +30,6 @@ export const menus = [
         name: "Order List",
         link: "/orders",
       },
-      {
-        name: "Order Details",
-        link: "/orders/1",
-      },
     ],
   },
 ];

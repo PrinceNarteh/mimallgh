@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { MdArrowBackIosNew } from "react-icons/md";
+import Back from "../../../components/Back";
 
 import { Button } from "../../../components/Button";
 import Card from "../../../components/Card";
@@ -49,9 +49,7 @@ const ShopDetails = () => {
 
   return (
     <div className="pb-10">
-      <Link href={`/shops`} className="flex cursor-pointer items-center">
-        <MdArrowBackIosNew className="mr-2" /> Back
-      </Link>
+      <Back />
       <div className="mx-auto max-w-3xl space-y-5">
         <Card heading="Shop Details">
           <div className="flex items-center justify-between py-4 px-4">

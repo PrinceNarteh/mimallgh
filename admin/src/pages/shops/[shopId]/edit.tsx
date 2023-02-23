@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Back from "../../../components/Back";
 import ShopForm from "../../../components/ShopForm";
 import { api } from "../../../utils/api";
 
@@ -19,6 +20,7 @@ const AddShop = () => {
   } else {
     return (
       <div className="mx-auto max-w-4xl">
+        <Back />
         <ShopForm shop={shop.data} />
       </div>
     );
