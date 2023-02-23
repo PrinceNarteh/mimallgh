@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, ChangeEvent } from "react";
-import Card from "../../../components/admin/Card";
-import InputField from "../../../components/InputField";
+import Card from "../../components/Card";
+import InputField from "../../components/InputField";
 import { useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Image from "next/image";
-import AddProductForm from "../../../components/AddProduct";
+import AddProductForm from "../../components/AddProduct";
 
 const AddProduct = () => {
   const {

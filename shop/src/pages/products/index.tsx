@@ -1,9 +1,8 @@
-import React from "react";
-import { BiSearch } from "react-icons/bi";
-import Card from "../../../components/admin/Card";
 import Image from "next/image";
-import { products } from "../../../../data/data";
-import Status from "../../../components/admin/Status";
+import { BiSearch } from "react-icons/bi";
+import { products } from "../../../data/data";
+import Card from "../../components/Card";
+import Status from "../../components/Status";
 
 const page = () => {
   return (

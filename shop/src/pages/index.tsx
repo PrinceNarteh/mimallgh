@@ -1,5 +1,5 @@
 import { AiOutlineFall, AiOutlineRise } from "react-icons/ai";
-import Card from "../../components/admin/Card";
+import Card from "../components/Card";
 
 const Admin = () => {
   return (
