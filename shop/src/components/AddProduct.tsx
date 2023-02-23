@@ -37,10 +37,7 @@ const AddProductForm = () => {
   }, [images]);
 
   return (
-    <div
-      className="mx-auto max-w-4xl pb-5
-    "
-    >
+    <div className="mx-auto max-w-4xl pb-5">
       <Card heading={"Add Product"}>
         <div className="space-y-4">
           <InputField
