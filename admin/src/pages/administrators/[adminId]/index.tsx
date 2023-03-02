@@ -75,10 +75,7 @@ const AdministratorDetails = () => {
           />
         </Card>
         <div className="flex items-center justify-end gap-5">
-          <Link
-            href={`/admin/administrators/${data?.id}/edit`}
-            className="link"
-          >
+          <Link href={`/administrators/${data?.id}/edit`} className="link">
             Edit
           </Link>
           <Button variant="danger" onClick={() => handleDelete()}>

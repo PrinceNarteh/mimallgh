@@ -66,7 +66,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
         onSuccess: (data) => {
           toast.success("Admin created successfully");
           reset();
-          router.push(`/admin/administrators/${data.id}`);
+          router.push(`/administrators/${data.id}`);
         },
       });
     } else {
@@ -74,7 +74,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
         onSuccess: (data) => {
           toast.success("Admin updated successfully");
           reset();
-          router.push(`/admin/administrators/${data.id}`);
+          router.push(`/administrators/${data.id}`);
         },
       });
     }
@@ -223,19 +223,29 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
               {...register("level")}
             >
-              <option value="level_one" selected={admin?.level === "LEVEL_ONE"}>
+              <option
+                className="bg-light-gray"
+                value="level_one"
+                selected={admin?.level === "LEVEL_ONE"}
+              >
                 Level One
               </option>
-              <option value="level_two" selected={admin?.level === "LEVEL_TWO"}>
+              <option
+                className="bg-light-gray"
+                value="level_two"
+                selected={admin?.level === "LEVEL_TWO"}
+              >
                 Level Two
               </option>
               <option
+                className="bg-light-gray"
                 value="level_three"
                 selected={admin?.level === "LEVEL_THREE"}
               >
                 Level Three
               </option>
               <option
+                className="bg-light-gray"
                 value="super_user"
                 selected={admin?.level === "SUPER_USER"}
               >
