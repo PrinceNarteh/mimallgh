@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 import SectionHeader from "../components/layout/SectionHeader";
 import ProductCard from "../components/ProductCard";
 import Section from "../components/Section";
+import TopDeals from "../components/TopDeals";
 
 const Home = () => {
   return (
@@ -47,20 +48,7 @@ const Home = () => {
         </div>
       </section>
 
-      <Section label="Top Deals">
-        <div className="overflow-y-auto">
-          <div className="flex gap-5 pb-3">
-            {Array(8)
-              .fill(null)
-              .map((_, idx) => (
-                <div
-                  key={idx}
-                  className="h-40 w-40 shrink-0 rounded-lg bg-gray-400"
-                ></div>
-              ))}
-          </div>
-        </div>
-      </Section>
+      <TopDeals />
 
       <section className="bg-gray-200 py-10">
         <div className="mx-auto w-11/12 space-y-10">
