@@ -1,12 +1,20 @@
 import React from "react";
-import seaShore from "../../assets/videos/sea-shore.mp4";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const ProductVideoDetails = () => {
   return (
     <div className="mx-auto mt-2 w-10/12">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
         <div className="col-span-8">
-          <div className="h-[500px] bg-gray-500"></div>
+          <div className="h-[480px]">
+            <ReactPlayer
+              url={"/videos/sea-shore.mp4"}
+              controls
+              width={"100%"}
+              height={"100%"}
+            />
+          </div>
           <div>
             <h3 className="py-1 text-xl font-semibold">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
