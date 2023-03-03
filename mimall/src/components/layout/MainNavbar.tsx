@@ -6,36 +6,22 @@ import Link from "next/link";
 
 const MainNavbar = () => {
   return (
-    <div className={"bg-gray-900"}>
+    <div className={"bg-gray-900 px-5"}>
       <div
-        className={"flex justify-between items-center py-7 max-w-7xl mx-auto"}
+        className={"mx-auto flex max-w-7xl items-center justify-between py-7"}
       >
-        <h3 className="text-pink-500 text-3xl">MiMall</h3>
-        <div className="flex items-center space-x-2">
-          <div className="bg-white p-2 rounded-md divide-x-2 space-x-2">
-            <select name="" id="">
-              <option value="all">All Categories</option>
-            </select>
-            <input
-              type="text"
-              placeholder="Search Products..."
-              className="pl-2 outline-none text-gray-700"
-            />
-          </div>
-          <button className="px-6 py-2 bg-pink-500 text-white rounded-md">
-            Search
-          </button>
-        </div>
+        <h3 className="text-3xl text-pink-500">MiMall</h3>
+
         <div className="flex items-center space-x-5">
-          <CiUser className="text-pink-500 text-3xl cursor-pointer" />
-          <BsHeart className="text-pink-500 text-2xl cursor-pointer" />
+          <CiUser className="cursor-pointer text-3xl text-pink-500" />
+          <BsHeart className="cursor-pointer text-2xl text-pink-500" />
           <div className="relative">
-            <TiShoppingCart className="text-pink-500 text-3xl cursor-pointer" />
+            <TiShoppingCart className="cursor-pointer text-3xl text-pink-500" />
             <Link
               href={"/cart"}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5  bg-[red] rounded-full flex justify-center items-center"
+              className="absolute -top-1.5 -right-1.5 flex h-5  w-5 items-center justify-center rounded-full bg-[red]"
             >
-              <span className="text-white text-[10px]">20</span>
+              <span className="text-[10px] text-white">20</span>
             </Link>
           </div>
         </div>
