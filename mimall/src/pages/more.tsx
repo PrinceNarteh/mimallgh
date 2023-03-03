@@ -18,7 +18,7 @@ const MoreProducts = () => {
               {Array(4)
                 .fill(0)
                 .map(() => (
-                  <div className="relative flex h-96 flex-col rounded-md bg-white shadow-md">
+                  <div className="relative flex h-96 cursor-pointer flex-col rounded-md bg-white shadow-md">
                     <div className="flex gap-2 p-2">
                       <span className="block h-12 w-12 rounded-full bg-[#ff0000]"></span>
                       <div>
