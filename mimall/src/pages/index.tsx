@@ -11,7 +11,9 @@ const Home = () => {
       <Banner />
       <div className="flex justify-center divide-x-2 divide-gray-500 py-5">
         <h3 className="px-10 text-3xl">Top Deals</h3>
-        <h3 className="px-10 text-3xl">Product Videos</h3>
+        <Link href={`/products-videos`} className="px-10 text-3xl">
+          Product Videos
+        </Link>
         <h3 className="px-10 text-3xl">Trending</h3>
       </div>
       <section className="mx-auto w-11/12 py-10">
@@ -46,12 +48,17 @@ const Home = () => {
       </section>
 
       <Section label="Top Deals">
-        <div className="flex gap-5">
-          {Array(8)
-            .fill(null)
-            .map((_, idx) => (
-              <div key={idx} className="h-40 w-40 rounded-lg bg-gray-400"></div>
-            ))}
+        <div className="overflow-y-auto">
+          <div className="flex gap-5 pb-3">
+            {Array(8)
+              .fill(null)
+              .map((_, idx) => (
+                <div
+                  key={idx}
+                  className="h-40 w-40 shrink-0 rounded-lg bg-gray-400"
+                ></div>
+              ))}
+          </div>
         </div>
       </Section>
 
@@ -60,24 +67,36 @@ const Home = () => {
           <div className="flex h-40 items-center justify-center bg-gray-900">
             <span className="text-4xl text-white">Trending</span>
           </div>
-          <div className="flex h-80 bg-white">
-            <div className="flex h-full w-60 flex-col items-start justify-between border-r-2 p-7">
-              <h3 className="mb-5 text-4xl font-semibold">Foods</h3>
+          <div className="flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="mb-2 text-4xl font-semibold">Foods</h3>
               <div>
                 <p className="text-xl font-semibold">Processed Food</p>
                 <p className="text-xl font-semibold">Raw Food</p>
               </div>
-              <Link href="/more" className="font-semibold text-orange-500">
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
                 Read More
               </Link>
             </div>
-            <div className="flex gap-7 p-7">
+            <div className="mb-3 flex flex-wrap justify-center gap-7 px-7">
               {Array(4)
                 .fill(null)
                 .map((_, idx) => (
-                  <div key={idx} className="h-full w-60 bg-gray-400"></div>
+                  <div
+                    key={idx}
+                    className="h-60 flex-1 shrink-0 basis-60 bg-gray-400"
+                  ></div>
                 ))}
             </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
           </div>
         </div>
       </section>
