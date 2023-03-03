@@ -2570,10 +2570,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-swiper@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-9.0.0.tgz#56e093cd6f5a6770313f31eadc77999a5f3d281f"
-  integrity sha512-7MbA7gg8VEFwCTd14KK5HL8KagT2sKQwu04Oud+gR+ivg8gAFK5xtZrPNkXg1wjpQB0gdA34YBqsPkFJ5HiRdA==
+swiper@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-9.1.0.tgz#1a804254aa5b52724038ea1b4007193742a6bbf3"
+  integrity sha512-Ck8CywwfUghkbUAHbxTAWyeUAcNrIDNJ6EnKFBGGcHDjeqbh0Jq08RbmD5fMu1a0oOv1eIkUGVkqNJy/asm+yA==
   dependencies:
     ssr-window "^4.0.2"
 
