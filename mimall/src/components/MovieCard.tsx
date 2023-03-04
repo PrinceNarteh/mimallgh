@@ -18,7 +18,7 @@ const MovieCard = () => {
               How to prepare delicious Ghanaian jollof
             </h4>
             <p>Daavi Joint</p>
-            <p className="text-sm">Science Market</p>
+            <p className="text-sm">2.3k views | 3 days ago</p>
           </div>
         </div>
       </div>
