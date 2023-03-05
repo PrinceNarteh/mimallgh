@@ -4,7 +4,7 @@ import Section from "./Section";
 const TopDeals = () => {
   return (
     <Section label="Top Deals">
-      <div className="overflow-y-auto">
+      <div className="w-full overflow-y-auto">
         <div className="flex gap-5 pb-3">
           {Array(8)
             .fill(null)
