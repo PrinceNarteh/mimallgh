@@ -11,11 +11,15 @@ const Home = () => {
     <div className="">
       <Banner />
       <div className="flex flex-col justify-center divide-gray-500 py-5 text-center sm:flex-row md:divide-y-0 md:divide-x-2 md:text-2xl">
-        <h3 className="px-10 py-2">Top Deals</h3>
+        <Link href={`/top-deals`} className="px-10 py-2">
+          Top Deals
+        </Link>
         <Link href={`/products-videos`} className="px-10 py-2">
           Product Videos
         </Link>
-        <h3 className="px-10 py-2">Trending</h3>
+        <Link href={`/trending`} className="px-10 py-2">
+          Trending
+        </Link>
       </div>
       <section className="mx-auto w-11/12 py-10">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
