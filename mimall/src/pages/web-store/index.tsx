@@ -1,5 +1,6 @@
 import React from "react";
 import CustomLinks from "../../components/CustomLinks";
+import MoreCard from "../../components/MoreCard";
 
 const WebStore = () => {
   return (
@@ -34,7 +35,7 @@ const WebStore = () => {
       <div className="my-5 border-y">
         <CustomLinks />
       </div>
-      <div className="flex justify-center gap-10 overflow-y-auto pt-5">
+      <div className="mb-10 flex justify-center gap-10 overflow-y-auto pt-5">
         <div className="flex w-36 flex-col items-center">
           <div className="h-32 w-32 rounded-full bg-violet-500"></div>
           <h3>Food</h3>
@@ -54,6 +55,36 @@ const WebStore = () => {
           <div className="h-32 w-32 rounded-full bg-violet-500"></div>
           <h3>Services</h3>
           <h4>50 Ads</h4>
+        </div>
+      </div>
+      <div className="grid h-96 grid-cols-12 gap-5">
+        <div className="col-span-8">
+          <div className="my-5 flex justify-between border-b-2">
+            <h4 className="sh-underline relative md:text-3xl">FOOD</h4>
+          </div>
+          <div className="grid gap-5 grid-auto-fit-sm">
+            <MoreCard />
+            <MoreCard />
+            <MoreCard />
+            <MoreCard />
+            <MoreCard />
+            <MoreCard />
+          </div>
+        </div>
+        <div className="col-span-4">
+          <div className="my-5 flex justify-between border-b-2">
+            <h4 className="sh-underline relative md:text-3xl">Top Deals</h4>
+          </div>
+          <div className="flex flex-wrap justify-center gap-5">
+            {Array(8)
+              .fill(null)
+              .map((_, idx) => (
+                <div
+                  key={idx}
+                  className="h-40 w-40 shrink-0 rounded-lg bg-gray-400"
+                ></div>
+              ))}
+          </div>
         </div>
       </div>
     </div>

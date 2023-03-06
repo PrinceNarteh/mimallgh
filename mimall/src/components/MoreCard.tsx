@@ -13,18 +13,16 @@ const MoreCard = () => {
       <div className="relative flex-1 rounded-md bg-gray-500 bg-opacity-20 p-5">
         <Image src="/images/iphone-2.jpg" fill alt="" />
       </div>
-      <div className="flex h-16 gap-3 p-2">
+      <div className="flex h-16 gap-3 p-4 py-2">
         <div className="">
           <h4 className="font-semibold line-clamp-1">
             Lorem, ipsum dolor sit amet elit sunt.
           </h4>
-          <p>Store price: ¢120.50</p>
+          <p className="text-gray-500">Store price: ¢120.50</p>
         </div>
-        <div className="flex w-28 items-center justify-center">
+        <div className="flex w-14 items-center justify-center">
           <p className="flex items-start tracking-widest text-[#ff0000] ">
-            <span className="text-xl">¢</span>
-            <span className="text-4xl">123</span>
-            <span className="text-xl">.50</span>
+            ¢123.50
           </p>
         </div>
       </div>
