@@ -1,26 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
+import CustomLinks from "../components/CustomLinks";
 import SectionHeader from "../components/layout/SectionHeader";
 import ProductCard from "../components/ProductCard";
-import Section from "../components/Section";
 import TopDeals from "../components/TopDeals";
 
 const Home = () => {
   return (
     <div className="">
       <Banner />
-      <div className="flex flex-col justify-center divide-gray-500 py-5 text-center sm:flex-row md:divide-y-0 md:divide-x-2 md:text-2xl">
-        <Link href={`/top-deals`} className="px-10 py-2">
-          Top Deals
-        </Link>
-        <Link href={`/products-videos`} className="px-10 py-2">
-          Product Videos
-        </Link>
-        <Link href={`/trending`} className="px-10 py-2">
-          Trending
-        </Link>
-      </div>
+      <CustomLinks />
       <section className="mx-auto w-11/12 py-10">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div className="relative h-56 overflow-hidden rounded-2xl bg-teal-500 shadow-lg">
