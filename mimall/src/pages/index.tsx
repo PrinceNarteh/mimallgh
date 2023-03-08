@@ -56,7 +56,7 @@ const Home = () => {
           <div className="flex h-40 items-center justify-center bg-gray-900">
             <span className="text-4xl text-white">Trending</span>
           </div>
-          <div className="flex flex-col bg-white">
+          <div className="my-5 flex flex-col bg-white">
             <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
               <h3 className="sh-underline mb-2 text-4xl font-semibold">
                 Foods
@@ -77,6 +77,206 @@ const Home = () => {
                     className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
                   >
                     <Image src={`/images/food-${idx + 2}.jpg`} fill alt="" />
+                  </div>
+                ))}
+            </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
+          </div>
+          <div className="my-5 flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="sh-underline mb-2 text-4xl font-semibold">Tech</h3>
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
+                Read More
+              </Link>
+            </div>
+            <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                  >
+                    <Image src={`/images/tech-${idx + 2}.jpg`} fill alt="" />
+                  </div>
+                ))}
+            </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
+          </div>
+          <div className="my-5 flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="sh-underline mb-2 text-4xl font-semibold">
+                Personal Services
+              </h3>
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
+                Read More
+              </Link>
+            </div>
+            <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                  >
+                    <Image
+                      src={`/images/services-${idx + 2}.jpg`}
+                      fill
+                      alt=""
+                    />
+                  </div>
+                ))}
+            </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
+          </div>
+          <div className="my-5 flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="sh-underline mb-2 text-4xl font-semibold">
+                Printing And Stationary
+              </h3>
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
+                Read More
+              </Link>
+            </div>
+            <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                  >
+                    <Image
+                      src={`/images/printing_and_stationery-${idx + 2}.jpg`}
+                      fill
+                      alt=""
+                    />
+                  </div>
+                ))}
+            </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
+          </div>
+          <div className="my-5 flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="sh-underline mb-2 text-4xl font-semibold">
+                Fashion And Wear
+              </h3>
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
+                Read More
+              </Link>
+            </div>
+            <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                  >
+                    <Image
+                      src={`/images/fashion_and_wear-${idx + 2}.jpg`}
+                      fill
+                      alt=""
+                    />
+                  </div>
+                ))}
+            </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
+          </div>
+          <div className="my-5 flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="sh-underline mb-2 text-4xl font-semibold">
+                Health And Wellness
+              </h3>
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
+                Read More
+              </Link>
+            </div>
+            <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                  >
+                    <Image
+                      src={`/images/health_and_wellness-${idx + 1}.jpg`}
+                      fill
+                      alt=""
+                    />
+                  </div>
+                ))}
+            </div>
+            <Link
+              href="/more"
+              className="mb-5 pr-7 text-right font-semibold text-orange-500"
+            >
+              Read More
+            </Link>
+          </div>
+          <div className="my-5 flex flex-col bg-white">
+            <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
+              <h3 className="sh-underline mb-2 text-4xl font-semibold">
+                Grocery And General
+              </h3>
+              <Link
+                href="/more"
+                className="hidden font-semibold text-orange-500"
+              >
+                Read More
+              </Link>
+            </div>
+            <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                  >
+                    <Image src={`/images/grocery-${idx + 1}.jpg`} fill alt="" />
                   </div>
                 ))}
             </div>
