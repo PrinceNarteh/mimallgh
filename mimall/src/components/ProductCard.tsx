@@ -5,7 +5,7 @@ import { MdOutlineStarPurple500, MdOutlineStarHalf } from "react-icons/md";
 
 const ProductCard = ({ id }: { id: string }) => {
   return (
-    <div className="h-[300px] w-52 cursor-pointer overflow-hidden rounded-lg pb-5 shadow-lg">
+    <div className="h-[300px] shrink-0 basis-52 cursor-pointer overflow-hidden rounded-lg pb-5 shadow-lg">
       <Link href={"/1"}>
         <div className="relative h-1/2 bg-slate-500">
           <Image
@@ -27,7 +27,8 @@ const ProductCard = ({ id }: { id: string }) => {
           <MdOutlineStarPurple500 />
           <MdOutlineStarHalf />
         </div> */}
-          <p>
+          <p className="line-clamp-3">
+            Lorem ipsum dolor sit amet consectetur elit. Libero vero impedit.
             Lorem ipsum dolor sit amet consectetur elit. Libero vero impedit.
           </p>
         </div>

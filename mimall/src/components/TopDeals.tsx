@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import Section from "./Section";
 
@@ -11,8 +12,10 @@ const TopDeals = () => {
             .map((_, idx) => (
               <div
                 key={idx}
-                className="h-40 w-40 shrink-0 rounded-lg bg-gray-400"
-              ></div>
+                className="relative h-40 w-40 shrink-0 cursor-pointer overflow-hidden rounded-lg shadow-md"
+              >
+                <Image src={`/images/food-${idx + 1}.jpg`} fill alt="" />
+              </div>
             ))}
         </div>
       </div>
