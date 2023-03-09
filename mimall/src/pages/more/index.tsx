@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import MoreCard from "../components/MoreCard";
+import MoreCard from "../../components/MoreCard";
 
 const MoreProducts = () => {
   return (
-    <div className="bg-gray-300 bg-opacity-30">
+    <div className="bg-gray-300 bg-opacity-30 pt-[100px]">
       <div className="mx-auto max-w-7xl py-5">
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
           <div className="col-span-8 space-y-5">
