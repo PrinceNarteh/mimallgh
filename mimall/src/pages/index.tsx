@@ -71,33 +71,6 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="mx-auto mb-10 w-11/12">
-        <SectionHeader label={"Today's Best Deal"} />
-        <div className="w-full overflow-x-auto">
-          <div className="mt-5 flex gap-5">
-            {Array(6)
-              .fill(null)
-              .map((_, idx) => (
-                <ProductCard id={idx.toString()} />
-              ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="min-h-screen bg-gray-200 py-10">
-        <div className="mx-auto w-11/12 space-y-10">
-          <div className="relative h-60 overflow-hidden rounded-lg">
-            <Image
-              src={"/images/banner-1.jpg"}
-              fill={true}
-              alt="banner"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div className="h-96 rounded-lg bg-teal-500"></div>
-        </div>
-      </section>
-
       <TopDeals />
 
       <section className="bg-gray-200 py-10">
