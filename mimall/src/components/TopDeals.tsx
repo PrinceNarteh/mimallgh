@@ -1,22 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Section from "./Section";
 
-const TopDeals = () => {
+const TopDeals = ({ topDeals }: { topDeals: { image: string }[] }) => {
   return (
     <Section label="Top Deals">
       <div className="w-full overflow-y-auto">
         <div className="flex gap-5 pb-3">
-          {Array(8)
-            .fill(null)
-            .map((_, idx) => (
+          {topDeals.map((topDeal, idx) => (
+            <Link href={`/products/${idx}`} className="cursor-pointer ">
               <div
                 key={idx}
-                className="relative h-40 w-40 shrink-0 cursor-pointer overflow-hidden rounded-lg shadow-md"
+                className="relative h-40 w-40 shrink-0 overflow-hidden rounded-lg shadow-md"
               >
-                <Image src={`/images/food-${idx + 1}.jpg`} fill alt="" />
+                <Image src={topDeal.image} fill alt="" />
               </div>
-            ))}
+            </Link>
+          ))}
         </div>
       </div>
     </Section>
