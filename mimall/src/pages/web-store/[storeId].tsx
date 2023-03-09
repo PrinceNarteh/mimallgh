@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import CustomLinks from "../../components/CustomLinks";
 import MoreCard from "../../components/MoreCard";
@@ -6,7 +7,15 @@ const WebStore = () => {
   return (
     <div className="mx-auto mb-5 w-10/12">
       <div className="pb-5">
-        <div className="h-96 bg-teal-500"></div>
+        <div className="relative h-[400px] bg-teal-500">
+          <Image
+            src={"/images/web-store-banner.jpg"}
+            fill
+            alt=""
+            style={{ objectFit: "cover" }}
+            className="object-top"
+          />
+        </div>
         <div className=" flex flex-col md:flex-row">
           <div className="relative bottom-16 left-10 h-32 w-32 shrink-0 rounded-full bg-red-500"></div>
           <div className="-mt-14 space-y-2 pt-2 md:mt-0 md:ml-14">
@@ -32,7 +41,7 @@ const WebStore = () => {
           </div>
         </div>
       </div>
-      <div className="my-5 border-y">
+      <div className="sticky top-[98px] z-20 my-5 border-y bg-white">
         <CustomLinks />
       </div>
       <div className="mb-10 flex justify-center gap-10 overflow-y-auto pt-5">
@@ -57,31 +66,30 @@ const WebStore = () => {
           <h4>50 Ads</h4>
         </div>
       </div>
-      <div className="grid h-96 grid-cols-12 gap-5">
-        <div className="col-span-8">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+        <div className="grid-col-12 lg:col-span-8">
           <div className="my-5 flex justify-between border-b-2">
             <h4 className="sh-underline relative md:text-3xl">FOOD</h4>
           </div>
           <div className="grid gap-5 grid-auto-fit-sm">
-            <MoreCard />
-            <MoreCard />
-            <MoreCard />
-            <MoreCard />
-            <MoreCard />
-            <MoreCard />
+            {Array(6)
+              .fill(null)
+              .map((_, idx) => (
+                <MoreCard index={idx} />
+              ))}
           </div>
         </div>
-        <div className="col-span-4">
+        <div className="grid-col-12 lg:col-span-4">
           <div className="my-5 flex justify-between border-b-2">
             <h4 className="sh-underline relative md:text-3xl">Top Deals</h4>
           </div>
-          <div className="flex flex-wrap justify-center gap-5">
+          <div className="grid justify-center gap-5 grid-auto-fit-xs">
             {Array(8)
               .fill(null)
               .map((_, idx) => (
                 <div
                   key={idx}
-                  className="h-40 w-40 shrink-0 rounded-lg bg-gray-400"
+                  className="h-40 shrink-0 rounded-lg bg-gray-400"
                 ></div>
               ))}
           </div>
