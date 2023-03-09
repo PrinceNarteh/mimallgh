@@ -16,10 +16,10 @@ const MoreProducts = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-5">
-              {Array(4)
+              {Array(16)
                 .fill(0)
-                .map(() => (
-                  <MoreCard />
+                .map((_, idx) => (
+                  <MoreCard index={idx} />
                 ))}
             </div>
 

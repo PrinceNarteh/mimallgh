@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const MoreCard = () => {
+const MoreCard = ({ index }: { index: number }) => {
+  console.log(index % 9);
   return (
     <div className="relative flex h-96 flex-col rounded-md bg-white shadow-md">
       <Link href={`/web-store/1`}>
@@ -16,7 +17,11 @@ const MoreCard = () => {
       <Link href={`/products/1`} className="block flex-1">
         <div className="flex h-full flex-col">
           <div className="relative flex-1 rounded-md bg-gray-500 bg-opacity-20 p-5">
-            <Image src="/images/iphone-2.jpg" fill alt="" />
+            <Image
+              src={`/images/food-${index % 9 == 0 ? 1 : index % 9}.jpg`}
+              fill
+              alt=""
+            />
           </div>
           <div className="flex h-16 gap-3 p-4 py-2">
             <div className="">
