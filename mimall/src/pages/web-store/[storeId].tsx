@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import CustomLinks from "../../components/CustomLinks";
 import MoreCard from "../../components/MoreCard";
+import { topDeals } from "../../utils/data";
 
 const WebStore = () => {
   return (
@@ -84,14 +85,19 @@ const WebStore = () => {
             <h4 className="sh-underline relative md:text-3xl">Top Deals</h4>
           </div>
           <div className="grid justify-center gap-5 grid-auto-fit-xs">
-            {Array(8)
-              .fill(null)
-              .map((_, idx) => (
-                <div
-                  key={idx}
-                  className="h-40 shrink-0 rounded-lg bg-gray-400"
-                ></div>
-              ))}
+            {topDeals.map((topDeal, idx) => (
+              <div
+                key={idx}
+                className="relative h-40 shrink-0 rounded-lg bg-gray-400"
+              >
+                <Image
+                  src={topDeal.image}
+                  fill
+                  alt=""
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
