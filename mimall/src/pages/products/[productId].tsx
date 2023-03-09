@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const ProductDetails = () => {
   return (
-    <div className="mx-auto my-5 max-w-5xl">
+    <div className="mx-auto mb-10 max-w-5xl pt-[120px]">
       <div className="relative flex flex-col gap-5 px-7 md:flex-row">
-        <div className="top-10 h-fit md:sticky">
+        <div className="top-[100px] h-fit md:sticky">
           <div className="relative flex h-[400px] justify-center">
             <Image
               src={"/images/product-1.jpg"}

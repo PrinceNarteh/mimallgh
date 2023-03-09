@@ -246,7 +246,7 @@ const Home = () => {
             <span className="text-4xl text-white">Trending</span>
           </div>
           {sections.map((section, idx) => (
-            <div className="my-5 flex flex-col bg-white">
+            <div key={idx} className="my-5 flex flex-col bg-white">
               <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
                 <h3 className="sh-underline mb-2 text-2xl font-semibold md:text-4xl">
                   {section.heading}
@@ -262,9 +262,11 @@ const Home = () => {
                 {section.images.map((image, idx) => (
                   <div
                     key={idx}
-                    className="relative h-60 flex-1 shrink-0 basis-60 overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                    className="relative h-60 flex-1 shrink-0 basis-60 cursor-pointer overflow-hidden rounded-md bg-gray-400 shadow-2xl"
                   >
-                    <Image src={image.imageUrl} fill alt="" />
+                    <Link key={idx} href={`/products/${idx}`}>
+                      <Image src={image.imageUrl} fill alt="" />
+                    </Link>
                   </div>
                 ))}
               </div>
