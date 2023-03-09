@@ -6,6 +6,41 @@ import SectionHeader from "../components/layout/SectionHeader";
 import ProductCard from "../components/ProductCard";
 import TopDeals from "../components/TopDeals";
 
+const categories = [
+  {
+    label: "Food",
+    image: "/images/food-2.jpg",
+  },
+  {
+    label: "Fashion and Wears",
+    image: "/images/fashion_and_wear-2.jpg",
+  },
+  {
+    label: "Grocery and General",
+    image: "/images/grocery-4.jpg",
+  },
+  {
+    label: "Health and Wellness",
+    image: "/images/health_and_wellness-4.jpg",
+  },
+  {
+    label: "Home and Electrical Appliances",
+    image: "/images/services-6.jpg",
+  },
+  {
+    label: "Personal Services",
+    image: "/images/services-2.jpg",
+  },
+  {
+    label: "Printing and Stationery",
+    image: "/images/printing_and_stationery-5.jpg",
+  },
+  {
+    label: "Tech",
+    image: "/images/tech-5.jpg",
+  },
+];
+
 const Home = () => {
   return (
     <div className="pt-[100px]">
@@ -15,13 +50,24 @@ const Home = () => {
       </div>
 
       <section className="mx-auto w-11/12 py-10">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div className="relative h-56 overflow-hidden rounded-2xl bg-teal-500 shadow-lg">
-            <Image src={"/images/iphone-1.jpg"} fill={true} alt="iPhone-1" />
-          </div>
-          <div className="relative h-56 overflow-hidden rounded-2xl bg-teal-500 shadow-lg">
-            <Image src={"/images/iphone-2.jpg"} fill={true} alt="iPhone-2" />
-          </div>
+        <div className="grid gap-5 grid-auto-fit-lg">
+          {categories.map((category, idx) => (
+            <div
+              key={idx}
+              className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl shadow-lg`}
+            >
+              <Image
+                src={category.image}
+                className="absolute object-cover duration-500 group-hover:scale-110"
+                fill={true}
+                alt=""
+              />
+              <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
+              <div className="relative z-10 flex h-full w-full items-center justify-center">
+                <h3 className=" text-lg text-white">{category.label}</h3>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
