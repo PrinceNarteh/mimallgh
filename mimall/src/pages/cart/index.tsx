@@ -1,9 +1,9 @@
 import React from "react";
-import CartItem from "../components/CartItem";
+import CartItem from "../../components/CartItem";
 
 const Cart = () => {
   return (
-    <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-y-5 py-10 px-7 md:grid-cols-5 md:gap-x-5">
+    <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-y-5 px-7 pt-[120px] pb-10 md:grid-cols-5 md:gap-x-5">
       <div className="col-span-3 w-full space-y-5">
         <CartItem />
         <CartItem />
