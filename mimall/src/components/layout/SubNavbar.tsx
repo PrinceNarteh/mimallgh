@@ -59,7 +59,7 @@ const SubNavbar = () => {
         </div>
         <div
           ref={menuRef}
-          className={`absolute top-12 z-10 w-full max-w-fit border bg-white py-2 text-gray-800 shadow-md duration-500
+          className={`absolute top-12 z-50 w-full max-w-fit border bg-white py-2 text-gray-800 shadow-md duration-500
           ${
             open
               ? "visible translate-y-0 opacity-100"

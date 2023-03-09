@@ -8,9 +8,12 @@ import TopDeals from "../components/TopDeals";
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="pt-[100px]">
       <Banner />
-      <CustomLinks />
+      <div className="sticky top-24 z-40 bg-white">
+        <CustomLinks />
+      </div>
+
       <section className="mx-auto w-11/12 py-10">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div className="relative h-56 overflow-hidden rounded-2xl bg-teal-500 shadow-lg">
@@ -58,7 +61,7 @@ const Home = () => {
           </div>
           <div className="my-5 flex flex-col bg-white">
             <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
-              <h3 className="sh-underline mb-2 text-4xl font-semibold">
+              <h3 className="sh-underline mb-2 text-2xl font-semibold md:text-4xl">
                 Foods
               </h3>
               <Link

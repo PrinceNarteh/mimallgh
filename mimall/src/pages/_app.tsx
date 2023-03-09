@@ -22,8 +22,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <div className={poppins.className}>
       <SessionProvider session={session}>
-        <MainNavbar />
-        <SubNavbar />
+        <div className="fixed z-50 w-full">
+          <MainNavbar />
+          <SubNavbar />
+        </div>
         <Component {...pageProps} />
       </SessionProvider>
       <Toaster />

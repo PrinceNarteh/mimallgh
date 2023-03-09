@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 
 const Banner = () => {
   return (
-    <div className="relative h-[calc(100vh_-_140px)] overflow-hidden">
+    <div className="relative h-[calc(100vh_-_100px)] overflow-hidden">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -25,7 +25,7 @@ const Banner = () => {
         modules={[Autoplay, Pagination]}
       >
         <SwiperSlide>
-          <div className="h-[calc(100vh_-_140px)]">
+          <div className="relative h-[calc(100vh_-_100px)]">
             <Image
               src={"/images/bg-1.jpg"}
               fill
@@ -35,7 +35,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="h-[calc(100vh_-_140px)]">
+          <div className="relative h-[calc(100vh_-_100px)]">
             <Image
               src={"/images/banner-2.jpg"}
               fill
@@ -45,7 +45,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="h-[calc(100vh_-_140px)]">
+          <div className="relative h-[calc(100vh_-_100px)]">
             <Image
               src={"/images/banner-3.jpg"}
               fill

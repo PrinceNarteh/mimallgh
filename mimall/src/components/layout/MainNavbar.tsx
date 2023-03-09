@@ -8,7 +8,7 @@ const MainNavbar = () => {
   return (
     <div className={"bg-gray-900 px-5"}>
       <div
-        className={"mx-auto flex max-w-7xl items-center justify-between py-7"}
+        className={"mx-auto flex max-w-7xl items-center justify-between py-2"}
       >
         <h3 className="text-3xl text-pink-500">MiMall</h3>
 
