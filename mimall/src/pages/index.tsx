@@ -55,15 +55,33 @@ const Home = () => {
                   Read More
                 </Link>
               </div>
-              <div className="mb-3 flex justify-start gap-7 overflow-y-auto px-7">
+              <div className="mb-3 flex items-center justify-start gap-5 overflow-y-auto px-7 pb-2">
                 {section.images.map((image, idx) => (
                   <div
                     key={idx}
-                    className="relative h-60 flex-1 shrink-0 basis-60 cursor-pointer overflow-hidden rounded-md bg-gray-400 shadow-2xl"
+                    className="h-[260px] w-[190px] shrink-0 cursor-pointer overflow-hidden rounded-md shadow-md"
                   >
-                    <Link key={idx} href={`/products/${idx}`}>
-                      <Image src={image.imageUrl} fill alt="" />
-                    </Link>
+                    <div className="relative h-[190px] w-[190px]">
+                      <Link key={idx} href={`/products/${idx}`}>
+                        <Image
+                          src={image.imageUrl}
+                          fill
+                          alt=""
+                          style={{ objectFit: "cover" }}
+                        />
+                      </Link>
+                    </div>
+                    <div className="px-2 py-1">
+                      <p className="text-sm line-clamp-1">
+                        Lorem ipsum dolor sit amet.
+                      </p>
+                      <div>
+                        <p className="font-semibold">GH¢ 1234.00</p>
+                        <p className="text-xs text-gray-600">
+                          Store price: GH¢ 1230.00
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
