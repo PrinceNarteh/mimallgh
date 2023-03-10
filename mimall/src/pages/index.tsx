@@ -18,7 +18,7 @@ const Home = () => {
           {categories.map((category, idx) => (
             <div
               key={idx}
-              className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl shadow-lg`}
+              className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
             >
               <Image
                 src={category.image}
@@ -28,7 +28,9 @@ const Home = () => {
               />
               <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
               <div className="relative z-10 flex h-full w-full items-center justify-center">
-                <h3 className=" text-lg text-white">{category.label}</h3>
+                <h3 className=" text-center text-lg text-white">
+                  {category.label}
+                </h3>
               </div>
             </div>
           ))}
