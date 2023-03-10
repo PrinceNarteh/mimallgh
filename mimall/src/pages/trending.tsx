@@ -1,10 +1,12 @@
 import React from "react";
+import Container from "../components/Container";
 import MovieCard from "../components/MovieCard";
 import TopDeals from "../components/TopDeals";
+import { topDeals } from "../utils/data";
 
 const Trending = () => {
   return (
-    <div>
+    <Container>
       <div className="mx-auto w-11/12 py-7">
         <div className="w-full">
           <div className="mt-5">
@@ -16,7 +18,7 @@ const Trending = () => {
                     <MovieCard key={idx} />
                     {idx % 8 === 0 && (
                       <div className="col-span-12">
-                        <TopDeals />
+                        <TopDeals topDeals={topDeals} />
                       </div>
                     )}
                   </div>
@@ -25,7 +27,7 @@ const Trending = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
