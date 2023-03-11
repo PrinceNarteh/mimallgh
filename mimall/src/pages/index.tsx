@@ -16,22 +16,25 @@ const Home = () => {
       <section className="mx-auto w-11/12 py-10">
         <div className="grid gap-5 grid-auto-fit-lg">
           {categories.map((category, idx) => (
-            <div
-              key={idx}
-              className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
-            >
-              <Image
-                src={category.image}
-                className="absolute object-cover duration-500 group-hover:scale-110"
-                fill={true}
-                alt=""
-              />
-              <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
-              <div className="relative z-10 flex h-full w-full items-center justify-center">
-                <h3 className=" text-center text-lg text-white">
-                  {category.label}
-                </h3>
+            <div>
+              <div
+                key={idx}
+                className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
+              >
+                <Image
+                  src={category.image}
+                  className="absolute object-cover duration-500 group-hover:scale-110"
+                  fill={true}
+                  alt=""
+                />
+                <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
+                <div className="relative z-10 flex h-full w-full items-center justify-center">
+                  <h3 className=" text-center text-lg text-white">
+                    {category.label}
+                  </h3>
+                </div>
               </div>
+              <p className="mt-1 text-center text-sm">300 Sellers | 150 ads</p>
             </div>
           ))}
         </div>
