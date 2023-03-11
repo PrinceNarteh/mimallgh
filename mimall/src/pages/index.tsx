@@ -1,9 +1,11 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
 import CustomLinks from "../components/CustomLinks";
 import TopDeals from "../components/TopDeals";
 import { categories, sections, topDeals } from "../utils/data";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const Home = () => {
   return (
@@ -39,16 +41,42 @@ const Home = () => {
           ))}
         </div>
       </section>
+      <div className="mb-5">
+        <TopDeals topDeals={topDeals} />
+      </div>
 
-      <TopDeals topDeals={topDeals} />
-
-      <section className="bg-gray-200 py-10">
-        <div className="mx-auto w-11/12 space-y-10">
-          <div className="flex h-40 items-center justify-center bg-gray-900">
-            <span className="text-4xl text-white">Trending</span>
+      <section className="my-5 bg-gray-200 pt-5">
+        <div className="mx-auto w-11/12">
+          <div className="my-5 bg-white px-5 py-2">
+            <h3 className="sh-underline mt-5 mb-2 pl-2 text-2xl font-semibold md:text-4xl">
+              Trending
+            </h3>
+            <div className="w-full overflow-x-auto">
+              <div className="my-5 flex items-center justify-start gap-5 px-5">
+                {Array(6)
+                  .fill(null)
+                  .map((_, idx) => (
+                    <div key={idx} className="w-60 shrink-0">
+                      <div className="overflow-hidden rounded-md">
+                        <ReactPlayer
+                          url={"/videos/sea-shore.mp4"}
+                          width={"100%"}
+                          height={"100%"}
+                          loop
+                          muted
+                          playing={true}
+                        />
+                      </div>
+                      <p className="mt-1 px-1 text-sm line-clamp-1">
+                        Lorem ipsum dolor sit amet dolor sit amet.
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
           {sections.map((section, idx) => (
-            <div key={idx} className="my-5 flex flex-col bg-white">
+            <div key={idx} className="mb-5 flex flex-col bg-white">
               <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
                 <h3 className="sh-underline mb-2 text-2xl font-semibold md:text-4xl">
                   {section.heading}
