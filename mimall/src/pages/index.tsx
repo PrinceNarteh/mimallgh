@@ -56,21 +56,23 @@ const Home = () => {
                 {Array(6)
                   .fill(null)
                   .map((_, idx) => (
-                    <div key={idx} className="w-60 shrink-0">
-                      <div className="overflow-hidden rounded-md">
-                        <ReactPlayer
-                          url={"/videos/sea-shore.mp4"}
-                          width={"100%"}
-                          height={"100%"}
-                          loop
-                          muted
-                          playing={true}
-                        />
+                    <Link href={"/product-videos/1"} key={idx}>
+                      <div className="w-60 shrink-0">
+                        <div className="overflow-hidden rounded-md">
+                          <ReactPlayer
+                            url={"/videos/sea-shore.mp4"}
+                            width={"100%"}
+                            height={"100%"}
+                            loop
+                            muted
+                            playing={true}
+                          />
+                        </div>
+                        <p className="mt-1 px-1 text-sm line-clamp-1">
+                          Lorem ipsum dolor sit amet dolor sit amet.
+                        </p>
                       </div>
-                      <p className="mt-1 px-1 text-sm line-clamp-1">
-                        Lorem ipsum dolor sit amet dolor sit amet.
-                      </p>
-                    </div>
+                    </Link>
                   ))}
               </div>
             </div>
