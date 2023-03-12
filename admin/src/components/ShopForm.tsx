@@ -94,8 +94,6 @@ const AddShopForm = ({
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
 
-  console.log(errors);
-
   return (
     <div className="pb-10">
       <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>

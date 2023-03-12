@@ -80,9 +80,6 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
     }
   };
 
-  console.log(getValues());
-  console.log(errors);
-
   return (
     <div className="mx-auto max-w-4xl pb-7">
       <Card heading={`${admin?.id ? "Edit" : "Add"} Administrator`}>

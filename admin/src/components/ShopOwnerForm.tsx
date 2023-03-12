@@ -41,9 +41,6 @@ const ShopOwnerForm = ({
     ),
   });
 
-  console.log(getValues());
-  console.log(errors);
-
   const createUser = api.users.register.useMutation({
     onError: (error) => {
       toast.error(error.message);
