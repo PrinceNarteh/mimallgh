@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const MoreCard = ({ index }: { index: number }) => {
-  console.log(index % 9);
   return (
     <div className="relative flex h-96 flex-col rounded-md bg-white shadow-md">
       <Link href={`/web-store/1`}>

@@ -8,7 +8,7 @@ const ProductDetails = () => {
   return (
     <div className="mx-auto mb-10 w-11/12 pt-[120px]">
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="relative col-span-8 flex gap-5 md:flex-row">
+        <div className="relative col-span-9 flex gap-5 md:flex-row">
           <div className="">
             <div className="top-[110px] pb-10 md:sticky">
               <div className=" h-fit w-[400px] shrink-0 gap-5 ">
@@ -105,15 +105,15 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="grid-col-12 lg:col-span-4">
-          <div className="my-5 flex justify-between border-b-2">
+        <div className="grid-col-12 lg:col-span-3">
+          <div className="mt-2 mb-5 flex justify-between border-b-2">
             <h4 className="sh-underline relative md:text-3xl">Top Deals</h4>
           </div>
-          <div className="grid justify-center gap-5 grid-auto-fit-xs">
+          <div className="flex flex-wrap gap-3">
             {topDeals.map((topDeal, idx) => (
               <div
                 key={idx}
-                className="relative h-40 shrink-0 rounded-lg bg-gray-400"
+                className="relative h-28 flex-1 basis-28 overflow-hidden rounded"
               >
                 <Image
                   src={topDeal.image}

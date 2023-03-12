@@ -44,8 +44,6 @@ const SubNavbar = () => {
     };
   });
 
-  console.log(openHelp);
-
   return (
     <div className="bg-gray-300 px-2">
       <div className="relative mx-auto flex max-w-7xl justify-between py-3">
