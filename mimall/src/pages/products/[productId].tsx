@@ -147,6 +147,11 @@ const ProductDetails = () => {
                   </ol>
                 </div>
               </div>
+              <div className="flex justify-end pr-10">
+                <button className="rounded-lg border border-pink-500 px-5 py-2 text-pink-500 duration-200 hover:bg-pink-500 hover:text-white">
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
