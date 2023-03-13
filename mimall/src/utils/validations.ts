@@ -25,7 +25,7 @@ export const createProductDto = z.object({
     "food",
     "furniture",
     "grocery_and_general",
-    "health_and_wellness",
+    "health-and-wellness",
     "home_and_electricals",
     "money_and_energy",
     "personal-care_and_beauty",

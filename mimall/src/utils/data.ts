@@ -9,10 +9,10 @@ export const topDeals = [
     image: "/images/tech-1.jpg",
   },
   {
-    image: "/images/health_and_wellness-1.jpg",
+    image: "/images/health-and-wellness-1.jpg",
   },
   {
-    image: "/images/printing_and_stationery-1.jpg",
+    image: "/images/printing-and-stationery-1.jpg",
   },
   {
     image: "/images/food-1.jpg",
@@ -43,7 +43,7 @@ export const categories = [
   },
   {
     label: "Health and Wellness",
-    image: "/images/health_and_wellness-4.jpg",
+    image: "/images/health-and-wellness-4.jpg",
   },
   {
     label: "Home and Electrical Appliances",
@@ -55,7 +55,7 @@ export const categories = [
   },
   {
     label: "Printing and Stationery",
-    image: "/images/printing_and_stationery-5.jpg",
+    image: "/images/printing-and-stationery-5.jpg",
   },
   {
     label: "Tech",
@@ -66,6 +66,7 @@ export const categories = [
 export const sections = [
   {
     heading: "Food",
+    link: "/food",
     images: [
       {
         imageUrl: "/images/food-1.jpg",
@@ -83,6 +84,7 @@ export const sections = [
   },
   {
     heading: "Fashion and Wears",
+    link: "/fashion-and-wears",
     images: [
       {
         imageUrl: "/images/fashion_and_wear-1.jpg",
@@ -100,6 +102,7 @@ export const sections = [
   },
   {
     heading: "Grocery and General",
+    link: "/grocery-and-general",
     images: [
       {
         imageUrl: "/images/grocery-1.jpg",
@@ -117,23 +120,25 @@ export const sections = [
   },
   {
     heading: "Health and Wellness",
+    link: "/health-and-wellness",
     images: [
       {
-        imageUrl: "/images/health_and_wellness-1.jpg",
+        imageUrl: "/images/health-and-wellness-1.jpg",
       },
       {
-        imageUrl: "/images/health_and_wellness-2.jpg",
+        imageUrl: "/images/health-and-wellness-2.jpg",
       },
       {
-        imageUrl: "/images/health_and_wellness-3.jpg",
+        imageUrl: "/images/health-and-wellness-3.jpg",
       },
       {
-        imageUrl: "/images/health_and_wellness-4.jpg",
+        imageUrl: "/images/health-and-wellness-4.jpg",
       },
     ],
   },
   {
     heading: "Home and Electrical Appliances",
+    link: "/home-and-electrical-appliances",
     images: [
       {
         imageUrl: "/images/appliances-1.jpg",
@@ -151,6 +156,7 @@ export const sections = [
   },
   {
     heading: "Personal Services",
+    link: "/personal-services",
     images: [
       {
         imageUrl: "/images/services-1.jpg",
@@ -168,23 +174,25 @@ export const sections = [
   },
   {
     heading: "Printing and Stationery",
+    link: "/printing-and-stationery",
     images: [
       {
-        imageUrl: "/images/printing_and_stationery-1.jpg",
+        imageUrl: "/images/printing-and-stationery-1.jpg",
       },
       {
-        imageUrl: "/images/printing_and_stationery-2.jpg",
+        imageUrl: "/images/printing-and-stationery-2.jpg",
       },
       {
-        imageUrl: "/images/printing_and_stationery-3.jpg",
+        imageUrl: "/images/printing-and-stationery-3.jpg",
       },
       {
-        imageUrl: "/images/printing_and_stationery-4.jpg",
+        imageUrl: "/images/printing-and-stationery-4.jpg",
       },
     ],
   },
   {
     heading: "Tech",
+    link: "/tech",
     images: [
       {
         imageUrl: "/images/tech-1.jpg",

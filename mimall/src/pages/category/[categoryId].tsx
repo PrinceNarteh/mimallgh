@@ -1,6 +1,11 @@
+import { useRouter } from "next/router";
 import MoreCard from "../../components/MoreCard";
 
-const MoreProducts = () => {
+const ProductByCategory = () => {
+  const { query } = useRouter();
+
+  console.log(query);
+
   return (
     <div className="bg-gray-300 bg-opacity-30 pt-[100px]">
       <div className="mx-auto max-w-7xl py-5">
@@ -66,4 +71,4 @@ const MoreProducts = () => {
   );
 };
 
-export default MoreProducts;
+export default ProductByCategory;
