@@ -3,6 +3,7 @@ import { BiMenu } from "react-icons/bi";
 import { locations } from "../../utils/menus";
 import NavItem from "./NavItem";
 import { CgMenuRightAlt } from "react-icons/cg";
+import Link from "next/link";
 
 const menus = [
   {
@@ -66,14 +67,15 @@ const SubNavbar = () => {
         `}
         >
           {locations.slice(1).map((location, idx) => (
-            <div
-              key={idx}
-              className={`cursor-pointer px-7 py-2 duration-500 hover:bg-[#ff0000] hover:text-white
+            <Link key={idx} href={`/markets/${location.link}`}>
+              <div
+                className={`cursor-pointer px-7 py-2 duration-500 hover:bg-[#ff0000] hover:text-white
               ${open ? "opacity-100" : "opacity-0"}
               `}
-            >
-              {location.label}
-            </div>
+              >
+                {location.label}
+              </div>
+            </Link>
           ))}
         </div>
         <CgMenuRightAlt

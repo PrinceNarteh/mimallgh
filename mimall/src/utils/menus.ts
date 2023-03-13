@@ -115,15 +115,15 @@ export const shopMenus = [
 ];
 
 export const locations = [
-  { label: "Select Location", value: "" },
-  { label: "Amamoma", value: "amamoma" },
-  { label: "Apewosika", value: "apewosika" },
-  { label: "Ayensu", value: "ayensu" },
-  { label: "Duakro", value: "duakro" },
-  { label: "KNH", value: "knh" },
-  { label: "Kokoado", value: "kokoado" },
-  { label: "Kwasipra", value: "kwasipra" },
-  { label: "New Site", value: "new_site" },
-  { label: "Old Site", value: "old_site" },
-  { label: "Science", value: "science" },
+  { label: "Select Location", link: "" },
+  { label: "Amamoma", link: "amamoma" },
+  { label: "Apewosika", link: "apewosika" },
+  { label: "Ayensu", link: "ayensu" },
+  { label: "Duakro", link: "duakro" },
+  { label: "KNH", link: "knh" },
+  { label: "Kokoado", link: "kokoado" },
+  { label: "Kwasipra", link: "kwasipra" },
+  { label: "New Site", link: "new-site" },
+  { label: "Old Site", link: "old-site" },
+  { label: "Science", link: "science" },
 ];
