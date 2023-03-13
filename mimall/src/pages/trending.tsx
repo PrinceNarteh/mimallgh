@@ -14,8 +14,8 @@ const Trending = () => {
               {Array(40)
                 .fill(null)
                 .map((_, idx) => (
-                  <div>
-                    <MovieCard key={idx} />
+                  <div key={idx}>
+                    <MovieCard />
                     {idx % 8 === 0 && (
                       <div className="col-span-12">
                         <TopDeals topDeals={topDeals} />

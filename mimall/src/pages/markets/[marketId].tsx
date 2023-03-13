@@ -24,9 +24,8 @@ const Markets = () => {
       <section className="mx-auto w-11/12 py-10">
         <div className="grid gap-5 grid-auto-fit-lg">
           {categories.map((category, idx) => (
-            <div>
+            <div key={idx}>
               <div
-                key={idx}
                 className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
               >
                 <Image
@@ -98,7 +97,7 @@ const Markets = () => {
               </div>
               <div className="mb-3 flex items-center justify-start gap-5 overflow-y-auto px-7 pb-2">
                 {section.images.map((image, idx) => (
-                  <div className="h-[260px] w-[190px]">
+                  <div className="h-[260px] w-[190px]" key={idx}>
                     <p className="mb-1 px-1 text-xs line-clamp-1">
                       Lorem ipsum dolor sit amet.
                     </p>

@@ -1,9 +1,9 @@
 export const topDeals = [
   {
-    image: "/images/fashion_and_wear-1.jpg",
+    image: "/images/fashion-and-wear-1.jpg",
   },
   {
-    image: "/images/services-1.jpg",
+    image: "/images/personal-services-1.jpg",
   },
   {
     image: "/images/tech-1.jpg",
@@ -18,13 +18,13 @@ export const topDeals = [
     image: "/images/food-1.jpg",
   },
   {
-    image: "/images/grocery-2.jpg",
+    image: "/images/grocery-and-general-2.jpg",
   },
   {
     image: "/images/tech-2.jpg",
   },
   {
-    image: "/images/fashion_and_wear-2.jpg",
+    image: "/images/fashion-and-wear-2.jpg",
   },
 ];
 
@@ -35,11 +35,11 @@ export const categories = [
   },
   {
     label: "Fashion and Wears",
-    image: "/images/fashion_and_wear-2.jpg",
+    image: "/images/fashion-and-wear-2.jpg",
   },
   {
     label: "Grocery and General",
-    image: "/images/grocery-4.jpg",
+    image: "/images/grocery-and-general-4.jpg",
   },
   {
     label: "Health and Wellness",
@@ -47,11 +47,11 @@ export const categories = [
   },
   {
     label: "Home and Electrical Appliances",
-    image: "/images/services-6.jpg",
+    image: "/images/personal-services-6.jpg",
   },
   {
     label: "Personal Services",
-    image: "/images/services-2.jpg",
+    image: "/images/personal-services-2.jpg",
   },
   {
     label: "Printing and Stationery",
@@ -87,16 +87,16 @@ export const sections = [
     link: "/fashion-and-wears",
     images: [
       {
-        imageUrl: "/images/fashion_and_wear-1.jpg",
+        imageUrl: "/images/fashion-and-wear-1.jpg",
       },
       {
-        imageUrl: "/images/fashion_and_wear-2.jpg",
+        imageUrl: "/images/fashion-and-wear-2.jpg",
       },
       {
-        imageUrl: "/images/fashion_and_wear-3.jpg",
+        imageUrl: "/images/fashion-and-wear-3.jpg",
       },
       {
-        imageUrl: "/images/fashion_and_wear-4.jpg",
+        imageUrl: "/images/fashion-and-wear-4.jpg",
       },
     ],
   },
@@ -105,16 +105,16 @@ export const sections = [
     link: "/grocery-and-general",
     images: [
       {
-        imageUrl: "/images/grocery-1.jpg",
+        imageUrl: "/images/grocery-and-general-1.jpg",
       },
       {
-        imageUrl: "/images/grocery-2.jpg",
+        imageUrl: "/images/grocery-and-general-2.jpg",
       },
       {
-        imageUrl: "/images/grocery-3.jpg",
+        imageUrl: "/images/grocery-and-general-3.jpg",
       },
       {
-        imageUrl: "/images/grocery-4.jpg",
+        imageUrl: "/images/grocery-and-general-4.jpg",
       },
     ],
   },
@@ -141,16 +141,16 @@ export const sections = [
     link: "/home-and-electrical-appliances",
     images: [
       {
-        imageUrl: "/images/appliances-1.jpg",
+        imageUrl: "/images/home-and-electrical-appliances-1.jpg",
       },
       {
-        imageUrl: "/images/appliances-2.jpg",
+        imageUrl: "/images/home-and-electrical-appliances-2.jpg",
       },
       {
-        imageUrl: "/images/appliances-3.jpg",
+        imageUrl: "/images/home-and-electrical-appliances-3.jpg",
       },
       {
-        imageUrl: "/images/appliances-4.jpg",
+        imageUrl: "/images/home-and-electrical-appliances-4.jpg",
       },
     ],
   },
@@ -159,16 +159,16 @@ export const sections = [
     link: "/personal-services",
     images: [
       {
-        imageUrl: "/images/services-1.jpg",
+        imageUrl: "/images/personal-services-1.jpg",
       },
       {
-        imageUrl: "/images/services-2.jpg",
+        imageUrl: "/images/personal-services-2.jpg",
       },
       {
-        imageUrl: "/images/services-3.jpg",
+        imageUrl: "/images/personal-services-3.jpg",
       },
       {
-        imageUrl: "/images/services-4.jpg",
+        imageUrl: "/images/personal-services-4.jpg",
       },
     ],
   },
