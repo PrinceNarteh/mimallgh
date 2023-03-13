@@ -1,41 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { MdOutlineStarPurple500, MdOutlineStarHalf } from "react-icons/md";
 
-const ProductCard = ({ id }: { id: string }) => {
+const ProductCard = () => {
   return (
-    <div className="h-[300px] shrink-0 basis-52 cursor-pointer overflow-hidden rounded-lg pb-5 shadow-lg">
-      <Link href={"/1"}>
-        <div className="relative h-1/2 bg-slate-500">
-          <Image
-            src={"/images/product-1.jpg"}
-            fill={true}
-            style={{ objectFit: "cover" }}
-            alt="product-1"
-          />
+    <div className="h-[260px] w-[190px]">
+      <p className="mb-1 px-1 text-xs line-clamp-1">
+        Lorem ipsum dolor sit amet.
+      </p>
+      <div className="shrink-0 cursor-pointer overflow-hidden rounded-md shadow-md">
+        <div className="relative h-[190px] w-[190px]">
+          <Link href={`/products/1`}>
+            <Image
+              src={`/images/product-1.jpg`}
+              fill
+              alt=""
+              style={{ objectFit: "cover" }}
+            />
+          </Link>
         </div>
-        <div className="space-y-1 p-3">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold">IPhone 13</h3>
-            <span className="text-orange-500">¢105.00</span>
-          </div>
-          {/* <div className="flex text- text-pink-700">
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarPurple500 />
-          <MdOutlineStarHalf />
-        </div> */}
-          <p className="line-clamp-3">
-            Lorem ipsum dolor sit amet consectetur elit. Libero vero impedit.
-            Lorem ipsum dolor sit amet consectetur elit. Libero vero impedit.
-          </p>
+        <div className="px-2 py-1">
+          <p className="text-sm line-clamp-1">Lorem ipsum dolor sit amet.</p>
+          <p className="font-semibold">GH¢ 1234.00</p>
         </div>
-      </Link>
-      <button className=" float-right mr-3 rounded-md border border-pink-500 px-3 py-1 text-xs text-pink-500 duration-200 hover:bg-pink-500 hover:text-white">
-        Add To Cart
-      </button>
+      </div>
     </div>
   );
 };
