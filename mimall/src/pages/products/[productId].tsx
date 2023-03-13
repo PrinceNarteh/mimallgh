@@ -9,7 +9,9 @@ import {
   WhatsappIcon,
 } from "react-share";
 import { MdContentCopy } from "react-icons/md";
+import { MdOutlineStar, MdOutlineStarHalf } from "react-icons/md";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const ProductDetails = () => {
@@ -56,38 +58,45 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="">
+              <div className="h-fit">
                 <h3 className="sh-underline mt-5 text-2xl">Product Video</h3>
-                <div>
-                  <div className="h-[280px]">
-                    <ReactPlayer
-                      url={"/videos/sea-shore.mp4"}
-                      controls
-                      width={"100%"}
-                      height={"100%"}
-                    />
-                    <div className="flex h-10 w-full items-center justify-end gap-2">
-                      <h6>Share:</h6>
-                      <FacebookShareButton
-                        url={url}
-                        quote="Hello"
-                        className="block"
-                      >
-                        <FacebookIcon
-                          size={25}
-                          style={{ borderRadius: "50%" }}
-                        />
-                      </FacebookShareButton>
-                      <WhatsappShareButton url={url} className="block">
-                        <WhatsappIcon
-                          size={25}
-                          style={{ borderRadius: "50%" }}
-                        />
-                      </WhatsappShareButton>
-                      <MdContentCopy size={20} />
-                    </div>
-                  </div>
+                <div className="h-[280px]">
+                  <ReactPlayer
+                    url={"/videos/sea-shore.mp4"}
+                    controls
+                    width={"100%"}
+                    height={"100%"}
+                  />
                 </div>
+                <div className="flex h-10 w-full items-center justify-end gap-2">
+                  <h6>Share:</h6>
+                  <FacebookShareButton
+                    url={url}
+                    quote="Hello"
+                    className="block"
+                  >
+                    <FacebookIcon size={25} style={{ borderRadius: "50%" }} />
+                  </FacebookShareButton>
+                  <WhatsappShareButton url={url} className="block">
+                    <WhatsappIcon size={25} style={{ borderRadius: "50%" }} />
+                  </WhatsappShareButton>
+                  <MdContentCopy size={20} className="cursor-pointer" />
+                </div>
+              </div>
+
+              <div>
+                <h5 className="sh-underline mb-2">Ratings and Reviews</h5>
+                <div className="flex text-2xl text-orange-500">
+                  <MdOutlineStar />
+                  <MdOutlineStar />
+                  <MdOutlineStar />
+                  <MdOutlineStar />
+                  <MdOutlineStarHalf />
+                </div>
+              </div>
+              <div className="mt-3">
+                <h5 className="sh-underline mb-2">FAQs</h5>
+                <p>100 answered questions</p>
               </div>
             </div>
           </div>
@@ -164,92 +173,38 @@ const ProductDetails = () => {
       </div>
       <div className="mt-10 px-7 pb-5">
         <h3 className="sh-underline text-2xl font-semibold">
-          Related Products
+          Compare with similar items
         </h3>
-        <div className="flex h-60 flex-wrap justify-center gap-5 pt-5">
-          <div className="h-60 w-52 cursor-pointer">
-            <div className="relative h-40 w-60">
-              <Image
-                src={"/images/product-1.jpg"}
-                alt="product-one"
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-            <div className="h-20">
-              <h4 className="font-semibold text-blue-700 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis, id?
-              </h4>
-              <p className="my-3 mt-1 flex items-start tracking-wider">
-                <span className="">¢</span>
-                <span className="text-2xl">123</span>
-                <span className="">50</span>
-              </p>
-            </div>
-          </div>
-          <div className="h-60 w-52 cursor-pointer">
-            <div className="relative h-40 w-60">
-              <Image
-                src={"/images/product-1.jpg"}
-                alt="product-one"
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-            <div className="h-20">
-              <h4 className="font-semibold text-blue-700 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis, id?
-              </h4>
-              <p className="my-3 mt-1 flex items-start tracking-wider">
-                <span className="">¢</span>
-                <span className="text-2xl">123</span>
-                <span className="">50</span>
-              </p>
-            </div>
-          </div>
-          <div className="h-60 w-52 cursor-pointer">
-            <div className="relative h-40 w-60">
-              <Image
-                src={"/images/product-1.jpg"}
-                alt="product-one"
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-            <div className="h-20">
-              <h4 className="font-semibold text-blue-700 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis, id?
-              </h4>
-              <p className="my-3 mt-1 flex items-start tracking-wider">
-                <span className="">¢</span>
-                <span className="text-2xl">123</span>
-                <span className="">50</span>
-              </p>
-            </div>
-          </div>
-          <div className="h-60 w-52 cursor-pointer">
-            <div className="relative h-40 w-60">
-              <Image
-                src={"/images/product-1.jpg"}
-                alt="product-one"
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-            <div className="h-20">
-              <h4 className="font-semibold text-blue-700 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis, id?
-              </h4>
-              <p className="my-3 mt-1 flex items-start tracking-wider">
-                <span className="">¢</span>
-                <span className="text-2xl">123</span>
-                <span className="">50</span>
-              </p>
-            </div>
+        <div className="w-full overflow-x-auto">
+          <div className="flex justify-start gap-5 py-4 pt-5">
+            {topDeals.map((topDeal, idx) => (
+              <div className="h-[260px] w-[190px]">
+                <p className="mb-1 px-1 text-xs line-clamp-1">
+                  Lorem ipsum dolor sit amet.
+                </p>
+                <div
+                  key={idx}
+                  className="shrink-0 cursor-pointer overflow-hidden rounded-md shadow-md"
+                >
+                  <div className="relative h-[190px] w-[190px]">
+                    <Link key={idx} href={`/products/${idx}`}>
+                      <Image
+                        src={topDeal.image}
+                        fill
+                        alt=""
+                        style={{ objectFit: "cover" }}
+                      />
+                    </Link>
+                  </div>
+                  <div className="px-2 py-1">
+                    <p className="text-sm line-clamp-1">
+                      Lorem ipsum dolor sit amet.
+                    </p>
+                    <p className="font-semibold">GH¢ 1234.00</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
