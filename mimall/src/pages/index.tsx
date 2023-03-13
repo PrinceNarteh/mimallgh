@@ -18,7 +18,7 @@ const Home = () => {
       <section className="mx-auto w-11/12 py-10">
         <div className="grid gap-5 grid-auto-fit-lg">
           {categories.map((category, idx) => (
-            <div>
+            <Link href={`/category/${category.link}`}>
               <div
                 key={idx}
                 className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
@@ -37,7 +37,7 @@ const Home = () => {
                 </div>
               </div>
               <p className="mt-1 text-center text-sm">300 Sellers | 150 ads</p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

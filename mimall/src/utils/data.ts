@@ -31,34 +31,42 @@ export const topDeals = [
 export const categories = [
   {
     label: "Food",
+    link: "/food",
     image: "/images/food-2.jpg",
   },
   {
     label: "Fashion and Wears",
+    link: "/fashion-and-wears",
     image: "/images/fashion-and-wear-2.jpg",
   },
   {
     label: "Grocery and General",
+    link: "/grocery-and-general",
     image: "/images/grocery-and-general-4.jpg",
   },
   {
     label: "Health and Wellness",
+    link: "/health-and-wellness",
     image: "/images/health-and-wellness-4.jpg",
   },
   {
     label: "Home and Electrical Appliances",
+    link: "/home-and-electrical-appliances",
     image: "/images/personal-services-6.jpg",
   },
   {
     label: "Personal Services",
+    link: "/personal-services",
     image: "/images/personal-services-2.jpg",
   },
   {
     label: "Printing and Stationery",
+    link: "/printing-and-stationery",
     image: "/images/printing-and-stationery-5.jpg",
   },
   {
     label: "Tech",
+    link: "/tech",
     image: "/images/tech-5.jpg",
   },
 ];
