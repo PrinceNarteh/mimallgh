@@ -4,6 +4,7 @@ import { locations } from "../../utils/menus";
 import NavItem from "./NavItem";
 import { CgMenuRightAlt } from "react-icons/cg";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const menus = [
   {
@@ -29,6 +30,7 @@ const SubNavbar = () => {
   const [openHelp, setOpenHelp] = useState(false);
   const menuRef = useRef<any>(null);
   const btnRef = useRef<any>(null);
+  const { push } = useRouter();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -44,6 +46,11 @@ const SubNavbar = () => {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+  const handleCloseMenu = (link: string) => {
+    push(`/markets/${link}`);
+    setOpen(false);
+  };
 
   return (
     <div className="bg-gray-300 px-2">
@@ -67,15 +74,15 @@ const SubNavbar = () => {
         `}
         >
           {locations.slice(1).map((location, idx) => (
-            <Link key={idx} href={`/markets/${location.link}`}>
-              <div
-                className={`cursor-pointer px-7 py-2 duration-500 hover:bg-[#ff0000] hover:text-white
+            <div
+              key={idx}
+              className={`cursor-pointer px-7 py-2 duration-500 hover:bg-[#ff0000] hover:text-white
               ${open ? "opacity-100" : "opacity-0"}
               `}
-              >
-                {location.label}
-              </div>
-            </Link>
+              onClick={() => handleCloseMenu(location.link)}
+            >
+              {location.label}
+            </div>
           ))}
         </div>
         <CgMenuRightAlt
