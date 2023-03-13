@@ -1,13 +1,12 @@
-import Image from "next/image";
-import React from "react";
+import Container from "../../components/Container";
 import MovieCard from "../../components/MovieCard";
 import TopDeals from "../../components/TopDeals";
-import { topDeals, sections } from "../../utils/data";
+import { topDeals } from "../../utils/data";
 
 const ProductVideos = () => {
   return (
-    <div>
-      <div className="mx-auto w-11/12 py-7 pt-[100px]">
+    <Container>
+      <div className="mx-auto w-11/12 pb-7">
         <div className="w-full">
           <div className="mt-5">
             <div className="flex items-center bg-white shadow">
@@ -84,7 +83,7 @@ const ProductVideos = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
