@@ -89,7 +89,7 @@ const Markets = () => {
                   {section.heading}
                 </h3>
                 <Link
-                  href="/more"
+                  href={`/category/${section.link}`}
                   className="hidden font-semibold text-orange-500"
                 >
                   Read More
@@ -126,7 +126,7 @@ const Markets = () => {
                 ))}
               </div>
               <Link
-                href="/more"
+                href={`/category/${section.link}`}
                 className="mb-5 pr-7 text-right font-semibold text-orange-500"
               >
                 Read More

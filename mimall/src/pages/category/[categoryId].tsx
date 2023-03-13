@@ -1,10 +1,10 @@
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import MoreCard from "../../components/MoreCard";
+import { capitalize } from "../../utils/utilities";
 
 const ProductByCategory = () => {
   const { query } = useRouter();
-
-  console.log(query);
 
   return (
     <div className="bg-gray-300 bg-opacity-30 pt-[100px]">
@@ -13,16 +13,45 @@ const ProductByCategory = () => {
           <div className="col-span-8 space-y-5">
             <div className="flex items-center bg-white shadow">
               <div className="flex-1 py-0.5 pl-5 text-2xl">
-                <span className="font-bold">RAW</span> FOOD
+                <span className="">
+                  {capitalize(query.categoryId as string)}
+                </span>
               </div>
-              <div className="bg-[#ff0000] px-4 py-2 text-white">SORT BY</div>
+              <div className="bg-[#ff0000] p-4 text-white">SORT BY</div>
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="flex flex-wrap gap-5">
               {Array(16)
                 .fill(0)
                 .map((_, idx) => (
-                  <MoreCard index={idx} />
+                  <div className="h-[260px] w-[190px]">
+                    <p className="mb-1 px-1 text-xs line-clamp-1">
+                      Lorem ipsum dolor sit amet.
+                    </p>
+                    <div
+                      key={idx}
+                      className="shrink-0 cursor-pointer overflow-hidden rounded-md shadow-md"
+                    >
+                      <div className="relative h-[190px] w-[190px]">
+                        <Link key={idx} href={`/products/${idx}`}>
+                          <Image
+                            src={`/images/${query.categoryId}-${
+                              idx % 4 === 0 ? 3 : idx % 4
+                            }.jpg`}
+                            fill
+                            alt=""
+                            style={{ objectFit: "cover" }}
+                          />
+                        </Link>
+                      </div>
+                      <div className="px-2 py-1">
+                        <p className="text-sm line-clamp-1">
+                          Lorem ipsum dolor sit amet.
+                        </p>
+                        <p className="font-semibold">GH¢ 1234.00</p>
+                      </div>
+                    </div>
+                  </div>
                 ))}
             </div>
 
