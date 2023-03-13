@@ -5,36 +5,75 @@ import Banner from "../components/Banner";
 import CustomLinks from "../components/layout/CustomLinks";
 import TopDeals from "../components/TopDeals";
 import { categories, sections, topDeals } from "../utils/data";
+import { locations } from "../utils/menus";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const Home = () => {
   return (
     <div className="pt-[100px]">
       <Banner />
-      <section className="mx-auto w-11/12 py-10">
-        <div className="grid gap-5 grid-auto-fit-lg">
-          {categories.map((category, idx) => (
-            <Link href={`/category/${category.link}`}>
-              <div
-                key={idx}
-                className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
-              >
-                <Image
-                  src={category.image}
-                  className="absolute object-cover duration-500 group-hover:scale-110"
-                  fill={true}
-                  alt=""
-                />
-                <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
-                <div className="relative z-10 flex h-full w-full items-center justify-center">
-                  <h3 className=" text-center text-lg text-white">
-                    {category.label}
-                  </h3>
-                </div>
-              </div>
-              <p className="mt-1 text-center text-sm">300 Sellers | 150 ads</p>
-            </Link>
-          ))}
+      <section className="mx-auto w-11/12 space-y-5 py-10">
+        <div>
+          <h4 className="sh-underline relative md:text-3xl">Categories</h4>
+          <div className="w-full overflow-x-scroll">
+            <div className="flex gap-3 py-4">
+              {categories.map((category, idx) => (
+                <Link href={`/category/${category.link}`}>
+                  <div
+                    key={idx}
+                    className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
+                  >
+                    <Image
+                      src={category.image}
+                      className="absolute object-cover duration-500 group-hover:scale-110"
+                      fill={true}
+                      alt=""
+                    />
+                    <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
+                    <div className="relative z-10 flex h-full w-full items-center justify-center">
+                      <h3 className=" text-center text-lg text-white">
+                        {category.label}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="mt-1 text-center text-sm">
+                    300 Sellers | 150 ads
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 className="sh-underline relative md:text-3xl">Markets</h4>
+          <div className="w-full overflow-x-scroll">
+            <div className="flex gap-3 py-4">
+              {locations.slice(1).map((location, idx) => (
+                <Link href={`/category/${location.link}`}>
+                  <div
+                    key={idx}
+                    className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
+                  >
+                    <Image
+                      src={"/images/product-1.jpg"}
+                      className="absolute object-cover duration-500 group-hover:scale-110"
+                      fill={true}
+                      alt=""
+                    />
+                    <div className="absolute inset-0 h-full w-full bg-black opacity-60"></div>
+                    <div className="relative z-10 flex h-full w-full items-center justify-center">
+                      <h3 className=" text-center text-lg text-white">
+                        {location.label}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="mt-1 text-center text-sm">
+                    300 Sellers | 150 ads
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       <div className="mb-5">
