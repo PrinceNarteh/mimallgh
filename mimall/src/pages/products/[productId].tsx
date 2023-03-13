@@ -208,6 +208,61 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <div className="mx-auto w-10/12 space-y-5">
+        <h3 className="sh-underline mt-5 text-2xl">
+          Customers Reviews and Rating
+        </h3>
+        <div>
+          <h5 className="font-semibold">100% Ratings</h5>
+          <div className="space-y-2 pl-5">
+            <div className="flex">
+              <div className="flex basis-40 text-2xl text-orange-500">
+                <MdOutlineStar />
+                <MdOutlineStar />
+                <MdOutlineStar />
+                <MdOutlineStar />
+                <MdOutlineStar />
+              </div>
+              <div>90%</div>
+            </div>
+            <div className="flex">
+              <div className="flex basis-40 text-2xl text-orange-500">
+                <MdOutlineStar />
+                <MdOutlineStar />
+                <MdOutlineStar />
+                <MdOutlineStar />
+                <MdOutlineStarHalf />
+              </div>
+              <div>10%</div>
+            </div>
+          </div>
+        </div>
+        <div className="">
+          <h5 className="mb-2 text-lg font-semibold">Top Reviews</h5>
+          <dl className="pl-5">
+            <ol className="space-y-2">
+              <li>
+                <dt className="text-semibold">Adwoa Sarfo</dt>
+                <dd className="pl-5">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tempora, vitae doloremque illum quas voluptates debitis rem
+                  aut quo, sint quis omnis labore soluta. Natus molestias ab
+                  repudiandae ipsa provident dolorum.
+                </dd>
+              </li>
+              <li>
+                <dt className="text-bold">Simon Agyenim Boateng</dt>
+                <dd className="pl-5">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tempora, vitae doloremque illum quas voluptates debitis rem
+                  aut quo, sint quis omnis labore soluta. Natus molestias ab
+                  repudiandae ipsa provident dolorum.
+                </dd>
+              </li>
+            </ol>
+          </dl>
+        </div>
+      </div>
     </div>
   );
 };
