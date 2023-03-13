@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Banner from "../../components/Banner";
-import CustomLinks from "../../components/CustomLinks";
+import Container from "../../components/Container";
+import CustomLinks from "../../components/layout/CustomLinks";
 import TopDeals from "../../components/TopDeals";
 import { categories, sections, topDeals } from "../../utils/data";
 import { capitalize } from "../../utils/utilities";
@@ -13,12 +14,9 @@ const Markets = () => {
   const { query } = useRouter();
   const market = capitalize(query.marketId as string);
   return (
-    <div className="pt-[100px]">
+    <Container>
       <div className="mx-auto my-5 w-11/12">
         <h3 className="sh-underline text-3xl">{market} Market</h3>
-      </div>
-      <div className="sticky top-24 z-40 mx-auto w-11/12 border-y bg-white py-3">
-        <CustomLinks />
       </div>
 
       <section className="mx-auto w-11/12 py-10">
@@ -135,7 +133,7 @@ const Markets = () => {
           ))}
         </div>
       </section>
-    </div>
+    </Container>
   );
 };
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import CustomLinks from "../../components/CustomLinks";
+import CustomLinks from "../../components/layout/CustomLinks";
 import MoreCard from "../../components/MoreCard";
 import { topDeals } from "../../utils/data";
 

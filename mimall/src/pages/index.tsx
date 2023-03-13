@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
-import CustomLinks from "../components/CustomLinks";
+import CustomLinks from "../components/layout/CustomLinks";
 import TopDeals from "../components/TopDeals";
 import { categories, sections, topDeals } from "../utils/data";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
@@ -11,10 +11,6 @@ const Home = () => {
   return (
     <div className="pt-[100px]">
       <Banner />
-      <div className="sticky top-24 z-40 bg-white">
-        <CustomLinks />
-      </div>
-
       <section className="mx-auto w-11/12 py-10">
         <div className="grid gap-5 grid-auto-fit-lg">
           {categories.map((category, idx) => (
