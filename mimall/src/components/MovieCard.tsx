@@ -4,7 +4,7 @@ import React from "react";
 
 const MovieCard = () => {
   return (
-    <Link href={"/products-videos/1"}>
+    <Link href={"/product-videos/1"}>
       <div className="h-[260px] cursor-pointer duration-500 hover:scale-105">
         <div className="relative h-[165px] overflow-hidden rounded-lg">
           <Image src="/images/iphone-1.jpg" fill alt="" />

@@ -18,9 +18,8 @@ const Home = () => {
           <div className="w-full overflow-x-scroll">
             <div className="flex gap-3 py-4">
               {categories.map((category, idx) => (
-                <Link href={`/category/${category.link}`}>
+                <Link key={idx} href={`/category/${category.link}`}>
                   <div
-                    key={idx}
                     className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
                   >
                     <Image
@@ -49,7 +48,7 @@ const Home = () => {
           <div className="w-full overflow-x-scroll">
             <div className="flex gap-3 py-4">
               {locations.slice(1).map((location, idx) => (
-                <Link href={`/category/${location.link}`}>
+                <Link href={`/markets/${location.link}`}>
                   <div
                     key={idx}
                     className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}

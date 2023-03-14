@@ -6,7 +6,7 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 const ProductVideoDetails = () => {
   return (
     <Container>
-      <div className="pt-50 mx-auto w-10/12">
+      <div className="mx-auto w-10/12 pt-5">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
           <div className="col-span-8">
             <div className="h-[480px]">

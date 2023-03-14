@@ -35,7 +35,10 @@ const ProductDetails = () => {
 
   return (
     <Container>
-      <div className="mx-auto mb-10 w-11/12 pt-10">
+      <div className="mx-auto mb-10 w-11/12 pt-5">
+        <h3 className="sh-underline mb-5 pl-2 text-2xl font-semibold md:text-4xl">
+          Mosco Mart
+        </h3>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
           <div className="relative col-span-9 flex gap-5 md:flex-row">
             <div className="">
@@ -64,10 +67,10 @@ const ProductDetails = () => {
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
                             isFluidWidth: true,
-                            src: "/images/product-1.jpg",
+                            src: images[currentImg],
                           },
                           largeImage: {
-                            src: "/images/product-1.jpg",
+                            src: images[currentImg],
                             width: 1200,
                             height: 1800,
                           },

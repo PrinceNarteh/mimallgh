@@ -19,8 +19,11 @@ const customLinks = [
 
 const CustomLinks = () => {
   const { pathname } = useRouter();
+  console.log(pathname === "/");
 
-  const links = customLinks.filter((link) => link.link !== pathname);
+  const links = customLinks.filter(
+    (link) => pathname === "/" || !link.link.startsWith(pathname)
+  );
 
   return (
     <div className="flex flex-col justify-center divide-gray-500 bg-white py-2 text-center shadow-md sm:flex-row md:divide-y-0 md:divide-x-2 md:text-xl">
