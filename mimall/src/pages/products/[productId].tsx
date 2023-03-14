@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { topDeals } from "../../utils/data";
@@ -15,7 +15,15 @@ import Link from "next/link";
 import Container from "../../components/Container";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
+const images = [
+  "/images/grocery-and-general-1.jpg",
+  "/images/grocery-and-general-2.jpg",
+  "/images/grocery-and-general-3.jpg",
+  "/images/grocery-and-general-4.jpg",
+];
+
 const ProductDetails = () => {
+  const [currentImg, setCurrentImg] = useState(0);
   const { asPath } = useRouter();
   const origin =
     typeof window !== "undefined" && window.location.origin
@@ -34,25 +42,24 @@ const ProductDetails = () => {
                 <div className=" h-fit w-[400px] shrink-0 gap-5 ">
                   <div className="flex justify-between gap-5">
                     <div className="flex flex-col justify-center gap-3">
-                      {Array(4)
-                        .fill(null)
-                        .map((_, idx) => (
-                          <div
-                            key={idx}
-                            className="relative h-20 w-20 cursor-pointer rounded border border-gray-400"
-                          >
-                            <Image
-                              src={"/images/product-1.jpg"}
-                              alt="product-one"
-                              fill
-                              style={{ objectFit: "contain" }}
-                            />
-                          </div>
-                        ))}
+                      {images.map((image, idx) => (
+                        <div
+                          key={idx}
+                          className="relative h-20 w-20 cursor-pointer rounded border border-gray-400"
+                          onMouseEnter={() => setCurrentImg(idx)}
+                        >
+                          <Image
+                            src={image}
+                            alt="product-one"
+                            fill
+                            style={{ objectFit: "contain" }}
+                          />
+                        </div>
+                      ))}
                     </div>
                     <div className="relative flex-1">
                       <Image
-                        src={"/images/product-1.jpg"}
+                        src={images[currentImg] as string}
                         alt="product-one"
                         fill
                         style={{ objectFit: "cover" }}
