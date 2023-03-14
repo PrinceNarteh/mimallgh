@@ -13,6 +13,7 @@ import { MdOutlineStar, MdOutlineStarHalf } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Container from "../../components/Container";
+import ReactImageMagnify from "react-image-magnify";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const images = [
@@ -34,7 +35,7 @@ const ProductDetails = () => {
 
   return (
     <Container>
-      <div className="mx-auto mb-10 w-11/12">
+      <div className="mx-auto mb-10 w-11/12 pt-10">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
           <div className="relative col-span-9 flex gap-5 md:flex-row">
             <div className="">
@@ -57,12 +58,24 @@ const ProductDetails = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="relative flex-1">
-                      <Image
-                        src={images[currentImg] as string}
-                        alt="product-one"
-                        fill
-                        style={{ objectFit: "cover" }}
+                    <div className="magnify">
+                      <ReactImageMagnify
+                        {...{
+                          smallImage: {
+                            alt: "Wristwatch by Ted Baker London",
+                            isFluidWidth: true,
+                            src: "/images/product-1.jpg",
+                          },
+                          largeImage: {
+                            src: "/images/product-1.jpg",
+                            width: 1200,
+                            height: 1800,
+                          },
+                          enlargedImageContainerDimensions: {
+                            width: "150%",
+                            height: "150%",
+                          },
+                        }}
                       />
                     </div>
                   </div>
