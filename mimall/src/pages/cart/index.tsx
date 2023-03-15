@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import CartItem from "../../components/CartItem";
 import Container from "../../components/Container";
@@ -25,9 +26,12 @@ const Cart = () => {
             <h4 className="font-bold">Total</h4>
             <span>¢200</span>
           </div>
-          <button className="w-full rounded-md bg-pink-500 py-3 text-center font-bold text-white">
+          <Link
+            href={"/checkout/form"}
+            className="block w-full rounded-md bg-pink-500 py-3 text-center font-bold text-white"
+          >
             Checkout
-          </button>
+          </Link>
         </div>
       </div>
     </Container>

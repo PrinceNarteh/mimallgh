@@ -1,8 +1,17 @@
 import CartCard from "../../components/CartCard";
 import Container from "../../components/Container";
 import { BsCircle, BsCheckCircleFill } from "react-icons/bs";
+import { useRouter } from "next/router";
+import { FormEvent } from "react";
 
 const Checkout = () => {
+  const router = useRouter();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push("/checkout/delivery-service");
+  };
+
   return (
     <Container>
       <div className="mx-auto mt-5 grid w-10/12 md:grid-cols-8">
@@ -10,7 +19,7 @@ const Checkout = () => {
           <div className="pt-6">
             <BsCheckCircleFill className="mr-5 text-2xl text-green-500" />
           </div>
-          <form className="mt-5">
+          <form onSubmit={handleSubmit} className="mt-5">
             <h4 className="sh-underline relative md:text-3xl">Address</h4>
             <div className="flex flex-col items-center py-2 xl:flex-row">
               <label
@@ -65,7 +74,10 @@ const Checkout = () => {
             </div>
             <div className="flex flex-col p-2 xl:flex-row">
               <div className="block w-60 shrink-0 whitespace-nowrap"></div>
-              <button className="rounded-md bg-pink-500 px-20 py-3 text-center font-bold text-white">
+              <button
+                type="submit"
+                className="rounded-md bg-pink-500 px-20 py-3 text-center font-bold text-white"
+              >
                 Proceed To Next Step
               </button>
             </div>
