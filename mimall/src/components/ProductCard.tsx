@@ -1,15 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const ProductCard = ({ image }: { image: string }) => {
-  const { pathname } = useRouter();
-
   return (
     <div className="h-[260px] w-[190px]">
       <Link
         href={`/web-store/1`}
-        className="mb-1 px-1 text-xs text-pink-500 line-clamp-1"
+        className="mb-1 px-1 text-xs font-bold tracking-widest text-pink-500 line-clamp-1"
       >
         Lorem ipsum dolor sit amet.
       </Link>

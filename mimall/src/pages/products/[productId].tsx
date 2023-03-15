@@ -1,20 +1,16 @@
-import React, { useState } from "react";
-import Image from "next/image";
 import dynamic from "next/dynamic";
-import { topDeals } from "../../utils/data";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { MdContentCopy, MdOutlineStar, MdOutlineStarHalf } from "react-icons/md";
+import ReactImageMagnify from "react-image-magnify";
 import {
   FacebookIcon,
-  FacebookShareButton,
-  WhatsappShareButton,
-  WhatsappIcon,
+  FacebookShareButton, WhatsappIcon, WhatsappShareButton
 } from "react-share";
-import { MdContentCopy } from "react-icons/md";
-import { MdOutlineStar, MdOutlineStarHalf } from "react-icons/md";
-import { useRouter } from "next/router";
-import Link from "next/link";
 import Container from "../../components/Container";
-import ReactImageMagnify from "react-image-magnify";
 import ProductCard from "../../components/ProductCard";
+import { topDeals } from "../../utils/data";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const images = [
