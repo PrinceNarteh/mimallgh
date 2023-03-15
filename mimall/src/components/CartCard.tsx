@@ -23,9 +23,6 @@ const CartCard = () => {
           <h4 className="font-bold">Total</h4>
           <span>¢200</span>
         </div>
-        <button className="w-full rounded-md bg-pink-500 py-3 text-center font-bold text-white">
-          Checkout
-        </button>
       </div>
     </div>
   );

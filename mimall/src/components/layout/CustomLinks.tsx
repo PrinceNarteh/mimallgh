@@ -19,7 +19,6 @@ const customLinks = [
 
 const CustomLinks = () => {
   const { pathname } = useRouter();
-  console.log(pathname === "/");
 
   const links = customLinks.filter(
     (link) => pathname === "/" || !link.link.startsWith(pathname)
