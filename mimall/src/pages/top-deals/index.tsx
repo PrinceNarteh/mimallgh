@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import Container from "../components/Container";
-import { sections } from "../utils/data";
+import Container from "../../components/Container";
+import ProductCard from "../../components/ProductCard";
+import { sections } from "../../utils/data";
 
 const TopDeals = () => {
   return (
@@ -26,32 +27,7 @@ const TopDeals = () => {
             </div>
             <div className="mb-3 flex items-center justify-start gap-5 overflow-y-auto py-2 px-7 pb-2">
               {section.images.map((image, idx) => (
-                <div className="h-[260px] w-[190px]">
-                  <p className="mb-1 px-1 text-xs line-clamp-1">
-                    Lorem ipsum dolor sit amet.
-                  </p>
-                  <div
-                    key={idx}
-                    className="shrink-0 cursor-pointer overflow-hidden rounded-md shadow-md"
-                  >
-                    <div className="relative h-[190px] w-[190px]">
-                      <Link key={idx} href={`/products/${idx}`}>
-                        <Image
-                          src={image.imageUrl}
-                          fill
-                          alt=""
-                          style={{ objectFit: "cover" }}
-                        />
-                      </Link>
-                    </div>
-                    <div className="px-2 py-1">
-                      <p className="text-sm line-clamp-1">
-                        Lorem ipsum dolor sit amet.
-                      </p>
-                      <p className="font-semibold">GH¢ 1234.00</p>
-                    </div>
-                  </div>
-                </div>
+                <ProductCard key={idx} image={image.imageUrl} />
               ))}
             </div>
             <Link

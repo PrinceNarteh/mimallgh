@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Container from "../../components/Container";
 import ReactImageMagnify from "react-image-magnify";
+import ProductCard from "../../components/ProductCard";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const images = [
@@ -212,32 +213,7 @@ const ProductDetails = () => {
           <div className="w-full overflow-x-auto">
             <div className="flex justify-start gap-5 py-4 pt-5">
               {topDeals.map((topDeal, idx) => (
-                <div className="h-[260px] w-[190px]">
-                  <p className="mb-1 px-1 text-xs line-clamp-1">
-                    Lorem ipsum dolor sit amet.
-                  </p>
-                  <div
-                    key={idx}
-                    className="shrink-0 cursor-pointer overflow-hidden rounded-md shadow-md"
-                  >
-                    <div className="relative h-[190px] w-[190px]">
-                      <Link key={idx} href={`/products/${idx}`}>
-                        <Image
-                          src={topDeal.image}
-                          fill
-                          alt=""
-                          style={{ objectFit: "cover" }}
-                        />
-                      </Link>
-                    </div>
-                    <div className="px-2 py-1">
-                      <p className="text-sm line-clamp-1">
-                        Lorem ipsum dolor sit amet.
-                      </p>
-                      <p className="font-semibold">GH¢ 1234.00</p>
-                    </div>
-                  </div>
-                </div>
+                <ProductCard key={idx} image={topDeal.image} />
               ))}
             </div>
           </div>
