@@ -1,6 +1,3 @@
-import React from "react";
-import CartItem from "./CartItem";
-
 const OrderSummary = () => {
   return (
     <div className="mx-auto w-full max-w-4xl overflow-x-auto rounded-md border border-gray-400 p-5">
