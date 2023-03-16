@@ -10,6 +10,7 @@ import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
 import { api } from "../utils/api";
 import CustomLinks from "../components/layout/CustomLinks";
+import SearchBar from "../components/SearchBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <MainNavbar />
           <SubNavbar />
           <CustomLinks />
+          <SearchBar />
         </div>
         <Component {...pageProps} />
       </SessionProvider>

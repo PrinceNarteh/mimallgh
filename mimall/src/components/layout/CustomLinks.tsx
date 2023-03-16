@@ -4,12 +4,12 @@ import React from "react";
 
 const customLinks = [
   {
-    label: "Top Deals",
-    link: "/top-deals",
-  },
-  {
     label: "Product Videos",
     link: "/product-videos",
+  },
+  {
+    label: "Top Deals",
+    link: "/top-deals",
   },
   {
     label: "Trending",

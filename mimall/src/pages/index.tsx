@@ -12,7 +12,9 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 const Home = () => {
   return (
     <Container>
-      <Banner />
+      <div className="pt-20">
+        <Banner />
+      </div>
       <section className="mx-auto w-11/12 space-y-5 py-10">
         <div>
           <h4 className="sh-underline relative md:text-3xl">Categories</h4>

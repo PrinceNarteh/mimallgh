@@ -8,12 +8,12 @@ import "swiper/css/pagination";
 
 const Banner = () => {
   return (
-    <div className="relative mx-auto grid h-[calc(100vh_-_150px)] w-11/12 grid-cols-12 overflow-hidden">
-      <div className="col-span-2 flex flex-wrap">
-        {Array(3)
+    <div className="relative mx-auto grid h-96 w-11/12 grid-cols-12 gap-3 overflow-hidden">
+      <div className="col-span-2 flex h-full flex-wrap justify-between gap-2">
+        {Array(2)
           .fill(null)
           .map((_, idx) => (
-            <div className="h-40 w-full flex-1 basis-40">
+            <div className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md bg-teal-500">
               <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -36,6 +36,7 @@ const Banner = () => {
                       fill
                       className="h-full w-full object-cover"
                       alt=""
+                      style={{ objectFit: "cover" }}
                     />
                   </div>
                 </SwiperSlide>
@@ -52,7 +53,7 @@ const Banner = () => {
                 <SwiperSlide>
                   <div className="h-40] relative">
                     <Image
-                      src={"/images/banner-3.jpg"}
+                      src={"/images/product-1.jpg"}
                       fill
                       style={{ objectFit: "cover" }}
                       alt=""
@@ -63,7 +64,7 @@ const Banner = () => {
             </div>
           ))}
       </div>
-      <div className="col-span-8">
+      <div className="col-span-8 h-96 overflow-hidden rounded-md">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -112,7 +113,7 @@ const Banner = () => {
         </Swiper>
       </div>
       <div className="col-span-2 flex flex-wrap">
-        {Array(3)
+        {Array(2)
           .fill(null)
           .map((_, idx) => (
             <div className="h-40 w-full flex-1 basis-40">
