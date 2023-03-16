@@ -1,6 +1,6 @@
-import CartCard from "../../components/CartCard";
+import { BsCheckCircleFill } from "react-icons/bs";
+import OrderSummary from "../../components/OrderSummary";
 import Container from "../../components/Container";
-import { BsCircle, BsCheckCircleFill } from "react-icons/bs";
 
 const Payment = () => {
   return (
@@ -31,14 +31,14 @@ const Payment = () => {
               <h4 className="sh-underline relative md:text-3xl">
                 Delivery Service
               </h4>
-              <div className="flex flex-col items-center py-2 xl:flex-row">
+              <div className="flex w-full flex-col items-center py-2 xl:flex-row">
                 <label
                   htmlFor="phoneNumber"
                   className="block w-60 shrink-0 whitespace-nowrap"
                 >
                   Choose Delivery Time
                 </label>
-                <select name="" id="" className="flex-1 border p-1">
+                <select name="" id="" className="w-full flex-1 border p-1">
                   <option value="">Select your time</option>
                 </select>
               </div>
@@ -49,7 +49,7 @@ const Payment = () => {
                 >
                   Favourite Delivery Company
                 </label>
-                <select name="" id="" className="flex-1 border p-1">
+                <select name="" id="" className="w-full flex-1 border p-1">
                   <option value="">Select your time</option>
                 </select>
               </div>
@@ -73,7 +73,7 @@ const Payment = () => {
           </div>
         </div>
         <div className="col-span-8 md:col-span-4">
-          <CartCard />
+          <OrderSummary />
         </div>
       </div>
     </Container>

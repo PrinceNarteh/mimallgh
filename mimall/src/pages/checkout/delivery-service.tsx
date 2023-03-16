@@ -1,4 +1,4 @@
-import CartCard from "../../components/CartCard";
+import CartCard from "../../components/OrderSummary";
 import Container from "../../components/Container";
 import { BsCircle, BsCheckCircleFill } from "react-icons/bs";
 import { FormEvent } from "react";
