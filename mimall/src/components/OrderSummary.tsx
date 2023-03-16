@@ -1,6 +1,6 @@
 const OrderSummary = () => {
   return (
-    <div className="mx-auto w-full max-w-4xl overflow-x-auto rounded-md border border-gray-400 p-5">
+    <div className="mx-auto w-full max-w-4xl overflow-x-auto rounded-md border border-gray-400 p-5 shadow">
       <div className="w-full space-y-5">
         <h4 className="sh-underline relative md:text-3xl">Order Summary</h4>
         <div className="relative overflow-x-auto">
@@ -25,6 +25,7 @@ const OrderSummary = () => {
               </tr>
             </thead>
             <tbody>
+              {}
               <tr className="border-b bg-white">
                 <th
                   scope="row"

@@ -37,8 +37,8 @@ const DeliveryService = () => {
           <h4 className="sh-underline relative md:text-3xl">
             Delivery Service
           </h4>
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col items-center py-2 xl:flex-row">
+          <form onSubmit={handleSubmit} className="space-y-2">
+            <div className="flex flex-col items-center gap-5 py-2 xl:flex-row">
               <label
                 htmlFor="phoneNumber"
                 className="block w-60 shrink-0 whitespace-nowrap"

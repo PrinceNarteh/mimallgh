@@ -18,7 +18,7 @@ const Checkout = () => {
       </div>
       <form onSubmit={handleSubmit} className="mt-5">
         <h4 className="sh-underline relative md:text-3xl">Address</h4>
-        <div className="flex flex-col items-center py-2 xl:flex-row">
+        <div className="flex flex-col items-center justify-start py-2 md:flex-row">
           <label
             htmlFor="fullName"
             className="block w-60 shrink-0 whitespace-nowrap"
