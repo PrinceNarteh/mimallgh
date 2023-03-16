@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
-import CustomLinks from "../components/layout/CustomLinks";
+import Container from "../components/Container";
 import ProductCard from "../components/ProductCard";
 import TopDeals from "../components/TopDeals";
 import { categories, sections, topDeals } from "../utils/data";
@@ -11,7 +11,7 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const Home = () => {
   return (
-    <div className="pt-[100px]">
+    <Container>
       <Banner />
       <section className="mx-auto w-11/12 space-y-5 py-10">
         <div>
@@ -140,7 +140,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-    </div>
+    </Container>
   );
 };
 
