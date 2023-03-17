@@ -4,9 +4,13 @@ import { CiUser } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
 import Link from "next/link";
 
-const MainNavbar = () => {
+const MainNavbar = ({ show }: { show: boolean }) => {
   return (
-    <div className={"bg-gray-900 px-5"}>
+    <div
+      className={`fixed ${
+        show ? "top-[52px]" : "top-0"
+      } w-full bg-gray-900 px-5 duration-200`}
+    >
       <div
         className={"mx-auto flex max-w-7xl items-center justify-between py-2"}
       >

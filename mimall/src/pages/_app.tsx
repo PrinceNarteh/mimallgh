@@ -39,9 +39,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <div className={poppins.className}>
       <SessionProvider session={session}>
         <div className="fixed z-50 w-full">
-          <MainNavbar />
-          <SubNavbar />
-          <CustomLinks />
+          <MainNavbar show={scrollY > 180} />
+          {/* <SubNavbar /> */}
+          {/* <CustomLinks /> */}
           <FloatingNavbar show={scrollY > 180} />
         </div>
         <Component {...pageProps} />

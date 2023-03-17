@@ -21,7 +21,7 @@ const SearchBar = () => {
           />
           <BiSearch className="w-10 shrink-0 text-3xl text-gray-500" />
         </div>
-        <div className="absolute -bottom-14 mx-auto h-16 w-[77%] rounded-md bg-white p-2 shadow">
+        <div className="absolute -bottom-14 mx-auto h-16 w-[77%] rounded-md border bg-white p-2 shadow">
           <div className="grid h-full w-full grid-cols-3 divide-x-2">
             <div className=""></div>
             <div className=""></div>
