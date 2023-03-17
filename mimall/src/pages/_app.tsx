@@ -42,7 +42,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <MainNavbar />
           <SubNavbar />
           <CustomLinks />
-          <FloatingNavbar show={scrollY > 400} />
+          <FloatingNavbar show={scrollY > 180} />
         </div>
         <Component {...pageProps} />
       </SessionProvider>
