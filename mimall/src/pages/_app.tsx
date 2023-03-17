@@ -9,7 +9,6 @@ import { Toaster } from "react-hot-toast";
 import CustomLinks from "../components/layout/CustomLinks";
 import FloatingNavbar from "../components/layout/FloatingNavbar";
 import MainNavbar from "../components/layout/MainNavbar";
-import SearchBar from "../components/layout/SearchBar";
 import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
 import { api } from "../utils/api";
@@ -43,7 +42,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <MainNavbar />
           <SubNavbar />
           <CustomLinks />
-          <SearchBar />
           <FloatingNavbar show={scrollY > 400} />
         </div>
         <Component {...pageProps} />

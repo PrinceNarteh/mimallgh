@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
 import Container from "../components/Container";
+import SearchBar from "../components/layout/SearchBar";
 import ProductCard from "../components/ProductCard";
 import TopDeals from "../components/TopDeals";
 import { categories, sections, topDeals } from "../utils/data";
@@ -12,7 +13,8 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 const Home = () => {
   return (
     <Container>
-      <div className="pt-28">
+      <SearchBar />
+      <div className="pt-14">
         <Banner />
       </div>
       <section className="mx-auto w-11/12 space-y-5 py-10">

@@ -2,8 +2,6 @@ import React from "react";
 import { BiSearch } from "react-icons/bi";
 
 const FloatingNavbar = ({ show }: { show: boolean }) => {
-  console.log(show);
-
   return (
     <div
       className={`${
