@@ -10,7 +10,7 @@ import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
 import { api } from "../utils/api";
 import CustomLinks from "../components/layout/CustomLinks";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/layout/SearchBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
