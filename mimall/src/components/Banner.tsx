@@ -8,12 +8,15 @@ import "swiper/css/pagination";
 
 const Banner = () => {
   return (
-    <div className="relative mx-auto grid h-96 w-11/12 grid-cols-12 gap-3 overflow-hidden">
-      <div className="col-span-2 flex h-full flex-wrap justify-between gap-2">
+    <div className="relative mx-auto grid h-96 w-9/12 grid-cols-8 gap-3 overflow-hidden rounded-md bg-white p-3">
+      <div className="col-span-2 flex h-full flex-wrap justify-between">
         {Array(2)
           .fill(null)
           .map((_, idx) => (
-            <div className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md bg-teal-500">
+            <div
+              key={idx}
+              className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md bg-teal-500"
+            >
               <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -30,7 +33,7 @@ const Banner = () => {
                 modules={[Autoplay, Pagination]}
               >
                 <SwiperSlide>
-                  <div className="relative h-40">
+                  <div className="relative h-[176px]">
                     <Image
                       src={"/images/bg-1.jpg"}
                       fill
@@ -41,7 +44,7 @@ const Banner = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="relative h-40">
+                  <div className="relative h-[176px]">
                     <Image
                       src={"/images/banner-2.jpg"}
                       fill
@@ -51,7 +54,7 @@ const Banner = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="h-40] relative">
+                  <div className="relative h-[176px]">
                     <Image
                       src={"/images/product-1.jpg"}
                       fill
@@ -64,7 +67,7 @@ const Banner = () => {
             </div>
           ))}
       </div>
-      <div className="col-span-8 h-96 overflow-hidden rounded-md">
+      <div className="col-span-4 h-96 overflow-hidden rounded-md">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -81,42 +84,47 @@ const Banner = () => {
           modules={[Autoplay, Pagination]}
         >
           <SwiperSlide>
-            <div className="relative h-[calc(100vh_-_100px)]">
+            <div className="relative h-[368px]">
               <Image
                 src={"/images/bg-1.jpg"}
                 fill
-                className="h-full w-full object-cover"
+                className="h-full w-full rounded-md object-cover object-center"
                 alt=""
               />
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="relative h-[calc(100vh_-_100px)]">
+            <div className="relative h-[368px]">
               <Image
                 src={"/images/banner-2.jpg"}
                 fill
                 style={{ objectFit: "cover" }}
+                className="h-full w-full rounded-md object-cover"
                 alt=""
               />
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="relative h-[calc(100vh_-_100px)]">
+            <div className="relative h-[368px]">
               <Image
                 src={"/images/banner-3.jpg"}
                 fill
                 style={{ objectFit: "cover" }}
+                className="h-full w-full rounded-md object-cover"
                 alt=""
               />
             </div>
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="col-span-2 flex flex-wrap">
+      <div className="col-span-2 flex h-full flex-wrap justify-between">
         {Array(2)
           .fill(null)
           .map((_, idx) => (
-            <div className="h-40 w-full flex-1 basis-40">
+            <div
+              key={idx}
+              className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md bg-teal-500"
+            >
               <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -133,17 +141,18 @@ const Banner = () => {
                 modules={[Autoplay, Pagination]}
               >
                 <SwiperSlide>
-                  <div className="relative h-40">
+                  <div className="relative h-[176px]">
                     <Image
                       src={"/images/bg-1.jpg"}
                       fill
                       className="h-full w-full object-cover"
                       alt=""
+                      style={{ objectFit: "cover" }}
                     />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="relative h-40">
+                  <div className="relative h-[176px]">
                     <Image
                       src={"/images/banner-2.jpg"}
                       fill
@@ -153,9 +162,9 @@ const Banner = () => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="h-40] relative">
+                  <div className="relative h-[176px]">
                     <Image
-                      src={"/images/banner-3.jpg"}
+                      src={"/images/product-1.jpg"}
                       fill
                       style={{ objectFit: "cover" }}
                       alt=""

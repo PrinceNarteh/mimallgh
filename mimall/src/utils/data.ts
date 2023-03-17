@@ -31,42 +31,42 @@ export const topDeals = [
 export const categories = [
   {
     label: "Food",
-    link: "/food",
+    link: "food",
     image: "/images/food-2.jpg",
   },
   {
     label: "Fashion and Wears",
-    link: "/fashion-and-wears",
+    link: "fashion-and-wears",
     image: "/images/fashion-and-wear-2.jpg",
   },
   {
     label: "Grocery and General",
-    link: "/grocery-and-general",
+    link: "grocery-and-general",
     image: "/images/grocery-and-general-4.jpg",
   },
   {
     label: "Health and Wellness",
-    link: "/health-and-wellness",
+    link: "health-and-wellness",
     image: "/images/health-and-wellness-4.jpg",
   },
   {
     label: "Home and Electrical Appliances",
-    link: "/home-and-electrical-appliances",
+    link: "home-and-electrical-appliances",
     image: "/images/personal-services-6.jpg",
   },
   {
     label: "Personal Services",
-    link: "/personal-services",
+    link: "personal-services",
     image: "/images/personal-services-2.jpg",
   },
   {
     label: "Printing and Stationery",
-    link: "/printing-and-stationery",
+    link: "printing-and-stationery",
     image: "/images/printing-and-stationery-5.jpg",
   },
   {
     label: "Tech",
-    link: "/tech",
+    link: "tech",
     image: "/images/tech-5.jpg",
   },
 ];
@@ -74,7 +74,7 @@ export const categories = [
 export const sections = [
   {
     heading: "Food",
-    link: "/food",
+    link: "food",
     images: [
       {
         imageUrl: "/images/food-1.jpg",
@@ -92,7 +92,7 @@ export const sections = [
   },
   {
     heading: "Fashion and Wears",
-    link: "/fashion-and-wears",
+    link: "fashion-and-wears",
     images: [
       {
         imageUrl: "/images/fashion-and-wear-1.jpg",
@@ -110,7 +110,7 @@ export const sections = [
   },
   {
     heading: "Grocery and General",
-    link: "/grocery-and-general",
+    link: "grocery-and-general",
     images: [
       {
         imageUrl: "/images/grocery-and-general-1.jpg",
@@ -128,7 +128,7 @@ export const sections = [
   },
   {
     heading: "Health and Wellness",
-    link: "/health-and-wellness",
+    link: "health-and-wellness",
     images: [
       {
         imageUrl: "/images/health-and-wellness-1.jpg",
@@ -146,7 +146,7 @@ export const sections = [
   },
   {
     heading: "Home and Electrical Appliances",
-    link: "/home-and-electrical-appliances",
+    link: "home-and-electrical-appliances",
     images: [
       {
         imageUrl: "/images/home-and-electrical-appliances-1.jpg",
@@ -164,7 +164,7 @@ export const sections = [
   },
   {
     heading: "Personal Services",
-    link: "/personal-services",
+    link: "personal-services",
     images: [
       {
         imageUrl: "/images/personal-services-1.jpg",
@@ -182,7 +182,7 @@ export const sections = [
   },
   {
     heading: "Printing and Stationery",
-    link: "/printing-and-stationery",
+    link: "printing-and-stationery",
     images: [
       {
         imageUrl: "/images/printing-and-stationery-1.jpg",
@@ -200,7 +200,7 @@ export const sections = [
   },
   {
     heading: "Tech",
-    link: "/tech",
+    link: "tech",
     images: [
       {
         imageUrl: "/images/tech-1.jpg",

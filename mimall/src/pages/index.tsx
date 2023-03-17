@@ -12,7 +12,7 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 const Home = () => {
   return (
     <Container>
-      <div className="pt-20">
+      <div className="pt-28">
         <Banner />
       </div>
       <section className="mx-auto w-11/12 space-y-5 py-10">
@@ -21,7 +21,7 @@ const Home = () => {
           <div className="w-full overflow-x-scroll">
             <div className="flex gap-3 py-4">
               {categories.map((category, idx) => (
-                <Link key={idx} href={`/category/${category.link}`}>
+                <Link key={idx} href={`/category${category.link}`}>
                   <div
                     className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
                   >
