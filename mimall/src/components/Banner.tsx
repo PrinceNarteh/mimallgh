@@ -15,7 +15,7 @@ const Banner = () => {
           .map((_, idx) => (
             <div
               key={idx}
-              className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md bg-teal-500"
+              className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md"
             >
               <Swiper
                 spaceBetween={30}
@@ -123,7 +123,7 @@ const Banner = () => {
           .map((_, idx) => (
             <div
               key={idx}
-              className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md bg-teal-500"
+              className="h-44 w-full flex-1 basis-40 justify-between overflow-hidden rounded-md"
             >
               <Swiper
                 spaceBetween={30}
