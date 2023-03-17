@@ -6,7 +6,7 @@ import Container from "../../components/Container";
 const Cart = () => {
   return (
     <Container>
-      <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-y-5 px-7 pb-10 md:grid-cols-5 md:gap-x-5">
+      <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-y-5 p-7 pb-10 md:grid-cols-5 md:gap-x-5">
         <div className="col-span-3 w-full space-y-5">
           <CartItem />
           <CartItem />

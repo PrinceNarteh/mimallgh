@@ -16,7 +16,7 @@ const ProductVideos = () => {
               <div className="bg-[#ff0000] px-4 py-2 text-white">SORT BY</div>
             </div>
             <div className="mt-5">
-              <div className="grid gap-5 grid-auto-fit-lg">
+              <div className="grid gap-5 grid-auto-fit-md">
                 {Array(6)
                   .fill(null)
                   .map((_, idx) => (

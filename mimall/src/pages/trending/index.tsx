@@ -10,7 +10,7 @@ const Trending = () => {
       <div className="mx-auto w-11/12 py-7">
         <div className="w-full">
           <div className="mt-5">
-            <div className="grid gap-5 grid-auto-fit-lg">
+            <div className="grid gap-5 grid-auto-fit-md">
               {Array(40)
                 .fill(null)
                 .map((_, idx) => (
