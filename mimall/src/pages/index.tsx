@@ -12,8 +12,15 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const Home = () => {
   return (
-    <div className="pt-12">
+    <div className="">
       <SearchBar />
+      <div className="sticky top-[50px] z-50 px-5 shadow-md">
+        <div className="grid h-14 w-full grid-cols-3 divide-x-2 rounded-md border bg-red-500">
+          <div className=""></div>
+          <div className=""></div>
+          <div className=""></div>
+        </div>
+      </div>
       <div className="pt-14">
         <Banner />
       </div>
