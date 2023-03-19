@@ -20,7 +20,6 @@ const SearchBar = () => {
             placeholder="Search for product..."
           />
           <BiSearch className="w-10 shrink-0 text-3xl text-gray-500" />
-          <div className="sticky top-0 mx-auto h-16 w-full rounded-md border bg-white p-2 shadow"></div>
         </div>
       </div>
     </div>

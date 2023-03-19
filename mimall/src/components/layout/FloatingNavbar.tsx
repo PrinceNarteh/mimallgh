@@ -5,8 +5,8 @@ const FloatingNavbar = ({ show }: { show: boolean }) => {
   return (
     <div
       className={`${
-        show ? " block translate-y-0" : "-translate-y-20"
-      } fixed top-0 z-50 flex w-full transform items-center bg-white px-10 duration-200`}
+        show ? " block translate-y-0" : "-translate-y-24"
+      } fixed top-0 z-50 flex h-[90px] w-full transform items-start bg-gray-200 px-10 pt-1 duration-200`}
     >
       <div className={"flex w-full items-center py-2"}>
         <h3 className="mr-20 text-3xl text-pink-500">MiMall</h3>
@@ -17,7 +17,7 @@ const FloatingNavbar = ({ show }: { show: boolean }) => {
               className="flex-1 py-1 px-2 outline-none"
               placeholder="Search for product..."
             />
-            <BiSearch className="w-10 shrink-0 text-3xl text-gray-500" />
+            <BiSearch className="w-10 shrink-0 text-2xl text-gray-500" />
           </div>
         </div>
       </div>

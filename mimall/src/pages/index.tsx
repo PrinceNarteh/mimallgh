@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
 import Container from "../components/Container";
+import Navbar from "../components/layout/Navbar";
 import SearchBar from "../components/layout/SearchBar";
 import ProductCard from "../components/ProductCard";
 import TopDeals from "../components/TopDeals";
@@ -14,17 +15,9 @@ const Home = () => {
   return (
     <div className="">
       <SearchBar />
-      <div className="sticky top-[50px] z-50 px-5 shadow-md">
-        <div className="grid h-14 w-full grid-cols-3 divide-x-2 rounded-md border bg-red-500">
-          <div className=""></div>
-          <div className=""></div>
-          <div className=""></div>
-        </div>
-      </div>
-      <div className="pt-14">
-        <Banner />
-      </div>
-      <section className="mx-auto w-11/12 space-y-5 py-10">
+      <Navbar />
+      <Banner />
+      <section className="mx-auto w-11/12 space-y-5 pt-7 pb-10">
         <div>
           <h4 className="sh-underline relative md:text-3xl">Categories</h4>
           <div className="w-full overflow-x-scroll">

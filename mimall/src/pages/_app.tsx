@@ -2,14 +2,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-
 import { Poppins } from "@next/font/google";
 import { useCallback, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import CustomLinks from "../components/layout/CustomLinks";
+
 import FloatingNavbar from "../components/layout/FloatingNavbar";
-import MainNavbar from "../components/layout/MainNavbar";
-import SubNavbar from "../components/layout/SubNavbar";
 import "../styles/globals.css";
 import { api } from "../utils/api";
 
@@ -39,10 +36,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <div className={poppins.className}>
       <SessionProvider session={session}>
         <div className="fixed z-50 w-full">
-          {/* <MainNavbar show={scrollY > 180} /> */}
-          {/* <SubNavbar /> */}
-          {/* <CustomLinks /> */}
-          <FloatingNavbar show={scrollY > 50} />
+          <FloatingNavbar show={scrollY > 70} />
         </div>
         <Component {...pageProps} />
       </SessionProvider>
