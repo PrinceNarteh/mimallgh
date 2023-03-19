@@ -14,8 +14,6 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 const Home = () => {
   return (
     <div className="">
-      <SearchBar />
-      <Navbar />
       <Banner />
       <section className="mx-auto w-11/12 space-y-5 pt-7 pb-10">
         <div>

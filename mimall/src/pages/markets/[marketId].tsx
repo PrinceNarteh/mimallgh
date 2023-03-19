@@ -15,7 +15,7 @@ const Markets = () => {
   const market = capitalize(query.marketId as string);
   return (
     <Container>
-      <div className="mx-auto my-5 w-11/12">
+      <div className="mx-auto w-11/12 py-5">
         <h3 className="sh-underline text-3xl">{market} Market</h3>
       </div>
 
@@ -23,7 +23,7 @@ const Markets = () => {
         <div className="grid gap-5 grid-auto-fit-lg">
           {categories.map((category, idx) => (
             <Link key={idx} href={`/category/${category.link}`}>
-              <div>
+              <div className="bg-white">
                 <div
                   className={`group relative h-28 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
                 >
