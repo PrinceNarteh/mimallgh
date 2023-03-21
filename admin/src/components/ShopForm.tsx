@@ -76,14 +76,14 @@ const AddShopForm = ({
       createShopMutation.mutate(data, {
         onSuccess() {
           toast.success("Shop created successfully");
-          router.push(`/admin/shops/${shop?.id}`);
+          router.push(`/shops/${shop?.id}`);
         },
       });
     } else {
       updateShopMutation.mutate(data, {
         onSuccess: () => {
           toast.success("Update successful");
-          router.push(`/admin/shops/${shop?.id}`);
+          router.push(`/shops/${shop?.id}`);
         },
       });
     }
@@ -93,6 +93,8 @@ const AddShopForm = ({
     id: shopOwner.id,
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
+
+  console.log(errors);
 
   return (
     <div className="pb-10">

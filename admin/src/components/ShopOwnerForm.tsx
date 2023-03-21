@@ -34,7 +34,7 @@ const ShopOwnerForm = ({
       phoneNumber: shopOwner?.phoneNumber || "",
       alternateNumber: shopOwner?.alternateNumber || "",
       password: shopOwner?.password || "",
-      role: shopOwner?.role || "shop_owner",
+      role: shopOwner?.role || "SHOP_OWNER",
     },
     resolver: zodResolver(
       shopOwner?.id ? updateShopOwnerDto : createShopOwnerDto
@@ -59,7 +59,7 @@ const ShopOwnerForm = ({
         {
           onSuccess: (data) => {
             toast.success("Shop owner created successfully.");
-            router.push(`/admin/shop-owners/${data.id}`);
+            router.push(`/shop-owners/${data.id}`);
           },
         }
       );
@@ -72,12 +72,14 @@ const ShopOwnerForm = ({
         {
           onSuccess: (data) => {
             toast.success("Shop owner updated successfully.");
-            router.push(`/admin/shop-owners/${data.id}`);
+            router.push(`/shop-owners/${data.id}`);
           },
         }
       );
     }
   };
+
+  console.log(errors);
 
   return (
     <div className="mx-auto max-w-4xl">

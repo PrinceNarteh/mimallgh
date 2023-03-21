@@ -73,7 +73,7 @@ const Checkout = () => {
           <div className="block w-60 shrink-0 whitespace-nowrap"></div>
           <button
             type="submit"
-            className="rounded-md bg-pink-500 px-20 py-3 text-center font-bold text-white"
+            className="w-full rounded-md bg-pink-500 py-3 text-center font-bold text-white"
           >
             Proceed To Next Step
           </button>
