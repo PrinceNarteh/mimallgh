@@ -1,6 +1,6 @@
 export const topDeals = [
   {
-    image: "/images/fashion-and-wear-1.jpg",
+    image: "/images/fashion-and-wears-1.jpg",
   },
   {
     image: "/images/personal-services-1.jpg",
@@ -37,7 +37,7 @@ export const categories = [
   {
     label: "Fashion and Wears",
     link: "fashion-and-wears",
-    image: "/images/fashion-and-wear-2.jpg",
+    image: "/images/fashion-and-wears-2.jpg",
   },
   {
     label: "Grocery and General",
@@ -95,16 +95,16 @@ export const sections = [
     link: "fashion-and-wears",
     images: [
       {
-        imageUrl: "/images/fashion-and-wear-1.jpg",
+        imageUrl: "/images/fashion-and-wears-1.jpg",
       },
       {
-        imageUrl: "/images/fashion-and-wear-2.jpg",
+        imageUrl: "/images/fashion-and-wears-2.jpg",
       },
       {
-        imageUrl: "/images/fashion-and-wear-3.jpg",
+        imageUrl: "/images/fashion-and-wears-3.jpg",
       },
       {
-        imageUrl: "/images/fashion-and-wear-4.jpg",
+        imageUrl: "/images/fashion-and-wears-4.jpg",
       },
     ],
   },
