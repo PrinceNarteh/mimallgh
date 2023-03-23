@@ -38,7 +38,7 @@ const OrderListTable = () => {
           <tbody>
             <tr
               className="cursor-pointer rounded bg-light-gray"
-              onClick={() => router.push(`/admin/orders/${123}`)}
+              onClick={() => router.push(`/orders/${123}`)}
             >
               <td className="text-center">
                 <input type="checkbox" />
@@ -51,7 +51,10 @@ const OrderListTable = () => {
               <td className="py-5 text-center ">$1234.00</td>
               <td className="py-5 text-center ">D</td>
             </tr>
-            <tr className="rounded bg-light-gray">
+            <tr
+              className="rounded bg-light-gray"
+              onClick={() => router.push(`/orders/${123}`)}
+            >
               <td className="text-center">
                 <input type="checkbox" />
               </td>
@@ -63,7 +66,10 @@ const OrderListTable = () => {
               <td className="py-5 text-center ">$2234.00</td>
               <td className="py-5 text-center ">D</td>
             </tr>
-            <tr className="rounded bg-light-gray">
+            <tr
+              className="rounded bg-light-gray"
+              onClick={() => router.push(`/orders/${123}`)}
+            >
               <td className="text-center">
                 <input type="checkbox" />
               </td>

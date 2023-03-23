@@ -36,8 +36,8 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-authImage bg-cover bg-no-repeat">
-      <div className="absolute inset-0 flex items-center justify-center bg-[rgba(0,0,100,0.7)] bg-[rgba(0_0_100_0.7)] bg-gradient-to-r px-5">
+    <div className="min-h-[calc(100vh-56px)] overflow-hidden bg-authImage bg-cover bg-no-repeat">
+      <div className="absolute inset-0 flex items-center justify-center bg-[rgba(31,41,55,0.8)] bg-[rgba(31,41,55,0.8)] bg-gradient-to-r px-5">
         <div className="relative flex w-full max-w-md flex-col items-center rounded  bg-white p-5 pt-10">
           <div
             className="absolute -top-11 flex h-20 w-20 items-center justify-center rounded-full border bg-white text-3xl text-gray-500 shadow-md
