@@ -41,7 +41,7 @@ const InputField = ({
       className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
     />
     {errors && errors[name] && (
-      <span className="pl-1 text-sm text-red-500">
+      <span className="pl-1 text-xs text-red-500">
         {errors[name]?.message as string}
       </span>
     )}

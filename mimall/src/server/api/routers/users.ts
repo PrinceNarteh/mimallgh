@@ -22,15 +22,19 @@ export const authRouter = createTRPCRouter({
           data: {
             ...input,
             password: hashedPassword,
-            role: mapRoleStringToEnum[input.role]!,
           },
         });
         return user;
       } catch (error: any) {
-        if (error.message.includes("User_email_key")) {
+        if (error.message.includes("User_")) {
           throw new TRPCError({
             code: "CONFLICT",
-            message: "Email already in used.",
+            message: `${error.message
+              .split("_")[1]
+              .replace(/([A-Z])/g, " $1")
+              .replace(/^./, function (str: string) {
+                return str.toUpperCase();
+              })} already in used`,
           });
         }
         throw new TRPCError({
@@ -182,7 +186,6 @@ export const authRouter = createTRPCRouter({
             message: "User not found",
           });
         }
-
 
         admin = await ctx.prisma.user.update({
           where: {

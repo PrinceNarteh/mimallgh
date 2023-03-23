@@ -53,9 +53,7 @@ export const createUserDto = z.object({
     .min(1, "Last name cannot be empty"),
   middleName: z.string().optional(),
   email: z.string({ required_error: "Email name is required." }).email(),
-  address: z
-    .string({ required_error: "Address is required." })
-    .min(1, "Address cannot be empty"),
+  address: z.string().optional(),
   phoneNumber: z
     .string({ required_error: "Phone number is required." })
     .length(10, "Phone number must be ten numbers"),
@@ -63,17 +61,13 @@ export const createUserDto = z.object({
   password: z
     .string({ required_error: "Password name is required." })
     .min(6, "Password should be six character or more"),
-  nationality: z.string({ required_error: "Nationality is required" }).min(1),
+  nationality: z.string().optional(),
   image: z.string({ required_error: "Password name is required." }).optional(),
   role: z.enum(["ADMIN", "SHOP_OWNER", "USER"], {
     required_error: "Role is required",
     invalid_type_error:
       "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
   }),
-  confirmPassword: z
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .optional(),
 });
 
 export const updateUserDto = createUserDto.extend({

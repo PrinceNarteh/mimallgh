@@ -46,7 +46,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <Navbar scroll={scrollY >= 70} />
         <Component {...pageProps} />
       </SessionProvider>
-      <Toaster position="top-right" reverseOrder />
+      <Toaster />
       <ReactQueryDevtools />
     </div>
   );
