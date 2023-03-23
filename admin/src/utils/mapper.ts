@@ -34,33 +34,23 @@ export const mapLevelToText = (level: string | null) => {
 };
 
 export const mapCategoryToString: Record<Category, string> = {
-  [Category.ACCOMMODATIONS_AND_BUILDING]: "accommodations_and_building",
-  [Category.FASHION_AND_WEARS]: "fashion_and_wears",
   [Category.FOOD]: "food",
-  [Category.FURNITURE]: "furniture",
+  [Category.FASHION_AND_WEARS]: "fashion_and_wears",
   [Category.GROCERY_AND_GENERAL]: "grocery_and_general",
   [Category.HEALTH_AND_WELLNESS]: "health_and_wellness",
-  [Category.HOME_AND_ELECTRICALS]: "home_and_electricals",
-  [Category.MONEY_AND_ENERGY]: "money_and_energy",
-  [Category.PERSONAL_CARE_AND_BEAUTY]: "personal_care_and_beauty",
-  [Category.RECREATION]: "recreation",
-  [Category.STATIONERY_AND_PRINTING]: "stationery_and_printing",
+  [Category.HOME_AND_ELECTRICAL_APPLIANCES]: "home_and_electrical_appliances",
+  [Category.PERSONAL_SERVICES]: "personal_services",
+  [Category.PRINTING_AND_STATIONERY]: "printing_and_stationery",
   [Category.TECH]: "tech",
-  [Category.TRANSPORT_AND_MACHINE]: "transport_and_machine",
 };
 
 export const mapStringToCategory: Record<string, Category> = {
-  accommodations_and_building: Category.ACCOMMODATIONS_AND_BUILDING,
-  fashion_and_wears: Category.FASHION_AND_WEARS,
   food: Category.FOOD,
-  furniture: Category.FURNITURE,
+  fashion_and_wears: Category.FASHION_AND_WEARS,
   grocery_and_general: Category.GROCERY_AND_GENERAL,
   health_and_wellness: Category.HEALTH_AND_WELLNESS,
-  home_and_electricals: Category.HOME_AND_ELECTRICALS,
-  money_and_energy: Category.MONEY_AND_ENERGY,
-  personal_care_and_beauty: Category.PERSONAL_CARE_AND_BEAUTY,
-  recreation: Category.RECREATION,
-  stationery_and_printing: Category.STATIONERY_AND_PRINTING,
+  home_and_electrical_appliances: Category.HOME_AND_ELECTRICAL_APPLIANCES,
+  personal_services: Category.PERSONAL_SERVICES,
+  printing_and_stationery: Category.PRINTING_AND_STATIONERY,
   tech: Category.TECH,
-  transport_and_machine: Category.TRANSPORT_AND_MACHINE,
 };
