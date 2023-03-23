@@ -29,7 +29,7 @@ const InputField = ({
   <div className="my-2 w-full">
     <label
       htmlFor={name}
-      className="mb-1.5 block pl-2 capitalize tracking-widest"
+      className="block pl-2 text-sm capitalize tracking-widest"
     >
       {label}
       {validationSchema?.required && "*"}
