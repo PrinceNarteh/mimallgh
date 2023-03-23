@@ -34,7 +34,6 @@ export const mapLevelToText = (level: string | null) => {
 };
 
 export const mapCategoryToString: Record<Category, string> = {
-  [Category.ACCOMMODATIONS_AND_BUILDING]: "accommodations_and_building",
   [Category.FASHION_AND_WEARS]: "fashion_and_wears",
   [Category.FOOD]: "food",
   [Category.FURNITURE]: "furniture",

@@ -6,14 +6,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import registerImg from "../../../assets/images/register.jpg";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { api } from "../../utils/api";
 
-const loginValidation = z.object({
-  email: z.string({ required_error: "Email is required." }).email(),
-  password: z
-    .string({ required_error: "Password is required." })
-    .min(6, "Minimum characters should be six."),
-});
+const registerValidation = z
+  .object({
+    firstName: z.string({ required_error: "First name is required" }),
+    lastName: z.string({ required_error: "Last name is required" }),
+    email: z.string({ required_error: "Email is required." }).email(),
+    phoneNumber: z
+      .string({ required_error: "Phone number is required." })
+      .min(1, "Phone number must be 10 digits"),
+    password: z
+      .string({ required_error: "Password is required." })
+      .min(6, "Minimum characters should be six."),
+    confirmPassword: z
+      .string({ required_error: "Confirm password name is required." })
+      .min(6, "Password must be at least 6 characters"),
+  })
+  .refine((val) => val?.password === val?.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 const Register = () => {
   const {
@@ -21,13 +35,21 @@ const Register = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(loginValidation),
+    resolver: zodResolver(registerValidation),
   });
+  const registerMutation = api.users.register.useMutation();
 
-  const submitHandler = async (data: { email: string; password: string }) => {
+  const submitHandler = async (data: any) => {
     try {
-      const res = await signIn("credentials", data);
-    } catch (error) {}
+      const user = {
+        ...data,
+        role: "USER",
+      };
+      const res = registerMutation.mutate(user);
+      console.log(res);
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -44,11 +66,11 @@ const Register = () => {
           </div>
           <div className="col-span-2 ml-5 rounded-md p-5">
             <h3 className="text-3xl font-bold text-slate-700">Register</h3>
-            <p className="my-2 text-slate-500">
+            <p className="my-2 text-sm text-slate-500">
               Enter your information to get an account
             </p>
             {/* {error && <p className="py-2 text-center text-red-500">{error}</p>} */}
-            <form>
+            <form onSubmit={handleSubmit(submitHandler)}>
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col md:flex-row md:gap-5">
                   <InputField
@@ -68,30 +90,13 @@ const Register = () => {
                 </div>
                 <div className="flex flex-col md:flex-row md:gap-5">
                   <InputField
-                    label="Other Names"
-                    name="middleName"
+                    label="Email"
+                    name="email"
+                    type="email"
                     register={register}
                     errors={errors}
+                    validationSchema={{ required: "Last name is required" }}
                   />
-                  <InputField
-                    label="Nationality"
-                    name="nationality"
-                    register={register}
-                    errors={errors}
-                    validationSchema={{
-                      required: "Please select your nationality.",
-                    }}
-                  />
-                </div>
-                <InputField
-                  label="Email"
-                  name="email"
-                  type="email"
-                  register={register}
-                  errors={errors}
-                  validationSchema={{ required: "Last name is required" }}
-                />
-                <div className="flex flex-col md:flex-row md:gap-5">
                   <InputField
                     label="Phone Number"
                     name="phoneNumber"
@@ -99,13 +104,6 @@ const Register = () => {
                     register={register}
                     errors={errors}
                     validationSchema={{ required: "Phone number is required" }}
-                  />
-                  <InputField
-                    label="Alternate Phone Number"
-                    name="alternatePhoneNumber"
-                    type="tel"
-                    register={register}
-                    errors={errors}
                   />
                 </div>
                 <div className="flex flex-col md:flex-row md:gap-5">
@@ -129,7 +127,7 @@ const Register = () => {
               </div>
               <button className="mt-2 flex items-center justify-center space-x-3 rounded bg-slate-700 px-10 py-2 text-white">
                 {/* {isSubmitting && <Spinner />}{" "} */}
-                <span className="inline-block">Login</span>
+                <span className="inline-block">Register</span>
               </button>
             </form>
             <p className="mt-2 text-center text-slate-600">
