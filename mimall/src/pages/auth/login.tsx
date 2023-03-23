@@ -47,8 +47,11 @@ const Login = () => {
           </div>
           <div className="relative w-full">
             <h3 className="text-center text-3xl font-bold text-blue-800">
-              Sign In
+              Login
             </h3>
+            <p className="my-2 text-center text-slate-500">
+              Enter your credentials to login
+            </p>
             <form onSubmit={handleSubmit(submitHandler)}>
               <InputField
                 label="Email"
@@ -68,6 +71,7 @@ const Login = () => {
               />
               <input
                 type="submit"
+                value="Login"
                 className="mt-2 w-full cursor-pointer rounded bg-blue-800 py-2 text-white"
               />
             </form>

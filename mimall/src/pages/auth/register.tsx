@@ -31,8 +31,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-authImage bg-cover bg-no-repeat">
-      <div className="flex h-screen w-full items-center justify-center bg-gradient-to-br from-[#088181] to-[#0d9f9f] px-5">
+    <div className="min-h-[calc(100vh-56px)] overflow-hidden bg-authImage bg-cover bg-no-repeat">
+      <div className="absolute inset-0 flex items-center justify-center bg-[rgba(31,41,55,0.8)] bg-[rgba(31,41,55,0.8)] bg-gradient-to-r px-5">
         <div className="min-h-96 mx-auto grid w-full max-w-4xl grid-cols-1 overflow-hidden rounded-md  bg-gray-100 p-5 shadow-lg md:grid-cols-3">
           <div className="relative overflow-hidden rounded-md">
             <Image
@@ -46,14 +46,13 @@ const Register = () => {
             <div className="my-4 flex justify-center">
               {/* <Image src={logo} alt="logo" /> */}
             </div>
-            <h3 className="text-3xl font-bold text-slate-700">Login</h3>
+            <h3 className="text-3xl font-bold text-slate-700">Register</h3>
             <p className="my-2 text-slate-500">
-              Enter your credentials to login
+              Enter your information to get an account
             </p>
             {/* {error && <p className="py-2 text-center text-red-500">{error}</p>} */}
             <form>
-              .flex.flex-col
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2">
                 <InputField
                   label="Email"
                   name="email"
@@ -78,9 +77,9 @@ const Register = () => {
             </form>
             <p className="mt-2 text-center text-slate-600">
               Don't have an account?
-              <Link href={"/auth/register"} className="text-blue-500">
+              <Link href={"/auth/login"} className="text-blue-500">
                 {" "}
-                Register
+                Login
               </Link>{" "}
               Here
             </p>
