@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 import { api } from "./../utils/api";
@@ -57,6 +58,7 @@ const AdminAddProductForm = (product: ProductProps) => {
     formState: { errors },
     setValue,
     getValues,
+    reset,
     handleSubmit,
   } = useForm({
     defaultValues: {
@@ -99,7 +101,6 @@ const AdminAddProductForm = (product: ProductProps) => {
         convertBase64(file)
           .then((res) => {
             imagesArray.push(res);
-            console.log(imagesArray);
           })
           .finally(() => {
             setPreviewImages(imagesArray);
@@ -115,11 +116,19 @@ const AdminAddProductForm = (product: ProductProps) => {
     label: `${shop.name} - ${shop.owner.firstName} ${shop.owner.middleName} ${shop.owner.lastName}`,
   }));
 
-  console.log(previewImages);
-
   const submitHandler = (data: any) => {
     console.log(data);
-    createProductMutation.mutate(data);
+    const toastId = toast.loading("Loading");
+    createProductMutation.mutate(data, {
+      onSuccess: () => {
+        toast.dismiss(toastId);
+        toast.success("Product created successfully");
+        reset();
+      },
+      onError: () => {
+        toast.dismiss(toastId);
+      },
+    });
   };
 
   return (

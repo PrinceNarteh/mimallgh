@@ -1,5 +1,5 @@
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { createProductDto, IdDto } from "../../../utils/validations";
+import { adminCreateProductDto, IdDto } from "../../../utils/validations";
 import { TRPCError } from "@trpc/server";
 import { cloudinary } from "../../../utils/cloudinary";
 import { mapStringToCategory } from "../../../utils/mapper";
@@ -10,7 +10,7 @@ export const productsRouter = createTRPCRouter({
     return products;
   }),
   createProduct: publicProcedure
-    .input(createProductDto)
+    .input(adminCreateProductDto)
     .mutation(async ({ input, ctx }) => {
       let images = [...input.selectedImages];
       let imagesBuffer = [];
@@ -34,13 +34,12 @@ export const productsRouter = createTRPCRouter({
         const product = ctx.prisma.product.create({
           data: {
             ...data,
-            category: mapStringToCategory[input.category]!,
+            category: mapStringToCategory[data.category]!,
             images: {
               createMany: {
                 data: imagesBuffer,
               },
             },
-            shopId: ctx.session?.user.id || "",
           },
         });
         return product;

@@ -4,11 +4,13 @@ import { BiSearch } from "react-icons/bi";
 import Card from "../../components/Card";
 import Status from "../../components/Status";
 import { useRouter } from "next/router";
+import { api } from "../../utils/api";
 
 const ProductList = () => {
   const router = useRouter();
 
   const navigate = (productId: string) => router.push(`/products/${productId}`);
+  const products = api.products.getAllProducts.useQuery();
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -36,12 +38,12 @@ const ProductList = () => {
           </thead>
 
           <tbody className="border-separate border-spacing-10 space-y-20">
-            {products.map((product, idx) => (
+            {products.data?.map((product, idx) => (
               <tr
                 className={`${
                   idx % 2 === 0 && "bg-gray-500 bg-opacity-20"
                 } cursor-pointer`}
-                key={idx}
+                key={product.id}
                 onClick={() => navigate(product.id)}
               >
                 <td className="py-7 text-center">
@@ -51,16 +53,16 @@ const ProductList = () => {
                   <div className="flex items-center gap-5">
                     <div className="relative h-12 w-12">
                       <Image
-                        src={product.image}
+                        src={product.images[0]}
                         style={{ objectFit: "contain" }}
-                        alt={product.name}
+                        alt={product.title}
                         height="48"
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold">{product.name}</h3>
+                      <h3 className="text-xl font-semibold">{product.title}</h3>
                       <p className="text-md">
-                        ID: {product.id} | SKU: {product.SKU}
+                        ID: {idx + 1} | SKU: {idx}
                       </p>
                     </div>
                   </div>

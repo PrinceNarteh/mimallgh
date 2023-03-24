@@ -163,6 +163,10 @@ export const createProductDto = z.object({
   selectedImages: z.array(z.string()).default([]),
 });
 
+export const adminCreateProductDto = createProductDto.extend({
+  shopId: z.string({ required_error: "Shop Id is required" }).cuid(),
+});
+
 export const updateProductDto = createProductDto.partial();
 
 export const loginDto = z.object({
