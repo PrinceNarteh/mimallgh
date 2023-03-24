@@ -64,6 +64,7 @@ const Orders = () => {
           <tbody>
             {orders.map((order, idx) => (
               <tr
+              key={idx}
                 onClick={() => router.push(`/orders/${order.no}`)}
                 className="cursor-pointer rounded bg-light-gray"
               >

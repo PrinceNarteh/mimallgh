@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
-        // session.user.role = user.role; <-- put other properties on the session here
+        session.user.role = user.role;
       }
       return session;
     },
@@ -80,11 +80,11 @@ export const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findUnique({ where: { email } });
 
-        // if (user && (await bcrypt.compare(password, user.password))) {
-        //   return user;
-        // }
+        if (user && (await bcrypt.compare(password, user.password))) {
+          return user;
+        }
 
-        return user;
+        return null;
       },
     }),
     /**

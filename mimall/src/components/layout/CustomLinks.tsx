@@ -27,7 +27,9 @@ const CustomLinks = () => {
   return (
     <div className="flex flex-col justify-center divide-gray-500 bg-white py-2 text-center shadow-md sm:flex-row md:divide-y-0 md:divide-x-2 md:text-xl">
       {links.map((link, idx) => (
-        <Link href={link.link} className="px-10 hover:text-pink-500">
+        <Link 
+        key={idx}
+        href={link.link} className="px-10 hover:text-pink-500">
           {link.label}
         </Link>
       ))}

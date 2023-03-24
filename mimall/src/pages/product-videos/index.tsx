@@ -20,7 +20,7 @@ const ProductVideos = () => {
                 {Array(6)
                   .fill(null)
                   .map((_, idx) => (
-                    <MovieCard />
+                    <MovieCard key={idx} />
                   ))}
               </div>
             </div>
@@ -37,7 +37,7 @@ const ProductVideos = () => {
                 {Array(6)
                   .fill(null)
                   .map((_, idx) => (
-                    <MovieCard />
+                    <MovieCard key={idx} />
                   ))}
               </div>
             </div>
@@ -59,7 +59,7 @@ const ProductVideos = () => {
                 {Array(6)
                   .fill(null)
                   .map((_, idx) => (
-                    <MovieCard />
+                    <MovieCard key={idx} />
                   ))}
               </div>
             </div>
@@ -76,7 +76,7 @@ const ProductVideos = () => {
                 {Array(6)
                   .fill(null)
                   .map((_, idx) => (
-                    <MovieCard />
+                    <MovieCard key={idx} />
                   ))}
               </div>
             </div>

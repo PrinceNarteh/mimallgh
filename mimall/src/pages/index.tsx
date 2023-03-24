@@ -51,9 +51,8 @@ const Home = () => {
           <div className="w-full overflow-x-scroll">
             <div className="flex gap-3 py-4">
               {locations.slice(1).map((location, idx) => (
-                <Link href={`/markets/${location.link}`}>
+                <Link key={idx}  href={`/markets/${location.link}`}>
                   <div
-                    key={idx}
                     className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
                   >
                     <Image
@@ -129,7 +128,7 @@ const Home = () => {
               </div>
               <div className="mb-3 flex items-center justify-start gap-5 overflow-y-auto px-7 pb-2">
                 {section.images.map((image, idx) => (
-                  <ProductCard image={image.imageUrl} />
+                  <ProductCard key={idx} image={image.imageUrl} />
                 ))}
               </div>
               <Link

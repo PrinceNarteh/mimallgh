@@ -8,18 +8,13 @@ import { TiShoppingCart } from "react-icons/ti";
 const Navbar = ({ scroll }: { scroll: boolean }) => {
   const { pathname } = useRouter();
 
-  console.log(!pathname.includes("/auth"));
 
   return (
     <div
       className={`sticky z-50 ${
         pathname === "/" ? "top-[84px] -translate-y-6" : "top-0"
       } 
-     ${
-       (pathname !== "/" || !pathname.includes("/auth")) && scroll
-         ? "top-14 px-5"
-         : ""
-     }
+     ${pathname !== "/" && scroll ? "top-14 px-5" : ""}
      ${pathname === "/" ? "px-5" : ""}
       transform  duration-200`}
     >

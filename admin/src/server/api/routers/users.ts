@@ -32,7 +32,6 @@ export const authRouter = createTRPCRouter({
             message: "Email already in used.",
           });
         }
-        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
