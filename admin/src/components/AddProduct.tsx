@@ -101,8 +101,8 @@ const AddProductForm = () => {
               id="user_avatar"
               type="file"
               onChange={selectedImages}
+              accept="image/*"
               multiple
-              accept=".png, .jpg, .jpeg"
             ></input>
           </div>
 

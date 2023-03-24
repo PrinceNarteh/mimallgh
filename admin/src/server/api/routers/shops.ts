@@ -46,7 +46,7 @@ export const shopRouter = createTRPCRouter({
         },
       });
       return shop;
-    }),
+    }), 
   createShop: publicProcedure
     .input(createShopDto)
     .mutation(async ({ input, ctx }) => {

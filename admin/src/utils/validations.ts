@@ -123,7 +123,9 @@ export const updateShopDto = createShopDto.extend({
 });
 
 export const createProductDto = z.object({
-  title: z.string(),
+  title: z
+    .string({ required_error: "Product name is required" })
+    .min(1, "Product name cannot be empty"),
   description: z
     .string({ required_error: "Description is required" })
     .min(2, "Description should be 2 or more characters"),
@@ -138,26 +140,27 @@ export const createProductDto = z.object({
     .string({ required_error: "Brand is required" })
     .min(2, "Brand should be 2 or more characters"),
   category: z.enum([
-    "accommodations_and_building",
-    "fashion_and_wears",
     "food",
-    "furniture",
+    "fashion_and_wears",
     "grocery_and_general",
     "health_and_wellness",
-    "home_and_electricals",
-    "money_and_energy",
-    "personal-care_and_beauty",
-    "recreation",
-    "stationery_and_printing",
+    "home_and_electrical_appliances",
+    "personal_services",
+    "printing_and_stationery",
     "tech",
-    "transport_and_machines",
   ]),
   ratings: z
     .number()
     .min(1, "Minimum rating should be 1")
     .max(5, "Maximum rating should be 5")
     .optional(),
-  images: z.string().url().optional(),
+  images: z.array(
+    z.object({
+      public_id: z.string(),
+      secure_url: z.string(),
+    })
+  ),
+  selectedImages: z.array(z.string()).default([]),
 });
 
 export const updateProductDto = createProductDto.partial();

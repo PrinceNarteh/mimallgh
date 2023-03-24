@@ -125,6 +125,14 @@ enum Category {
     TECH
 }
 
+model Image {
+    id         String   @id @default(cuid())
+    public_id  String
+    secure_url String
+    Product    Product? @relation(fields: [productId], references: [id])
+    productId  String?
+}
+
 model Product {
     id                 String   @id @default(cuid())
     title              String
@@ -134,7 +142,7 @@ model Product {
     stock              Int      @default(0)
     brand              String
     category           Category
-    images             String
+    images             Image[]
     shopId             String
     shop               Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
     createdAt          DateTime @default(now())

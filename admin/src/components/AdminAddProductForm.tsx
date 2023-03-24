@@ -10,34 +10,72 @@ import InputField from "./InputField";
 import SearchFilter from "./SearchFilter";
 import { SelectOption } from "./SelectOption";
 
+const convertBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = () => {
+      resolve(fileReader.result as string);
+    };
+
+    fileReader.onerror = (error: any) => {
+      reject(error.message);
+    };
+  });
+};
+
 const categories = [
-  {
-    label: "Accommodations & Building",
-    value: "accommodations_and_building",
-  },
-  { label: "Fashion & Wears", value: "fashion_and_wears" },
   { label: "Food", value: "food" },
-  { label: "Furniture", value: "furniture" },
+  { label: "Fashion & Wears", value: "fashion_and_wears" },
   { label: "Grocery & General", value: "grocery_and_general" },
   { label: "Health & Wellness", value: "health_and_wellness" },
-  { label: "Home & Electricals", value: "home_and_electricals" },
-  { label: "Money & Energy", value: "money_and_energy" },
-  { label: "Personal Care & Beauty", value: "personal-care_and_beauty" },
-  { label: "Recreation", value: "recreation" },
-  { label: "Stationary & Printing", value: "stationery_and_printing" },
+  {
+    label: "Home & Electrical Appliances",
+    value: "home_and_electrical_appliances",
+  },
+  { label: "Personal Services", value: "personal_services" },
+  { label: "Printing & Stationary", value: "printing_and_stationery" },
   { label: "Tech", value: "tech" },
-  { label: "Transport & Machines", value: "transport_and_machines" },
 ];
 
-const AdminAddProductForm = () => {
+interface ProductProps {
+  brand: string;
+  category: string;
+  description: string;
+  discount: number;
+  images: string[];
+  price: number;
+  shopId: string;
+  stock: number;
+  title: string;
+}
+
+const AdminAddProductForm = (product: ProductProps) => {
   const {
     register,
     formState: { errors },
     setValue,
-  } = useForm();
+    getValues,
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      brand: product.brand || "",
+      category: product.category || "",
+      description: product.description || "",
+      discount: product.discount || 0,
+      price: product.price || 0,
+      shopId: product.shopId || "",
+      stock: product.stock || 0,
+      title: product.title || "",
+      images: product.images || [],
+      selectedImages: product.images || [],
+    },
+  });
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const getAllShops = api.shops.getAllShops.useQuery();
+  const createProductMutation = api.products.createProduct.useMutation();
 
   const selectedImages = (e: ChangeEvent<HTMLInputElement>) => {
     let files: FileList | null = e.target.files;
@@ -55,10 +93,21 @@ const AdminAddProductForm = () => {
   }
 
   useEffect(() => {
-    const imagesArray = images?.map((file) => {
-      return URL.createObjectURL(file);
-    });
-    setPreviewImages(imagesArray);
+    const getImages = async () => {
+      let imagesArray: string[] = [];
+      images?.map((file) => {
+        convertBase64(file)
+          .then((res) => {
+            imagesArray.push(res);
+            console.log(imagesArray);
+          })
+          .finally(() => {
+            setPreviewImages(imagesArray);
+            setValue("selectedImages", imagesArray);
+          });
+      });
+    };
+    getImages();
   }, [images]);
 
   const shops = getAllShops?.data?.map((shop) => ({
@@ -66,10 +115,17 @@ const AdminAddProductForm = () => {
     label: `${shop.name} - ${shop.owner.firstName} ${shop.owner.middleName} ${shop.owner.lastName}`,
   }));
 
+  console.log(previewImages);
+
+  const submitHandler = (data: any) => {
+    console.log(data);
+    createProductMutation.mutate(data);
+  };
+
   return (
     <div className="mx-auto max-w-4xl pb-5">
       <Card heading={"Add Product"}>
-        <form>
+        <form onSubmit={handleSubmit(submitHandler)}>
           <div className="space-y-4">
             <label className="-mb-2 block pl-2 capitalize tracking-widest">
               Shop
@@ -82,8 +138,8 @@ const AdminAddProductForm = () => {
               options={shops || []}
             />
             <InputField
-              label="Name"
-              name="name"
+              label="Title"
+              name="title"
               register={register}
               errors={errors}
             />
@@ -92,21 +148,27 @@ const AdminAddProductForm = () => {
               <InputField
                 label="Price"
                 name="price"
+                type="number"
                 register={register}
                 errors={errors}
+                validationSchema={{ valueAsNumber: true }}
               />
               <InputField
                 label="Discount"
                 name="discount"
+                type="number"
                 register={register}
                 errors={errors}
+                validationSchema={{ valueAsNumber: true }}
               />
             </div>
             <InputField
-              label="Quantity"
-              name="quantity"
+              label="Stock"
+              name="stock"
+              type="number"
               register={register}
               errors={errors}
+              validationSchema={{ valueAsNumber: true }}
             />
             <div className="flex flex-col gap-5 md:flex-row">
               <InputField
@@ -122,7 +184,10 @@ const AdminAddProductForm = () => {
                 >
                   Category
                 </label>
-                <select className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none">
+                <select
+                  className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
+                  {...register("category")}
+                >
                   <option value="" className="bg-light-gray">
                     Select Category
                   </option>
@@ -146,9 +211,20 @@ const AdminAddProductForm = () => {
               <textarea
                 className="w-full rounded border border-gray-600 bg-transparent p-2 outline-none"
                 rows={5}
-                onChange={(e) => {}}
+                {...register("description")}
               />
             </div>
+            {getValues().images.length > 0 ? (
+              <div className="">
+                <label
+                  className="mb-2 block bg-light-gray pl-2 capitalize tracking-widest"
+                  htmlFor="user_avatar"
+                >
+                  Product Images
+                </label>
+              </div>
+            ) : null}
+
             <div className="">
               <label
                 className="mb-2 block bg-light-gray pl-2 capitalize tracking-widest"
