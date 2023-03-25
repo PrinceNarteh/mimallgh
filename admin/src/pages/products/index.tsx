@@ -5,12 +5,15 @@ import Card from "../../components/Card";
 import Status from "../../components/Status";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
+import { capitalize } from "../../utils/utilities";
 
 const ProductList = () => {
   const router = useRouter();
 
   const navigate = (productId: string) => router.push(`/products/${productId}`);
   const products = api.products.getAllProducts.useQuery();
+
+  console.log(products.data);
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -51,12 +54,13 @@ const ProductList = () => {
                 </td>
                 <td className="px-2">
                   <div className="flex items-center gap-5">
-                    <div className="relative h-12 w-12">
+                    <div className="relative flex h-12 w-12 items-center">
                       <Image
-                        src={product.images[0]}
-                        style={{ objectFit: "contain" }}
+                        src={product.images[0]?.secure_url as string}
+                        style={{ objectFit: "cover" }}
                         alt={product.title}
                         height="48"
+                        width="48"
                       />
                     </div>
                     <div>
@@ -67,7 +71,9 @@ const ProductList = () => {
                     </div>
                   </div>
                 </td>
-                <td className="px-2 text-center">{product.category}</td>
+                <td className="px-2 text-center">
+                  {capitalize(product.category)}
+                </td>
                 <td className="px-2 text-center">
                   <Status
                     variant={product.stock === 0 ? "danger" : "success"}

@@ -6,7 +6,11 @@ import { mapStringToCategory } from "../../../utils/mapper";
 
 export const productsRouter = createTRPCRouter({
   getAllProducts: publicProcedure.query(async ({ ctx }) => {
-    const products = await ctx.prisma.product.findMany();
+    const products = await ctx.prisma.product.findMany({
+      include: {
+        images: true,
+      },
+    });
     return products;
   }),
   createProduct: publicProcedure
