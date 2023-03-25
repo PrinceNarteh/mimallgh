@@ -1,4 +1,6 @@
+import { Image as ProductImage, Product, Shop } from "@prisma/client";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -40,19 +42,43 @@ const categories = [
   { label: "Tech", value: "tech" },
 ];
 
-interface ProductProps {
+type ProductProps =
+  | (Product & { shop: Shop; images: ProductImage[] })
+  | null
+  | undefined;
+
+const initialValues: {
+  id: string;
   brand: string;
   category: string;
   description: string;
-  discount: number;
-  images: string[];
+  discountPercentage: number;
   price: number;
   shopId: string;
   stock: number;
   title: string;
-}
+  images: ProductImage[];
+  selectedImages: [];
+} = {
+  id: "",
+  brand: "",
+  category: "",
+  description: "",
+  discountPercentage: 0,
+  price: 0,
+  shopId: "",
+  stock: 0,
+  title: "",
+  images: [],
+  selectedImages: [],
+};
 
-const AdminAddProductForm = (product: ProductProps) => {
+const AdminAddProductForm = () => {
+  const [state, setState] = useState(initialValues);
+  const {
+    query: { productId },
+  } = useRouter();
+
   const {
     register,
     formState: { errors },
@@ -61,23 +87,20 @@ const AdminAddProductForm = (product: ProductProps) => {
     reset,
     handleSubmit,
   } = useForm({
-    defaultValues: {
-      brand: product.brand || "",
-      category: product.category || "",
-      description: product.description || "",
-      discount: product.discount || 0,
-      price: product.price || 0,
-      shopId: product.shopId || "",
-      stock: product.stock || 0,
-      title: product.title || "",
-      images: product.images || [],
-      selectedImages: product.images || [],
-    },
+    defaultValues: state,
   });
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
+  const { data, refetch } = api.products.getProductById.useQuery(
+    {
+      id: productId as string,
+    },
+    {
+      enabled: false,
+    }
+  );
 
   const selectedImages = (e: ChangeEvent<HTMLInputElement>) => {
     let files: FileList | null = e.target.files;
@@ -96,7 +119,7 @@ const AdminAddProductForm = (product: ProductProps) => {
 
   useEffect(() => {
     const getImages = async () => {
-      let imagesArray: string[] = [];
+      let imagesArray: any = [];
       images?.map((file) => {
         convertBase64(file)
           .then((res) => {
@@ -116,8 +139,24 @@ const AdminAddProductForm = (product: ProductProps) => {
     label: `${shop.name} - ${shop.owner.firstName} ${shop.owner.middleName} ${shop.owner.lastName}`,
   }));
 
+  useEffect(() => {
+    if (productId) {
+      setState(data as any);
+      setValue("id", data?.id || "");
+      setValue("brand", data?.brand || "");
+      setValue("category", data?.category.toLowerCase() || "");
+      setValue("description", data?.description || "");
+      setValue("discountPercentage", data?.discountPercentage || 0);
+      setValue("images", data?.images || []);
+      setValue("price", data?.price || 0);
+      setValue("selectedImages", data?.selectedImages || []);
+      setValue("shopId", data?.shopId || "");
+      setValue("stock", data?.stock || 0);
+      setValue("title", data?.title || "");
+    }
+  }, [data]);
+
   const submitHandler = (data: any) => {
-    console.log(data);
     const toastId = toast.loading("Loading");
     createProductMutation.mutate(data, {
       onSuccess: () => {
@@ -140,11 +179,11 @@ const AdminAddProductForm = (product: ProductProps) => {
               Shop
             </label>
             <SearchFilter
-              value={""}
               errors={errors}
               field="shopId"
               setValue={setValue}
               options={shops || []}
+              value={getValues().shopId}
             />
             <InputField
               label="Title"
@@ -164,7 +203,7 @@ const AdminAddProductForm = (product: ProductProps) => {
               />
               <InputField
                 label="Discount"
-                name="discount"
+                name="discountPercentage"
                 type="number"
                 register={register}
                 errors={errors}
@@ -231,6 +270,28 @@ const AdminAddProductForm = (product: ProductProps) => {
                 >
                   Product Images
                 </label>
+                <div className="flex gap-5">
+                  {getValues()?.images.map((image, index) => (
+                    <div
+                      key={index}
+                      className="relative h-32 w-32 rounded-md bg-slate-500"
+                    >
+                      <AiOutlineCloseCircle
+                        onClick={() => deleteHandler(index)}
+                        className="absolute -right-2 -top-2 z-10 cursor-pointer rounded-full bg-white text-2xl text-orange-500"
+                      />
+                      <div className="overflow-hidden">
+                        <Image
+                          src={image.secure_url}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          alt=""
+                          className="rounded"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : null}
 
@@ -292,7 +353,9 @@ const AdminAddProductForm = (product: ProductProps) => {
               accept=".png, .jpg, .jpeg"
             ></input>
           </div>
-          <Button type="submit">Add Product</Button>
+          <Button type="submit">
+            {getValues()?.id ? "Edit" : "Add"} Product
+          </Button>
         </form>
       </Card>
     </div>

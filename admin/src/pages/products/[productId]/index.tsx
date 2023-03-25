@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import Back from "../../../components/Back";
 import Card from "../../../components/Card";
@@ -75,6 +76,12 @@ const ProductDetails = () => {
           </div>
         </div>
       </Card>
+      <div className="flex justify-end gap-5">
+        <Link href={`/products/${data?.id}/edit`} className="link">
+          Edit
+        </Link>
+        <button className="bg-red-500 py-2 px-4">Delete</button>
+      </div>
     </div>
   );
 };

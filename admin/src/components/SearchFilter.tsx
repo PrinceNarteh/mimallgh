@@ -26,23 +26,9 @@ const SearchFilter = ({
   value,
 }: ISearchFilter) => {
   const [inputValue, setInputValue] = useState("");
-  const [selected, setSelected] = useState(() => {
-    if (value) {
-      const option = options.find((option) => option.id === value);
-      if (option) {
-        return option;
-      } else {
-        return {
-          id: "",
-          label: "",
-        };
-      }
-    } else {
-      return {
-        id: "",
-        label: "",
-      };
-    }
+  const [selected, setSelected] = useState({
+    id: "",
+    label: "",
   });
   const [open, setOpen] = useState(false);
 
@@ -53,6 +39,17 @@ const SearchFilter = ({
       shouldTouch: true,
     });
   }, [selected]);
+
+  useEffect(() => {
+    console.log({ options, value });
+
+    if (value) {
+      const option = options.find((option) => option.id === value);
+      if (option) {
+        setSelected(option);
+      }
+    }
+  }, [value]);
 
   return (
     <div className="relative w-full font-medium">
