@@ -1,4 +1,5 @@
 export const capitalize = (word: string) => {
+  if (!word) return;
   if (word === "knh") return word.toUpperCase();
 
   return word
