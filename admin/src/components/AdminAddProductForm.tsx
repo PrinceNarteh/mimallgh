@@ -42,11 +42,6 @@ const categories = [
   { label: "Tech", value: "tech" },
 ];
 
-type ProductProps =
-  | (Product & { shop: Shop; images: ProductImage[] })
-  | null
-  | undefined;
-
 const initialValues: {
   id: string;
   brand: string;
@@ -77,6 +72,7 @@ const AdminAddProductForm = () => {
   const [state, setState] = useState(initialValues);
   const {
     query: { productId },
+    push,
   } = useRouter();
 
   const {
@@ -93,6 +89,7 @@ const AdminAddProductForm = () => {
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
+  const updateProductMutation = api.products.updateProduct.useMutation();
   const { data, refetch } = api.products.getProductById.useQuery(
     {
       id: productId as string,
@@ -149,7 +146,6 @@ const AdminAddProductForm = () => {
       setValue("discountPercentage", data?.discountPercentage || 0);
       setValue("images", data?.images || []);
       setValue("price", data?.price || 0);
-      setValue("selectedImages", data?.selectedImages || []);
       setValue("shopId", data?.shopId || "");
       setValue("stock", data?.stock || 0);
       setValue("title", data?.title || "");
@@ -158,16 +154,29 @@ const AdminAddProductForm = () => {
 
   const submitHandler = (data: any) => {
     const toastId = toast.loading("Loading");
-    createProductMutation.mutate(data, {
-      onSuccess: () => {
-        toast.dismiss(toastId);
-        toast.success("Product created successfully");
-        reset();
-      },
-      onError: () => {
-        toast.dismiss(toastId);
-      },
-    });
+    if (data.id) {
+      updateProductMutation.mutate(data, {
+        onSuccess: (value) => {
+          toast.dismiss(toastId);
+          toast.success("Product updated successfully");
+          push(`/products/${value?.id}`);
+        },
+        onError: () => {
+          toast.dismiss(toastId);
+        },
+      });
+    } else {
+      createProductMutation.mutate(data, {
+        onSuccess: () => {
+          toast.dismiss(toastId);
+          toast.success("Product created successfully");
+          reset();
+        },
+        onError: () => {
+          toast.dismiss(toastId);
+        },
+      });
+    }
   };
 
   return (

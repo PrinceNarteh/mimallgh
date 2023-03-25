@@ -1,5 +1,9 @@
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { adminCreateProductDto, IdDto } from "../../../utils/validations";
+import {
+  adminCreateProductDto,
+  adminUpdateProductDto,
+  IdDto,
+} from "../../../utils/validations";
 import { TRPCError } from "@trpc/server";
 import { cloudinary } from "../../../utils/cloudinary";
 import { mapStringToCategory } from "../../../utils/mapper";
@@ -54,6 +58,60 @@ export const productsRouter = createTRPCRouter({
             images: {
               createMany: {
                 data: imagesBuffer,
+              },
+            },
+          },
+        });
+        return product;
+      } catch (error) {}
+    }),
+  updateProduct: publicProcedure
+    .input(adminUpdateProductDto)
+    .mutation(async ({ input, ctx }) => {
+      let imagesBuffer: {
+        public_id: string;
+        secure_url: string;
+      }[] = [];
+      if (input.selectedImages.length > 0) {
+        let images = [...input.selectedImages];
+
+        for (let i = 0; i < images.length; i++) {
+          const result = await cloudinary.uploader.upload(images[i] as string, {
+            folder: "mimall",
+            width: 1920,
+            crop: "scale",
+          });
+
+          imagesBuffer.push({
+            public_id: result.public_id,
+            secure_url: result.secure_url,
+          });
+        }
+      }
+
+      const { selectedImages, images, ...data } = input;
+
+      const oldImages = images.map((image) => ({
+        public_id: image.public_id,
+        secure_url: image.secure_url,
+      }));
+
+      const newImages = oldImages.concat(imagesBuffer);
+
+      try {
+        const product = ctx.prisma.product.update({
+          where: {
+            id: input.id,
+          },
+          data: {
+            ...data,
+            category: mapStringToCategory[data.category]!,
+            images: {
+              deleteMany: {
+                productId: input.id,
+              },
+              createMany: {
+                data: newImages,
               },
             },
           },

@@ -167,6 +167,10 @@ export const adminCreateProductDto = createProductDto.extend({
   shopId: z.string({ required_error: "Shop Id is required" }).cuid(),
 });
 
+export const adminUpdateProductDto = adminCreateProductDto.extend({
+  id: z.string({ required_error: "Product Id is required" }).cuid(),
+});
+
 export const updateProductDto = createProductDto.partial();
 
 export const loginDto = z.object({
