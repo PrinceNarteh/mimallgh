@@ -89,7 +89,7 @@ model VerificationToken {
 model Shop {
     id              String    @id @default(cuid())
     name            String
-    description     String
+    description     String    @db.Text
     location        String
     address         String?
     phoneNumber     String
@@ -136,7 +136,7 @@ model Image {
 model Product {
     id                 String   @id @default(cuid())
     title              String
-    description        String
+    description        String   @db.LongText
     price              Float
     discountPercentage Float    @default(0)
     stock              Int      @default(0)

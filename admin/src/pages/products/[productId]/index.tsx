@@ -19,9 +19,7 @@ const ProductDetails = () => {
     <div className="mx-auto w-11/12 space-y-3 pb-5">
       <Back />
       <Card heading="Product Detail">
-        <h3 className="mb-2 text-2xl font-semibold">
-          Lorem ipsum dolor sit amet.
-        </h3>
+        <h3 className="mb-2 text-2xl font-semibold">{data?.title}</h3>
         <div className="min-h-96 grid grid-cols-12">
           <div className="col-span-5 space-y-3">
             <div className="relative h-[400px] bg-slate-500">
@@ -71,7 +69,7 @@ const ProductDetails = () => {
             <Item label="Shop" value={`${data?.shop.name}`} />
             <div className={`bg-dark-gray py-4 px-4`}>
               <div className="mb-3 font-bold">Description</div>
-              <div className="line-clamp-6">{data?.description}</div>
+              <div className="line-clamp-5">{data?.description}</div>
             </div>
           </div>
         </div>

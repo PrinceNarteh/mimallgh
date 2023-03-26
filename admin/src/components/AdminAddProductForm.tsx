@@ -1,4 +1,6 @@
-import { Image as ProductImage, Product, Shop } from "@prisma/client";
+import { Image as ProductImage } from "@prisma/client";
+import axios from "axios";
+import crypto from "crypto";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -10,6 +12,7 @@ import { api } from "./../utils/api";
 import { Button } from "./Button";
 import Card from "./Card";
 import InputField from "./InputField";
+import Modal from "./Modal";
 import SearchFilter from "./SearchFilter";
 import { SelectOption } from "./SelectOption";
 
@@ -87,6 +90,8 @@ const AdminAddProductForm = () => {
   });
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [publicId, setPublicId] = useState("");
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
   const updateProductMutation = api.products.updateProduct.useMutation();
@@ -108,7 +113,7 @@ const AdminAddProductForm = () => {
     setImages([...images, ...pickedImages]);
   };
 
-  function deleteHandler(index: number) {
+  function deleteSelectedImage(index: number) {
     const imageCopy = [...images];
     imageCopy.splice(index, 1);
     setImages([...imageCopy]);
@@ -151,6 +156,58 @@ const AdminAddProductForm = () => {
       setValue("title", data?.title || "");
     }
   }, [data]);
+
+  const deleteImage = (public_id: string) => {
+    setPublicId(public_id);
+    setOpenDialog(true);
+  };
+
+  const generateSHA1 = (data: any) => {
+    const hash = crypto.createHash("sha1");
+    hash.update(data);
+    return hash.digest("hex");
+  };
+
+  const generateSignature = (publicId: string, apiSecret: string) => {
+    const timestamp = new Date().getTime();
+    return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
+  };
+
+  async function confirmDelete(choose: boolean) {
+    if (choose) {
+      const toastId = toast.loading("Loading...");
+      const cloudName = "prinart";
+      const timestamp = new Date().getTime();
+      const apiKey = "178383658495781";
+      const apiSecret = "qrlNOEHVZAMGnLvxp-4rrOMDLzw";
+      const signature = generateSHA1(generateSignature(publicId, apiSecret));
+      const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`;
+
+      try {
+        const response = await axios.post(url, {
+          public_id: publicId,
+          signature: signature,
+          api_key: apiKey,
+          timestamp: timestamp,
+        });
+
+        const newImages = getValues().images.filter(
+          (image) => image.public_id !== publicId
+        );
+        console.log(response);
+        setValue("images", newImages);
+        toast.dismiss(toastId);
+        toast.success("Image deleted successfully");
+      } catch (error) {
+        toast.dismiss(toastId);
+        console.error(error);
+      } finally {
+        setOpenDialog(false);
+      }
+    } else {
+      setOpenDialog(false);
+    }
+  }
 
   const submitHandler = (data: any) => {
     const toastId = toast.loading("Loading");
@@ -286,7 +343,7 @@ const AdminAddProductForm = () => {
                       className="relative h-32 w-32 rounded-md bg-slate-500"
                     >
                       <AiOutlineCloseCircle
-                        onClick={() => deleteHandler(index)}
+                        onClick={() => deleteImage(image.public_id)}
                         className="absolute -right-2 -top-2 z-10 cursor-pointer rounded-full bg-white text-2xl text-orange-500"
                       />
                       <div className="overflow-hidden">
@@ -328,7 +385,7 @@ const AdminAddProductForm = () => {
                   className="relative h-32 w-32 rounded-md bg-slate-500"
                 >
                   <AiOutlineCloseCircle
-                    onClick={() => deleteHandler(index)}
+                    onClick={() => deleteSelectedImage(index)}
                     className="absolute -right-2 -top-2 z-10 cursor-pointer rounded-full bg-white text-2xl text-orange-500"
                   />
                   <div className="overflow-hidden">
@@ -367,6 +424,16 @@ const AdminAddProductForm = () => {
           </Button>
         </form>
       </Card>
+      {openDialog ? (
+        <Modal
+          onDialog={confirmDelete}
+          message={
+            openDialog
+              ? `Are you sure you want to delete this product image?`
+              : ""
+          }
+        />
+      ) : null}
     </div>
   );
 };

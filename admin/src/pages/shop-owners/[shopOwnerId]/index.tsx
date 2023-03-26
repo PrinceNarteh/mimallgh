@@ -24,8 +24,6 @@ const ShopOwnerDetails = () => {
     id: shopOwnerId as string,
   });
 
-  const handleDelete = () => setOpenDialog(true);
-
   function confirmDelete(choose: boolean) {
     if (choose) {
       deleteUser.mutate(
