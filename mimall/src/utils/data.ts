@@ -24,7 +24,7 @@ export const topDeals = [
     image: "/images/tech-2.jpg",
   },
   {
-    image: "/images/fashion-and-wear-2.jpg",
+    image: "/images/fashion-and-wears-2.jpg",
   },
 ];
 
