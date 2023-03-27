@@ -113,7 +113,7 @@ model Branch {
     Shop        Shop?   @relation(fields: [shopId], references: [id], onDelete: Cascade)
     shopId      String?
 }
- 
+
 enum Category {
     FOOD
     FASHION_AND_WEARS
@@ -125,16 +125,24 @@ enum Category {
     TECH
 }
 
+model Image {
+    id         String   @id @default(cuid())
+    public_id  String
+    secure_url String
+    Product    Product? @relation(fields: [productId], references: [id])
+    productId  String?
+}
+
 model Product {
     id                 String   @id @default(cuid())
     title              String
-    description        String
+    description        String   @db.LongText
     price              Float
     discountPercentage Float    @default(0)
     stock              Int      @default(0)
     brand              String
     category           Category
-    images             String
+    images             Image[]
     shopId             String
     shop               Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
     createdAt          DateTime @default(now())

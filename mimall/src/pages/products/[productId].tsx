@@ -1,16 +1,26 @@
+import { Product } from "@prisma/client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { MdContentCopy, MdOutlineStar, MdOutlineStarHalf } from "react-icons/md";
+import {
+  MdContentCopy,
+  MdOutlineStar,
+  MdOutlineStarHalf,
+} from "react-icons/md";
 import ReactImageMagnify from "react-image-magnify";
 import {
   FacebookIcon,
-  FacebookShareButton, WhatsappIcon, WhatsappShareButton
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
 } from "react-share";
 import Container from "../../components/Container";
 import ProductCard from "../../components/ProductCard";
+import { addToCart } from "../../features/cart/cartSlice";
 import { topDeals } from "../../utils/data";
+import { useAppDispatch } from "../../store";
+import { api } from "../../utils/api";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const images = [
@@ -23,12 +33,27 @@ const images = [
 const ProductDetails = () => {
   const [currentImg, setCurrentImg] = useState(0);
   const { asPath } = useRouter();
+  const dispatch = useAppDispatch();
   const origin =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
       : "";
 
   const url = `${origin}${asPath}`;
+  const { data } = api.products.getProductById.useQuery({
+    id: "clfmq8mfe0001tckovhyp77us",
+  });
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(
+      addToCart({
+        id: "123",
+        title: "Sample Product",
+        price: 20,
+        qty: 1,
+      })
+    );
+  };
 
   return (
     <Container>
@@ -64,7 +89,7 @@ const ProductDetails = () => {
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
                             isFluidWidth: true,
-                            src: images[currentImg],
+                            src: images[currentImg] as string,
                           },
                           largeImage: {
                             src: images[currentImg],
@@ -106,7 +131,10 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 <div className="mb-4 flex justify-end">
-                  <button className="rounded-lg border border-pink-500 px-5 py-2 text-pink-500 duration-200 hover:bg-pink-500 hover:text-white">
+                  <button
+                    className="rounded-lg border border-pink-500 px-5 py-2 text-pink-500 duration-200 hover:bg-pink-500 hover:text-white"
+                    onClick={() => handleAddToCart(data as Product)}
+                  >
                     Add to Cart
                   </button>
                 </div>

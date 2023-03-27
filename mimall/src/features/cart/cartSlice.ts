@@ -1,16 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "@prisma/client";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface IProduct {
+interface ICartItem {
   id: string;
   title: string;
-  price: string;
+  price: number;
   qty: number;
 }
 
 interface CartState {
-  cartItems: IProduct[];
+  cartItems: ICartItem[];
   cartTotalQty: number;
   cartTotalAmt: number;
 }
@@ -25,8 +24,8 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<{ product: IProduct }>) => {
-      const { product } = action.payload;
+    addToCart: (state, action: PayloadAction<ICartItem>) => {
+      const product = action.payload;
       const productExists = state.cartItems.find(
         (item) => item.id === product.id
       );
@@ -42,8 +41,9 @@ const cartSlice = createSlice({
         });
         state.cartItems = newProducts;
       } else {
-        state.cartItems.push(action.payload.product);
+        state.cartItems.push(product);
       }
+      console.log(state.cartItems);
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.cartItems.filter((item) => item.id !== action.payload);

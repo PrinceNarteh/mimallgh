@@ -7,6 +7,15 @@ export const productsRouter = createTRPCRouter({
     const products = await ctx.prisma.product.findMany();
     return products;
   }),
+  getProductById: publicProcedure.input(IdDto).query(async ({ input, ctx }) => {
+    const product = await ctx.prisma.product.findUnique({
+      where: { id: input.id },
+      include: {
+        shop: true,
+      },
+    });
+    return product;
+  }),
   createProduct: protectedProcedure
     .input(createProductDto)
     .mutation(async ({ input, ctx }) => {
