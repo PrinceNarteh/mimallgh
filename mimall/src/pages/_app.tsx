@@ -12,6 +12,8 @@ import { api } from "../utils/api";
 import Navbar from "../components/layout/Navbar";
 import SearchBar from "../components/layout/SearchBar";
 import { useRouter } from "next/router";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -39,12 +41,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <div className={poppins.className}>
       <SessionProvider session={session}>
-        <div className="fixed z-50 w-full">
-          <FloatingNavbar show={scrollY >= 70} />
-        </div>
-        {pathname === "/" && <SearchBar />}
-        <Navbar scroll={scrollY >= 70} />
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <div className="fixed z-50 w-full">
+            <FloatingNavbar show={scrollY >= 70} />
+          </div>
+          {pathname === "/" && <SearchBar />}
+          <Navbar scroll={scrollY >= 70} />
+          <Component {...pageProps} />
+        </Provider>
       </SessionProvider>
       <Toaster />
       <ReactQueryDevtools />
