@@ -41,16 +41,6 @@ const ProductDetails = () => {
                   />
                 </div>
               ))}
-              {data?.images.map((image, idx) => (
-                <div key={idx} className=" relative h-28 w-40">
-                  <Image
-                    src={image.secure_url}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    alt=""
-                  />
-                </div>
-              ))}
             </div>
           </div>
           <div className="col-span-7 px-5">

@@ -1,6 +1,4 @@
 import { Image as ProductImage } from "@prisma/client";
-import axios from "axios";
-import crypto from "crypto";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -15,6 +13,7 @@ import InputField from "./InputField";
 import Modal from "./Modal";
 import SearchFilter from "./SearchFilter";
 import { SelectOption } from "./SelectOption";
+import { deleteProductImage } from "../utils/deleteProductImage";
 
 const convertBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -95,7 +94,7 @@ const AdminAddProductForm = () => {
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
   const updateProductMutation = api.products.updateProduct.useMutation();
-  const { data, refetch } = api.products.getProductById.useQuery(
+  const { data } = api.products.getProductById.useQuery(
     {
       id: productId as string,
     },
@@ -162,39 +161,17 @@ const AdminAddProductForm = () => {
     setOpenDialog(true);
   };
 
-  const generateSHA1 = (data: any) => {
-    const hash = crypto.createHash("sha1");
-    hash.update(data);
-    return hash.digest("hex");
-  };
-
-  const generateSignature = (publicId: string, apiSecret: string) => {
-    const timestamp = new Date().getTime();
-    return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
-  };
-
   async function confirmDelete(choose: boolean) {
     if (choose) {
       const toastId = toast.loading("Loading...");
-      const cloudName = "prinart";
-      const timestamp = new Date().getTime();
-      const apiKey = "178383658495781";
-      const apiSecret = "qrlNOEHVZAMGnLvxp-4rrOMDLzw";
-      const signature = generateSHA1(generateSignature(publicId, apiSecret));
-      const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`;
 
       try {
-        const response = await axios.post(url, {
-          public_id: publicId,
-          signature: signature,
-          api_key: apiKey,
-          timestamp: timestamp,
-        });
+        await deleteProductImage(publicId);
 
         const newImages = getValues().images.filter(
           (image) => image.public_id !== publicId
         );
-        console.log(response);
+
         setValue("images", newImages);
         toast.dismiss(toastId);
         toast.success("Image deleted successfully");
