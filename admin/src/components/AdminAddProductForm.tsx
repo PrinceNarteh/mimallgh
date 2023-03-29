@@ -143,18 +143,10 @@ const AdminAddProductForm = () => {
   useEffect(() => {
     if (productId) {
       setState(data as any);
-      setValue("id", data?.id || "");
-      setValue("brand", data?.brand || "");
-      setValue("category", data?.category.toLowerCase() || "");
-      setValue("description", data?.description || "");
-      setValue("discountPercentage", data?.discountPercentage || 0);
-      setValue("images", data?.images || []);
-      setValue("price", data?.price || 0);
-      setValue("shopId", data?.shopId || "");
-      setValue("stock", data?.stock || 0);
-      setValue("title", data?.title || "");
     }
   }, [data]);
+
+  console.log(state);
 
   const deleteImage = (public_id: string) => {
     setPublicId(public_id);

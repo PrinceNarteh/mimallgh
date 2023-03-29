@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Shop } from "@prisma/client";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FiInstagram } from "react-icons/fi";
@@ -15,51 +16,51 @@ import InputField from "./InputField";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
 
-const AddShopForm = ({
-  shop,
-}: {
-  shop?:
-    | (Shop & {
-        owner: {
-          firstName: string;
-          lastName: string;
-          middleName: string | null;
-        };
-        branches: {
-          id?: string;
-          location: string;
-          address: string | null;
-          phoneNumber: string;
-          shopId?: string | null;
-        }[];
-      })
-    | null
-    | undefined;
-}) => {
+type IInput =
+  | (Shop & {
+      owner: {
+        firstName: string;
+        lastName: string;
+        middleName: string | null;
+      };
+      branches: {
+        id?: string;
+        location: string;
+        address: string | null;
+        phoneNumber: string;
+        shopId?: string | null;
+      }[];
+    })
+  | null
+  | undefined;
+
+const AddShopForm = () => {
+  const [state, setState] = useState({
+    id: "",
+    ownerId: "",
+    name: "",
+    location: "",
+    address: "",
+    openingTime: "",
+    closingTime: "",
+    phoneNumber: "",
+    description: "",
+    facebookHandle: "",
+    instagramHandle: "",
+    whatsappNumber: "",
+    branches: [],
+  });
   const {
     register,
     formState: { errors },
     getValues,
     setValue,
     control,
+    reset,
     handleSubmit,
   } = useForm({
-    defaultValues: {
-      id: shop?.id || null,
-      ownerId: shop?.ownerId || "",
-      name: shop?.name || "",
-      location: shop?.location || "",
-      address: shop?.address || "",
-      openingTime: shop?.openingTime || "",
-      closingTime: shop?.closingTime || "",
-      phoneNumber: shop?.phoneNumber || "",
-      description: shop?.description || "",
-      facebookHandle: shop?.facebookHandle || "",
-      instagramHandle: shop?.instagramHandle || "",
-      whatsappNumber: shop?.whatsappNumber || "",
-      branches: shop?.branches || [],
-    },
-    resolver: zodResolver(shop?.ownerId ? updateShopDto : createShopDto),
+    defaultValues: state,
+    resolver: zodResolver(state?.ownerId ? updateShopDto : createShopDto),
   });
   const { fields, append, remove } = useFieldArray({
     name: "branches",
@@ -71,29 +72,43 @@ const AddShopForm = ({
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation();
 
-  const submitHandler = async (data: any) => {
-    if (!data.id) {
-      createShopMutation.mutate(data, {
-        onSuccess() {
-          toast.success("Shop created successfully");
-          router.push(`/shops/${shop?.id}`);
-        },
-      });
-    } else {
-      updateShopMutation.mutate(data, {
-        onSuccess: () => {
-          toast.success("Update successful");
-          router.push(`/shops/${shop?.id}`);
-        },
-      });
-    }
+  const { data } = api.shops.getShopById.useQuery({
+    shopId: router.query.shopId as string,
+  });
+
+  useEffect(() => {
+    const newData = {
+      ...data,
+      id: data?.id,
+    };
+    console.log(newData);
+    reset(newData as any);
+  }, [data]);
+
+  const submitHandler = async (value: any) => {
+    console.log(value);
+    // if (!value.id) {
+    //   createShopMutation.mutate(value, {
+    //     onSuccess(data) {
+    //       toast.success("Shop created successfully");
+    //       // router.push(`/shops/${data.id}`);
+    //     },
+    //   });
+    // } else {
+    //   updateShopMutation.mutate(value, {
+    //     onSuccess: (data) => {
+    //       console.log(data);
+    //       toast.success("Update successful");
+    //       // router.push(`/shops/${data?.id}`);
+    //     },
+    //   });
+    // }
   };
 
   const owners = shopOwners?.data?.map((shopOwner) => ({
     id: shopOwner.id,
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
-
 
   return (
     <div className="pb-10">

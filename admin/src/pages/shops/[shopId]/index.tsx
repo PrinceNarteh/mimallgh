@@ -72,8 +72,8 @@ const ShopDetails = () => {
             <div className="font-bold">Phone Number</div>
             <div>{data?.phoneNumber}</div>
           </div>
-          <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
-            <div className="font-bold">Description</div>
+          <div className="flex flex-col items-start bg-dark-gray py-4 px-4">
+            <div className="mb-2 font-bold">Description</div>
             <div>{data?.description}</div>
           </div>
         </Card>
