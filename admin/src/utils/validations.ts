@@ -72,6 +72,7 @@ export const updateShopOwnerDto = baseUserDto.extend({
 });
 
 export const createShopDto = z.object({
+  id: z.string({ required_error: "" }).cuid().optional(),
   ownerId: z
     .string({ required_error: "Shop Owner Id is required" })
     .cuid("Enter valid ID"),

@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Shop } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -16,40 +15,8 @@ import InputField from "./InputField";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
 
-type IInput =
-  | (Shop & {
-      owner: {
-        firstName: string;
-        lastName: string;
-        middleName: string | null;
-      };
-      branches: {
-        id?: string;
-        location: string;
-        address: string | null;
-        phoneNumber: string;
-        shopId?: string | null;
-      }[];
-    })
-  | null
-  | undefined;
-
 const AddShopForm = () => {
-  const [state, setState] = useState({
-    id: "",
-    ownerId: "",
-    name: "",
-    location: "",
-    address: "",
-    openingTime: "",
-    closingTime: "",
-    phoneNumber: "",
-    description: "",
-    facebookHandle: "",
-    instagramHandle: "",
-    whatsappNumber: "",
-    branches: [],
-  });
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -59,14 +26,27 @@ const AddShopForm = () => {
     reset,
     handleSubmit,
   } = useForm({
-    defaultValues: state,
-    resolver: zodResolver(state?.ownerId ? updateShopDto : createShopDto),
+    defaultValues: {
+      id: "",
+      ownerId: "",
+      name: "",
+      location: "",
+      address: "",
+      openingTime: "",
+      closingTime: "",
+      phoneNumber: "",
+      description: "",
+      facebookHandle: "",
+      instagramHandle: "",
+      whatsappNumber: "",
+      branches: [],
+    },
+    resolver: zodResolver(router.query.shopId ? updateShopDto : createShopDto),
   });
   const { fields, append, remove } = useFieldArray({
     name: "branches",
     control,
   });
-  const router = useRouter();
 
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
@@ -77,32 +57,25 @@ const AddShopForm = () => {
   });
 
   useEffect(() => {
-    const newData = {
-      ...data,
-      id: data?.id,
-    };
-    console.log(newData);
-    reset(newData as any);
+    reset(data as any);
   }, [data]);
 
   const submitHandler = async (value: any) => {
-    console.log(value);
-    // if (!value.id) {
-    //   createShopMutation.mutate(value, {
-    //     onSuccess(data) {
-    //       toast.success("Shop created successfully");
-    //       // router.push(`/shops/${data.id}`);
-    //     },
-    //   });
-    // } else {
-    //   updateShopMutation.mutate(value, {
-    //     onSuccess: (data) => {
-    //       console.log(data);
-    //       toast.success("Update successful");
-    //       // router.push(`/shops/${data?.id}`);
-    //     },
-    //   });
-    // }
+    if (!value.id) {
+      createShopMutation.mutate(value, {
+        onSuccess(data) {
+          toast.success("Shop created successfully");
+          router.push(`/shops/${data.id!}`);
+        },
+      });
+    } else {
+      updateShopMutation.mutate(value, {
+        onSuccess: (data) => {
+          toast.success("Update successful");
+          router.push(`/shops/${data?.id!}`);
+        },
+      });
+    }
   };
 
   const owners = shopOwners?.data?.map((shopOwner) => ({
