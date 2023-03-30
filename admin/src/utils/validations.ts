@@ -24,7 +24,7 @@ export const baseUserDto = z.object({
     .string({ required_error: "Password name is required." })
     .min(6, "Password should be six character or more"),
   nationality: z.string({ required_error: "Nationality is required" }).min(1),
-  image: z.string({ required_error: "Password name is required." }).optional(),
+  image: z.union([z.string(), z.null()]),
   role: z.enum(["ADMIN", "SHOP_OWNER", "USER"], {
     required_error: "Role is required",
     invalid_type_error:

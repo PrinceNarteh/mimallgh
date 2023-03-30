@@ -1,31 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
+import { useEffect } from "react";
 import { api } from "./../utils/api";
 import { createAdminDto, updateAdminDto } from "./../utils/validations";
-import InputField from "./InputField";
 import { Button } from "./Button";
 import Card from "./Card";
+import InputField from "./InputField";
+import { capitalize } from "../utils/utilities";
 
-const convertLevelToString = (level: string) => {
-  switch (level) {
-    case "LEVEL_ONE":
-      return "level_one";
-    case "LEVEL_TWO":
-      return "level_two";
-    case "LEVEL_THREE":
-      return "level_three";
-    case "SUPER_USER":
-      return "super_user";
-    default:
-      break;
-  }
-};
+const levels = ["level_one", "level_two", "level_three", "super_user"];
 
-const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
+const AdminForm = () => {
+  const router = useRouter();
   const {
     register,
     formState: { errors, isSubmitting },
@@ -34,33 +23,46 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      id: admin?.id || "",
-      firstName: admin?.firstName || "",
-      lastName: admin?.lastName || "",
-      middleName: admin?.middleName || "",
-      email: admin?.email || "",
-      address: admin?.address || "",
-      nationality: admin?.nationality || "",
-      cardType: admin?.cardType || "",
-      cardNumber: admin?.cardNumber || "",
-      phoneNumber: admin?.phoneNumber || "",
-      alternateNumber: admin?.alternateNumber || "",
-      password: admin?.password || "",
-      level: (admin?.level && convertLevelToString(admin.level)) || "",
-      role: admin?.role || "ADMIN",
+      id: "",
+      firstName: "",
+      lastName: "",
+      middleName: "",
+      email: "",
+      address: "",
+      nationality: "",
+      cardType: "",
+      cardNumber: "",
+      phoneNumber: "",
+      alternateNumber: "",
+      password: "",
+      level: "",
+      role: "ADMIN",
     },
-    resolver: zodResolver(admin?.id ? updateAdminDto : createAdminDto),
+    resolver: zodResolver(
+      router.query.adminId ? updateAdminDto : createAdminDto
+    ),
   });
-  const router = useRouter();
 
+  const { data } = api.users.getUserById.useQuery({
+    id: router.query.adminId as string,
+  });
+  console.log(data);
+
+  const updateAdmin = api.users.updateAdmin.useMutation();
   const createAdmin = api.users.createAdmin.useMutation({
     onError: (error) => {
       toast.error(error.message);
     },
   });
-  const updateAdmin = api.users.updateAdmin.useMutation();
+
+  console.log(errors);
+
+  useEffect(() => {
+    reset(data as any);
+  }, [data]);
 
   const submitHandler = async (data: any) => {
+    console.log(data);
     if (!data.id) {
       createAdmin.mutate(data, {
         onSuccess: (data) => {
@@ -80,9 +82,13 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
     }
   };
 
+  levels.map((levels) => {
+    console.log(levels === getValues().level.toLowerCase());
+  });
+
   return (
     <div className="mx-auto max-w-4xl pb-7">
-      <Card heading={`${admin?.id ? "Edit" : "Add"} Administrator`}>
+      <Card heading={`${router.query.adminId ? "Edit" : "Add"} Administrator`}>
         <form
           className="w-full space-y-3"
           onSubmit={handleSubmit(submitHandler)}
@@ -188,7 +194,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               errors={errors}
             />
           </div>
-          {!admin?.id && (
+          {!router.query.adminId && (
             <div className="flex flex-col gap-5 md:flex-row">
               <InputField
                 name="password"
@@ -219,35 +225,13 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
               id="level"
               className="w-full rounded border border-gray-500 bg-transparent p-2 outline-none"
               {...register("level")}
+              value={getValues().level.toLowerCase()}
             >
-              <option
-                className="bg-light-gray"
-                value="level_one"
-                selected={admin?.level === "LEVEL_ONE"}
-              >
-                Level One
-              </option>
-              <option
-                className="bg-light-gray"
-                value="level_two"
-                selected={admin?.level === "LEVEL_TWO"}
-              >
-                Level Two
-              </option>
-              <option
-                className="bg-light-gray"
-                value="level_three"
-                selected={admin?.level === "LEVEL_THREE"}
-              >
-                Level Three
-              </option>
-              <option
-                className="bg-light-gray"
-                value="super_user"
-                selected={admin?.level === "SUPER_USER"}
-              >
-                Super User
-              </option>
+              {levels.map((level, idx) => (
+                <option key={idx} className="bg-light-gray" value={level}>
+                  {capitalize(level)}
+                </option>
+              ))}
             </select>
             {errors && errors["level"] && (
               <span className="pl-1 text-sm text-red-500">
@@ -260,7 +244,7 @@ const AdminForm = ({ admin }: { admin?: User | null | undefined }) => {
             className="rounded bg-blue-600 py-2 px-4 text-white"
             disabled={isSubmitting}
           >
-            {`${admin?.id ? "Edit" : "Add"} Administrator`}
+            {`${router.query.adminId ? "Edit" : "Add"} Administrator`}
           </Button>
         </form>
       </Card>
