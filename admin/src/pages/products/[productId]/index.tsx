@@ -20,23 +20,29 @@ const ProductDetails = () => {
       <Back />
       <Card heading="Product Detail">
         <h3 className="mb-2 text-2xl font-semibold">{data?.title}</h3>
-        <div className="min-h-96 grid grid-cols-12">
+        <div className="min-h-96 grid grid-cols-1 space-y-5 md:grid-cols-12">
           <div className="col-span-5 space-y-3">
             <div className="relative h-[400px] bg-slate-500">
               <Image
                 src={data?.images[0]?.secure_url as string}
+                sizes="400"
                 fill
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "contain" }}
                 alt=""
+                priority
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex justify-between gap-3 overflow-x-auto">
               {data?.images.map((image, idx) => (
-                <div key={idx} className=" relative h-28 w-40">
+                <div
+                  key={idx}
+                  className="relative h-[100px] w-[100px] shrink-0"
+                >
                   <Image
                     src={image.secure_url}
                     fill
-                    style={{ objectFit: "cover" }}
+                    sizes="100"
+                    style={{ objectFit: "contain" }}
                     alt=""
                   />
                 </div>
@@ -84,11 +90,11 @@ const Item = ({
   dark?: boolean;
 }) => (
   <div
-    className={`flex items-center justify-between py-4 px-4 ${
+    className={`flex flex-col items-start justify-between py-4 px-4 ${
       dark ? "bg-dark-gray" : ""
     }`}
   >
-    <div className="font-bold">{label}</div>
+    <div className="font-bold line-clamp-1">{label}</div>
     <div>{value}</div>
   </div>
 );

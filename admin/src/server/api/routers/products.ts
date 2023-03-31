@@ -1,12 +1,11 @@
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
+import { mapStringToCategory } from "../../../utils/mapper";
 import {
   adminCreateProductDto,
   adminUpdateProductDto,
   IdDto,
 } from "../../../utils/validations";
-import { TRPCError } from "@trpc/server";
-import { cloudinary } from "../../../utils/cloudinary";
-import { mapStringToCategory } from "../../../utils/mapper";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const productsRouter = createTRPCRouter({
   getAllProducts: publicProcedure.query(async ({ ctx }) => {
@@ -32,32 +31,14 @@ export const productsRouter = createTRPCRouter({
   createProduct: publicProcedure
     .input(adminCreateProductDto)
     .mutation(async ({ input, ctx }) => {
-      let images = [...input.selectedImages];
-      let imagesBuffer = [];
-
-      for (let i = 0; i < images.length; i++) {
-        const result = await cloudinary.uploader.upload(images[i] as string, {
-          folder: "mimall",
-          width: 1920,
-          crop: "scale",
-        });
-
-        imagesBuffer.push({
-          public_id: result.public_id,
-          secure_url: result.secure_url,
-        });
-      }
-
-      const { selectedImages, ...data } = input;
-
       try {
         const product = ctx.prisma.product.create({
           data: {
-            ...data,
-            category: mapStringToCategory[data.category]!,
+            ...input,
+            category: mapStringToCategory[input.category]!,
             images: {
               createMany: {
-                data: imagesBuffer,
+                data: input.images,
               },
             },
           },
@@ -68,35 +49,7 @@ export const productsRouter = createTRPCRouter({
   updateProduct: publicProcedure
     .input(adminUpdateProductDto)
     .mutation(async ({ input, ctx }) => {
-      let imagesBuffer: {
-        public_id: string;
-        secure_url: string;
-      }[] = [];
-      if (input.selectedImages.length > 0) {
-        let images = [...input.selectedImages];
-
-        for (let i = 0; i < images.length; i++) {
-          const result = await cloudinary.uploader.upload(images[i] as string, {
-            folder: "mimall",
-            width: 1920,
-            crop: "scale",
-          });
-
-          imagesBuffer.push({
-            public_id: result.public_id,
-            secure_url: result.secure_url,
-          });
-        }
-      }
-
-      const { selectedImages, images, ...data } = input;
-
-      const oldImages = images.map((image) => ({
-        public_id: image.public_id,
-        secure_url: image.secure_url,
-      }));
-
-      const newImages = oldImages.concat(imagesBuffer);
+      const { images, ...data } = input;
 
       try {
         const product = ctx.prisma.product.update({
@@ -111,7 +64,7 @@ export const productsRouter = createTRPCRouter({
                 productId: input.id,
               },
               createMany: {
-                data: newImages,
+                data: input.images,
               },
             },
           },

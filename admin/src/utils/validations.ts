@@ -161,7 +161,6 @@ export const createProductDto = z.object({
       secure_url: z.string(),
     })
   ),
-  selectedImages: z.array(z.string()).default([]),
 });
 
 export const adminCreateProductDto = createProductDto.extend({

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { toast } from "react-hot-toast";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
@@ -55,7 +56,6 @@ const initialValues: {
   stock: number;
   title: string;
   images: ProductImage[];
-  selectedImages: [];
 } = {
   id: "",
   brand: "",
@@ -67,11 +67,9 @@ const initialValues: {
   stock: 0,
   title: "",
   images: [],
-  selectedImages: [],
 };
 
 const AdminAddProductForm = () => {
-  const [state, setState] = useState(initialValues);
   const {
     query: { productId },
     push,
@@ -85,8 +83,9 @@ const AdminAddProductForm = () => {
     reset,
     handleSubmit,
   } = useForm({
-    defaultValues: state,
+    defaultValues: initialValues,
   });
+  const [fetchAgain, setFetchAgain] = useState(true);
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -94,7 +93,7 @@ const AdminAddProductForm = () => {
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
   const updateProductMutation = api.products.updateProduct.useMutation();
-  const { data } = api.products.getProductById.useQuery(
+  const { data, refetch } = api.products.getProductById.useQuery(
     {
       id: productId as string,
     },
@@ -128,7 +127,6 @@ const AdminAddProductForm = () => {
           })
           .finally(() => {
             setPreviewImages(imagesArray);
-            setValue("selectedImages", imagesArray);
           });
       });
     };
@@ -141,12 +139,13 @@ const AdminAddProductForm = () => {
   }));
 
   useEffect(() => {
-    if (productId) {
-      setState(data as any);
+    if (productId && !getValues().id) {
+      refetch();
+      reset(data as any);
+      setFetchAgain(false);
+      console.log(data);
     }
   }, [data]);
-
-  console.log(state);
 
   const deleteImage = (public_id: string) => {
     setPublicId(public_id);
@@ -169,7 +168,6 @@ const AdminAddProductForm = () => {
         toast.success("Image deleted successfully");
       } catch (error) {
         toast.dismiss(toastId);
-        console.error(error);
       } finally {
         setOpenDialog(false);
       }
@@ -179,29 +177,62 @@ const AdminAddProductForm = () => {
   }
 
   const submitHandler = (data: any) => {
+    // console.log(data);
     const toastId = toast.loading("Loading");
-    if (data.id) {
-      updateProductMutation.mutate(data, {
-        onSuccess: (value) => {
-          toast.dismiss(toastId);
-          toast.success("Product updated successfully");
-          push(`/products/${value?.id}`);
-        },
-        onError: () => {
-          toast.dismiss(toastId);
-        },
-      });
-    } else {
-      createProductMutation.mutate(data, {
-        onSuccess: () => {
-          toast.dismiss(toastId);
-          toast.success("Product created successfully");
-          reset();
-        },
-        onError: () => {
-          toast.dismiss(toastId);
-        },
-      });
+    const imageUrls = [];
+
+    const formData = new FormData();
+    formData.append("cloud_name", "prinart");
+    formData.append("upload_preset", "mimall");
+
+    for (let i = 0; i < images.length; i++) {
+      formData.append("file", images[i] as any);
+      imageUrls[i] = axios.post(
+        "https://api.cloudinary.com/v1_1/prinart/image/upload",
+        formData
+      );
+    }
+
+    try {
+      Promise.all(imageUrls)
+        .then((res: any) => {
+          return res.map((item: any) => ({
+            public_id: item.data.public_id,
+            secure_url: item.data.secure_url,
+          }));
+        })
+        .then((res) => {
+          const newData = {
+            ...data,
+            images: res,
+          };
+
+          if (data.id) {
+            updateProductMutation.mutate(newData, {
+              onSuccess: (value) => {
+                toast.dismiss(toastId);
+                toast.success("Product updated successfully");
+                push(`/products/${value?.id}`);
+              },
+              onError: () => {
+                toast.dismiss(toastId);
+              },
+            });
+          } else {
+            createProductMutation.mutate(newData, {
+              onSuccess: () => {
+                toast.dismiss(toastId);
+                toast.success("Product created successfully");
+                reset();
+              },
+              onError: () => {
+                toast.dismiss(toastId);
+              },
+            });
+          }
+        });
+    } catch (error: any) {
+      console.log(error.message);
     }
   };
 
@@ -305,11 +336,11 @@ const AdminAddProductForm = () => {
                 >
                   Product Images
                 </label>
-                <div className="flex gap-5">
+                <div className="flex gap-5 overflow-x-auto py-3">
                   {getValues()?.images.map((image, index) => (
                     <div
                       key={index}
-                      className="relative h-32 w-32 rounded-md bg-slate-500"
+                      className="relative h-32 w-32 shrink-0 rounded-md bg-slate-500"
                     >
                       <AiOutlineCloseCircle
                         onClick={() => deleteImage(image.public_id)}
@@ -318,9 +349,10 @@ const AdminAddProductForm = () => {
                       <div className="overflow-hidden">
                         <Image
                           src={image.secure_url}
-                          fill
-                          style={{ objectFit: "cover" }}
+                          style={{ objectFit: "contain" }}
                           alt=""
+                          sizes="128"
+                          fill
                           className="rounded"
                         />
                       </div>
@@ -347,11 +379,11 @@ const AdminAddProductForm = () => {
                 accept=".png, .jpg, .jpeg"
               ></input>
             </div>
-            <div className="mt-10 flex flex-wrap justify-center gap-7 ">
+            <div className="flex gap-5 overflow-x-auto py-3">
               {previewImages.map((image, index) => (
                 <div
                   key={index}
-                  className="relative h-32 w-32 rounded-md bg-slate-500"
+                  className="relative h-32 w-32 shrink-0 rounded-md bg-slate-500"
                 >
                   <AiOutlineCloseCircle
                     onClick={() => deleteSelectedImage(index)}
@@ -360,7 +392,8 @@ const AdminAddProductForm = () => {
                   <div className="overflow-hidden">
                     <Image
                       src={image}
-                      fill
+                      width="128"
+                      height="128"
                       style={{ objectFit: "cover" }}
                       alt=""
                       className="rounded"
