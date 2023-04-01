@@ -7,6 +7,7 @@ import Back from "../../../components/Back";
 import Card from "../../../components/Card";
 import Modal from "../../../components/Modal";
 import { api } from "../../../utils/api";
+import Loader from "../../../components/Loader";
 
 const ShopOwnerDetails = () => {
   const {
@@ -20,7 +21,7 @@ const ShopOwnerDetails = () => {
   }
   const deleteUser = api.users.deleteUser.useMutation();
 
-  const { data } = api.users.getUserById.useQuery({
+  const { data, isLoading } = api.users.getUserById.useQuery({
     id: shopOwnerId as string,
   });
 
@@ -39,6 +40,10 @@ const ShopOwnerDetails = () => {
     } else {
       setOpenDialog(false);
     }
+  }
+
+  if (shopOwnerId && isLoading) {
+    return <Loader />;
   }
 
   return (

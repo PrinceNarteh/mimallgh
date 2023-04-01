@@ -10,18 +10,12 @@ const EditShopOwner = () => {
     push,
   } = useRouter();
 
-  if (!shopOwnerId) {
-    push(`/shop-owners`);
-  }
-
-  const shopOwner = api.users.getUserById.useQuery({
-    id: shopOwnerId as string,
-  });
+  
 
   return (
     <div>
       <Back />
-      <ShopOwnerForm shopOwner={shopOwner.data} />
+      <ShopOwnerForm />
     </div>
   );
 };

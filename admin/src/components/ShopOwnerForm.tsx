@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -10,11 +9,8 @@ import { createShopOwnerDto, updateShopOwnerDto } from "./../utils/validations";
 import { Button } from "./Button";
 import Card from "./Card";
 
-const ShopOwnerForm = ({
-  shopOwner,
-}: {
-  shopOwner?: User | null | undefined;
-}) => {
+const ShopOwnerForm = () => {
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -22,38 +18,40 @@ const ShopOwnerForm = ({
     getValues,
   } = useForm({
     defaultValues: {
-      ...(shopOwner?.id && { id: shopOwner?.id }),
-      firstName: shopOwner?.firstName || "",
-      lastName: shopOwner?.lastName || "",
-      middleName: shopOwner?.middleName || "",
-      email: shopOwner?.email || "",
-      address: shopOwner?.address || "",
-      nationality: shopOwner?.nationality || "",
-      cardType: shopOwner?.cardType || "",
-      cardNumber: shopOwner?.cardNumber || "",
-      phoneNumber: shopOwner?.phoneNumber || "",
-      alternateNumber: shopOwner?.alternateNumber || "",
-      password: shopOwner?.password || "",
-      role: shopOwner?.role || "SHOP_OWNER",
+      id: "",
+      firstName: "",
+      lastName: "",
+      middleName: "",
+      email: "",
+      address: "",
+      nationality: "",
+      cardType: "",
+      cardNumber: "",
+      phoneNumber: "",
+      alternateNumber: "",
+      password: "",
+      role: "SHOP_OWNER",
     },
     resolver: zodResolver(
-      shopOwner?.id ? updateShopOwnerDto : createShopOwnerDto
+      router.query.shopOwnerId ? updateShopOwnerDto : createShopOwnerDto
     ),
   });
 
+  const { data, isLoading } = api.users.getUserById.useQuery({
+    id: router.query.shopOwnerId as string,
+  });
   const createUser = api.users.register.useMutation({
     onError: (error) => {
       toast.error(error.message);
     },
   });
   const updateUser = api.users.updateUser.useMutation();
-  const router = useRouter();
 
-  const submitHandler = async (data: any) => {
-    if (!shopOwner?.id) {
+  const submitHandler = async (value: any) => {
+    if (getValues()?.id) {
       createUser.mutate(
         {
-          ...data,
+          ...value,
           role: "SHOP_OWNER",
         },
         {
@@ -66,7 +64,7 @@ const ShopOwnerForm = ({
     } else {
       updateUser.mutate(
         {
-          ...data,
+          ...value,
           role: "SHOP_OWNER",
         },
         {
@@ -79,10 +77,9 @@ const ShopOwnerForm = ({
     }
   };
 
-
   return (
     <div className="mx-auto max-w-4xl">
-      <Card heading={`${shopOwner?.id ? "Edit" : "Add"} Shop Owner`}>
+      <Card heading={`${getValues()?.id ? "Edit" : "Add"} Shop Owner`}>
         <form
           className="w-full space-y-3"
           onSubmit={handleSubmit(submitHandler)}
@@ -171,7 +168,7 @@ const ShopOwnerForm = ({
               errors={errors}
             />
           </div>
-          {!shopOwner?.id && (
+          {!getValues()?.id && (
             <div className="flex flex-col gap-5 md:flex-row">
               <InputField
                 name="password"
@@ -192,7 +189,7 @@ const ShopOwnerForm = ({
             </div>
           )}
           <Button type="submit">
-            {`${shopOwner?.id ? "Edit" : "Add"} Shop Owner`}
+            {`${getValues()?.id ? "Edit" : "Add"} Shop Owner`}
           </Button>
         </form>
       </Card>

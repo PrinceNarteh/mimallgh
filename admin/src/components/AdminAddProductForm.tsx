@@ -94,14 +94,15 @@ const AdminAddProductForm = () => {
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
   const updateProductMutation = api.products.updateProduct.useMutation();
-  const { data, refetch, isLoading } = api.products.getProductById.useQuery(
-    {
-      id: productId as string,
-    },
-    {
-      enabled: false,
-    }
-  );
+  const { data, refetch, isLoading, isError } =
+    api.products.getProductById.useQuery(
+      {
+        id: productId as string,
+      },
+      {
+        enabled: false,
+      }
+    );
 
   const selectedImages = (e: ChangeEvent<HTMLInputElement>) => {
     let files: FileList | null = e.target.files;
@@ -138,15 +139,6 @@ const AdminAddProductForm = () => {
     id: shop.id,
     label: `${shop.name} - ${shop.owner.firstName} ${shop.owner.middleName} ${shop.owner.lastName}`,
   }));
-
-  useEffect(() => {
-    if (productId && !getValues().id) {
-      refetch();
-      reset(data as any);
-      setFetchAgain(false);
-      console.log(data);
-    }
-  }, [data]);
 
   const deleteImage = (public_id: string) => {
     setPublicId(public_id);
@@ -236,8 +228,22 @@ const AdminAddProductForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (productId && !getValues().id) {
+      refetch();
+      reset(data as any);
+      setFetchAgain(false);
+    }
+  }, [data]);
+
   if (productId && isLoading) {
     return <Loader />;
+  }
+
+  console.log(isError);
+
+  if (isError) {
+    toast.error("Error fetching data");
   }
 
   return (

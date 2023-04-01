@@ -2,12 +2,13 @@
   "name": "mimallgh",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://admin.mimallgh.com/",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
