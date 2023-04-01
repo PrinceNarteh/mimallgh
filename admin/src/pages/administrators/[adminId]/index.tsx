@@ -10,6 +10,7 @@ import Card from "../../../components/Card";
 import Modal from "../../../components/Modal";
 import { api } from "../../../utils/api";
 import { mapLevelToText } from "../../../utils/mapper";
+import Loader from "../../../components/Loader";
 
 const AdministratorDetails = () => {
   const {
@@ -23,7 +24,7 @@ const AdministratorDetails = () => {
     push(`/administrators`);
   }
 
-  const { data } = api.users.getUserById.useQuery({
+  const { data, isLoading } = api.users.getUserById.useQuery({
     id: adminId as string,
   });
 
@@ -44,6 +45,10 @@ const AdministratorDetails = () => {
     } else {
       setOpenDialog(false);
     }
+  }
+
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (

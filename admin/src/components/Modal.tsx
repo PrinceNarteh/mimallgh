@@ -8,7 +8,7 @@ interface IModal {
 
 const Modal = ({ message, onDialog }: IModal) => {
   return (
-    <div className="absolute inset-0 grid min-h-full place-content-center bg-gray-800/80">
+    <div className="absolute inset-0 grid place-content-center bg-gray-800/80">
       <div className="w-full max-w-sm rounded-md bg-gray-900 py-5 px-10">
         <div className="flex flex-col items-center space-y-5 pb-2 text-center text-lg">
           <RiErrorWarningLine className="my-3 text-6xl" />
