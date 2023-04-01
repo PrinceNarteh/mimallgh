@@ -10,6 +10,7 @@ import { Button } from "./Button";
 import Card from "./Card";
 import InputField from "./InputField";
 import { capitalize } from "../utils/utilities";
+import Loader from "./Loader";
 
 const levels = ["level_one", "level_two", "level_three", "super_user"];
 
@@ -43,10 +44,9 @@ const AdminForm = () => {
     ),
   });
 
-  const { data } = api.users.getUserById.useQuery({
+  const { data, isLoading } = api.users.getUserById.useQuery({
     id: router.query.adminId as string,
   });
-  console.log(data);
 
   const updateAdmin = api.users.updateAdmin.useMutation();
   const createAdmin = api.users.createAdmin.useMutation({
@@ -85,6 +85,10 @@ const AdminForm = () => {
   levels.map((levels) => {
     console.log(levels === getValues().level.toLowerCase());
   });
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="mx-auto max-w-4xl pb-7">
