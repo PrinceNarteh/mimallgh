@@ -53,20 +53,25 @@ const ShopOwnerDetails = () => {
         <Card heading="Shop Owner Details">
           <DetailItem
             label="Name"
-            value={`${data?.firstName} ${data?.middleName} ${data?.lastName}`}
+            value={`${data?.firstName || ""} ${data?.middleName || ""} ${
+              data?.lastName || ""
+            }`}
             dark
           />
-          <DetailItem label="Shop Name" value={`${data?.lastName}`} />
-          <DetailItem label="Email" value={`${data?.email}`} dark />
-          <DetailItem label="Phone Number" value={`${data?.phoneNumber}`} />
-          <DetailItem label="Address" value={`${data?.address}`} dark />
+          <DetailItem label="Shop Name" value={`${data?.lastName || ""}`} />
+          <DetailItem label="Email" value={`${data?.email || ""}`} dark />
+          <DetailItem
+            label="Phone Number"
+            value={`${data?.phoneNumber || ""}`}
+          />
+          <DetailItem label="Address" value={`${data?.address || ""}`} dark />
           <DetailItem
             label="Status"
             value={`${data?.active ? "Active" : "Inactive"}`}
           />
           <DetailItem
             label="Date Joined"
-            value={`${data?.createdAt.toDateString()}`}
+            value={`${data?.createdAt.toDateString() || ""}`}
             dark
           />
         </Card>
@@ -80,7 +85,9 @@ const ShopOwnerDetails = () => {
       {openDialog ? (
         <Modal
           onDialog={confirmDelete}
-          message={openDialog ? `${data?.firstName} ${data?.lastName}` : ""}
+          message={
+            openDialog ? `${data?.firstName || ""} ${data?.lastName || ""}` : ""
+          }
         />
       ) : null}
     </div>

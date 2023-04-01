@@ -1,4 +1,4 @@
-import AdminAddProductForm from "../../components/AdminAddProductForm";
+import AdminAddProductForm from "../../components/AddProductForm";
 import Back from "../../components/Back";
 
 const AddProduct = () => {

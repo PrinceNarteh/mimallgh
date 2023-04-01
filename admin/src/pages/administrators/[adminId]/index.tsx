@@ -58,13 +58,18 @@ const AdministratorDetails = () => {
         <Card heading="Administrator Details">
           <DetailItem
             label="Name"
-            value={`${data?.firstName} ${data?.middleName} ${data?.lastName}`}
+            value={`${data?.firstName || ""} ${data?.middleName || ""} ${
+              data?.lastName || ""
+            }`}
             dark
           />
-          <DetailItem label="Shop Name" value={`${data?.lastName}`} />
-          <DetailItem label="Email" value={`${data?.email}`} dark />
-          <DetailItem label="Phone Number" value={`${data?.phoneNumber}`} />
-          <DetailItem label="Address" value={`${data?.address}`} dark />
+          <DetailItem label="Shop Name" value={`${data?.lastName || ""}`} />
+          <DetailItem label="Email" value={`${data?.email || ""}`} dark />
+          <DetailItem
+            label="Phone Number"
+            value={`${data?.phoneNumber || ""}`}
+          />
+          <DetailItem label="Address" value={`${data?.address || ""}`} dark />
           <DetailItem
             label="Status"
             value={`${data?.active ? "Active" : "Inactive"}`}

@@ -55,22 +55,22 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="col-span-7 px-5">
-            <Item label="Price" value={`¢${data?.price}`} dark />
+            <Item label="Price" value={`¢${data?.price || ""}`} dark />
             <Item
               label="Discount Percentage"
-              value={`¢${data?.discountPercentage}`}
+              value={`¢${data?.discountPercentage || ""}`}
             />
-            <Item label="Stock" value={`${data?.stock}`} dark />
-            <Item label="Brand" value={`${data?.brand}`} />
+            <Item label="Stock" value={`${data?.stock || ""}`} dark />
+            <Item label="Brand" value={`${data?.brand || ""}`} />
             <Item
               label="Category"
               value={`${capitalize(data?.category || "")}`}
               dark
             />
-            <Item label="Shop" value={`${data?.shop.name}`} />
+            <Item label="Shop" value={`${data?.shop.name || ""}`} />
             <div className={`bg-dark-gray py-4 px-4`}>
               <div className="mb-3 font-bold">Description</div>
-              <div className="line-clamp-5">{data?.description}</div>
+              <div className="line-clamp-5">{data?.description || ""}</div>
             </div>
           </div>
         </div>

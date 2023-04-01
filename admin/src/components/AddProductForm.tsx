@@ -1,13 +1,14 @@
-import { Image as ProductImage } from "@prisma/client";
+import type { Image as ProductImage } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-import { api } from "./../utils/api";
+import { api } from "../utils/api";
 import { Button } from "./Button";
 import Card from "./Card";
 import InputField from "./InputField";
@@ -86,7 +87,7 @@ const AdminAddProductForm = () => {
   } = useForm({
     defaultValues: initialValues,
   });
-  const [fetchAgain, setFetchAgain] = useState(true);
+  const [_, setFetchAgain] = useState(true);
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -105,7 +106,7 @@ const AdminAddProductForm = () => {
     );
 
   const selectedImages = (e: ChangeEvent<HTMLInputElement>) => {
-    let files: FileList | null = e.target.files;
+    const files: FileList | null = e.target.files;
     let pickedImages: File[] = [];
     if (files !== null) {
       pickedImages = Array.from(files);
@@ -121,7 +122,7 @@ const AdminAddProductForm = () => {
 
   useEffect(() => {
     const getImages = async () => {
-      let imagesArray: any = [];
+      let imagesArray: string[] = [];
       images?.map((file) => {
         convertBase64(file)
           .then((res) => {
@@ -132,12 +133,12 @@ const AdminAddProductForm = () => {
           });
       });
     };
-    getImages();
+    getImages().catch((error) => console.log(error));
   }, [images]);
 
   const shops = getAllShops?.data?.map((shop) => ({
     id: shop.id,
-    label: `${shop.name} - ${shop.owner.firstName} ${shop.owner.middleName} ${shop.owner.lastName}`,
+    label: `${shop?.name} - ${shop?.owner?.firstName} ${shop?.owner?.middleName} ${shop?.owner?.lastName}`,
   }));
 
   const deleteImage = (public_id: string) => {
@@ -178,7 +179,7 @@ const AdminAddProductForm = () => {
     formData.append("upload_preset", "mimall");
 
     for (let i = 0; i < images.length; i++) {
-      formData.append("file", images[i] as any);
+      formData.append("file", images[i] as File);
       imageUrls[i] = axios.post(
         "https://api.cloudinary.com/v1_1/prinart/image/upload",
         formData

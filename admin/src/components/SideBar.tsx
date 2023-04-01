@@ -48,7 +48,7 @@ const SideBar = ({ open }: { open: boolean }) => {
         <div className="flex flex-1 flex-col justify-between overflow-y-auto">
           <div className="px-4 pt-4">
             <ul className="flex flex-col space-y-2">
-              {menus.map((menu: any, index: number) =>
+              {menus.map((menu, index) =>
                 menu?.subLinks ? (
                   <li className="relative" key={index}>
                     <input
@@ -83,7 +83,7 @@ const SideBar = ({ open }: { open: boolean }) => {
                       className={`hidden pt-2 pl-4 transition-[display] duration-300  peer-checked:block`}
                     >
                       <ul className="flex flex-col border-l border-gray-700 pl-2 text-gray-500">
-                        {menu.subLinks.map((subLink: any, index: number) => (
+                        {menu.subLinks.map((subLink, index) => (
                           <li key={index}>
                             <Link
                               href={subLink.link}

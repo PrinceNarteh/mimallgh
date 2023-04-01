@@ -63,7 +63,9 @@ const ShopDetails = () => {
           </div>
           <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
             <div className="font-bold">Owner</div>
-            <div>{`${data?.owner.firstName} ${data?.owner.middleName} ${data?.owner.lastName}`}</div>
+            <div>{`${data?.owner.firstName || ""} ${
+              data?.owner.middleName || ""
+            } ${data?.owner.lastName || ""}`}</div>
           </div>
           <div className="flex items-center justify-between py-4 px-4">
             <div className="font-bold">Location</div>
@@ -71,15 +73,15 @@ const ShopDetails = () => {
           </div>
           <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
             <div className="font-bold">Address</div>
-            <div>{data?.address}</div>
+            <div>{data?.address || ""}</div>
           </div>
           <div className="flex items-center justify-between py-4 px-4">
             <div className="font-bold">Phone Number</div>
-            <div>{data?.phoneNumber}</div>
+            <div>{data?.phoneNumber || ""}</div>
           </div>
           <div className="flex flex-col items-start bg-dark-gray py-4 px-4">
             <div className="mb-2 font-bold">Description</div>
-            <div>{data?.description}</div>
+            <div>{data?.description || ""}</div>
           </div>
         </Card>
 

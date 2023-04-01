@@ -15,6 +15,37 @@ import InputField from "./InputField";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
 import Loader from "./Loader";
+import { Branch, Shop } from "@prisma/client";
+
+const initialState: {
+  id: string;
+  ownerId: string;
+  name: string;
+  location: string;
+  address: string;
+  openingTime: string;
+  closingTime: string;
+  phoneNumber: string;
+  description: string;
+  facebookHandle: string;
+  instagramHandle: string;
+  whatsappNumber: string;
+  branches: Branch[];
+} = {
+  id: "",
+  ownerId: "",
+  name: "",
+  location: "",
+  address: "",
+  openingTime: "",
+  closingTime: "",
+  phoneNumber: "",
+  description: "",
+  facebookHandle: "",
+  instagramHandle: "",
+  whatsappNumber: "",
+  branches: [],
+};
 
 const AddShopForm = () => {
   const router = useRouter();
@@ -27,21 +58,7 @@ const AddShopForm = () => {
     reset,
     handleSubmit,
   } = useForm({
-    defaultValues: {
-      id: "",
-      ownerId: "",
-      name: "",
-      location: "",
-      address: "",
-      openingTime: "",
-      closingTime: "",
-      phoneNumber: "",
-      description: "",
-      facebookHandle: "",
-      instagramHandle: "",
-      whatsappNumber: "",
-      branches: [],
-    },
+    defaultValues: initialState,
     resolver: zodResolver(router.query.shopId ? updateShopDto : createShopDto),
   });
   const { fields, append, remove } = useFieldArray({
@@ -65,15 +82,16 @@ const AddShopForm = () => {
     if (!value.id) {
       createShopMutation.mutate(value, {
         onSuccess(data) {
+          const { id } = data as Shop;
           toast.success("Shop created successfully");
-          router.push(`/shops/${data.id!}`);
+          router.push(`/shops/${id}`);
         },
       });
     } else {
       updateShopMutation.mutate(value, {
         onSuccess: (data) => {
           toast.success("Update successful");
-          router.push(`/shops/${data?.id!}`);
+          router.push(`/shops/${router.query.shopId}`);
         },
       });
     }
@@ -267,6 +285,8 @@ const AddShopForm = () => {
             <Button
               onClick={() =>
                 append({
+                  shopId: "",
+                  id: "",
                   address: "",
                   location: "",
                   phoneNumber: "",
