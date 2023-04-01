@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const ProductCard = ({ image }: { image: string }) => {
   return (
-    <div className="h-[260px] w-[190px] bg-white">
+    <div className="h-[280px] w-[200px] bg-white p-3">
       <Link
         href={`/web-store/1`}
         className="mb-1 px-1 text-xs font-bold tracking-widest text-pink-500 line-clamp-1"

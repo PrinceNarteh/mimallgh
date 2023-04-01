@@ -36,7 +36,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  });
+  }, []);
 
   return (
     <div className={poppins.className}>

@@ -2,16 +2,26 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import Banner from "../components/Banner";
-import Container from "../components/Container";
-import Navbar from "../components/layout/Navbar";
-import SearchBar from "../components/layout/SearchBar";
 import ProductCard from "../components/ProductCard";
 import TopDeals from "../components/TopDeals";
+import { api } from "../utils/api";
 import { categories, sections, topDeals } from "../utils/data";
 import { locations } from "../utils/menus";
+import { useEffect, useState } from "react";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const Home = () => {
+  const [state, setState] = useState([]);
+  const { data } = api.products.getAllProducts.useQuery();
+
+  useEffect(() => {
+    if (data) {
+      setState(data as any);
+    }
+  }, []);
+
+  console.log(state);
+
   return (
     <div className="">
       <Banner />
@@ -51,7 +61,7 @@ const Home = () => {
           <div className="w-full overflow-x-scroll">
             <div className="flex gap-3 py-4">
               {locations.slice(1).map((location, idx) => (
-                <Link key={idx}  href={`/markets/${location.link}`}>
+                <Link key={idx} href={`/markets/${location.link}`}>
                   <div
                     className={`group relative h-28 w-52 cursor-pointer overflow-hidden rounded-2xl p-5 shadow-lg`}
                   >

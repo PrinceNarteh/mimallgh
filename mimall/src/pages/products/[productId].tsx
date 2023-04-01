@@ -62,7 +62,7 @@ const ProductDetails = () => {
           Mosco Mart
         </h3>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-          <div className="relative col-span-9 flex gap-5 md:flex-row">
+          <div className="relative col-span-9 flex flex-col gap-5 md:flex-row">
             <div className="">
               <div className="top-[110px] pb-10 md:sticky">
                 <div className=" h-fit w-[400px] shrink-0 gap-5 ">
