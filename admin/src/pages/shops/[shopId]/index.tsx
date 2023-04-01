@@ -2,13 +2,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import Back from "../../../components/Back";
 
+import Back from "../../../components/Back";
 import { Button } from "../../../components/Button";
 import Card from "../../../components/Card";
 import Modal from "../../../components/Modal";
 import { api } from "../../../utils/api";
 import { capitalize } from "../../../utils/utilities";
+import Loader from "../../../components/Loader";
 
 const ShopDetails = () => {
   const {
@@ -20,7 +21,7 @@ const ShopDetails = () => {
   if (!shopId) {
     push(`/shops`);
   }
-  const { data } = api.shops.getShopById.useQuery(
+  const { data, isLoading } = api.shops.getShopById.useQuery(
     { shopId: shopId as string },
     {
       cacheTime: 10000,
@@ -29,6 +30,10 @@ const ShopDetails = () => {
   const deleteShop = api.shops.deleteShop.useMutation();
 
   const handleDelete = () => setOpenDialog(true);
+
+  if (shopId && isLoading) {
+    return <Loader />;
+  }
 
   function confirmDelete(choose: boolean) {
     if (choose) {
