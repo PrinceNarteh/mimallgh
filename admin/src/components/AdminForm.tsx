@@ -86,7 +86,7 @@ const AdminForm = () => {
     console.log(levels === getValues().level.toLowerCase());
   });
 
-  if (isLoading) {
+  if (router.query.adminId && isLoading) {
     return <Loader />;
   }
 

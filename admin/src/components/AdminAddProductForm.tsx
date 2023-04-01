@@ -178,7 +178,6 @@ const AdminAddProductForm = () => {
   }
 
   const submitHandler = (data: any) => {
-    // console.log(data);
     const toastId = toast.loading("Loading");
     const imageUrls = [];
 
@@ -237,7 +236,7 @@ const AdminAddProductForm = () => {
     }
   };
 
-  if (isLoading) {
+  if (productId && isLoading) {
     return <Loader />;
   }
 
