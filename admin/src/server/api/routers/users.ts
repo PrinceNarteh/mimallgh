@@ -25,13 +25,14 @@ export const authRouter = createTRPCRouter({
           },
         });
         return user;
-      } catch (error: any) {
-        if (error.message.includes("User_email_key")) {
-          throw new TRPCError({
-            code: "CONFLICT",
-            message: "Email already in used.",
-          });
-        }
+      } catch (error: unknown) {
+        if (error instanceof TypeError)
+          if (error.message.includes("User_email_key")) {
+            throw new TRPCError({
+              code: "CONFLICT",
+              message: "Email already in used.",
+            });
+          }
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
@@ -51,8 +52,11 @@ export const authRouter = createTRPCRouter({
           },
         });
         return user;
-      } catch (error: any) {
-        if (error.message.includes("User_email_key")) {
+      } catch (error: unknown) {
+        if (
+          error instanceof TRPCError &&
+          error.message.includes("User_email_key")
+        ) {
           throw new TRPCError({
             code: "CONFLICT",
             message: "Email already in used.",
@@ -71,7 +75,7 @@ export const authRouter = createTRPCRouter({
           id: input.id,
         },
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
         message: "Something went wrong",
@@ -102,7 +106,12 @@ export const authRouter = createTRPCRouter({
           },
         });
         return users;
-      } catch (error) {}
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong",
+        });
+      }
     }),
   getAllShopOwners: publicProcedure.query(async ({ ctx }) => {
     const shopOwners = await ctx.prisma.user.findMany({
@@ -152,8 +161,11 @@ export const authRouter = createTRPCRouter({
           },
         });
         return admin;
-      } catch (error: any) {
-        if (error.message.includes("User_email_key")) {
+      } catch (error: unknown) {
+        if (
+          error instanceof TRPCError &&
+          error.message.includes("User_email_key")
+        ) {
           throw new TRPCError({
             code: "CONFLICT",
             message: "Email already in used.",
@@ -193,8 +205,11 @@ export const authRouter = createTRPCRouter({
           },
         });
         return admin;
-      } catch (error: any) {
-        if (error.message.includes("User_email_key")) {
+      } catch (error: unknown) {
+        if (
+          error instanceof TRPCError &&
+          error.message.includes("User_email_key")
+        ) {
           throw new TRPCError({
             code: "CONFLICT",
             message: "Email already in used.",

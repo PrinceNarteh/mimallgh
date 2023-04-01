@@ -1,16 +1,11 @@
-import { Role, Branch, Shop } from "@prisma/client";
-import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 import {
-  createShopDto,
   IdDto,
+  createShopDto,
   updateShopDto,
 } from "../../../utils/validations";
-import {
-  adminProtectedProcedure,
-  createTRPCRouter,
-  publicProcedure,
-} from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const shopRouter = createTRPCRouter({
   getAllShops: publicProcedure.query(async ({ ctx }) => {
@@ -46,7 +41,7 @@ export const shopRouter = createTRPCRouter({
         },
       });
       return shop;
-    }), 
+    }),
   createShop: publicProcedure
     .input(createShopDto)
     .mutation(async ({ input, ctx }) => {
@@ -87,7 +82,7 @@ export const shopRouter = createTRPCRouter({
           });
         }
 
-        const { branches, id, ownerId, ...update } = input;
+        const { branches, ...update } = input;
 
         const newBranches = branches.map((branch) => ({
           location: branch.location,

@@ -1,7 +1,7 @@
-import crypto from "crypto";
+import crypto, { BinaryLike } from "crypto";
 import axios from "axios";
 
-const generateSHA1 = (data: any) => {
+const generateSHA1 = (data: BinaryLike) => {
   const hash = crypto.createHash("sha1");
   hash.update(data);
   return hash.digest("hex");
@@ -20,7 +20,7 @@ export const deleteProductImage = async (publicId: string) => {
   const signature = generateSHA1(generateSignature(publicId, apiSecret));
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`;
 
-  const response = await axios.post(url, {
+  await axios.post(url, {
     public_id: publicId,
     signature: signature,
     api_key: apiKey,

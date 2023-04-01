@@ -1,15 +1,13 @@
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { Role } from "@prisma/client";
 import type { GetServerSidePropsContext } from "next";
 import {
   getServerSession,
-  type NextAuthOptions,
   type DefaultSession,
+  type NextAuthOptions,
 } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { env } from "../env/server.mjs";
 import { prisma } from "./db";
-import bcrypt from "bcryptjs";
-import { Role } from "@prisma/client";
 
 /**
  * Module augmentation for `next-auth` types
@@ -21,15 +19,15 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      firstName: String;
-      lastName: String;
-      middleName: String;
-      address: String;
-      phoneNumber: String;
-      email: String;
-      password: String;
-      image: String;
-      active: Boolean;
+      firstName: string;
+      lastName: string;
+      middleName: string;
+      address: string;
+      phoneNumber: string;
+      email: string;
+      password: string;
+      image: string;
+      active: boolean;
       role: Role;
       // ...other properties
       // role: UserRole;
@@ -72,8 +70,8 @@ export const authOptions: NextAuthOptions = {
           type: "password",
         },
       },
-      async authorize(credentials, req) {
-        const { email, password } = credentials as {
+      async authorize(credentials) {
+        const { email } = credentials as {
           email: string;
           password: string;
         };

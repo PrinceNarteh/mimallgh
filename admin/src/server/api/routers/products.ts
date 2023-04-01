@@ -49,16 +49,14 @@ export const productsRouter = createTRPCRouter({
   updateProduct: publicProcedure
     .input(adminUpdateProductDto)
     .mutation(async ({ input, ctx }) => {
-      const { images, ...data } = input;
-
       try {
         const product = ctx.prisma.product.update({
           where: {
             id: input.id,
           },
           data: {
-            ...data,
-            category: mapStringToCategory[data.category]!,
+            ...input,
+            category: mapStringToCategory[input.category]!,
             images: {
               deleteMany: {
                 productId: input.id,
@@ -81,7 +79,7 @@ export const productsRouter = createTRPCRouter({
             id: input.id,
           },
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",
