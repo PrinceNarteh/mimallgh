@@ -14,6 +14,7 @@ import Card from "./Card";
 import InputField from "./InputField";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
+import Loader from "./Loader";
 
 const AddShopForm = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const AddShopForm = () => {
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation();
 
-  const { data } = api.shops.getShopById.useQuery({
+  const { data, isLoading } = api.shops.getShopById.useQuery({
     shopId: router.query.shopId as string,
   });
 
@@ -83,6 +84,10 @@ const AddShopForm = () => {
     label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
   }));
 
+  if (router.query.shopId && isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="pb-10">
       <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
@@ -95,11 +100,11 @@ const AddShopForm = () => {
               Shop Owner
             </label>
             <SearchFilter
+              value={data?.ownerId || ""}
               field="ownerId"
               options={owners || []}
               errors={errors}
               setValue={setValue}
-              value={getValues().ownerId}
             />
           </div>
           <div className="flex flex-col gap-5 lg:flex-row">

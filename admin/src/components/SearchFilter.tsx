@@ -25,6 +25,7 @@ const SearchFilter = ({
   field,
   value,
 }: ISearchFilter) => {
+  const [hasValue, setHasValue] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selected, setSelected] = useState({
     id: "",
@@ -41,13 +42,12 @@ const SearchFilter = ({
   }, [selected]);
 
   useEffect(() => {
-    console.log({ options, value });
-
-    if (value) {
+    if (value && !hasValue) {
       const option = options.find((option) => option.id === value);
       if (option) {
         setSelected(option);
       }
+      setHasValue(true);
     }
   }, [value]);
 

@@ -2,13 +2,18 @@ import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
+import Loader from "../../components/Loader";
 
 const ShopOwnersList = () => {
   const router = useRouter();
-  const { data, isSuccess } = api.users.getAllShopOwners.useQuery();
+  const { data, isLoading } = api.users.getAllShopOwners.useQuery();
 
   const navigate = (shopOwnerId: string) =>
     router.push(`/shop-owners/${shopOwnerId}`);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="mx-auto max-w-5xl">
@@ -28,26 +33,25 @@ const ShopOwnersList = () => {
             </tr>
           </thead>
           <tbody>
-            {isSuccess &&
-              data?.map((shopOwner, idx) => (
-                <tr
-                  className="cursor-pointer rounded bg-light-gray"
-                  onClick={() => navigate(shopOwner.id)}
-                  key={idx}
-                >
-                  <td className="text-center">
-                    <input type="checkbox" />
-                  </td>
-                  <td className="py-5 text-center">{idx + 1}</td>
-                  <td className="py-5 text-center">{`${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`}</td>
-                  <td className="py-5 text-center">{shopOwner.email}</td>
-                  <td className="py-5 text-center">{shopOwner.phoneNumber}</td>
-                  <td className="py-5 text-center">{shopOwner.shop?.name}</td>
-                  <td className="flex justify-center py-5">
-                    <BsThreeDotsVertical />
-                  </td>
-                </tr>
-              ))}
+            {data?.map((shopOwner, idx) => (
+              <tr
+                className="cursor-pointer rounded bg-light-gray"
+                onClick={() => navigate(shopOwner.id)}
+                key={idx}
+              >
+                <td className="text-center">
+                  <input type="checkbox" />
+                </td>
+                <td className="py-5 text-center">{idx + 1}</td>
+                <td className="py-5 text-center">{`${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`}</td>
+                <td className="py-5 text-center">{shopOwner.email}</td>
+                <td className="py-5 text-center">{shopOwner.phoneNumber}</td>
+                <td className="py-5 text-center">{shopOwner.shop?.name}</td>
+                <td className="flex justify-center py-5">
+                  <BsThreeDotsVertical />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
