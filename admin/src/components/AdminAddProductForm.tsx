@@ -15,6 +15,7 @@ import Modal from "./Modal";
 import SearchFilter from "./SearchFilter";
 import { SelectOption } from "./SelectOption";
 import { deleteProductImage } from "../utils/deleteProductImage";
+import Loader from "./Loader";
 
 const convertBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -93,7 +94,7 @@ const AdminAddProductForm = () => {
   const getAllShops = api.shops.getAllShops.useQuery();
   const createProductMutation = api.products.createProduct.useMutation();
   const updateProductMutation = api.products.updateProduct.useMutation();
-  const { data, refetch } = api.products.getProductById.useQuery(
+  const { data, refetch, isLoading } = api.products.getProductById.useQuery(
     {
       id: productId as string,
     },
@@ -235,6 +236,10 @@ const AdminAddProductForm = () => {
       console.log(error.message);
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="mx-auto max-w-4xl pb-5">
