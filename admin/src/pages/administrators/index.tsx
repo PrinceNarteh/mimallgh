@@ -3,15 +3,20 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import Back from "../../components/Back";
 import { api } from "../../utils/api";
 import { mapLevelToText } from "../../utils/mapper";
+import Loader from "../../components/Loader";
 
 const AdministratorsList = () => {
   const router = useRouter();
-  const { data, isSuccess } = api.users.getUsersByRole.useQuery({
+  const { data, isLoading } = api.users.getUsersByRole.useQuery({
     role: "admin",
   });
 
   const navigate = (adminId: string) =>
     router.push(`/administrators/${adminId}`);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div>
@@ -33,28 +38,27 @@ const AdministratorsList = () => {
               </tr>
             </thead>
             <tbody>
-              {isSuccess &&
-                data?.map((admin, idx) => (
-                  <tr
-                    className="cursor-pointer rounded bg-light-gray"
-                    onClick={() => navigate(admin.id)}
-                    key={idx}
-                  >
-                    <td className="text-center">
-                      <input type="checkbox" />
-                    </td>
-                    <td className="py-5 text-center">{idx + 1}</td>
-                    <td className="py-5 text-center">{`${admin.firstName} ${admin.middleName} ${admin.lastName}`}</td>
-                    <td className="py-5 text-center">{admin.email}</td>
-                    <td className="py-5 text-center">{admin.phoneNumber}</td>
-                    <td className="py-5 text-center">
-                      {mapLevelToText(admin.level)}
-                    </td>
-                    <td className="flex justify-center py-5">
-                      <BsThreeDotsVertical />
-                    </td>
-                  </tr>
-                ))}
+              {data?.map((admin, idx) => (
+                <tr
+                  className="cursor-pointer rounded bg-light-gray"
+                  onClick={() => navigate(admin.id)}
+                  key={idx}
+                >
+                  <td className="text-center">
+                    <input type="checkbox" />
+                  </td>
+                  <td className="py-5 text-center">{idx + 1}</td>
+                  <td className="py-5 text-center">{`${admin.firstName} ${admin.middleName} ${admin.lastName}`}</td>
+                  <td className="py-5 text-center">{admin.email}</td>
+                  <td className="py-5 text-center">{admin.phoneNumber}</td>
+                  <td className="py-5 text-center">
+                    {mapLevelToText(admin.level)}
+                  </td>
+                  <td className="flex justify-center py-5">
+                    <BsThreeDotsVertical />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
