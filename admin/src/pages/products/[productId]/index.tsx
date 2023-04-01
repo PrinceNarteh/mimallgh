@@ -5,6 +5,7 @@ import Back from "../../../components/Back";
 import Card from "../../../components/Card";
 import { api } from "../../../utils/api";
 import { capitalize } from "../../../utils/utilities";
+import Loader from "../../../components/Loader";
 
 const ProductDetails = () => {
   const {
@@ -14,6 +15,10 @@ const ProductDetails = () => {
   const { isLoading, data } = api.products.getProductById.useQuery({
     id: productId as string,
   });
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="mx-auto w-11/12 space-y-3 pb-5">
