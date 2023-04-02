@@ -41,7 +41,9 @@ const AdministratorsList = () => {
               {data?.map((admin, idx) => (
                 <tr
                   className="cursor-pointer rounded bg-light-gray"
-                  onClick={() => navigate(admin.id)}
+                  onClick={() => {
+                    navigate(admin.id);
+                  }}
                   key={idx}
                 >
                   <td className="text-center">

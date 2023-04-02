@@ -23,15 +23,14 @@ const Login = () => {
     resolver: zodResolver(loginValidation),
   });
   const router = useRouter();
-  const { data: session } = useSession();
 
-  const submitHandler = async (data: any) => {
+  const submitHandler = async (data: { email: string; password: string }) => {
     const res = await signIn("credentials", {
       ...data,
       redirect: false,
     });
     if (res?.error === null) {
-      router.push("/shop");
+      router.push("/shop").catch((error) => console.log(error));
     }
   };
 

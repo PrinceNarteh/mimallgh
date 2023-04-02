@@ -123,6 +123,8 @@ export const updateShopDto = createShopDto.extend({
   ),
 });
 
+export type IUpdateShopDto = z.infer<typeof updateShopDto>;
+
 export const createProductDto = z.object({
   title: z
     .string({ required_error: "Product name is required" })

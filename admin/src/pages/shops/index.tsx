@@ -27,13 +27,19 @@ const Shops = () => {
             {data?.map((shop, idx) => (
               <tr
                 className="cursor-pointer rounded bg-light-gray"
-                onClick={() => router.push(`/shops/${shop.id}`)}
+                onClick={() => {
+                  router
+                    .push(`/shops/${shop.id}`)
+                    .catch((error) => console.log(error));
+                }}
                 key={idx}
               >
                 <td className="py-5 text-center ">{idx + 1}</td>
                 <td className="py-5 text-left">{shop.name}</td>
                 <td className="py-5 text-center ">
-                  <div>{`${shop?.owner.firstName} ${shop?.owner.middleName} ${shop?.owner.lastName}`}</div>
+                  <div>{`${shop?.owner.firstName || ""} ${
+                    shop?.owner.middleName || ""
+                  } ${shop?.owner.lastName || ""}`}</div>
                 </td>
                 <td className="py-5 text-center">{shop.location}</td>
                 <td className="py-5 text-center ">{shop.phoneNumber}</td>

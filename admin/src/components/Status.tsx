@@ -23,11 +23,9 @@ const Status = ({ variant = "success", children }: IStatus) => {
       break;
   }
 
-  let bgColor = `text-${color}-800 bg-${color}-300`;
-
   return (
     <span
-      className={`p-1.5 text-xs font-medium uppercase tracking-wider ${bgColor}  rounded-sm bg-opacity-30`}
+      className={`rounded-sm bg-opacity-30 p-1.5 text-xs font-medium  uppercase tracking-wider`}
     >
       {children}
     </span>

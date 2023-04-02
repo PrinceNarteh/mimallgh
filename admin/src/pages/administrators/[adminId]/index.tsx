@@ -21,7 +21,7 @@ const AdministratorDetails = () => {
   const deleteUser = api.users.deleteUser.useMutation();
 
   if (!adminId) {
-    push(`/administrators`);
+    push(`/administrators`).catch((error: any) => console.log(error));
   }
 
   const { data, isLoading } = api.users.getUserById.useQuery({
@@ -38,7 +38,7 @@ const AdministratorDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/administrators`);
+            push(`/administrators`).catch((error: any) => console.log(error));
           },
         }
       );
@@ -76,12 +76,12 @@ const AdministratorDetails = () => {
           />
           <DetailItem
             label="Date Joined"
-            value={`${data?.createdAt.toDateString()}`}
+            value={`${data?.createdAt.toDateString() || ""}`}
             dark
           />
           <DetailItem
             label="Level"
-            value={mapLevelToText(data?.level as string)}
+            value={mapLevelToText((data?.level as string) || "")}
           />
         </Card>
         <div className="flex items-center justify-end gap-5">
@@ -115,7 +115,7 @@ const DetailItem = ({
 }) => (
   <div
     className={`flex items-center justify-between py-4 px-4 ${
-      dark && "bg-dark-gray"
+      dark ? "bg-dark-gray" : ""
     }`}
   >
     <div className="font-bold">{label}</div>

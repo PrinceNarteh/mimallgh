@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoThreeBars } from "react-icons/go";
 import { BiSearch } from "react-icons/bi";
 

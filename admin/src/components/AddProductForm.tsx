@@ -26,10 +26,6 @@ const convertBase64 = (file: File): Promise<string> => {
     fileReader.onload = () => {
       resolve(fileReader.result as string);
     };
-
-    fileReader.onerror = (error: any) => {
-      reject(error.message);
-    };
   });
 };
 
@@ -122,7 +118,7 @@ const AdminAddProductForm = () => {
 
   useEffect(() => {
     const getImages = async () => {
-      let imagesArray: string[] = [];
+      const imagesArray: string[] = [];
       images?.map((file) => {
         convertBase64(file)
           .then((res) => {
@@ -138,7 +134,9 @@ const AdminAddProductForm = () => {
 
   const shops = getAllShops?.data?.map((shop) => ({
     id: shop.id,
-    label: `${shop?.name} - ${shop?.owner?.firstName} ${shop?.owner?.middleName} ${shop?.owner?.lastName}`,
+    label: `${shop?.name || ""} - ${shop?.owner?.firstName || ""} ${
+      shop?.owner?.middleName || ""
+    } ${shop?.owner?.lastName}`,
   }));
 
   const deleteImage = (public_id: string) => {
@@ -170,7 +168,7 @@ const AdminAddProductForm = () => {
     }
   }
 
-  const submitHandler = (data: any) => {
+  const submitHandler = async (data: any) => {
     const toastId = toast.loading("Loading");
     const imageUrls = [];
 

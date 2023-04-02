@@ -17,7 +17,7 @@ const ShopOwnerDetails = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   if (!shopOwnerId) {
-    push(`/shop-owners`);
+    push(`/shop-owners`).catch((error) => console.log(error));
   }
   const deleteUser = api.users.deleteUser.useMutation();
 
@@ -33,7 +33,7 @@ const ShopOwnerDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/administrators`);
+            push(`/administrators`).catch((error) => console.log(error));
           },
         }
       );
@@ -105,7 +105,7 @@ const DetailItem = ({
 }) => (
   <div
     className={`flex items-center justify-between py-4 px-4 ${
-      dark && "bg-dark-gray"
+      dark ? "bg-dark-gray" : ""
     }`}
   >
     <div className="font-bold">{label}</div>

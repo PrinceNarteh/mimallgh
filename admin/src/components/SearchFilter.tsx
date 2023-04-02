@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FieldErrorsImpl } from "react-hook-form";
+import type { FieldErrorsImpl } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 
@@ -56,7 +56,7 @@ const SearchFilter = ({
       <div
         onClick={() => setOpen(!open)}
         className={`flex w-full items-center justify-between rounded border border-gray-500 p-2 text-gray-400 ${
-          !selected && "text-gray-500"
+          !selected ? "text-gray-500" : ""
         }`}
       >
         {selected
@@ -64,7 +64,7 @@ const SearchFilter = ({
             ? selected?.label.substring(0, 25) + "..."
             : selected.label
           : "Select Shop Owner"}
-        <BiChevronDown size={20} className={`${open && "rotate-180"}`} />
+        <BiChevronDown size={20} className={`${open ? "rotate-180" : ""}`} />
       </div>
       <ul
         className={`absolute mt-2 w-full overflow-y-auto bg-gray-700 ${
@@ -86,8 +86,9 @@ const SearchFilter = ({
             key={idx}
             className={`p-2 text-sm hover:bg-sky-600 hover:text-white
             ${
-              option?.label?.toLowerCase() === selected?.label.toLowerCase() &&
-              "bg-sky-600 text-white"
+              option?.label?.toLowerCase() === selected?.label.toLowerCase()
+                ? "bg-sky-600 text-white"
+                : ""
             }
             ${
               option?.label?.toLowerCase().startsWith(inputValue)

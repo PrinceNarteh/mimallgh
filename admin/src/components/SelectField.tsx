@@ -1,10 +1,8 @@
-import React, { SelectHTMLAttributes } from "react";
-import {
+import type {
   FieldErrorsImpl,
   RegisterOptions,
   UseFormRegister,
 } from "react-hook-form";
-import { SelectOption } from "./SelectOption";
 
 interface ISelectField {
   name: string;

@@ -24,7 +24,7 @@ const Register = () => {
     resolver: zodResolver(loginValidation),
   });
 
-  const submitHandler = async (data: { email: string; password: string }) => {
+  const submitHandler = async (data: any) => {
     try {
       const res = await signIn("credentials", data);
     } catch (error) {}
@@ -51,7 +51,7 @@ const Register = () => {
               Enter your credentials to login
             </p>
             {/* {error && <p className="py-2 text-center text-red-500">{error}</p>} */}
-            <form>
+            <form onSubmit={handleSubmit(submitHandler)}>
               .flex.flex-col
               <div className="flex gap-2">
                 <InputField
@@ -71,8 +71,10 @@ const Register = () => {
                   validationSchema={{ required: "Password is required" }}
                 />
               </div>
-              <button className="mt-2 flex w-full items-center justify-center space-x-3 rounded bg-slate-700 py-2 text-white">
-                {/* {isSubmitting && <Spinner />}{" "} */}
+              <button
+                disabled={isSubmitting}
+                className="mt-2 flex w-full items-center justify-center space-x-3 rounded bg-slate-700 py-2 text-white"
+              >
                 <span className="inline-block">Login</span>
               </button>
             </form>

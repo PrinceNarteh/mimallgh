@@ -1,37 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FiInstagram } from "react-icons/fi";
 import { ImFacebook2, ImWhatsapp } from "react-icons/im";
 
+import { Branch, Shop } from "@prisma/client";
 import { api } from "./../utils/api";
 import { locations } from "./../utils/menus";
-import { createShopDto, updateShopDto } from "./../utils/validations";
+import { createShopDto, updateShopDto, IUpdateShopDto } from "./../utils/validations";
 import { Button } from "./Button";
 import Card from "./Card";
 import InputField from "./InputField";
+import Loader from "./Loader";
 import SearchFilter from "./SearchFilter";
 import SelectField from "./SelectField";
-import Loader from "./Loader";
-import { Branch, Shop } from "@prisma/client";
 
-const initialState: {
-  id: string;
-  ownerId: string;
-  name: string;
-  location: string;
-  address: string;
-  openingTime: string;
-  closingTime: string;
-  phoneNumber: string;
-  description: string;
-  facebookHandle: string;
-  instagramHandle: string;
-  whatsappNumber: string;
-  branches: Branch[];
-} = {
+const initialState: IUpdateShopDto = {
   id: "",
   ownerId: "",
   name: "",
@@ -75,10 +61,10 @@ const AddShopForm = () => {
   });
 
   useEffect(() => {
-    reset(data as any);
+    reset(data as IUpdateShopDto);
   }, [data]);
 
-  const submitHandler = async (value: any) => {
+  const submitHandler: SubmitHandler<IUpdateShopDto> = (value) => {
     if (!value.id) {
       createShopMutation.mutate(value, {
         onSuccess(data) {
@@ -89,7 +75,7 @@ const AddShopForm = () => {
       });
     } else {
       updateShopMutation.mutate(value, {
-        onSuccess: (data) => {
+        onSuccess: () => {
           toast.success("Update successful");
           router.push(`/shops/${router.query.shopId}`);
         },
@@ -98,8 +84,10 @@ const AddShopForm = () => {
   };
 
   const owners = shopOwners?.data?.map((shopOwner) => ({
-    id: shopOwner.id,
-    label: `${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`,
+    id: shopOwner.id || "",
+    label: `${shopOwner.firstName || ""} ${shopOwner.middleName || ""} ${
+      shopOwner.lastName || ""
+    }`,
   }));
 
   if (router.query.shopId && isLoading) {

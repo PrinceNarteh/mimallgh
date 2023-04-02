@@ -3,6 +3,7 @@ import React from "react";
 import { menus } from "../utils/menus";
 
 import { IoIosArrowBack } from "react-icons/io";
+import Image from "next/image";
 
 const SideBar = ({ open }: { open: boolean }) => {
   return (
@@ -130,7 +131,7 @@ const SideBar = ({ open }: { open: boolean }) => {
         <div className="flex items-center justify-between bg-[#232529] py-4 pl-6 pr-4">
           <div className="flex items-center">
             <div className="relative h-8 w-8 rounded-full before:absolute before:right-0 before:bottom-0 before:h-2 before:w-2 before:rounded-full before:bg-green-500 before:ring-1 before:ring-white">
-              <img
+              <Image
                 className="rounded-full"
                 src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
                 alt="profile"
