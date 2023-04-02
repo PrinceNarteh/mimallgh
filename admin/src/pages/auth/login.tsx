@@ -2,10 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import InputField from "../../components/InputField";
-import { useSession } from "next-auth/react";
 
 const loginValidation = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
@@ -14,17 +13,22 @@ const loginValidation = z.object({
     .min(6, "Minimum characters should be six."),
 });
 
+type ILogin = z.infer<typeof loginValidation>;
+
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILogin>({
     resolver: zodResolver(loginValidation),
   });
   const router = useRouter();
 
-  const submitHandler = async (data: { email: string; password: string }) => {
+  const submitHandler: SubmitHandler<ILogin> = async (data: {
+    email: string;
+    password: string;
+  }) => {
     const res = await signIn("credentials", {
       ...data,
       redirect: false,
