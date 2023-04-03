@@ -4,18 +4,18 @@ import type {
   UseFormRegister,
 } from "react-hook-form";
 
-interface IInputField {
+type IInputField<TFormValues> = {
   name: string;
   label: string;
   type?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<TFormValues>;
   errors: Partial<
     FieldErrorsImpl<{
       [x: string]: any;
     }>
   >;
   validationSchema?: RegisterOptions;
-}
+};
 
 const InputField = ({
   name,
@@ -24,7 +24,7 @@ const InputField = ({
   errors,
   type = "text",
   validationSchema,
-}: IInputField) => (
+}: IInputField<>) => (
   <div className="my-2 w-full">
     <label
       htmlFor={name}
