@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import InputField from "../../components/InputField";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,6 +7,7 @@ import Image from "next/image";
 import registerImg from "../../../assets/images/register.jpg";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { IRegister } from "../../utils/validations";
 
 const loginValidation = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
@@ -20,13 +21,13 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<IRegister>({
     resolver: zodResolver(loginValidation),
   });
 
-  const submitHandler = async (data: any) => {
+  const submitHandler: SubmitHandler<IRegister> = async (data) => {
     try {
-      const res = await signIn("credentials", data);
+      await signIn("credentials", data);
     } catch (error) {}
   };
 
@@ -79,7 +80,7 @@ const Register = () => {
               </button>
             </form>
             <p className="mt-2 text-center text-slate-600">
-              Don't have an account?
+              Don&apos;t have an account?
               <Link href={"/auth/register"} className="text-blue-500">
                 {" "}
                 Register

@@ -42,7 +42,7 @@ const AdministratorsList = () => {
                 <tr
                   className="cursor-pointer rounded bg-light-gray"
                   onClick={() => {
-                    navigate(admin.id);
+                    navigate(admin.id).catch((error) => console.log(error));
                   }}
                   key={idx}
                 >
@@ -50,7 +50,9 @@ const AdministratorsList = () => {
                     <input type="checkbox" />
                   </td>
                   <td className="py-5 text-center">{idx + 1}</td>
-                  <td className="py-5 text-center">{`${admin.firstName} ${admin.middleName} ${admin.lastName}`}</td>
+                  <td className="py-5 text-center">{`${admin.firstName || ""} ${
+                    admin.middleName || ""
+                  } ${admin.lastName || ""}`}</td>
                   <td className="py-5 text-center">{admin.email}</td>
                   <td className="py-5 text-center">{admin.phoneNumber}</td>
                   <td className="py-5 text-center">

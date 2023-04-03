@@ -13,10 +13,10 @@ const Modal = ({ message, onDialog }: IModal) => {
         <div className="flex flex-col items-center space-y-5 pb-2 text-center text-lg">
           <RiErrorWarningLine className="my-3 text-6xl" />
           <div>
-            <p>Are you sure you wan't to delete</p>
+            <p>Are you sure you wan&apos;t to delete</p>
             <p className="mt-0 text-xl font-bold">{message}?</p>
           </div>
-          <p>You won't be able to revert this!</p>
+          <p>You won&apos;t be able to revert this!</p>
         </div>
         <div className="flex items-center justify-center gap-3">
           <Button onClick={() => onDialog(false)}>No, Cancel</Button>

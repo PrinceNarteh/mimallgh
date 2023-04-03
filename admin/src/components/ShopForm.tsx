@@ -6,10 +6,14 @@ import { toast } from "react-hot-toast";
 import { FiInstagram } from "react-icons/fi";
 import { ImFacebook2, ImWhatsapp } from "react-icons/im";
 
-import { Branch, Shop } from "@prisma/client";
+import type { Shop } from "@prisma/client";
 import { api } from "./../utils/api";
 import { locations } from "./../utils/menus";
-import { createShopDto, updateShopDto, IUpdateShopDto } from "./../utils/validations";
+import {
+  createShopDto,
+  updateShopDto,
+  type IUpdateShopDto,
+} from "./../utils/validations";
 import { Button } from "./Button";
 import Card from "./Card";
 import InputField from "./InputField";
@@ -62,7 +66,7 @@ const AddShopForm = () => {
 
   useEffect(() => {
     reset(data as IUpdateShopDto);
-  }, [data]);
+  }, [data, reset]);
 
   const submitHandler: SubmitHandler<IUpdateShopDto> = (value) => {
     if (!value.id) {
@@ -70,14 +74,16 @@ const AddShopForm = () => {
         onSuccess(data) {
           const { id } = data as Shop;
           toast.success("Shop created successfully");
-          router.push(`/shops/${id}`);
+          router.push(`/shops/${id}`).catch((error) => console.log(error));
         },
       });
     } else {
       updateShopMutation.mutate(value, {
         onSuccess: () => {
           toast.success("Update successful");
-          router.push(`/shops/${router.query.shopId}`);
+          router
+            .push(`/shops/${router.query.shopId}`)
+            .catch((error) => console.log(error));
         },
       });
     }

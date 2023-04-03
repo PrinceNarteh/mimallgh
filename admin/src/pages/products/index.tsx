@@ -1,4 +1,3 @@
-import { products } from "../../../data/data";
 import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import Card from "../../components/Card";
@@ -46,10 +45,12 @@ const ProductList = () => {
               {data?.map((product, idx) => (
                 <tr
                   className={`${
-                    idx % 2 === 0 && "bg-gray-500 bg-opacity-20"
+                    idx % 2 === 0 ? "bg-gray-500 bg-opacity-20" : ""
                   } cursor-pointer`}
                   key={product.id}
-                  onClick={() => navigate(product.id)}
+                  onClick={() =>
+                    navigate(product.id).catch((error) => console.log(error))
+                  }
                 >
                   <td className="py-7 text-center">
                     <input type="checkbox" name="" id="" />

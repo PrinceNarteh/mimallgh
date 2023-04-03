@@ -19,7 +19,7 @@ const ShopDetails = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   if (!shopId) {
-    push(`/shops`);
+    push(`/shops`).catch((error) => console.log(error));
   }
   const { data, isLoading } = api.shops.getShopById.useQuery(
     { shopId: shopId as string },
@@ -43,7 +43,7 @@ const ShopDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/shops`);
+            push(`/shops`).catch((error) => console.log(error));
           },
         }
       );
@@ -88,16 +88,16 @@ const ShopDetails = () => {
         {data?.branches.length
           ? data.branches.map((branch, index) => (
               <Card
-                heading={`${capitalize(branch.location)} Branch`}
+                heading={`${capitalize(branch.location) || ""} Branch`}
                 key={index}
               >
                 <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
                   <div className="font-bold">Location</div>
-                  <div>{capitalize(branch.location)}</div>
+                  <div>{capitalize(branch.location) || ""}</div>
                 </div>
                 <div className="flex items-center justify-between  py-4 px-4">
                   <div className="font-bold">Address</div>
-                  <div>{branch.address}</div>
+                  <div>{branch.address || ""}</div>
                 </div>
                 <div className="flex items-center justify-between bg-dark-gray py-4 px-4">
                   <div className="font-bold">Phone Number</div>

@@ -16,6 +16,11 @@ export const baseUserDto = z.object({
   address: z
     .string({ required_error: "Address is required." })
     .min(1, "Address cannot be empty"),
+  cardType: z.enum(["ghana_card", "student_id", "voters_id"]).optional(),
+  cardNumber: z
+    .string({ required_error: "Card number is required" })
+    .min(1, "Card number cannot be empty")
+    .optional(),
   phoneNumber: z
     .string({ required_error: "Phone number is required." })
     .length(10, "Phone number must be ten numbers"),
@@ -25,12 +30,16 @@ export const baseUserDto = z.object({
     .min(6, "Password should be six character or more"),
   nationality: z.string({ required_error: "Nationality is required" }).min(1),
   image: z.union([z.string(), z.null()]),
-  role: z.enum(["ADMIN", "SHOP_OWNER", "USER"], {
-    required_error: "Role is required",
-    invalid_type_error:
-      "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
-  }),
+  role: z
+    .enum(["ADMIN", "SHOP_OWNER", "USER"], {
+      required_error: "Role is required",
+      invalid_type_error:
+        "Invalid role value. Expect 'ADMIN' | 'SHOP_OWNER' | 'USER'",
+    })
+    .default("USER"),
 });
+
+export type IRegister = z.infer<typeof baseUserDto>;
 
 export const updateUserDto = baseUserDto
   .extend({
@@ -70,6 +79,8 @@ export const createShopOwnerDto = baseUserDto
 export const updateShopOwnerDto = baseUserDto.extend({
   id: z.string({ required_error: "ID is required." }).cuid(),
 });
+
+export type IShopOwner = z.infer<typeof updateShopOwnerDto>;
 
 export const createShopDto = z.object({
   id: z.string({ required_error: "" }).cuid().optional(),
@@ -172,6 +183,8 @@ export const adminCreateProductDto = createProductDto.extend({
 export const adminUpdateProductDto = adminCreateProductDto.extend({
   id: z.string({ required_error: "Product Id is required" }).cuid(),
 });
+
+export type IAdminCreateProductDto = z.infer<typeof adminUpdateProductDto>;
 
 export const updateProductDto = createProductDto.partial();
 

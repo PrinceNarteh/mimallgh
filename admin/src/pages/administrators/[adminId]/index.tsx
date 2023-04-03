@@ -21,7 +21,7 @@ const AdministratorDetails = () => {
   const deleteUser = api.users.deleteUser.useMutation();
 
   if (!adminId) {
-    push(`/administrators`).catch((error: any) => console.log(error));
+    push(`/administrators`).catch((error) => console.log(error));
   }
 
   const { data, isLoading } = api.users.getUserById.useQuery({
@@ -38,7 +38,7 @@ const AdministratorDetails = () => {
           onSuccess: () => {
             toast.success("Admin deleted successfully!");
             setOpenDialog(false);
-            push(`/administrators`).catch((error: any) => console.log(error));
+            push(`/administrators`).catch((error) => console.log(error));
           },
         }
       );
@@ -85,7 +85,10 @@ const AdministratorDetails = () => {
           />
         </Card>
         <div className="flex items-center justify-end gap-5">
-          <Link href={`/administrators/${data?.id}/edit`} className="link">
+          <Link
+            href={`/administrators/${data?.id || ""}/edit`}
+            className="link"
+          >
             Edit
           </Link>
           <Button variant="danger" onClick={() => handleDelete()}>
@@ -97,7 +100,9 @@ const AdministratorDetails = () => {
       {openDialog ? (
         <Modal
           onDialog={confirmDelete}
-          message={openDialog ? `${data?.firstName} ${data?.lastName}` : ""}
+          message={
+            openDialog ? `${data?.firstName || ""} ${data?.lastName || ""}` : ""
+          }
         />
       ) : null}
     </div>

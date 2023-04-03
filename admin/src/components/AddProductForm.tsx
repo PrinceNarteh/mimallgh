@@ -1,9 +1,8 @@
-import type { Image as ProductImage } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -17,9 +16,10 @@ import SearchFilter from "./SearchFilter";
 import { SelectOption } from "./SelectOption";
 import { deleteProductImage } from "../utils/deleteProductImage";
 import Loader from "./Loader";
+import { IAdminCreateProductDto } from "../utils/validations";
 
 const convertBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
 
@@ -43,21 +43,10 @@ const categories = [
   { label: "Tech", value: "tech" },
 ];
 
-const initialValues: {
-  id: string;
-  brand: string;
-  category: string;
-  description: string;
-  discountPercentage: number;
-  price: number;
-  shopId: string;
-  stock: number;
-  title: string;
-  images: ProductImage[];
-} = {
+const initialValues: IAdminCreateProductDto = {
   id: "",
   brand: "",
-  category: "",
+  category: "food",
   description: "",
   discountPercentage: 0,
   price: 0,
@@ -80,10 +69,10 @@ const AdminAddProductForm = () => {
     getValues,
     reset,
     handleSubmit,
-  } = useForm({
+  } = useForm<IAdminCreateProductDto>({
     defaultValues: initialValues,
   });
-  const [_, setFetchAgain] = useState(true);
+  const setFetchAgain = useState(true)[1];
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -117,7 +106,7 @@ const AdminAddProductForm = () => {
   }
 
   useEffect(() => {
-    const getImages = async () => {
+    const getImages = () => {
       const imagesArray: string[] = [];
       images?.map((file) => {
         convertBase64(file)
@@ -129,7 +118,7 @@ const AdminAddProductForm = () => {
           });
       });
     };
-    getImages().catch((error) => console.log(error));
+    getImages();
   }, [images]);
 
   const shops = getAllShops?.data?.map((shop) => ({
@@ -168,7 +157,7 @@ const AdminAddProductForm = () => {
     }
   }
 
-  const submitHandler = async (data: any) => {
+  const submitHandler: SubmitHandler<IAdminCreateProductDto> = (data) => {
     const toastId = toast.loading("Loading");
     const imageUrls = [];
 
@@ -186,8 +175,8 @@ const AdminAddProductForm = () => {
 
     try {
       Promise.all(imageUrls)
-        .then((res: any) => {
-          return res.map((item: any) => ({
+        .then((res) => {
+          return res.map((item) => ({
             public_id: item.data.public_id,
             secure_url: item.data.secure_url,
           }));
@@ -203,7 +192,9 @@ const AdminAddProductForm = () => {
               onSuccess: (value) => {
                 toast.dismiss(toastId);
                 toast.success("Product updated successfully");
-                push(`/products/${value?.id}`);
+                push(`/products/${value?.id || ""}`).catch((error) =>
+                  console.log(error)
+                );
               },
               onError: () => {
                 toast.dismiss(toastId);
@@ -221,9 +212,12 @@ const AdminAddProductForm = () => {
               },
             });
           }
+        })
+        .catch((error) => {
+          console.log(error);
         });
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      console.log(error);
     }
   };
 

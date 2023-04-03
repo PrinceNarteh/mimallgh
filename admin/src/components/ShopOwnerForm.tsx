@@ -1,13 +1,34 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import InputField from "./../components/InputField";
 import { api } from "./../utils/api";
-import { createShopOwnerDto, updateShopOwnerDto } from "./../utils/validations";
+import {
+  createShopOwnerDto,
+  updateShopOwnerDto,
+  type IShopOwner,
+} from "./../utils/validations";
 import { Button } from "./Button";
 import Card from "./Card";
+
+const initialState: IShopOwner = {
+  id: "",
+  firstName: "",
+  lastName: "",
+  middleName: "",
+  email: "",
+  address: "",
+  nationality: "",
+  cardType: undefined,
+  cardNumber: "",
+  phoneNumber: "",
+  alternateNumber: "",
+  password: "",
+  image: "",
+  role: "SHOP_OWNER",
+};
 
 const ShopOwnerForm = () => {
   const router = useRouter();
@@ -16,30 +37,13 @@ const ShopOwnerForm = () => {
     formState: { errors },
     handleSubmit,
     getValues,
-  } = useForm({
-    defaultValues: {
-      id: "",
-      firstName: "",
-      lastName: "",
-      middleName: "",
-      email: "",
-      address: "",
-      nationality: "",
-      cardType: "",
-      cardNumber: "",
-      phoneNumber: "",
-      alternateNumber: "",
-      password: "",
-      role: "SHOP_OWNER",
-    },
+  } = useForm<IShopOwner>({
+    defaultValues: initialState,
     resolver: zodResolver(
       router.query.shopOwnerId ? updateShopOwnerDto : createShopOwnerDto
     ),
   });
 
-  const { data, isLoading } = api.users.getUserById.useQuery({
-    id: router.query.shopOwnerId as string,
-  });
   const createUser = api.users.register.useMutation({
     onError: (error) => {
       toast.error(error.message);
@@ -47,7 +51,7 @@ const ShopOwnerForm = () => {
   });
   const updateUser = api.users.updateUser.useMutation();
 
-  const submitHandler = async (value: any) => {
+  const submitHandler: SubmitHandler<IShopOwner> = (value) => {
     if (getValues()?.id) {
       createUser.mutate(
         {
@@ -57,7 +61,9 @@ const ShopOwnerForm = () => {
         {
           onSuccess: (data) => {
             toast.success("Shop owner created successfully.");
-            router.push(`/shop-owners/${data.id}`);
+            router
+              .push(`/shop-owners/${data.id}`)
+              .catch((error) => console.log(error));
           },
         }
       );
@@ -70,7 +76,9 @@ const ShopOwnerForm = () => {
         {
           onSuccess: (data) => {
             toast.success("Shop owner updated successfully.");
-            router.push(`/shop-owners/${data.id}`);
+            router
+              .push(`/shop-owners/${data.id}`)
+              .catch((error) => console.log(error));
           },
         }
       );

@@ -1,4 +1,4 @@
-import crypto, { BinaryLike } from "crypto";
+import crypto, { type BinaryLike } from "crypto";
 import axios from "axios";
 
 const generateSHA1 = (data: BinaryLike) => {

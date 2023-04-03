@@ -36,14 +36,20 @@ const ShopOwnersList = () => {
             {data?.map((shopOwner, idx) => (
               <tr
                 className="cursor-pointer rounded bg-light-gray"
-                onClick={() => navigate(shopOwner.id)}
+                onClick={() => {
+                  navigate(shopOwner.id).catch((error) => console.log(error));
+                }}
                 key={idx}
               >
                 <td className="text-center">
                   <input type="checkbox" />
                 </td>
                 <td className="py-5 text-center">{idx + 1}</td>
-                <td className="py-5 text-center">{`${shopOwner.firstName} ${shopOwner.middleName} ${shopOwner.lastName}`}</td>
+                <td className="py-5 text-center">{`${
+                  shopOwner.firstName || ""
+                } ${shopOwner.middleName || ""} ${
+                  shopOwner.lastName || ""
+                }`}</td>
                 <td className="py-5 text-center">{shopOwner.email}</td>
                 <td className="py-5 text-center">{shopOwner.phoneNumber}</td>
                 <td className="py-5 text-center">{shopOwner.shop?.name}</td>
