@@ -90,7 +90,9 @@ const ShopOwnerForm = () => {
       <Card heading={`${getValues()?.id ? "Edit" : "Add"} Shop Owner`}>
         <form
           className="w-full space-y-3"
-          onSubmit={handleSubmit(submitHandler)}
+          onSubmit={() => {
+            handleSubmit(submitHandler);
+          }}
         >
           <div className="flex flex-col gap-5 lg:flex-row">
             <InputField

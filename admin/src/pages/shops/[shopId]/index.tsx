@@ -108,7 +108,7 @@ const ShopDetails = () => {
           : null}
 
         <div className="flex items-center justify-end gap-5">
-          <Link href={`/shops/${data?.id}/edit`} className="link">
+          <Link href={`/shops/${data?.id as string}/edit`} className="link">
             Edit
           </Link>
           <Button onClick={handleDelete} variant="danger">
@@ -119,7 +119,7 @@ const ShopDetails = () => {
       {openDialog ? (
         <Modal
           onDialog={confirmDelete}
-          message={openDialog ? `${data?.name}` : ""}
+          message={openDialog ? `${data?.name as string}` : ""}
         />
       ) : null}
     </div>

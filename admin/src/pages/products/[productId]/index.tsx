@@ -61,10 +61,10 @@ const ProductDetails = () => {
               value={`¢${data?.discountPercentage || ""}`}
             />
             <Item label="Stock" value={`${data?.stock || ""}`} dark />
-            <Item label="Brand" value={`${data?.brand || ""}`} />
+            <Item label="Brand" value={`${(data?.brand as string) || ""}`} />
             <Item
               label="Category"
-              value={`${capitalize(data?.category || "")}`}
+              value={`${capitalize((data?.category as string) || "")}`}
               dark
             />
             <Item label="Shop" value={`${data?.shop.name || ""}`} />

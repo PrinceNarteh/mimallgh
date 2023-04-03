@@ -10,7 +10,9 @@ import Loader from "../../components/Loader";
 const ProductList = () => {
   const router = useRouter();
 
-  const navigate = (productId: string) => router.push(`/products/${productId}`);
+  const navigate = (productId: string) =>
+    router.push(`/products/${productId}`).catch((error) => console.log(error));
+
   const { data, isLoading } = api.products.getAllProducts.useQuery();
 
   if (isLoading) {
@@ -48,9 +50,9 @@ const ProductList = () => {
                     idx % 2 === 0 ? "bg-gray-500 bg-opacity-20" : ""
                   } cursor-pointer`}
                   key={product.id}
-                  onClick={() =>
-                    navigate(product.id).catch((error) => console.log(error))
-                  }
+                  onClick={() => {
+                    navigate(product.id);
+                  }}
                 >
                   <td className="py-7 text-center">
                     <input type="checkbox" name="" id="" />

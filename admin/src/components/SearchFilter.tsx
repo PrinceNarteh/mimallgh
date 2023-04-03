@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import type { FieldErrorsImpl } from "react-hook-form";
+import type {
+  FieldErrorsImpl,
+  UseFormReturn,
+  FieldErrors,
+  FieldValues,
+} from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 
@@ -8,12 +13,8 @@ interface ISearchFilter {
     id: string;
     label: string;
   }[];
-  setValue: any;
-  errors: Partial<
-    FieldErrorsImpl<{
-      [x: string]: any;
-    }>
-  >;
+  setValue: UseFormReturn["setValue"];
+  errors: Partial<FieldErrorsImpl<FieldErrors>>;
   field: string;
   value: string;
 }
@@ -39,7 +40,7 @@ const SearchFilter = ({
       shouldValidate: true,
       shouldTouch: true,
     });
-  }, [selected]);
+  }, [selected, setValue, field]);
 
   useEffect(() => {
     if (value && !hasValue) {
@@ -49,7 +50,7 @@ const SearchFilter = ({
       }
       setHasValue(true);
     }
-  }, [value]);
+  }, [value, hasValue, setValue]);
 
   return (
     <div className="relative w-full font-medium">

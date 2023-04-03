@@ -39,16 +39,20 @@ const initialState: IUpdateShopDto = {
 
 const AddShopForm = () => {
   const router = useRouter();
+  const { data, isLoading } = api.shops.getShopById.useQuery({
+    shopId: router.query.shopId as string,
+  });
+
   const {
     register,
     formState: { errors },
     getValues,
     setValue,
     control,
-    reset,
     handleSubmit,
   } = useForm({
     defaultValues: initialState,
+    values: data as IUpdateShopDto,
     resolver: zodResolver(router.query.shopId ? updateShopDto : createShopDto),
   });
   const { fields, append, remove } = useFieldArray({
@@ -59,14 +63,6 @@ const AddShopForm = () => {
   const shopOwners = api.users.getUsersByRole.useQuery({ role: "shop_owner" });
   const createShopMutation = api.shops.createShop.useMutation();
   const updateShopMutation = api.shops.updateShop.useMutation();
-
-  const { data, isLoading } = api.shops.getShopById.useQuery({
-    shopId: router.query.shopId as string,
-  });
-
-  useEffect(() => {
-    reset(data as IUpdateShopDto);
-  }, [data, reset]);
 
   const submitHandler: SubmitHandler<IUpdateShopDto> = (value) => {
     if (!value.id) {
@@ -82,7 +78,7 @@ const AddShopForm = () => {
         onSuccess: () => {
           toast.success("Update successful");
           router
-            .push(`/shops/${router.query.shopId}`)
+            .push(`/shops/${router.query.shopId as string}`)
             .catch((error) => console.log(error));
         },
       });
@@ -103,7 +99,12 @@ const AddShopForm = () => {
   return (
     <div className="pb-10">
       <Card heading={`${getValues().id ? "Edit" : "Add"} Shop`}>
-        <form className="w-full" onSubmit={handleSubmit(submitHandler)}>
+        <form
+          className="w-full"
+          onSubmit={() => {
+            handleSubmit(submitHandler);
+          }}
+        >
           <div className="my-2 w-full">
             <label
               htmlFor="shop_owner"

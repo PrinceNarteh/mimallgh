@@ -7,7 +7,7 @@ import Image from "next/image";
 import registerImg from "../../../assets/images/register.jpg";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { IRegister } from "../../utils/validations";
+import type { IRegister } from "../../utils/validations";
 
 const loginValidation = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
@@ -52,7 +52,11 @@ const Register = () => {
               Enter your credentials to login
             </p>
             {/* {error && <p className="py-2 text-center text-red-500">{error}</p>} */}
-            <form onSubmit={handleSubmit(submitHandler)}>
+            <form
+              onSubmit={() => {
+                handleSubmit(submitHandler);
+              }}
+            >
               .flex.flex-col
               <div className="flex gap-2">
                 <InputField

@@ -39,7 +39,9 @@ const OrderListTable = () => {
             <tr
               className="cursor-pointer rounded bg-light-gray"
               onClick={() => {
-                router.push(`/orders/${123}`);
+                router
+                  .push(`/orders/${123}`)
+                  .catch((error) => console.log(error));
               }}
             >
               <td className="text-center">
@@ -56,7 +58,9 @@ const OrderListTable = () => {
             <tr
               className="rounded bg-light-gray"
               onClick={() => {
-                router.push(`/orders/${123}`);
+                router
+                  .push(`/orders/${123}`)
+                  .catch((error) => console.log(error));
               }}
             >
               <td className="text-center">
@@ -73,7 +77,9 @@ const OrderListTable = () => {
             <tr
               className="rounded bg-light-gray"
               onClick={() => {
-                router.push(`/orders/${123}`);
+                router
+                  .push(`/orders/${123}`)
+                  .catch((error) => console.log(error));
               }}
             >
               <td className="text-center">
