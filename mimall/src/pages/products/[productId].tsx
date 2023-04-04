@@ -92,7 +92,7 @@ const ProductDetails = () => {
                             src: images[currentImg] as string,
                           },
                           largeImage: {
-                            src: images[currentImg],
+                            src: images[currentImg] as string,
                             width: 1200,
                             height: 1800,
                           },

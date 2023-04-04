@@ -3,7 +3,7 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { Poppins } from "@next/font/google";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { Toaster } from "react-hot-toast";
 
 import FloatingNavbar from "../components/layout/FloatingNavbar";
@@ -24,12 +24,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  const [scrollY, setScrollY] = useState(0);
+  const scrollRef = useRef(0);
   const { pathname } = useRouter();
 
   const onScroll = useCallback((e: Event) => {
-    setScrollY(window.scrollY);
+    scrollRef.current = window.scrollY;
   }, []);
+
+  console.log(scrollRef);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -43,10 +45,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <SessionProvider session={session}>
         <Provider store={store}>
           <div className="fixed z-50 w-full">
-            <FloatingNavbar show={scrollY >= 70} />
+            <FloatingNavbar show={scrollRef.current >= 70} />
           </div>
           {pathname === "/" && <SearchBar />}
-          <Navbar scroll={scrollY >= 70} />
+          <Navbar scroll={scrollRef.current >= 70} />
           <Component {...pageProps} />
         </Provider>
       </SessionProvider>

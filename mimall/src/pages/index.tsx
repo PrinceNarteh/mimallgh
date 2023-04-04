@@ -8,19 +8,31 @@ import { api } from "../utils/api";
 import { categories, sections, topDeals } from "../utils/data";
 import { locations } from "../utils/menus";
 import { useEffect, useState } from "react";
+import _ from "lodash";
+import type { Image as ProductImage, Product } from "@prisma/client";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
+type IProduct = {
+  category: string;
+  data: (Product & { shop: { name: string }; images: ProductImage[] })[];
+};
+
 const Home = () => {
-  const [state, setState] = useState([]);
+  const [state, setState] = useState<IProduct[]>([]);
   const { data } = api.products.getAllProducts.useQuery();
 
   useEffect(() => {
     if (data) {
-      setState(data as any);
+      const products = _.chain(data)
+        .groupBy("category")
+        .map((value, key) => ({
+          category: key,
+          data: value,
+        }))
+        .value();
+      setState(products);
     }
   }, []);
-
-  console.log(state);
 
   return (
     <div className="">

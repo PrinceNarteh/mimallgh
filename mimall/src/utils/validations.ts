@@ -61,7 +61,7 @@ export const createUserDto = z.object({
   password: z
     .string({ required_error: "Password name is required." })
     .min(6, "Password should be six character or more"),
-  nationality: z.string().optional(),
+  nationality: z.string().default(""),
   image: z.string({ required_error: "Password name is required." }).optional(),
   role: z.enum(["ADMIN", "SHOP_OWNER", "USER"], {
     required_error: "Role is required",

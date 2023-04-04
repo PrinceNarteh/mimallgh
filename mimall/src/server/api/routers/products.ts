@@ -4,7 +4,16 @@ import { TRPCError } from "@trpc/server";
 
 export const productsRouter = createTRPCRouter({
   getAllProducts: publicProcedure.query(async ({ ctx }) => {
-    const products = await ctx.prisma.product.findMany();
+    const products = await ctx.prisma.product.findMany({
+      include: {
+        images: true,
+        shop: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
     return products;
   }),
   getProductById: publicProcedure.input(IdDto).query(async ({ input, ctx }) => {
