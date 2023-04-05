@@ -46,7 +46,7 @@ const Register = () => {
   });
   const registerMutation = api.users.register.useMutation();
 
-  const submitHandler: SubmitHandler<IRegister> = async (data) => {
+  const submitHandler: SubmitHandler<IRegister> = (data) => {
     try {
       const user = {
         ...data,
@@ -83,7 +83,11 @@ const Register = () => {
               Enter your information to get an account
             </p>
             {/* {error && <p className="py-2 text-center text-red-500">{error}</p>} */}
-            <form onSubmit={handleSubmit(submitHandler)}>
+            <form
+              onSubmit={() => {
+                handleSubmit(submitHandler);
+              }}
+            >
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col md:flex-row md:gap-5">
                   <InputField
@@ -144,7 +148,7 @@ const Register = () => {
               </button>
             </form>
             <p className="mt-2 text-center text-slate-600">
-              Don't have an account?
+              Don&apos;t have an account?
               <Link href={"/auth/login"} className="text-blue-500">
                 {" "}
                 Login

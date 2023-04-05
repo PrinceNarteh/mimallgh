@@ -1,19 +1,19 @@
+import { Poppins } from "@next/font/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-import { Poppins } from "@next/font/google";
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Toaster } from "react-hot-toast";
 
-import FloatingNavbar from "../components/layout/FloatingNavbar";
-import "../styles/globals.css";
-import { api } from "../utils/api";
-import Navbar from "../components/layout/Navbar";
-import SearchBar from "../components/layout/SearchBar";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
+import FloatingNavbar from "../components/layout/FloatingNavbar";
+import Navbar from "../components/layout/Navbar";
+import SearchBar from "../components/layout/SearchBar";
 import { store } from "../store";
+import "../styles/globals.css";
+import { api } from "../utils/api";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,18 +27,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const scrollRef = useRef(0);
   const { pathname } = useRouter();
 
-  const onScroll = useCallback((e: Event) => {
+  const onScroll = useCallback(() => {
     scrollRef.current = window.scrollY;
   }, []);
-
-  console.log(scrollRef);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [onScroll]);
 
   return (
     <div className={poppins.className}>

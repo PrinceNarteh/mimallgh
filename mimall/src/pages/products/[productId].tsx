@@ -1,4 +1,4 @@
-import { Product } from "@prisma/client";
+import type { Product } from "@prisma/client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -45,6 +45,7 @@ const ProductDetails = () => {
   });
 
   const handleAddToCart = (product: Product) => {
+    console.log(product);
     dispatch(
       addToCart({
         id: "123",

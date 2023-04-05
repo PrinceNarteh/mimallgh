@@ -32,7 +32,9 @@ const Home = () => {
         .value();
       setState(products);
     }
-  }, []);
+  }, [data]);
+
+  console.log(state);
 
   return (
     <div className="">

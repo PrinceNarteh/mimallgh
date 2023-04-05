@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FormEvent } from "react";
+import type { FormEvent } from "react";
 import { BsCheckCircleFill, BsCircle } from "react-icons/bs";
 import CheckoutContainer from "../../components/CheckoutContainer";
 
@@ -8,7 +8,7 @@ const DeliveryService = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/checkout/payment");
+    router.push("/checkout/payment").catch((error) => console.log(error));
   };
 
   return (

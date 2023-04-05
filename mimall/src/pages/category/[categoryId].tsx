@@ -37,7 +37,7 @@ const ProductByCategory = () => {
                         <div className="relative h-[190px] w-[190px]">
                           <Link href={`/products/${idx}`}>
                             <Image
-                              src={`/images/${query.categoryId}-${
+                              src={`/images/${query.categoryId as string}-${
                                 idx % 4 === 0 ? 3 : idx % 4
                               }.jpg`}
                               fill

@@ -27,7 +27,7 @@ export const productsRouter = createTRPCRouter({
   }),
   createProduct: protectedProcedure
     .input(createProductDto)
-    .mutation(async ({ input, ctx }) => {
+    .mutation(async () => {
       // try {
       //   const product = ctx.prisma.product.create({
       //     data: {
