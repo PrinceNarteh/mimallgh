@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { BiMenu } from "react-icons/bi";
+import { CgMenuRightAlt } from "react-icons/cg";
 import { locations } from "../../utils/menus";
 import NavItem from "./NavItem";
-import { CgMenuRightAlt } from "react-icons/cg";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 const menus = [
   {
@@ -28,14 +27,18 @@ const menus = [
 const SubNavbar = () => {
   const [open, setOpen] = useState(false);
   const [openHelp, setOpenHelp] = useState(false);
-  const menuRef = useRef<any>(null);
-  const btnRef = useRef<any>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const btnRef = useRef<HTMLDivElement | null>(null);
   const { push } = useRouter();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (btnRef.current.contains(e.target)) return;
-      if (!menuRef.current.contains(e.target)) {
+      if (e.target instanceof HTMLElement && btnRef.current?.contains(e.target))
+        return;
+      if (
+        e.target instanceof HTMLElement &&
+        !menuRef.current?.contains(e.target)
+      ) {
         setOpen(false);
       }
     };

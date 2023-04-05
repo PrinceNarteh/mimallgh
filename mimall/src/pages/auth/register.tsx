@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import InputField from "../../components/InputField";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import registerImg from "../../../assets/images/register.jpg";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { api } from "../../utils/api";
+import { Role } from "@prisma/client";
 
 const registerValidation = z
   .object({
@@ -33,21 +34,23 @@ const registerValidation = z
     path: ["confirmPassword"],
   });
 
+type IRegister = z.infer<typeof registerValidation>;
+
 const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
+    formState: { errors },
+  } = useForm<IRegister>({
     resolver: zodResolver(registerValidation),
   });
   const registerMutation = api.users.register.useMutation();
 
-  const submitHandler = async (data: any) => {
+  const submitHandler: SubmitHandler<IRegister> = async (data) => {
     try {
       const user = {
         ...data,
-        role: "USER",
+        role: Role.USER,
       };
       registerMutation.mutate(user, {
         onSuccess() {

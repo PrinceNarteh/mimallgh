@@ -1,11 +1,8 @@
-import { useSession } from "next-auth/react";
 import React from "react";
 import Container from "./Container";
 import OrderSummary from "./OrderSummary";
 
 const CheckoutContainer = ({ children }: { children: React.ReactNode }) => {
-  const { data: session } = useSession();
-
   return (
     <Container>
       <div className="mx-auto grid w-10/12 gap-10 pt-5 md:grid-cols-8">
