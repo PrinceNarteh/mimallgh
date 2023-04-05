@@ -46,7 +46,7 @@ export const productsRouter = createTRPCRouter({
             id: input.id,
           },
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Something went wrong",

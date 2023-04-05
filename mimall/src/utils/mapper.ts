@@ -29,7 +29,7 @@ export const mapStringToLevel: Record<string, Level> = {
 export const mapLevelToText = (level: string | null) => {
   return level
     ?.split("_")
-    .map((l) => l[0] + l.substring(1).toLowerCase())
+    .map((l) => `${String(l[0])} + ${l.substring(1).toLowerCase()}`)
     .join(" ");
 };
 

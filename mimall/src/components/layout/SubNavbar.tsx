@@ -51,7 +51,7 @@ const SubNavbar = () => {
   });
 
   const handleCloseMenu = (link: string) => {
-    push(`/markets/${link}`);
+    push(`/markets/${link}`).catch((error) => console.log(error));
     setOpen(false);
   };
 

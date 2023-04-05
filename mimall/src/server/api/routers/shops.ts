@@ -82,7 +82,7 @@ export const shopRouter = createTRPCRouter({
           });
         }
 
-        const { branches, id, ownerId, ...update } = input;
+        const { branches, ...update } = input;
 
         const newBranches = branches.map((branch) => ({
           location: branch.location,

@@ -4,6 +4,6 @@ export const capitalize = (word: string) => {
 
   return word
     .split("-")
-    .map((word) => word[0]?.toUpperCase() + word.slice(1))
+    .map((word) => `${String(word[0]?.toUpperCase())}${word.slice(1)}`)
     .join(" ");
 };
