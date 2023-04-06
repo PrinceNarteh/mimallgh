@@ -2,6 +2,7 @@
   "name": "mimallgh",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://client.mimallgh.com/",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
