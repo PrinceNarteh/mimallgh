@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
+}
+
+model Branch {
+  id          String  @id
+  location    String
+  address     String?
+  phoneNumber String
+  shopId      String?
+  Shop        Shop?   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId], map: "Branch_shopId_fkey")
+}
+
+model Image {
+  id         String   @id
+  public_id  String
+  secure_url String
+  productId  String?
+  Product    Product? @relation(fields: [productId], references: [id])
+
+  @@index([productId], map: "Image_productId_fkey")
+}
+
+model Product {
+  id                 String           @id
+  title              String
+  description        String           @db.LongText
+  price              Float
+  discountPercentage Float            @default(0)
+  stock              Int              @default(0)
+  brand              String
+  category           Product_category
+  shopId             String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime
+  Image              Image[]
+  Shop               Shop             @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId], map: "Product_shopId_fkey")
+}
+
+model Session {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model Shop {
+  id              String    @id
+  name            String
+  description     String    @db.Text
+  location        String
+  address         String?
+  phoneNumber     String
+  alternateNumber String?
+  whatsappNumber  String?
+  instagramHandle String?
+  facebookHandle  String?
+  openingTime     String
+  closingTime     String
+  ownerId         String    @unique
+  Branch          Branch[]
+  Product         Product[]
+  User            User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id              String      @id
+  firstName       String
+  lastName        String
+  middleName      String?
+  address         String?
+  phoneNumber     String
+  alternateNumber String?
+  nationality     String
+  email           String      @unique
+  password        String
+  image           String?
+  cardType        String?
+  cardNumber      String?
+  active          Boolean     @default(true)
+  role            User_role
+  level           User_level?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime
+  Account         Account[]
+  Session         Session[]
+  Shop            Shop?
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum Product_category {
+  FOOD
+  FASHION_AND_WEARS
+  GROCERY_AND_GENERAL
+  HEALTH_AND_WELLNESS
+  HOME_AND_ELECTRICAL_APPLIANCES
+  PERSONAL_SERVICES
+  PRINTING_AND_STATIONERY
+  TECH
+}
+
+enum User_role {
+  ADMIN
+  USER
+  SHOP_OWNER
+}
+
+enum User_level {
+  LEVEL_ONE
+  LEVEL_TWO
+  LEVEL_THREE
+  SUPER_USER
+}
