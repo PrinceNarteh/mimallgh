@@ -15,5 +15,9 @@ export const getProductById = async (id: string): Promise<Product | null> => {
     where: {
       id,
     },
+    include: {
+      Image: true,
+      Shop: true,
+    },
   });
 };

@@ -9,3 +9,16 @@ export const getAllProduct = async (req: Request, res: Response) => {
     return res.status(500).json(error.message);
   }
 };
+
+export const getProductById = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+  try {
+    const product = await ProductService.getProductById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product Not Found" });
+    }
+    res.status(200).json(product);
+  } catch (error: any) {
+    return res.status(500).json(error.message);
+  }
+};
