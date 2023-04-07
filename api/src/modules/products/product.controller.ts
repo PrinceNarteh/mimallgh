@@ -22,3 +22,13 @@ export const getProductById = async (req: Request, res: Response) => {
     return res.status(500).json(error.message);
   }
 };
+
+export const getProductsByCategory = async (req: Request, res: Response) => {
+  const { category } = req.params;
+  try {
+    const products = await ProductService.getByCategory(category);
+    res.status(200).json(products);
+  } catch (error: any) {
+    return res.status(500).json(error.message);
+  }
+};
