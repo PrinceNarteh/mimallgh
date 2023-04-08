@@ -30,3 +30,26 @@ export const getByCategory = async (category: string): Promise<Product[]> => {
     },
   });
 };
+
+export const createProduct = async (input: Product) => {
+  return db.product.create({
+    data: input,
+  });
+};
+
+export const updateProduct = async (id: string, input: Product) => {
+  return db.product.update({
+    where: {
+      id,
+    },
+    data: input,
+  });
+};
+
+export const deleteProduct = async (id: string) => {
+  return db.product.delete({
+    where: {
+      id,
+    },
+  });
+};
