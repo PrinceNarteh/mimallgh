@@ -1,7 +1,9 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import productRouter from "./modules/products/product.router";
+
+import authRouter from "./modules/users/auth.routes";
+import productRouter from "./modules/products/product.routes";
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 
 const app = express();
 
+app.use("/auth", authRouter);
 app.use("/products", productRouter);
 
 app.use(cors());
