@@ -165,7 +165,6 @@ model Item {
 
 model Cart {
   id        String   @id @default(cuid())
-  orderId   String
   items     Item[]
   userId    String   @unique
   user      User     @relation(fields: [userId], references: [id])
