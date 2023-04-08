@@ -9,12 +9,35 @@ export const getUserById = async (id: string): Promise<User | null> => {
   });
 };
 
+export const getUserByEmail = async (email: string) => {
+  return db.user.findFirst({
+    where: {
+      email,
+    },
+  });
+};
+
+export const getUserByPhoneNumber = async (phoneNumber: string) => {
+  return db.user.findFirst({
+    where: {
+      phoneNumber,
+    },
+  });
+};
+
 export const getUserByEmailOrPhoneNumber = async (
   emailOrPhoneNumber: string
 ) => {
   return db.user.findFirst({
     where: {
-      OR: [{ email: emailOrPhoneNumber }, { phoneNumber: emailOrPhoneNumber }],
+      OR: [
+        {
+          email: emailOrPhoneNumber,
+        },
+        {
+          phoneNumber: emailOrPhoneNumber,
+        },
+      ],
     },
   });
 };
