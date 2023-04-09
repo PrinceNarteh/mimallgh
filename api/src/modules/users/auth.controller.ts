@@ -3,22 +3,18 @@ import type { Request, Response } from "express";
 
 import { db } from "../../utils/db.server";
 import { generateToken } from "../../utils/generateToken";
-import {
-  getUserByEmail,
-  getUserByEmailOrPhoneNumber,
-  getUserByPhoneNumber,
-} from "./user.service";
+import * as UserService from "./user.service";
 
 export const register = async (req: Request, res: Response) => {
   try {
     const { body } = req;
 
-    let user = await getUserByEmail(body.email);
+    let user = await UserService.getUserByEmail(body.email);
     if (user) {
       return res.status(400).json({ message: "Email is already in used." });
     }
 
-    user = await getUserByPhoneNumber(body.phoneNumber);
+    user = await UserService.getUserByPhoneNumber(body.phoneNumber);
     if (user) {
       return res
         .status(400)
@@ -46,7 +42,9 @@ export const login = async (req: Request, res: Response) => {
   try {
     const { emailOrPhoneNumber, password } = req.body;
 
-    let user = await getUserByEmailOrPhoneNumber(emailOrPhoneNumber);
+    let user = await UserService.getUserByEmailOrPhoneNumber(
+      emailOrPhoneNumber
+    );
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({ message: "Invalid credentials" });

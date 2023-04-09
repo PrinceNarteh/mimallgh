@@ -1,6 +1,10 @@
 import type { Cart } from "@prisma/client";
 import { db } from "../../utils/db.server";
 
+export const getAllCarts = async () => {
+  return db.cart.findMany();
+};
+
 export const getCart = async (id: string) => {
   return db.cart.findUnique({
     where: { id },

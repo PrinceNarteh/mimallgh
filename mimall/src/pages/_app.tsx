@@ -3,7 +3,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import { useRouter } from "next/router";
@@ -24,11 +24,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  const scrollRef = useRef(0);
+  const [scrollY, setScrollY] = useState(0);
   const { pathname } = useRouter();
 
   const onScroll = useCallback(() => {
-    scrollRef.current = window.scrollY;
+    setScrollY(window.scrollY);
   }, []);
 
   useEffect(() => {
@@ -43,10 +43,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <SessionProvider session={session}>
         <Provider store={store}>
           <div className="fixed z-50 w-full">
-            <FloatingNavbar show={scrollRef.current >= 70} />
+            <FloatingNavbar show={scrollY >= 70} />
           </div>
           {pathname === "/" && <SearchBar />}
-          <Navbar scroll={scrollRef.current >= 70} />
+          <Navbar scroll={scrollY >= 70} />
           <Component {...pageProps} />
         </Provider>
       </SessionProvider>
