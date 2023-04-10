@@ -13,5 +13,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp"), require("@shrutibalasa/tailwind-grid-auto-fit"),],
+  plugins: [require("@shrutibalasa/tailwind-grid-auto-fit"),],
 };
