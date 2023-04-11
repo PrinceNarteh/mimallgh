@@ -29,6 +29,8 @@ export const verifyToken = (
       id: user.id,
       role: user.role,
     };
+
+    next();
   } catch (error) {
     return res.status(403).json("Token not valid");
   }

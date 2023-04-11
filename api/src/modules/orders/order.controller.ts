@@ -53,13 +53,11 @@ export const updateOrder = async (req: Request, res: Response) => {
   try {
     let order = await OrderService.getOrder(orderId);
     if (!order) {
-      return res.status(404).json({ message: "Order not found" });
+      return res.status(404).json({ message: "Not Found" });
     }
 
     if (order.userId !== req.user?.id) {
-      return res
-        .status(403)
-        .json({ message: "You are not permitted to perform this operation" });
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     order = await OrderService.updateCart(orderId, body);
@@ -74,10 +72,10 @@ export const deleteCart = async (req: Request, res: Response) => {
     let order = await OrderService.getOrder(orderId);
 
     if (order && order.userId !== req.user?.id) {
-      return res
-        .status(403)
-        .json({ message: "You are not permitted to perform this operation" });
+      return res.status(403).json({ message: "Forbidden" });
     }
+
+    await OrderService.deleteCart(orderId);
 
     res.status(200).json({ message: "Order deleted successfully" });
   } catch (error: any) {
