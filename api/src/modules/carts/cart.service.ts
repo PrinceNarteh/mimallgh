@@ -11,14 +11,6 @@ export const getCart = async (id: string) => {
   });
 };
 
-export const getByUserId = async (id: string) => {
-  return db.cart.findFirst({
-    where: {
-      userId: id,
-    },
-  });
-};
-
 export const createCart = async (data: Cart) => {
   return db.cart.create({
     data,
