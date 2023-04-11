@@ -9,6 +9,12 @@ export const getAllOrders = async () => {
   });
 };
 
+export const getOrder = async (id: string) => {
+  return db.order.findUnique({
+    where: { id },
+  });
+};
+
 export const getOrdersByUser = async (userId: string) => {
   return db.order.findMany({
     where: {
