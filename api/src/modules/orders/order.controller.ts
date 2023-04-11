@@ -19,9 +19,9 @@ export const getOrdersByUser = async (req: Request, res: Response) => {
   }
 };
 
-export const getOrderByUser = async (req: Request, res: Response) => {
+export const getOrder = async (req: Request, res: Response) => {
   try {
-    const cart = await OrderService.getOrderByUser(req.user.id);
+    const cart = await OrderService.getOrder(req.user.id);
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }

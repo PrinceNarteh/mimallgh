@@ -23,14 +23,6 @@ export const getOrdersByUser = async (userId: string) => {
   });
 };
 
-export const getOrderByUser = async (userId: string) => {
-  return db.order.findFirst({
-    where: {
-      userId,
-    },
-  });
-};
-
 export const createCart = async (data: Cart) => {
   return db.cart.create({
     data,
