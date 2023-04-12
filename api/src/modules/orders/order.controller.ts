@@ -12,7 +12,7 @@ export const getAllOrders = async (req: Request, res: Response) => {
 
 export const getOrdersByUser = async (req: Request, res: Response) => {
   try {
-    const orders = await OrderService.getOrdersByUser(req.user.id);
+    const orders = await OrderService.getOrdersByUser(req.user?.id as string);
     res.status(200).json({ orders });
   } catch (error: any) {
     res.status(500).json(error.message);
@@ -21,7 +21,7 @@ export const getOrdersByUser = async (req: Request, res: Response) => {
 
 export const getOrder = async (req: Request, res: Response) => {
   try {
-    const cart = await OrderService.getOrder(req.user.id);
+    const cart = await OrderService.getOrder(req.user?.id as string);
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
@@ -37,7 +37,7 @@ export const createOrder = async (req: Request, res: Response) => {
   try {
     const newCart = {
       ...body,
-      userId: req.user.id,
+      userId: req.user?.id as string,
     };
     const cart = await OrderService.createCart(newCart);
     res.status(201).json({ cart });
@@ -56,7 +56,7 @@ export const updateOrder = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Not Found" });
     }
 
-    if (order.userId !== req.user.id) {
+    if (order.userId !== (req.user?.id as string)) {
       return res.status(403).json({ message: "Forbidden" });
     }
 
@@ -71,7 +71,7 @@ export const deleteCart = async (req: Request, res: Response) => {
   try {
     let order = await OrderService.getOrder(orderId);
 
-    if (order && order.userId !== req.user.id) {
+    if (order && order.userId !== (req.user?.id as string)) {
       return res.status(403).json({ message: "Forbidden" });
     }
 
