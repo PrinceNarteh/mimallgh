@@ -42,12 +42,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <div className={poppins.className}>
       <SessionProvider session={session}>
         <Provider store={store}>
-          <div className="fixed z-50 w-full">
-            <FloatingNavbar show={scrollY >= 70} />
+          <SearchBar />
+          <div className="pt-16">
+            <Navbar />
+            <Component {...pageProps} />
           </div>
-          {pathname === "/" && <SearchBar />}
-          <Navbar scroll={scrollY >= 70} />
-          <Component {...pageProps} />
         </Provider>
       </SessionProvider>
       <Toaster />
