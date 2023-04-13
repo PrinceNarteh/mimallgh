@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <div className="">
       <Banner />
-      <section className="mx-auto w-11/12 space-y-5 pt-7 pb-10">
+      <section className="mx-auto w-11/12 space-y-5 pb-10 pt-7">
         <div>
           <h4 className="sh-underline relative md:text-3xl">Categories</h4>
           <div className="w-full overflow-x-scroll">
@@ -101,66 +101,72 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <div className="mb-5">
-        <TopDeals topDeals={topDeals} />
-      </div>
 
       <section className="my-5 bg-gray-200 pt-5">
         <div className="mx-auto w-11/12">
-          <div className="my-5 bg-white px-5 py-2">
-            <h3 className="sh-underline mt-5 mb-2 pl-2 text-2xl font-semibold md:text-4xl">
-              Trending
-            </h3>
-            <div className="w-full overflow-x-auto">
-              <div className="my-5 flex items-center justify-start gap-5 px-5">
-                {Array(6)
-                  .fill(null)
-                  .map((_, idx) => (
-                    <Link href={"/product-videos/1"} key={idx}>
-                      <div className="w-60 shrink-0">
-                        <div className="overflow-hidden rounded-md">
-                          <ReactPlayer
-                            url={"/videos/sea-shore.mp4"}
-                            width={"100%"}
-                            height={"100%"}
-                            loop
-                            muted
-                            playing={true}
-                          />
-                        </div>
-                        <p className="mt-1 px-1 text-sm line-clamp-1">
-                          Lorem ipsum dolor sit amet dolor sit amet.
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-              </div>
-            </div>
-          </div>
           {sections.map((section, idx) => (
-            <div key={idx} className="mb-5 flex flex-col bg-white">
-              <div className="flex h-full flex-col items-start justify-between border-r-2 p-7">
-                <h3 className="sh-underline mb-2 text-2xl font-semibold md:text-4xl">
-                  {section.heading}
-                </h3>
-                <Link
-                  href={`/category/${section.link}`}
-                  className="hidden font-semibold text-orange-500"
-                >
-                  Read More
-                </Link>
-              </div>
-              <div className="mb-3 flex items-center justify-start gap-5 overflow-y-auto px-7 pb-2">
-                {section.images.map((image, idx) => (
-                  <ProductCard key={idx} image={image.imageUrl} />
-                ))}
-              </div>
-              <Link
-                href={`/category/${section.link}`}
-                className="mb-5 pr-7 text-right font-semibold text-orange-500"
-              >
-                Read More
-              </Link>
+            <div key={idx} className="mb-5 flex flex-col">
+              <>
+                <div className="relative mb-10 bg-white">
+                  <div className="flex h-full flex-col items-start justify-between border-r-2 p-7 sm:flex-row">
+                    <h3 className="sh-underline mb-2 text-2xl font-semibold md:text-4xl">
+                      {section.heading}
+                    </h3>
+                    <Link
+                      href={`/category/${section.link}`}
+                      className="font-semibold text-orange-500"
+                    >
+                      Read More
+                    </Link>
+                  </div>
+                  <div className="w-full overflow-x-scroll">
+                    <div className="mb-3 grid w-[1280] grid-flow-col grid-rows-2">
+                      {section.images.map((image, idx) => (
+                        <ProductCard key={idx} image={image.imageUrl} />
+                      ))}
+                      {section.images.map((image, idx) => (
+                        <ProductCard key={idx} image={image.imageUrl} />
+                      ))}
+                      {section.images.map((image, idx) => (
+                        <ProductCard key={idx} image={image.imageUrl} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="mb-5 bg-white">
+                  <TopDeals topDeals={topDeals} />
+                </div>
+                <div className="my-5 bg-white px-5 py-2">
+                  <h3 className="sh-underline mb-2 mt-5 pl-2 text-2xl font-semibold md:text-4xl">
+                    Trending
+                  </h3>
+                  <div className="w-full overflow-x-auto">
+                    <div className="my-5 flex items-center justify-start gap-5 px-5">
+                      {Array(6)
+                        .fill(null)
+                        .map((_, idx) => (
+                          <Link href={"/product-videos/1"} key={idx}>
+                            <div className="w-60 shrink-0">
+                              <div className="overflow-hidden rounded-md">
+                                <ReactPlayer
+                                  url={"/videos/sea-shore.mp4"}
+                                  width={"100%"}
+                                  height={"100%"}
+                                  loop
+                                  muted
+                                  playing={true}
+                                />
+                              </div>
+                              <p className="mt-1 line-clamp-1 px-1 text-sm">
+                                Lorem ipsum dolor sit amet dolor sit amet.
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </>
             </div>
           ))}
         </div>
