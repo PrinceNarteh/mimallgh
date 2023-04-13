@@ -7,7 +7,7 @@ import { topDeals } from "../../utils/data";
 const WebStore = () => {
   return (
     <Container>
-      <div className="mx-auto mb-5 w-10/12">
+      <div className="mx-auto mb-5 w-11/12">
         <div className="pb-5">
           <div className="relative h-[400px] bg-teal-500">
             <Image
@@ -20,7 +20,7 @@ const WebStore = () => {
           </div>
           <div className=" flex flex-col md:flex-row">
             <div className="relative bottom-16 left-10 h-32 w-32 shrink-0 rounded-full bg-red-500"></div>
-            <div className="-mt-14 space-y-2 pt-2 md:mt-0 md:ml-14">
+            <div className="-mt-14 space-y-2 pt-2 md:ml-14 md:mt-0">
               <h3 className="text-4xl">Mosco Mart</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -44,7 +44,7 @@ const WebStore = () => {
             </div>
           </div>
         </div>
-        <div className="sticky top-[98px] z-20 my-5 border-y bg-white">
+        <div className="sticky top-16 z-20 my-5 border-y bg-white">
           <CustomLinks />
         </div>
         <div className="mb-10 flex justify-center gap-10 overflow-y-auto pt-5">
@@ -74,7 +74,7 @@ const WebStore = () => {
             <div className="my-5 flex justify-between border-b-2">
               <h4 className="sh-underline relative md:text-3xl">FOOD</h4>
             </div>
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-wrap justify-center gap-5">
               {Array(8)
                 .fill(null)
                 .map((_, idx) => (
@@ -89,7 +89,7 @@ const WebStore = () => {
             <div className="my-5 flex justify-between border-b-2">
               <h4 className="sh-underline relative md:text-3xl">Top Deals</h4>
             </div>
-            <div className="grid justify-center gap-5 grid-auto-fit-xs">
+            <div className="grid place-items-center justify-center grid-auto-fit-xs">
               {topDeals.map((topDeal, idx) => (
                 <ProductCard image={topDeal.image} key={idx} />
               ))}
