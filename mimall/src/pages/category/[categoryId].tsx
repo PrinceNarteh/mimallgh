@@ -10,7 +10,7 @@ const ProductByCategory = () => {
   return (
     <Container>
       <div className="bg-gray-300 bg-opacity-30">
-        <div className="mx-auto max-w-7xl py-5">
+        <div className="container p-5">
           <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
             <div className="col-span-8 space-y-5">
               <div className="flex items-center bg-white shadow">
@@ -22,14 +22,14 @@ const ProductByCategory = () => {
                 <div className="bg-[#ff0000] p-4 text-white">SORT BY</div>
               </div>
 
-              <div className="flex flex-wrap gap-5">
+              <div className="flex flex-wrap justify-center gap-10">
                 {Array(16)
                   .fill(0)
                   .map((_, idx) => (
                     <div key={idx} className="h-[260px] w-[190px]">
                       <Link
                         href={`/web-store/${idx}`}
-                        className="mb-1 px-1 text-xs line-clamp-1"
+                        className="mb-1 line-clamp-1 px-1 text-xs"
                       >
                         Lorem ipsum dolor sit amet.
                       </Link>
@@ -47,7 +47,7 @@ const ProductByCategory = () => {
                           </Link>
                         </div>
                         <div className="px-2 py-1">
-                          <p className="text-sm line-clamp-1">
+                          <p className="line-clamp-1 text-sm">
                             Lorem ipsum dolor sit amet.
                           </p>
                           <p className="font-semibold">GH¢ 1234.00</p>
@@ -90,7 +90,7 @@ const ProductByCategory = () => {
                 <h3 className="text-xl font-semibold">Subscribe</h3>
                 <div className="mt-5 flex shadow">
                   <input type="text" className="flex-1 p-2 outline-none" />
-                  <button className="bg-[#ff0000] py-2 px-4 uppercase text-white">
+                  <button className="bg-[#ff0000] px-4 py-2 uppercase text-white">
                     Subscribe
                   </button>
                 </div>
